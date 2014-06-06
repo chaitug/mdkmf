@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen	xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory	
+		android:title="Server Sync Settings"> 
+		<EditTextPreference
+        	android:title="Server URL"
+            android:summary="Sync Cloud Server"
+            android:key="serverURL"/>
+		<CheckBoxPreference
+		    android:key="PREF_AUTO_UPDATE"
+			android:title="Auto sync"
+			android:summary="Select to turn on automatic updating" 
+			android:defaultValue="false"
+		/> 
+		<ListPreference
+		    android:key="PREF_UPDATE_FREQ" 
+		    android:title="Refresh frequency" 
+		    android:summary="Frequency at which to sync with the server" 
+		    android:entries="@array/update_freq_options"
+		    android:entryValues="@array/update_freq_values" 
+		    android:dialogTitle="Sync frequency" 
+		    android:defaultValue="60" 
+		/>
+	</PreferenceCategory>
+    <PreferenceCategory	
+		android:title="User Credentials"> 
+		<EditTextPreference
+        	android:title="User Name"
+            android:summary="User Name"
+            android:key="userName"/>
+		<EditTextPreference
+        	android:title="Password"
+            android:summary="Password"
+            android:key="password"
+            android:inputType="textPassword"/>
+		<EditTextPreference
+        	android:title="Tenant Id"
+            android:summary="Tenant Id"
+            android:key="tenantId"/>	
+		<EditTextPreference
+        	android:title="Store Id"
+            android:summary="Store Id"
+            android:key="storeId"/>  
+		<EditTextPreference
+        	android:title="Store Name"
+            android:summary="Store Name"
+            android:key="storeName"/>                         	
+	</PreferenceCategory>
+    <PreferenceCategory	
+		android:title="Location Settings"> 
+		<CheckBoxPreference
+		    android:key="PREF_LOCATION_AUTO_SAVE"
+			android:title="Auto Save Locations"
+			android:summary="Select to turn off automatic saving of locations" 
+			android:defaultValue="false"
+		/> 
+		<ListPreference
+		    android:key="PREF_LOCATION_SAVE_FREQ" 
+		    android:title="Save frequency" 
+		    android:summary="Frequency at which location details are saved" 
+		    android:entries="@array/location_save_freq_options"
+		    android:entryValues="@array/location_save_freq_values" 
+		    android:dialogTitle="Save frequency" 
+		    android:defaultValue="15" 
+		/>
+	</PreferenceCategory>		
+</PreferenceScreen>

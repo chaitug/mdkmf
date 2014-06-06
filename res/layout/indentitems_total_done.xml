@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"  
+  android:id="@+id/newIndentDone"     
+  >
+
+  <TextView
+    android:id="@+id/indentitemsTotal"
+    android:layout_toLeftOf="@+id/newIndentDoneButton"    
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+	android:layout_margin="2dp"  
+	android:textSize="11sp"		    
+	android:text="Total: Rs 0.0"  
+    style="@style/TotalText"	
+    android:textColor="#00FF00"/> 
+</RelativeLayout>

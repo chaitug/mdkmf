@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/listheader_border">
+    <TextView android:id="@+id/column_indent_date_header"
+        android:layout_width="0dp"
+    	android:layout_weight="2"    
+    	android:padding="2dp" 
+    	android:textSize="12sp"
+   	 	android:textStyle="bold"       	   
+    	android:layout_height="wrap_content" 
+        android:text="@string/column_indent_date_header"    	
+        />
+    <TextView android:id="@+id/column_indent_supply_header"
+        android:layout_width="0dp"
+    	android:layout_weight="1.2"    
+    	android:padding="2dp"  
+    	android:textSize="12sp"
+   	 	android:textStyle="bold"       	  
+    	android:layout_height="wrap_content" 
+        android:text="@string/column_indent_supply_header"    	
+        /> 
+    <TextView android:id="@+id/column_order_synced_header"
+        android:layout_width="0dp"
+    	android:layout_weight="1"    
+    	android:textSize="12sp" 
+    	android:textStyle="bold"   	  
+    	android:layout_height="wrap_content" 
+        android:text="Synced"    	
+        />
+       
+    <TextView android:id="@+id/column_indent_total_header"
+        android:layout_width="0dp"
+    	android:layout_weight="2"    
+    	android:gravity="right"     	
+    	android:padding="2dp"  
+    	android:textSize="12sp"
+   	 	android:textStyle="bold"       	 
+    	android:layout_marginRight="10dp"    	 
+    	android:layout_height="wrap_content" 
+        android:text="@string/column_indent_total_header"    	
+        />     
+	<ImageView
+        android:id="@+id/orderRowArrow"
+        android:contentDescription="@string/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+         android:visibility="invisible"        
+        android:src="@drawable/arrow" />                
+</LinearLayout>

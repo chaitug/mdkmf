@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:id="@+id/indentTitle"
+        style="@style/TitleBar" >
+
+        <ImageButton
+            style="@style/TitleBarAction"
+            android:contentDescription="@string/description_home"
+            android:onClick="onClickHome"
+            android:src="@drawable/title_home" />
+
+        <ImageView style="@style/TitleBarSeparator" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom" >
+
+            <TextView
+                android:id="@+id/retailerId"
+                style="@style/TitleBarText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/indentsLabel"                
+                android:layout_centerInParent="true"                
+                android:text=""
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/indentsLabel"                
+                style="@style/TitleBarText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/syncIndentButton"
+                android:layout_centerInParent="true"
+                android:gravity="left"
+                android:text=": Indents"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            
+            <ImageView style="@style/TitleBarSeparator" 
+                android:layout_toLeftOf="@+id/syncIndentButton"/>
+            <ImageButton
+                android:id="@+id/syncIndentButton"
+                style="@style/TitleBarAction"
+            	android:layout_alignParentRight="true"
+                android:src="@drawable/title_refresh" /> 
+
+            <ProgressBar
+                android:id="@+id/indentsRefreshProgress"
+                style="@android:style/Widget.ProgressBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@+id/syncIndentButton"
+                android:indeterminate="true"
+                android:visibility="invisible" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/indent_list_fragment"
+        android:name="in.vasista.vsales.indent.IndentListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/indentTitle"
+        android:layout_weight="1" />
+
+</RelativeLayout>

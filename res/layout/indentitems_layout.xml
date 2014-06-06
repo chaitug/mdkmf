@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/orderTitle"
+        style="@style/TitleBar" >
+
+        <ImageButton
+            style="@style/TitleBarAction"
+            android:contentDescription="@string/description_home"
+            android:onClick="onClickHome"
+            android:src="@drawable/title_home" />
+
+        <ImageView style="@style/TitleBarSeparator" />
+
+        <TextView
+            style="@style/TitleBarText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Indent Details"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/indentUploadProgress"
+            style="@android:style/Widget.ProgressBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="invisible" />
+            <ImageView style="@style/TitleBarSeparator" 
+                android:layout_toLeftOf="@+id/indentUploadButton"/>
+            <ImageButton
+                android:id="@+id/indentUploadButton"
+                style="@style/TitleBarAction"
+            android:layout_toLeftOf="@+id/indentEditButton"
+                android:src="@drawable/title_upload" /> 
+
+            <ImageView style="@style/TitleBarSeparator" 
+                android:layout_toLeftOf="@+id/indentEditButton"/>
+            <ImageButton
+                android:id="@+id/indentEditButton"
+                style="@style/TitleBarAction"
+            	android:layout_alignParentRight="true"
+                android:src="@drawable/title_edit" />         
+
+            <ImageView style="@style/TitleBarSeparator" 
+                android:layout_toLeftOf="@+id/newIndentDoneButton"/>
+            <ImageButton
+                android:id="@+id/newIndentDoneButton"
+                style="@style/TitleBarAction"
+            	android:layout_alignParentRight="true"
+                android:src="@drawable/title_accept" />             
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/indentHeaderRow"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/indentSupply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/indentSynced"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="Supply: AM"
+                android:textColor="#000000"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/indentSynced"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/indentDate"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="Synced: Y"
+                android:textColor="#000000"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/indentDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="Date: 8/5/2013"
+                android:textColor="#000000"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/indentitems_list_fragment"
+        android:name="in.vasista.vsales.indent.IndentItemsListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+  <LinearLayout style="@style/TitleBar"
+      android:id="@+id/orderTitle">
+        <ImageButton style="@style/TitleBarAction"
+            android:contentDescription="@string/description_home"
+            android:src="@drawable/title_home"
+            android:onClick="onClickHome" />
+
+        <ImageView style="@style/TitleBarSeparator" />
+        <TextView style="@style/TitleBarText" 
+        	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+			android:layout_centerInParent="true"			
+			android:textSize="20sp"		
+	    	android:textStyle="bold"    
+			android:text="Order Details" />          
+ </LinearLayout>   
+ <LinearLayout 
+    android:id="@+id/orderHeaderRow"  	    
+   	android:layout_height="wrap_content"
+   	android:layout_width="fill_parent">
+	<RelativeLayout 
+ 			android:layout_width="wrap_content"
+ 			android:layout_height="wrap_content">     
+ 			<TextView
+   			android:id="@+id/orderId"
+   			android:layout_toLeftOf="@+id/orderDate"        			
+   			android:layout_width="wrap_content"
+   			android:layout_height="wrap_content"
+   			android:layout_alignParentLeft="true"    			    			
+			android:text="Order Id: 1"  
+   			android:layout_weight="1"    
+   			android:padding="5dp" 				
+			android:textSize="15sp" 
+   			android:textStyle="bold"  
+			android:textColor="#000000"/>  			
+ 			<TextView
+   			android:id="@+id/orderSupply"
+   			android:layout_toLeftOf="@+id/orderDate"        			
+   			android:layout_width="wrap_content"
+   			android:layout_height="wrap_content" 			    			
+			android:text="Supply: AM"  
+   			android:layout_weight="1"    
+   			android:padding="5dp" 				
+			android:textSize="15sp" 
+   			android:textStyle="bold"  
+			android:textColor="#000000"/>   					      			
+ 			<TextView
+   			android:id="@+id/orderDate"
+   			android:layout_width="wrap_content"
+   			android:layout_height="wrap_content"
+   			android:layout_alignParentRight="true"    			    			
+			android:text="Date: 8/5/2014" 
+   			android:layout_weight="1"    
+   			android:padding="5dp" 					
+			android:textSize="15sp" 
+   			android:textStyle="bold"  				
+			android:textColor="#000000"/>     			
+ 		</RelativeLayout>
+ </LinearLayout>     
+  <fragment android:name="in.vasista.vsales.order.OrderItemsListFragment"
+    android:id="@+id/orderitems_list_fragment"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" />
+</LinearLayout>

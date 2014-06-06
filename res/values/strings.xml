@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2011 Wglxy.com
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources>
+    <string name="hello">Choose one of the features below.</string>
+
+    <string name="app_name">Milkosoft</string>
+    <string name="description_logo">Milkosoft</string>
+
+    <string name="description_about">About</string>
+    <string name="description_home">Home</string>
+    <string name="description_search">Search</string>
+    <string name="description_feature1">Indent</string>
+    <string name="description_feature2">Orders</string>
+    <string name="description_feature3">Payments</string>
+    <string name="description_feature4">Catalog</string>
+    <string name="description_feature5">Outlets</string>
+    <string name="description_feature6">Feature 6</string>
+
+    <string name="title_about">About</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_feature1">Indent</string>
+    <string name="title_feature2">Orders</string>
+    <string name="title_feature3">Payments</string>
+    <string name="title_feature4">Catalog</string>
+    <string name="title_feature5">Outlets</string>
+    <string name="title_feature6">Feature 6</string>
+    
+    <string name="account_summary"><u>Account Summary for </u></string>
+
+    <string name="default_intro">This is the default content view for an activity. Be sure to change your activity\'s onCreate method. Use setContentView on a custom layout.</string>
+    <string name="feature1_intro">Coming soon!</string>
+    <string name="feature2_intro">Coming soon!</string>
+    <string name="feature3_intro">Coming soon!</string>
+    <string name="feature4_intro">Coming soon!</string>
+    <string name="feature5_intro">Feature 5 content goes here.</string>
+    <string name="feature6_intro">Feature 6 content goes here.</string>
+
+    <string name="about_intro">This app geared towards Sales Agents is provided by Vasista.</string>
+    <string name="search_intro">Content for the Search page goes here.</string>
+
+    <string name="action_settings">Settings</string>
+    
+        <string name="menu_preferences">Settings</string>
+    
+    <string name="column_product_id_header">Product Code</string>
+    <string name="column_product_name_header">Name</string>
+    <string name="column_product_description_header">Description</string>
+    <string name="column_product_price_header">Price (Rs)</string>
+    
+    <string name="column_order_id_header">Order Id</string>
+    <string name="column_order_date_header">Order Date</string>
+    <string name="column_order_supply_header">Supply</string>
+    <string name="column_order_total_header">Amount (Rs)</string>
+        
+    <string name="column_orderitem_qty_header">Quantity</string>
+    <string name="column_orderitem_amount_header">Amount (Rs)</string>
+
+    <string name="add_product_hint">Select Product</string>
+    <string name="add_product_qty_hint">Quantity</string>
+    
+    <string name="column_indent_id_header">Id</string>
+    <string name="column_indent_date_header">Supply Date</string>
+    <string name="column_indent_status_header">Status</string>
+    <string name="column_indent_supply_header">Supply</string>
+    <string name="column_indent_total_header">Amount (Rs)</string>    
+    
+    <string name="column_payment_id_header">Id</string>
+    <string name="column_payment_date_header">Payment Date</string>
+    <string name="column_payment_method_header">Method</string>
+    <string name="column_payment_amount_header">Amount (Rs)</string>    
+    
+    <string name="column_facility_id_header">Code</string>
+    <string name="column_facility_name_header">Name</string>
+    <string name="column_facility_category_header">Category</string>
+    <string name="column_facility_route_header">Route</string>       
+    <string name="column_facility_phone_header">Phone</string>       
+    
+    <style name="ButtonText">
+	    <item name="android:layout_width">fill_parent</item>
+	    <item name="android:layout_height">wrap_content</item>
+	    <item name="android:textColor">#ffffff</item>
+	    <item name="android:gravity">center</item>
+	    <item name="android:layout_margin">3dp</item>
+	    <item name="android:textSize">30dp</item>
+	    <item name="android:textStyle">bold</item>
+	    <item name="android:shadowColor">#000000</item>
+	    <item name="android:shadowDx">1</item>
+	    <item name="android:shadowDy">1</item>
+	    <item name="android:shadowRadius">2</item>
+	</style>
+    <style name="TotalText">
+	    <item name="android:layout_width">fill_parent</item>
+	    <item name="android:layout_height">wrap_content</item>
+	    <item name="android:textColor">#ffffff</item>
+	    <item name="android:gravity">center</item>
+	    <item name="android:layout_margin">3dp</item>
+	    <item name="android:textSize">25dp</item>
+	    <item name="android:textStyle">bold</item>
+	    <item name="android:shadowColor">#000000</item>
+	    <item name="android:shadowDx">1</item>
+	    <item name="android:shadowDy">1</item>
+	    <item name="android:shadowRadius">2</item>
+	</style>	
+	
+    <string-array name="list_of_retailers">
+      <item >B80504</item>
+      <item >B80604</item>
+      <item >B80902</item>
+    </string-array>
+    
+</resources>
