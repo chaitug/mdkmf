@@ -25,12 +25,21 @@
     <TextView android:id="@+id/column_price_header"
         android:layout_width="0dp"
     	android:layout_weight="1" 
-    	android:layout_marginRight="30dp"    	   
-    	android:gravity="right"     	
     	android:padding="5dp"   
     	android:textSize="12sp" 
     	android:textStyle="bold"         	 
     	android:layout_height="wrap_content" 
         android:text="@string/column_product_price_header"    	
-        />    
+        />  
+    <TextView android:id="@+id/column_mrp_price_header"
+        android:layout_width="0dp"
+    	android:layout_weight="1" 
+    	android:layout_marginRight="20dp"    	   
+    	android:gravity="right"     	
+    	android:padding="5dp"   
+    	android:textSize="12sp" 
+    	android:textStyle="bold"         	 
+    	android:layout_height="wrap_content" 
+        android:text="@string/column_product_mrp_price_header"    	
+        />              
 </LinearLayout>

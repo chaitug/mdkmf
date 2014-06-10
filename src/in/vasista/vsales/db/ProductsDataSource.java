@@ -20,7 +20,8 @@ public class ProductsDataSource {
 	      MySQLiteHelper.COLUMN_PRODUCT_NAME,
 	      MySQLiteHelper.COLUMN_PRODUCT_DESC,
 	      MySQLiteHelper.COLUMN_PRODUCT_SEQUENCE_NUM,	      
-	      MySQLiteHelper.COLUMN_PRODUCT_PRICE};
+	      MySQLiteHelper.COLUMN_PRODUCT_PRICE,
+	      MySQLiteHelper.COLUMN_PRODUCT_MRP_PRICE};
 	  
 	  public ProductsDataSource(Context context) {
 	    dbHelper = new MySQLiteHelper(context); 
@@ -40,18 +41,20 @@ public class ProductsDataSource {
 		    values.put(MySQLiteHelper.COLUMN_PRODUCT_NAME, product.getName());
 		    values.put(MySQLiteHelper.COLUMN_PRODUCT_DESC, product.getDescription());	
 		    values.put(MySQLiteHelper.COLUMN_PRODUCT_SEQUENCE_NUM, product.getSequenceNum());		    		    
-		    values.put(MySQLiteHelper.COLUMN_PRODUCT_PRICE, product.getPrice());		    
+		    values.put(MySQLiteHelper.COLUMN_PRODUCT_PRICE, product.getPrice());
+		    values.put(MySQLiteHelper.COLUMN_PRODUCT_MRP_PRICE, product.getMrpPrice());		    
 		    database.insert(MySQLiteHelper.TABLE_PRODUCT, null, values);
 	  }
 	  
-	  public void insertProduct(Product product) {
+	  public void insertProduct(Product product) {    
 		    ContentValues values = new ContentValues();
 		    values.put(MySQLiteHelper.COLUMN_PRODUCT_ID, product.getId());
 		    values.put(MySQLiteHelper.COLUMN_PRODUCT_NAME, product.getName());
 		    values.put(MySQLiteHelper.COLUMN_PRODUCT_DESC, product.getDescription());
 		    values.put(MySQLiteHelper.COLUMN_PRODUCT_SEQUENCE_NUM, product.getSequenceNum());		    		    		    
-		    values.put(MySQLiteHelper.COLUMN_PRODUCT_PRICE, product.getPrice());		    
-		    database.insert(MySQLiteHelper.TABLE_PRODUCT, null, values);
+		    values.put(MySQLiteHelper.COLUMN_PRODUCT_PRICE, product.getPrice());
+		    values.put(MySQLiteHelper.COLUMN_PRODUCT_MRP_PRICE, product.getMrpPrice());		    		    
+		    database.insert(MySQLiteHelper.TABLE_PRODUCT, null, values);    
 	  }
 	  
 	  public void deleteAllProducts() {
@@ -66,7 +69,7 @@ public class ProductsDataSource {
 	        allColumns, null, null, null, null, orderBy);
 
 	    cursor.moveToFirst();
-	    while (!cursor.isAfterLast()) {
+	    while (!cursor.isAfterLast()) { 
 	      Product product = cursorToProduct(cursor);
 	      products.add(product);
 	      cursor.moveToNext();
@@ -81,7 +84,8 @@ public class ProductsDataSource {
 	    		cursor.getString(1),
 	    		cursor.getString(2),
 	    		cursor.getInt(3),
-	    		(float)cursor.getDouble(4));
+	    		(float)cursor.getDouble(4),
+	    		(float)cursor.getDouble(5));
 	    return product;
 	  }
 	  

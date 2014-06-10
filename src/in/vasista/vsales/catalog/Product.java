@@ -5,14 +5,16 @@ public class Product {
 	String name;
 	String description;
 	float price;
+	float mrpPrice;	
 	int sequenceNum;
 	
-	public Product(String id, String name, String description, int sequenceNum, float price) {
+	public Product(String id, String name, String description, int sequenceNum, float price, float mrpPrice) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.sequenceNum = sequenceNum;
 		this.price = price;
+		this.mrpPrice = mrpPrice;
 	}
 	
 	public String getId() {
@@ -32,8 +34,12 @@ public class Product {
 	public float getPrice() {
 		return price;
 	}
+
+	public float getMrpPrice() {
+		return mrpPrice;
+	}
 	
 	public String toString() {
-		return id + " " + name;
+		return id + " " + name + " " + price + " " + mrpPrice;
 	}
 }

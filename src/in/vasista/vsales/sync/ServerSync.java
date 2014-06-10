@@ -88,7 +88,7 @@ public class ServerSync {
 					if (progressBar != null) {
 						progressBar.setVisibility(View.INVISIBLE);
 					}
-					Toast.makeText( context, "Indent upload succeeded!", Toast.LENGTH_SHORT ).show();	    		    			
+					Toast.makeText( context, "Indent upload succeeded!", Toast.LENGTH_LONG ).show();	    		    			
 				}
 			});
 		}
@@ -97,7 +97,7 @@ public class ServerSync {
 			if (progressBar != null) {
 				progressBar.setVisibility(View.INVISIBLE);
 			}
-			Toast.makeText( context, "Upload failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
+			Toast.makeText( context, "Upload failed: " + e, Toast.LENGTH_LONG ).show();	    		    			
 		}	
 	}
 	
@@ -126,13 +126,14 @@ public class ServerSync {
 				    	  String description = (String)value.get("description");	
 				    	  int sequenceNum = ((Long)value.get("sequenceNum")).intValue();				    	  
 				    	  float price = ((BigDecimal)value.get("totalAmount")).setScale(2,BigDecimal.ROUND_HALF_UP).floatValue();
-				    	  Product product = new Product(productId, name, description, sequenceNum, price);
-				    	  //Log.d(module, "product = " + product);		
+				    	  float mrpPrice = ((BigDecimal)value.get("mrpPrice")).setScale(2,BigDecimal.ROUND_HALF_UP).floatValue();
+				    	  Product product = new Product(productId, name, description, sequenceNum, price, mrpPrice);
+				    	  Log.d(module, "product = " + product);		
 				    	  datasource.insertProduct(product);
 				    	} 
 				    	datasource.close();
 				    	if (listFragment != null) {
-					    	//Log.d(module, "calling listFragment notifyChange..." + listFragment.getClass().getName());						    		
+					    	Log.d(module, "calling listFragment notifyChange..." + listFragment.getClass().getName());						    		
 				    		listFragment.notifyChange();
 				    	}
 					}

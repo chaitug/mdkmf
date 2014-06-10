@@ -13,6 +13,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_PRODUCT_NAME = "PRODUCT_NAME";
 	  public static final String COLUMN_PRODUCT_DESC = "PRODUCT_DESC";	  
 	  public static final String COLUMN_PRODUCT_PRICE = "PRODUCT_PRICE";
+	  public static final String COLUMN_PRODUCT_MRP_PRICE = "PRODUCT_MRP_PRICE";	  
 	  public static final String COLUMN_PRODUCT_SEQUENCE_NUM = "PRODUCT_SEQ_NUM";
   
 	  
@@ -60,7 +61,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  
 	  
 	  private static final String DATABASE_NAME = "vsalesagent.db";
-	  private static final int DATABASE_VERSION = 7; 
+	  private static final int DATABASE_VERSION = 8; 
 
 	  // Database creation sql statement
 	  private static final String DATABASE_CREATE_PRODUCT = "create table "
@@ -69,6 +70,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	      + " text not null, " + COLUMN_PRODUCT_DESC	
 	      + " text, " + COLUMN_PRODUCT_SEQUENCE_NUM
 	      + " integer, " + COLUMN_PRODUCT_PRICE
+	      + " real, " + COLUMN_PRODUCT_MRP_PRICE	      
 	      + " real not null);"; 
 
 	  
@@ -147,8 +149,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    //db.execSQL("delete from INDENT");
 	    //db.execSQL(DATABASE_CREATE_ORDER);
 	    //db.execSQL(DATABASE_CREATE_ORDER_ITEM);
-	    db.execSQL("drop table FACILITY");		    	    
-	    db.execSQL(DATABASE_CREATE_FACILITY);		    	    
+//	    db.execSQL("drop table FACILITY");		    	    
+//	    db.execSQL(DATABASE_CREATE_FACILITY);	
+	    db.execSQL("drop table PRODUCT");		    	    
+	    db.execSQL(DATABASE_CREATE_PRODUCT);		    
 	    
 
 	    //db.execSQL(DATABASE_CREATE_PAYMENT);

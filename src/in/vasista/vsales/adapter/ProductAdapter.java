@@ -34,6 +34,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 	    String name = item.getName();
 	    String description = item.getDescription();	    
 	    String price = String.format("%.2f", item.getPrice()) ;
+	    String mrpPrice = String.format("%.2f", item.getMrpPrice()) ;
 
 	    if (convertView == null) { 
 	      productView = new LinearLayout(getContext());
@@ -48,11 +49,12 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 	    TextView nameView = (TextView)productView.findViewById(R.id.rowName);
 	    TextView descriptionView = (TextView)productView.findViewById(R.id.rowDescription);	    
 	    TextView priceView = (TextView)productView.findViewById(R.id.rowPrice);
+	    TextView mrpPriceView = (TextView)productView.findViewById(R.id.rowMrpPrice);
 
 	    nameView.setText(name);
 	    descriptionView.setText(description);
 	    priceView.setText(price);
-
+	    mrpPriceView.setText(mrpPrice);  
 	    return productView;
 	  }
 }

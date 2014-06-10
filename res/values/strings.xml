@@ -61,6 +61,8 @@
     <string name="column_product_name_header">Name</string>
     <string name="column_product_description_header">Description</string>
     <string name="column_product_price_header">Price (Rs)</string>
+    <string name="column_product_mrp_price_header">MRP (Rs)</string>
+    
     
     <string name="column_order_id_header">Order Id</string>
     <string name="column_order_date_header">Order Date</string>

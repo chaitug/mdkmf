@@ -163,7 +163,7 @@ public class IndentItemsListFragment extends ListFragment{
 		});			 
 		if (indent != null) { 
 			SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
-			boolean isActiveIndent =  fmt.format(new Date()).compareTo(fmt.format(indent.getSupplyDate())) < 0;
+			boolean isActiveIndent =  fmt.format(new Date()).compareTo(fmt.format(indent.getSupplyDate())) <= 0;
 	    	//Log.d(module, "now = " + fmt.format(new Date()));
 	    	//Log.d(module, "supplyDate = " + fmt.format(indent.getSupplyDate()));
 			if (!isActiveIndent) {
