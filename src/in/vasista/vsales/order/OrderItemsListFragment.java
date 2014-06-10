@@ -57,22 +57,21 @@ public class OrderItemsListFragment extends ListFragment{
 		super.onActivityCreated(savedInstanceState);  
 		Intent orderItemsIntent= getActivity().getIntent();
 		int orderId = -1;
-		orderId = orderItemsIntent.getIntExtra("orderId", orderId);	 	
+		orderId = orderItemsIntent.getIntExtra("orderId", orderId);	 
+		final String retailerId = orderItemsIntent.getStringExtra("retailerId");	 			
 		if (adapter == null) {		
 			datasource = new OrdersDataSource(getActivity()); 
 			datasource.open();
 			order = datasource.getOrderDetails(orderId);
-			orderItems = datasource.getOrderItems(orderId);
+			orderItems = datasource.getOrderItems(orderId);  
 		}
 	
 		listView = getListView();
 		final OrderItemsListFragment orderItemsListFragment = this;
 
-		if (listView.getHeaderViewsCount() == 0) {
-			final View headerView1 = getActivity().getLayoutInflater().inflate(R.layout.orderitems_total_done, null);
-			listView.addHeaderView(headerView1);	
-			
-			
+		if (listView.getHeaderViewsCount() == 0) {	
+			TextView orderDetailsTitle = (TextView)getActivity().findViewById(R.id.orderDetailsTitle);
+			orderDetailsTitle.setText(retailerId + ": Order Details");
 			final View headerView2 = getActivity().getLayoutInflater().inflate(R.layout.orderitems_header, null);
 			listView.addHeaderView(headerView2);
 		}
@@ -106,16 +105,16 @@ public class OrderItemsListFragment extends ListFragment{
 			date = order.getSupplyDate();    
 			orderSupply = "Supply: " + order.getSubscriptionType();
 		}
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");  
 	    String orderDateStr = dateFormat.format(date);
 		TextView totalView = (TextView)listView.getRootView().findViewById(R.id.orderitemsTotal);
 		if (totalView != null) {
-			totalView.setText(totalStr);
+			totalView.setText(totalStr);   
 		}
-		TextView orderIdView = (TextView)listView.getRootView().findViewById(R.id.orderId);	
-		if (orderIdView != null) {
-			orderIdView.setText(orderIdStr);
-		}	
+//		TextView orderIdView = (TextView)listView.getRootView().findViewById(R.id.orderId);	
+//		if (orderIdView != null) {
+//			orderIdView.setText(orderIdStr);
+//		}	
 		TextView orderSupplyView = (TextView)listView.getRootView().findViewById(R.id.orderSupply);	
 		if (orderSupplyView != null) {
 			orderSupplyView.setText(orderSupply);

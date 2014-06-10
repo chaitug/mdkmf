@@ -43,10 +43,10 @@ public class IndentListFragment extends ListFragment{
 		
 		super.onActivityCreated(savedInstanceState);
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-    	String retailerId = prefs.getString("storeId", "");
+    	final String retailerId = prefs.getString("storeId", "");
 		TextView retailerIdView = (TextView)getActivity().findViewById(R.id.retailerId);
 		retailerIdView.setText(retailerId);  
-
+ 
 		if (adapter == null) {			
     	    datasource = new IndentsDataSource(getActivity());
     	    datasource.open();
@@ -87,6 +87,7 @@ public class IndentListFragment extends ListFragment{
             if (indent != null) {
             	Intent indentItemsIntent = new Intent(getActivity(), IndentItemsListActivity.class);
             	indentItemsIntent.putExtra("indentId", indent.getId());
+            	indentItemsIntent.putExtra("retailerId", retailerId);
             	startActivity(indentItemsIntent);
             }
 		  }

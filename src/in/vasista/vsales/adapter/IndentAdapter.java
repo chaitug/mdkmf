@@ -57,7 +57,7 @@ public class IndentAdapter extends ArrayAdapter<Indent> {
 
 	    TextView dateView = (TextView)indentView.findViewById(R.id.indentRowDate);
 	    TextView subscriptionTypeView = (TextView)indentView.findViewById(R.id.indentRowSupply);	    
-	    TextView syncedView = (TextView)indentView.findViewById(R.id.indentRowSynced);	    	    
+	    //TextView syncedView = (TextView)indentView.findViewById(R.id.indentRowSynced);	    	    
 	    TextView totalView = (TextView)indentView.findViewById(R.id.indentRowTotal);
 
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
@@ -65,7 +65,7 @@ public class IndentAdapter extends ArrayAdapter<Indent> {
 	    
 	    dateView.setText(dateStr);
 	    subscriptionTypeView.setText(subscriptionType);
-	    syncedView.setText(syncStr);      	    
+	    //syncedView.setText(syncStr);      	    
 	    totalView.setText(total);        
 	    return indentView;
 	  }

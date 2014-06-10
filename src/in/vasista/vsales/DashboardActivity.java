@@ -206,11 +206,11 @@ public void onClickFeature (View v)
       case R.id.home_btn_outlets :
            startActivity (new Intent(getApplicationContext(), FacilityActivity.class));
            break;
-//      case R.id.home_btn_feature6 :
+//      case R.id.home_btn_feature6 : 
 //           startActivity (new Intent(getApplicationContext(), F6Activity.class));
 //           break;
-      default: 
-    	   break; 
+      default:    
+    	   break;    
     }
 }
 

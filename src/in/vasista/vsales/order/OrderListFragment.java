@@ -43,11 +43,11 @@ public class OrderListFragment extends ListFragment{
 	OrderAdapter adapter;
 	OrdersDataSource datasource;
 	
-	public void onActivityCreated(Bundle savedInstanceState) {
+	public void onActivityCreated(Bundle savedInstanceState) {  
 		
 		super.onActivityCreated(savedInstanceState);
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-    	String retailerId = prefs.getString("storeId", "");
+    	final String retailerId = prefs.getString("storeId", "");
 		TextView retailerIdView = (TextView)getActivity().findViewById(R.id.retailerId);
 		retailerIdView.setText(retailerId);		
 		
@@ -89,6 +89,7 @@ public class OrderListFragment extends ListFragment{
             if (order != null) { 
             	Intent orderItemsIntent = new Intent(getActivity(), OrderItemsListActivity.class);
             	orderItemsIntent.putExtra("orderId", order.getId());
+            	orderItemsIntent.putExtra("retailerId", retailerId);            	
             	startActivity(orderItemsIntent);
             }
 		  }

@@ -22,14 +22,14 @@
     	android:layout_height="wrap_content" 
         android:text="@string/column_indent_supply_header"    	
         /> 
-    <TextView android:id="@+id/column_order_synced_header"
+<!--     <TextView android:id="@+id/column_order_synced_header"
         android:layout_width="0dp"
     	android:layout_weight="1"    
     	android:textSize="12sp" 
     	android:textStyle="bold"   	  
     	android:layout_height="wrap_content" 
         android:text="Synced"    	
-        />
+        /> -->
        
     <TextView android:id="@+id/column_indent_total_header"
         android:layout_width="0dp"

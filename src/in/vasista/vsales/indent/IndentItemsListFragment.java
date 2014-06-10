@@ -56,10 +56,11 @@ public class IndentItemsListFragment extends ListFragment{
 		super.onActivityCreated(savedInstanceState);  
 		Intent indentItemsIntent= getActivity().getIntent();
 		int indentId = -1;
-		indentId = indentItemsIntent.getIntExtra("indentId", indentId);	 	
-		if (adapter == null) {		
+		indentId = indentItemsIntent.getIntExtra("indentId", indentId);	
+		final String retailerId = indentItemsIntent.getStringExtra("retailerId");	 			
+		if (adapter == null) {		  
 			datasource = new IndentsDataSource(getActivity());
-			if (indentId == -1) {
+			if (indentId == -1) {  
 				indentItems = new ArrayList<IndentItem>();	
 				initializeIndentItems();
 			}
@@ -78,16 +79,15 @@ public class IndentItemsListFragment extends ListFragment{
 		final IndentItemsListFragment indentItemsListFragment = this;
 
 		if (listView.getHeaderViewsCount() == 0) {
-			final View headerView1 = getActivity().getLayoutInflater().inflate(R.layout.indentitems_total_done, null);
-			listView.addHeaderView(headerView1);	
-			
+
+			TextView indentDetailsTitle = (TextView)getActivity().findViewById(R.id.indentDetailsTitle);
+			indentDetailsTitle.setText(retailerId + ": Indent Details");
 			if (indent != null) {           
 				View completeView = (View)listView.getRootView().findViewById(R.id.newIndentDoneButton);
 				completeView.setVisibility(View.GONE);	
 				
 			}
 			else { 
-				// Handle New Order Button
 				isEditableList = true;		
 				View editView = (View)listView.getRootView().findViewById(R.id.indentEditButton);
 				editView.setVisibility(View.GONE);			
@@ -273,12 +273,12 @@ public class IndentItemsListFragment extends ListFragment{
 	
 		TextView indentSupplyView = (TextView)listView.getRootView().findViewById(R.id.indentSupply);	
 		if (indentSupplyView != null) {
-			indentSupplyView.setText(indentSupply);
+			indentSupplyView.setText(indentSupply);  
 		}	
-		TextView indentSyncedView = (TextView)listView.getRootView().findViewById(R.id.indentSynced);	
-		if (indentSyncedView != null) {
-			indentSyncedView.setText(synced); 
-		}			
+		//TextView indentSyncedView = (TextView)listView.getRootView().findViewById(R.id.indentSynced);	
+		//if (indentSyncedView != null) {
+		//	indentSyncedView.setText(synced); 
+		//}			
 		TextView indentDateView = (TextView)listView.getRootView().findViewById(R.id.indentDate);	
 		if (indentDateView != null) {
 			indentDateView.setText(indentDateStr);

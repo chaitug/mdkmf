@@ -2,6 +2,8 @@ package in.vasista.vsales.sync;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -177,7 +179,8 @@ public class ServerSync {
 			XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(context);
 			adapter.call("getFacilityIndent", paramMap, progressBar, new XMLRPCMethodCallback() {	
 				public void callFinished(Object result, ProgressBar progressBar) {
-					if (result != null) {
+					SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd");  		    	  
+					if (result != null) {						
 						IndentsDataSource indentDataSource = new IndentsDataSource(context);
 						indentDataSource.open();  
 						indentDataSource.deleteAllIndents();
@@ -187,6 +190,15 @@ public class ServerSync {
 				    	Log.d(module, "indentResults.size() = " + indentResults.size());
 				    	if (indentResults.size() > 0) {
 				    		if (indentResults.get("AM") != null) {
+								Date amSupplyDate = supplyDate;
+								if (indentResults.get("amSupplyDate") != null) {
+									String amSupplyDateStr = (String)indentResults.get("amSupplyDate");
+									try {
+										amSupplyDate = format.parse(amSupplyDateStr);
+									} catch (ParseException e) {
+										// just go with default date for now
+									}
+								}
 					    		Object[] indentResultsAM = (Object[])indentResults.get("AM");
 						    	Log.d(module, "indentResultsAM.size() = " + indentResultsAM.length);	
 				    		  	for (int i=0; i < indentResultsAM.length; ++i) {
@@ -198,8 +210,18 @@ public class ServerSync {
 							    	IndentItem item = new IndentItem(productId, product.getName(), (int)productQty, product.getPrice());
 							    	amIndentItems.add(item); 
 				    		  	}   
+				    		  	indentDataSource.insertIndentAndItems(amSupplyDate, "AM", amIndentItems);				    		  	
 				    		}
 				    		if (indentResults.get("PM") != null) {
+								Date pmSupplyDate = supplyDate;
+								if (indentResults.get("pmSupplyDate") != null) {
+									String pmSupplyDateStr = (String)indentResults.get("pmSupplyDate");
+									try {
+										pmSupplyDate = format.parse(pmSupplyDateStr);
+									} catch (ParseException e) {
+										// just go with default date for now
+									}
+								}
 					    		Object[] indentResultsPM = (Object[])indentResults.get("PM");
 						    	Log.d(module, "indentResultsPM.size() = " + indentResultsPM.length);	
 				    		  	for (int i=0; i < indentResultsPM.length; ++i) {
@@ -211,10 +233,9 @@ public class ServerSync {
 							    	IndentItem item = new IndentItem(productId, product.getName(), (int)productQty, product.getPrice());
 							    	pmIndentItems.add(item);
 				    		  	}   
+				    		  	indentDataSource.insertIndentAndItems(pmSupplyDate, "PM", pmIndentItems);		    		  					    		  	
 				    		}					    		
 				    	}			
-		    		  	indentDataSource.insertIndentAndItems(supplyDate, "AM", amIndentItems);
-		    		  	indentDataSource.insertIndentAndItems(supplyDate, "PM", pmIndentItems);		    		  	
 		    		  	indentDataSource.close();
 				    	if (listFragment != null) {
 					    	//Log.d(module, "calling listFragment notifyChange..." + listFragment.getClass().getName());						    		
