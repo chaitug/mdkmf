@@ -53,6 +53,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_FACILITY_NAME = "FACILITY_NAME";
 	  public static final String COLUMN_FACILITY_CAT = "CATEGORY";		  	  
 	  public static final String COLUMN_FACILITY_PHONE_NUM = "PHONE_NUM";	
+	  public static final String COLUMN_FACILITY_SALESREP = "SALESREP";		  
 	  public static final String COLUMN_FACILITY_AM_ROUTE = "AM_ROUTE_ID";		  	  
 	  public static final String COLUMN_FACILITY_PM_ROUTE = "PM_ROUTE_ID";	
 	  public static final String COLUMN_FACILITY_LATITUDE = "LATITUDE";		  	  
@@ -61,7 +62,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  
 	  
 	  private static final String DATABASE_NAME = "vsalesagent.db";
-	  private static final int DATABASE_VERSION = 8; 
+	  private static final int DATABASE_VERSION = 10; 
 
 	  // Database creation sql statement
 	  private static final String DATABASE_CREATE_PRODUCT = "create table "
@@ -120,6 +121,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		      + " text primary key, " + COLUMN_FACILITY_NAME
 		      + " text, " + COLUMN_FACILITY_CAT	
 		      + " text, " + COLUMN_FACILITY_PHONE_NUM
+		      + " text, " + COLUMN_FACILITY_SALESREP		      
 		      + " text, " + COLUMN_FACILITY_AM_ROUTE	
 		      + " text, " + COLUMN_FACILITY_PM_ROUTE	
 		      + " text, " + COLUMN_FACILITY_LATITUDE	
@@ -149,8 +151,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    //db.execSQL("delete from INDENT");
 	    //db.execSQL(DATABASE_CREATE_ORDER);
 	    //db.execSQL(DATABASE_CREATE_ORDER_ITEM);
-//	    db.execSQL("drop table FACILITY");		    	    
-//	    db.execSQL(DATABASE_CREATE_FACILITY);	
+	    db.execSQL("drop table FACILITY");		    	    
+	    db.execSQL(DATABASE_CREATE_FACILITY);	
 	    db.execSQL("drop table PRODUCT");		    	    
 	    db.execSQL(DATABASE_CREATE_PRODUCT);		    
 	    

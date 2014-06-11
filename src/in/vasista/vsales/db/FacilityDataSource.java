@@ -22,7 +22,8 @@ public class FacilityDataSource {
 	  private String[] allColumns = { MySQLiteHelper.COLUMN_FACILITY_ID,
 	      MySQLiteHelper.COLUMN_FACILITY_NAME,
 	      MySQLiteHelper.COLUMN_FACILITY_CAT,
-	      MySQLiteHelper.COLUMN_FACILITY_PHONE_NUM,	      
+	      MySQLiteHelper.COLUMN_FACILITY_PHONE_NUM,	 
+	      MySQLiteHelper.COLUMN_FACILITY_SALESREP,	 
 	      MySQLiteHelper.COLUMN_FACILITY_AM_ROUTE,
 	      MySQLiteHelper.COLUMN_FACILITY_PM_ROUTE,
 	      MySQLiteHelper.COLUMN_FACILITY_LATITUDE,
@@ -45,7 +46,8 @@ public class FacilityDataSource {
 		    values.put(MySQLiteHelper.COLUMN_FACILITY_ID, facility.getId());
 		    values.put(MySQLiteHelper.COLUMN_FACILITY_NAME, facility.getName());
 		    values.put(MySQLiteHelper.COLUMN_FACILITY_CAT, facility.getCategory());	
-		    values.put(MySQLiteHelper.COLUMN_FACILITY_PHONE_NUM, facility.getOwnerPhone());		    		    
+		    values.put(MySQLiteHelper.COLUMN_FACILITY_PHONE_NUM, facility.getOwnerPhone());	
+		    values.put(MySQLiteHelper.COLUMN_FACILITY_SALESREP, facility.getSalesRep());		    		    		    
 		    values.put(MySQLiteHelper.COLUMN_FACILITY_AM_ROUTE, facility.getAmRouteId());
 		    values.put(MySQLiteHelper.COLUMN_FACILITY_PM_ROUTE, facility.getPmRouteId());
 		    values.put(MySQLiteHelper.COLUMN_FACILITY_LATITUDE, facility.getLatitude());		    		    
@@ -92,10 +94,11 @@ public class FacilityDataSource {
 	    		cursor.getString(1),
 	    		cursor.getString(2),
 	    		cursor.getString(3),
-	    		cursor.getString(4),
+	    		cursor.getString(4),	    		
 	    		cursor.getString(5),
 	    		cursor.getString(6),
-	    		cursor.getString(7));
+	    		cursor.getString(7),
+	    		cursor.getString(8)); 
 	    return facility;
 	  }
 }

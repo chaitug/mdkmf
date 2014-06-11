@@ -3,10 +3,12 @@ package in.vasista.vsales;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import in.vasista.vsales.R; 
+import in.vasista.vsales.catalog.Product;
 import in.vasista.vsales.db.FacilityDataSource;
 import in.vasista.vsales.db.IndentsDataSource;
 import in.vasista.vsales.db.OrdersDataSource;
@@ -45,6 +47,8 @@ public class MainActivity extends DashboardActivity  {
     private static final int SHOW_PREFERENCES = 1;
     private static final int RETAILER_DASHBOARD = 1;
     private static final int SALESREP_DASHBOARD = 2;
+	private Map facilityMap = new HashMap<String, Facility> ();
+    
     
     void setDashboard() {
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -80,7 +84,11 @@ public class MainActivity extends DashboardActivity  {
     	facilityDS.open();
     	List<Facility> facilityList = facilityDS.getAllFacilities();
     	facilityDS.close(); 
-
+		  for (int i = 0; i < facilityList.size(); ++i) {
+			  Facility facility = facilityList.get(i);
+			  facilityMap.put(facility.getId(), facility);
+		  }
+		  
 	    final String[] retailers = new String[facilityList.size()];
 	    int index = 0;       
 	    for (Facility facility : facilityList) { 
@@ -288,7 +296,10 @@ public class MainActivity extends DashboardActivity  {
     	prefEditor.commit();          
     	
 		TextView accountSummaryView = (TextView)findViewById(R.id.accntSummary);
-		accountSummaryView.setText("Account summary for " + retailerId + " :");
+		Facility facility = (Facility)facilityMap.get(retailerId);
+		String facilityName = (facility != null)?facility.getName():"";
+		accountSummaryView.setText("" + retailerId + 
+				" [" + facilityName +  "] :");
 		accountSummaryView.setPaintFlags(accountSummaryView.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
 		
 		ProgressBar progressBar = (ProgressBar) findViewById(R.id.getDuesProgress);

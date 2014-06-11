@@ -56,6 +56,8 @@ public class FacilityDetailsActivity extends DashboardActivity  {
 		nameView.setText(facility.getName());		
 		TextView categoryView = (TextView)findViewById(R.id.facilityCategory);
 		categoryView.setText(facility.getCategory());	
+		TextView salesRepView = (TextView)findViewById(R.id.facilitySalesRep);
+		salesRepView.setText(facility.getSalesRep());			
 		TextView amRouteView = (TextView)findViewById(R.id.facilityAmRoute);
 		amRouteView.setText(facility.getAmRouteId());
 		TextView pmRouteView = (TextView)findViewById(R.id.facilityPmRoute);

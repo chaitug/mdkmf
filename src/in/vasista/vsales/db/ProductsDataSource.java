@@ -83,12 +83,12 @@ public class ProductsDataSource {
 	    Product product = new Product(cursor.getString(0),
 	    		cursor.getString(1),
 	    		cursor.getString(2),
-	    		cursor.getInt(3),
-	    		(float)cursor.getDouble(4),
+	    		cursor.getInt(3), 
+	    		(float)cursor.getDouble(4), 
 	    		(float)cursor.getDouble(5));
 	    return product;
 	  }
-	  
+	   
 	  public Map getProductMap() {
 		  List<Product> products = getAllProducts();
 		  Map result = new HashMap<String, Product> ();

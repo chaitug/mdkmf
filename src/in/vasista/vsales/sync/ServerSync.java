@@ -128,7 +128,7 @@ public class ServerSync {
 				    	  float price = ((BigDecimal)value.get("totalAmount")).setScale(2,BigDecimal.ROUND_HALF_UP).floatValue();
 				    	  float mrpPrice = ((BigDecimal)value.get("mrpPrice")).setScale(2,BigDecimal.ROUND_HALF_UP).floatValue();
 				    	  Product product = new Product(productId, name, description, sequenceNum, price, mrpPrice);
-				    	  Log.d(module, "product = " + product);		
+				    	  //Log.d(module, "product = " + product);		
 				    	  datasource.insertProduct(product);
 				    	} 
 				    	datasource.close();
@@ -332,7 +332,7 @@ public class ServerSync {
 			
 		try {   
 			XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(context);
-			adapter.call("getBoothDues", paramMap, progressBar, new XMLRPCMethodCallback() {	
+			adapter.call("getFacilityDues", paramMap, progressBar, new XMLRPCMethodCallback() {	
 				public void callFinished(Object result, ProgressBar progressBar) {
 					if (result != null) { 
 				    	Map boothDues = (Map)((Map)result).get("boothDues");
@@ -400,7 +400,7 @@ public class ServerSync {
 			if (progressBar != null) {
 				progressBar.setVisibility(View.INVISIBLE);
 			}
-			Toast.makeText( context, "getFacilityPayments failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
+			Toast.makeText( context, "fetchOrders failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
 		}		
     	if (listFragment != null) {
 	    	//Log.d(module, "calling listFragment notifyChange..." + listFragment.getClass().getName());						    		
@@ -430,14 +430,15 @@ public class ServerSync {
 							    	String id = (String)boothMap.get("facilityId");
 							    	String name = (String)boothMap.get("facilityName");
 							    	String category = (String)boothMap.get("category");	
-							    	String ownerPhone = (String)boothMap.get("ownerPhone");							    	
+							    	String ownerPhone = (String)boothMap.get("ownerPhone");	
+							    	String salesRep = (String)boothMap.get("salesRep");							    								    	
 							    	String amRouteId = (String)boothMap.get("amRouteId");							    	
 							    	String pmRouteId = (String)boothMap.get("pmRouteId");
 							    	String latitude = (String)boothMap.get("latitude");
 							    	String longitude = (String)boothMap.get("longitude");							    	
 							    	Facility facility = new Facility(id, name, category, 
-							    			ownerPhone, amRouteId, pmRouteId, latitude, longitude);
-							    	Log.d(module, "facility = " + facility);	  
+							    			ownerPhone, salesRep, amRouteId, pmRouteId, latitude, longitude);
+							    	//Log.d(module, "facility = " + facility);	  
 							    	datasource.insertFacility(facility);
 				    		  	}   
 				    		}	

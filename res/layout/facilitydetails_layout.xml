@@ -108,6 +108,23 @@
                 android:layout_margin="2dp"
                 android:textSize="12sp"
                 android:textStyle="bold" />
+            
+            <TextView
+                android:id="@+id/facilitySalesRepLabel"
+                style="@style/TextLabel"
+                android:layout_height="wrap_content"
+            	android:layout_toLeftOf="@+id/facilitySalesRep"                                
+                android:layout_margin="2dp"
+                android:text="Field Rep: " />
+
+            <TextView
+                android:id="@+id/facilitySalesRep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"                
+                android:layout_margin="2dp"
+                android:textSize="12sp"
+                android:textStyle="bold" />              
         </RelativeLayout>
 
         <RelativeLayout

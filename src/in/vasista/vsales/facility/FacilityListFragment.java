@@ -94,7 +94,7 @@ public class FacilityListFragment extends ListFragment {
 					inputSearch.setVisibility(View.GONE);	
 					inputSearch.setText("");					
 				}
-            }
+            } 
 		  }
 		});	
 		
