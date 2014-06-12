@@ -90,10 +90,6 @@ public class FacilityListFragment extends ListFragment {
             	Intent facilityDetailsIntent = new Intent(getActivity(), FacilityDetailsActivity.class);
             	facilityDetailsIntent.putExtra("facilityId", facility.getId());
             	startActivity(facilityDetailsIntent);
-				if (inputSearch.isShown()) {
-					inputSearch.setVisibility(View.GONE);	
-					inputSearch.setText("");					
-				}
             } 
 		  }
 		});	

@@ -18,6 +18,8 @@ package in.vasista.vsales;
 
 import in.vasista.vsales.R;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 
 /**
  * This is the activity for feature 5 in the dashboard application.
@@ -47,6 +49,25 @@ protected void onCreate(Bundle savedInstanceState)
     //setTitleFromActivityLabel (R.id.title_text);
 	setContentView(R.layout.facility_layout);
 
+}
+
+/**
+ * onResume
+ * Called when the activity will start interacting with the user. 
+ * At this point your activity is at the top of the activity stack, with user input going to it.
+ * Always followed by onPause().
+ *
+ */
+
+protected void onResume ()
+{
+   super.onResume ();
+	final EditText inputSearch = (EditText) findViewById(R.id.inputSearch);
+	if (inputSearch != null) {
+		inputSearch.setVisibility(View.GONE);	
+		inputSearch.setText("");
+	}
+   
 }
     
 } // end class

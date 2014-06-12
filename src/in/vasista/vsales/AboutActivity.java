@@ -18,6 +18,7 @@ package in.vasista.vsales;
 
 import in.vasista.vsales.R;
 import android.os.Bundle;
+import android.webkit.WebView;
 
 /**
  * This is the About activity in the dashboard application.
@@ -36,16 +37,21 @@ public class AboutActivity extends DashboardActivity
  * This method also provides you with a Bundle containing the activity's previously frozen state, if there was one.
  * 
  * Always followed by onStart().
- *
+ *  
  * @param savedInstanceState Bundle
  */
 
 protected void onCreate(Bundle savedInstanceState) 
-{
+{  
     super.onCreate(savedInstanceState);
 
-    setContentView (R.layout.activity_about);
-    setTitleFromActivityLabel (R.id.title_text);
+    setContentView (R.layout.activity_about);    
+    setTitleFromActivityLabel (R.id.title_text);  
+    
+    WebView view = ((WebView)findViewById(R.id.about_content));
+    view.setVerticalScrollBarEnabled(false);
+
+    view.loadUrl("file:///android_asset/about.html");         
 }
     
-} // end class
+} // end class  

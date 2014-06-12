@@ -30,7 +30,7 @@
     <string name="description_feature5">Outlets</string>
     <string name="description_feature6">Feature 6</string>
 
-    <string name="title_about">About</string>
+    <string name="title_about">About Milkosoft</string>
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
     <string name="title_feature1">Indent</string>
@@ -50,7 +50,15 @@
     <string name="feature5_intro">Feature 5 content goes here.</string>
     <string name="feature6_intro">Feature 6 content goes here.</string>
 
-    <string name="about_intro">This app geared towards Sales Agents is provided by Vasista.</string>
+    <string name="about_intro1">Milkosoft is the first cloud-based Dairy ERP built exclusively for the Indian Dairy 
+        Industry developed by Vasista Enterprise Solutions Pvt Ltd. All operations from procurement, production, marketing and finance are 
+        seamlessly integrated into Milkosoft.</string>
+
+    <string name="about_intro2">This Android app provides easy access to all the daily Marketing 
+        activities related to sales of Milk and Milk Products.  This app is also available for 
+        agents who can track their purchases, payments and even place indents right from their fingertips.</string>
+
+    
     <string name="search_intro">Content for the Search page goes here.</string>
 
     <string name="action_settings">Settings</string>
