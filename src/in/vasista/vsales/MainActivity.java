@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import in.vasista.vsales.R; 
+import in.vasista.vsales.adapter.FacilityAutoAdapter;
 import in.vasista.vsales.catalog.Product;
 import in.vasista.vsales.db.FacilityDataSource;
 import in.vasista.vsales.db.IndentsDataSource;
@@ -25,7 +26,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +36,7 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -97,23 +101,28 @@ public class MainActivity extends DashboardActivity  {
 	    }	               
 	    final MainActivity mainActivity = this;      
 	    
-	    final ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,retailers);
+	    //final ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,retailers);
+	    final FacilityAutoAdapter adapter = new FacilityAutoAdapter(this, R.layout.autocomplete_item, facilityList);
 	    final AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteRetailer); 	    
-	    actv.setAdapter(adapter);
-	    actv.setVisibility(View.GONE);           
+	    actv.setAdapter(adapter); 
+	    actv.setVisibility(View.GONE);                   
 	    
-	    actv.setOnItemClickListener(new OnItemClickListener() {
+	    actv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 	    	  @Override     
 	    	  public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 	    	    InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 	    	    in.hideSoftInputFromWindow(actv.getWindowToken(), 0);
 	    	    actv.clearFocus();  
-	    	    String retailerId =  (String)parent.getItemAtPosition(position);
+	    	    //String retailerId =  (String)parent.getItemAtPosition(position);
+	    	    Facility retailer =  (Facility)parent.getItemAtPosition(position);
+	    	    
 	    	    //actv.setInputType(InputType.TYPE_NULL);
 				//Toast.makeText( mainActivity, "Clicked actv: " + retailerId, Toast.LENGTH_SHORT ).show();	    		    			
-	    	    mainActivity.initializeRetailer(retailerId, true); 
+	    	    mainActivity.initializeRetailer(retailer.getId(), true); 
+	    	    actv.setText("");
 				actv.setVisibility(View.GONE);		      			
-	    	  }     
+	    	  }  
+	    	  
 	    });   
 	    
 		ImageButton searchButton = (ImageButton)findViewById(R.id.homeSearch);
