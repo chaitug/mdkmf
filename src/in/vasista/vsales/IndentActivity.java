@@ -16,8 +16,21 @@
 
 package in.vasista.vsales;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import in.vasista.vsales.R;
+import in.vasista.vsales.db.IndentsDataSource;
+import in.vasista.vsales.indent.Indent;
+import in.vasista.vsales.indent.IndentListFragment;
+import in.vasista.vsales.sync.ServerSync;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 
 /**
  * This is the activity for feature 2 in the dashboard application.
@@ -47,6 +60,39 @@ protected void onCreate(Bundle savedInstanceState)
     //setTitleFromActivityLabel (R.id.title_text);
 	setContentView(R.layout.indent_layout);
 
+}
+
+protected void onResume ()
+{
+   super.onResume ();
+   IndentsDataSource datasource = new IndentsDataSource(this);
+   datasource.open();
+   List<Indent> indents = datasource.getAllIndents();
+   boolean fetchIndents = false;
+   if (indents.size() > 0) {
+	   SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+	   for (int i=0; i < indents.size(); ++i) {
+		   Indent indent = indents.get(i);
+		   boolean isInactiveIndent =  fmt.format(new Date()).compareTo(fmt.format(indent.getSupplyDate())) > 0;
+		   if (isInactiveIndent) {
+			   fetchIndents = true;
+			   break;
+		   }
+	   }
+   }
+   else {     
+	   fetchIndents = true;
+   }
+   if (fetchIndents) {
+	   FragmentManager fm = getFragmentManager();
+	   IndentListFragment indentListFragment = (IndentListFragment) fm.findFragmentById(R.id.indent_list_fragment);
+	   ProgressBar progressBar = (ProgressBar) findViewById(R.id.indentsRefreshProgress);
+	   progressBar.setVisibility(View.VISIBLE);
+	   ServerSync serverSync = new ServerSync(this);
+	   serverSync.fetchActiveIndents(progressBar, indentListFragment);	
+   }
+   datasource.close();
+   
 }
     
 } // end class

@@ -59,9 +59,6 @@ public class IndentAdapter extends ArrayAdapter<Indent> {
 	    TextView subscriptionTypeView = (TextView)indentView.findViewById(R.id.indentRowSupply);	    
 	    //TextView syncedView = (TextView)indentView.findViewById(R.id.indentRowSynced);	    	    
 	    TextView totalView = (TextView)indentView.findViewById(R.id.indentRowTotal);
-
-		SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
-		boolean isActiveIndent =  fmt.format(new Date()).compareTo(fmt.format(item.getSupplyDate())) < 0;
 	    
 	    dateView.setText(dateStr);
 	    subscriptionTypeView.setText(subscriptionType);

@@ -63,8 +63,6 @@ public class IndentListFragment extends ListFragment{
 						ProgressBar progressBar = (ProgressBar) indentListFragment.getActivity().findViewById(R.id.indentsRefreshProgress);
 						progressBar.setVisibility(View.VISIBLE);
 						ServerSync serverSync = new ServerSync(getActivity());
-						//OrderListFragment indentListFragment =   
-						//		(OrderListFragment)getActivity().getSupportFragmentManager().findFragmentByTag(MainActivity.getFragmentTag(1));		
 						serverSync.fetchActiveIndents(progressBar, indentListFragment);											
 				}
 			}); 

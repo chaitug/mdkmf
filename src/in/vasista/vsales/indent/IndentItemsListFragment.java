@@ -155,10 +155,28 @@ public class IndentItemsListFragment extends ListFragment{
 		final ImageButton uploadButton = (ImageButton)listView.getRootView().findViewById(R.id.indentUploadButton);			
 		uploadButton.setOnClickListener(new OnClickListener() {   
 			public void onClick(View view) {
-				ProgressBar progressBar = (ProgressBar) listView.getRootView().findViewById(R.id.indentUploadProgress);
-				progressBar.setVisibility(View.VISIBLE);
-				ServerSync serverSync = new ServerSync(getActivity());
-				serverSync.uploadIndent(indent, progressBar, indentItemsListFragment);				
+				AlertDialog.Builder alert = new AlertDialog.Builder(
+						getActivity());
+				alert.setTitle("Upload Indent?");			
+				alert.setPositiveButton("Ok",
+						new DialogInterface.OnClickListener() { 
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								ProgressBar progressBar = (ProgressBar) listView.getRootView().findViewById(R.id.indentUploadProgress);
+								progressBar.setVisibility(View.VISIBLE);
+								ServerSync serverSync = new ServerSync(getActivity());
+								serverSync.uploadIndent(indent, progressBar, indentItemsListFragment);
+							}
+						});
+   
+				alert.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								// Canceled.
+							}
+						});
+				alert.show();
 			} 
 		});			 
 		if (indent != null) { 
