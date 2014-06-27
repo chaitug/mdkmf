@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/orderTitle"
+        style="@style/TitleBar" >
+
+        <ImageButton
+            style="@style/TitleBarAction"
+            android:contentDescription="@string/description_home"
+            android:onClick="onClickHome"
+            android:src="@drawable/title_home" />
+
+        <ImageView style="@style/TitleBarSeparator" />
+
+        <TextView
+            android:id="@+id/employeeIdHeader"
+            style="@style/TitleBarText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Employee Details"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/retailerdetail_border"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/employeeDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:gravity="right"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"             
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/employeeNameLabel"
+                style="@style/TextLabel"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="2dp"
+                android:text="Name: " />
+
+            <TextView
+                android:id="@+id/employeeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_toRightOf="@+id/employeeNameLabel"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"             
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/employeeIdLabel"
+                style="@style/TextLabel"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="2dp"
+                android:text="Code: " />
+
+            <TextView
+                android:id="@+id/employeeId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_toRightOf="@+id/employeeIdLabel"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp" 
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/employeeDeptLabel"
+                style="@style/TextLabel"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:text="Dept: " />
+
+            <TextView
+                android:id="@+id/employeeDept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_toRightOf="@+id/employeeDeptLabel"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"             
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/employeePosLabel"
+                style="@style/TextLabel"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="2dp"
+                android:text="Position: " />
+
+            <TextView
+                android:id="@+id/employeePosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_toRightOf="@+id/employeePosLabel"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/employeeJoinDateLabel"
+                style="@style/TextLabel"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="2dp"
+                android:text="Join Date: " />
+
+            <TextView
+                android:id="@+id/employeeJoinDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_toRightOf="@+id/employeeJoinDateLabel"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/employeePhoneLabel"
+                style="@style/TextLabel"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:text="Phone: " />
+
+            <TextView
+                android:id="@+id/employeePhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_toRightOf="@+id/employeePhoneLabel"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/callButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/phoneNumber"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/employeePhone"
+                android:background="@drawable/call_button" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

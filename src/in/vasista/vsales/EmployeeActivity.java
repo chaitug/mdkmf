@@ -18,6 +18,8 @@ package in.vasista.vsales;
 
 import in.vasista.vsales.R;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 
 /**
  * This is the activity for feature 6 in the dashboard application.
@@ -25,7 +27,7 @@ import android.os.Bundle;
  *
  */
 
-public class F6Activity extends DashboardActivity 
+public class EmployeeActivity extends DashboardActivity 
 {
 
 /**
@@ -43,8 +45,27 @@ public class F6Activity extends DashboardActivity
 protected void onCreate(Bundle savedInstanceState) 
 {
     super.onCreate(savedInstanceState);
-    setContentView (R.layout.activity_f6);
-    setTitleFromActivityLabel (R.id.title_text);
+    //setContentView (R.layout.activity_f6);
+    //setTitleFromActivityLabel (R.id.title_text);
+	setContentView(R.layout.employee_layout);
 }
-    
+
+/**
+ * onResume
+ * Called when the activity will start interacting with the user. 
+ * At this point your activity is at the top of the activity stack, with user input going to it.
+ * Always followed by onPause().
+ *
+ */
+
+protected void onResume ()
+{
+   super.onResume ();
+	final EditText inputSearch = (EditText) findViewById(R.id.inputSearch);
+	if (inputSearch != null) {
+		inputSearch.setVisibility(View.GONE);	
+		inputSearch.setText("");
+	}
+   
+}
 } // end class

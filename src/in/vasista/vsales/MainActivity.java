@@ -250,7 +250,17 @@ public class MainActivity extends DashboardActivity  {
 	/**
 	 */
 	// Click Methods
+    public void onClick(View v) {
+    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    	String retailerId = prefs.getString("storeId", "");
+		//Toast.makeText( this, "Clicked " + retailerId, Toast.LENGTH_SHORT ).show();	 
+        if (!retailerId.isEmpty()) { 
+        	Intent facilityDetailsIntent = new Intent(this, FacilityDetailsActivity.class);
+        	facilityDetailsIntent.putExtra("facilityId", retailerId);
+        	startActivity(facilityDetailsIntent);
+        } 
 
+    } 
 
 	/**
 	 */

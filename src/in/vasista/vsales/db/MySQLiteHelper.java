@@ -59,10 +59,18 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_FACILITY_LATITUDE = "LATITUDE";		  	  
 	  public static final String COLUMN_FACILITY_LONGITUDE = "LONGITUDE";		  	  
 	  
+	  public static final String TABLE_EMPLOYEE = "EMPLOYEE";
+	  public static final String COLUMN_EMPLOYEE_ID = "EMPLOYEE_ID";
+	  public static final String COLUMN_EMPLOYEE_NAME = "EMPLOYEE_NAME";
+	  public static final String COLUMN_EMPLOYEE_DEPT = "DEPT";	
+	  public static final String COLUMN_EMPLOYEE_POSITION = "POSITION";			  
+	  public static final String COLUMN_EMPLOYEE_PHONE_NUM = "PHONE_NUM";	
+	  public static final String COLUMN_EMPLOYEE_JOIN_DATE = "JOIN_DATE";		  
+	
 	  
 	  
 	  private static final String DATABASE_NAME = "vsalesagent.db";
-	  private static final int DATABASE_VERSION = 10; 
+	  private static final int DATABASE_VERSION = 11; 
 
 	  // Database creation sql statement
 	  private static final String DATABASE_CREATE_PRODUCT = "create table "
@@ -128,6 +136,15 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		      + " text, " + COLUMN_FACILITY_LONGITUDE			      
 		      + " text);";	  
 	  
+	  private static final String DATABASE_CREATE_EMPLOYEE = "create table "
+		      + TABLE_EMPLOYEE + " (" + COLUMN_EMPLOYEE_ID
+		      + " text primary key, " + COLUMN_EMPLOYEE_NAME
+		      + " text, " + COLUMN_EMPLOYEE_DEPT	
+		      + " text, " + COLUMN_EMPLOYEE_POSITION
+		      + " text, " + COLUMN_EMPLOYEE_PHONE_NUM		      
+		      + " text, " + COLUMN_EMPLOYEE_JOIN_DATE				      
+		      + " text);";		  
+	  
 	  public MySQLiteHelper(Context context) {
 	    super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	  }
@@ -140,7 +157,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    database.execSQL(DATABASE_CREATE_ORDER);	
 	    database.execSQL(DATABASE_CREATE_ORDER_ITEM);		    
 	    database.execSQL(DATABASE_CREATE_PAYMENT);		
-	    database.execSQL(DATABASE_CREATE_FACILITY);		    	    
+	    database.execSQL(DATABASE_CREATE_FACILITY);		
+	    database.execSQL(DATABASE_CREATE_EMPLOYEE);		    	    	    
 	  } 
 
 	  @Override
@@ -151,11 +169,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    //db.execSQL("delete from INDENT");
 	    //db.execSQL(DATABASE_CREATE_ORDER);
 	    //db.execSQL(DATABASE_CREATE_ORDER_ITEM);
-	    db.execSQL("drop table FACILITY");		    	    
-	    db.execSQL(DATABASE_CREATE_FACILITY);	
-	    db.execSQL("drop table PRODUCT");		    	    
-	    db.execSQL(DATABASE_CREATE_PRODUCT);		    
-	    
+	    //db.execSQL("drop table FACILITY");		    	    
+	    //db.execSQL(DATABASE_CREATE_FACILITY);	
+	    //db.execSQL("drop table PRODUCT");		    	    
+	    //db.execSQL(DATABASE_CREATE_PRODUCT);		    
+	    db.execSQL(DATABASE_CREATE_EMPLOYEE);	
 
 	    //db.execSQL(DATABASE_CREATE_PAYMENT);
 //	    db.execSQL("delete from PRODUCT");

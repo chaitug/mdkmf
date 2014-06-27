@@ -16,11 +16,14 @@ import java.util.Map.Entry;
 import in.vasista.vsales.MainActivity;
 import in.vasista.vsales.catalog.CatalogListFragment;
 import in.vasista.vsales.catalog.Product;
+import in.vasista.vsales.db.EmployeeDataSource;
 import in.vasista.vsales.db.FacilityDataSource;
 import in.vasista.vsales.db.IndentsDataSource;
 import in.vasista.vsales.db.OrdersDataSource;
 import in.vasista.vsales.db.PaymentsDataSource;
 import in.vasista.vsales.db.ProductsDataSource;
+import in.vasista.vsales.employee.Employee;
+import in.vasista.vsales.employee.EmployeeListFragment;
 import in.vasista.vsales.facility.Facility;
 import in.vasista.vsales.facility.FacilityListFragment;
 import in.vasista.vsales.indent.Indent;
@@ -462,6 +465,72 @@ public class ServerSync {
 				progressBar.setVisibility(View.INVISIBLE);
 			}
 			Toast.makeText( context, "Update outlets failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
+		}	
+    	if (listFragment != null) {
+	    	//Log.d(module, "calling listFragment notifyChange..." + listFragment.getClass().getName());						    		
+    		listFragment.notifyChange();
+    	}
+	}		
+
+	public void updateEmployees(ProgressBar progressBar, final EmployeeListFragment listFragment) {
+		final EmployeeDataSource datasource = new EmployeeDataSource(context);
+		datasource.open();  
+		Map paramMap = new HashMap();
+		try {   
+			XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(context);
+			adapter.call("getActiveEmployees", paramMap, progressBar, new XMLRPCMethodCallback() {
+				public void callFinished(Object result, ProgressBar progressBar) {
+					if (result != null) {
+						SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd");  		    	  
+				    	Map employeesResult = (Map)((Map)result).get("employeesResult");
+				    	Log.d(module, "employeesResult.size() = " + employeesResult.size());
+				    	datasource.open();
+				    	datasource.deleteAllEmployees();
+				    	if (employeesResult.size() > 0) {
+				    		if (employeesResult.get("employeeList") != null) {
+					    		Object[] employeesList = (Object[])employeesResult.get("employeeList");
+						    	Log.d(module, "employeesList.size() = " + employeesList.length);	
+				    		  	for (int i=0; i < employeesList.length; ++i) {
+				    		  		Map employeeMap = (Map)employeesList[i];				    		  		
+							    	String id = (String)employeeMap.get("employeeId");
+							    	String name = (String)employeeMap.get("name");
+							    	String department = (String)employeeMap.get("department");	
+							    	String position = (String)employeeMap.get("position");	
+							    	String phoneNumber = (String)employeeMap.get("phoneNumber");
+									Date joinDate = new Date();
+									String joinDateStr = (String)employeeMap.get("joinDate");
+									try {
+										joinDate = format.parse(joinDateStr);
+									} catch (ParseException e) {
+										// just go with default date for now
+									}
+																    								    	
+							    	Employee employee = new Employee(id, name, department, 
+							    			position, phoneNumber, joinDate);
+							    	//Log.d(module, "facility = " + facility);	  
+							    	datasource.insertEmployee(employee);
+				    		  	}   
+				    		}	
+				    	}
+				    	datasource.close();
+				    	if (listFragment != null) {
+					    	//Log.d(module, "calling listFragment notifyChange..." + listFragment.getClass().getName());						    		
+				    		listFragment.notifyChange();
+				    	}
+					}
+					if (progressBar != null) {
+						progressBar.setVisibility(View.INVISIBLE);
+					}
+					Toast.makeText( context, "Updated employees!", Toast.LENGTH_SHORT ).show();
+				}
+			});
+		}
+		catch (Exception e) {
+			Log.e(module, "Exception: ", e);
+			if (progressBar != null) {
+				progressBar.setVisibility(View.INVISIBLE);
+			}
+			Toast.makeText( context, "Update employees failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
 		}	
     	if (listFragment != null) {
 	    	//Log.d(module, "calling listFragment notifyChange..." + listFragment.getClass().getName());						    		

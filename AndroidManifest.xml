@@ -44,7 +44,7 @@
             android:theme="@style/Theme.D1"
             android:label="@string/title_feature5"
             />
-      <activity android:name="in.vasista.vsales.F6Activity"
+      <activity android:name="in.vasista.vsales.EmployeeActivity"
             android:theme="@style/Theme.D1"
             android:label="@string/title_feature6"
             />
@@ -65,7 +65,10 @@
     	</activity> 
         <activity android:name="in.vasista.vsales.FacilityDetailsActivity"
       			android:label="Facility Details">
-    	</activity>     	    	
+    	</activity>   
+        <activity android:name="in.vasista.vsales.EmployeeDetailsActivity"
+      			android:label="Employee Details">
+    	</activity>     	  	    	
     	<activity android:name="in.vasista.vsales.preference.FragmentPreferences"/>  
       
       </application>

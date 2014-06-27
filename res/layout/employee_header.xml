@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/listheader_border">
+    <TextView android:id="@+id/column_name_header"
+        android:layout_width="0dp"
+    	android:layout_weight="2"    
+    	android:padding="5dp" 
+    	android:textSize="12sp" 
+    	android:textStyle="bold"        	   
+    	android:layout_height="wrap_content" 
+        android:text="@string/column_employee_name_header"    	
+        />    
+    <TextView android:id="@+id/column_dept_header"
+        android:layout_width="0dp"
+    	android:layout_weight="1.7" 
+    	android:layout_marginRight="30dp"    	   
+    	android:padding="5dp"   
+    	android:textSize="12sp" 
+    	android:textStyle="bold"         	 
+    	android:layout_height="wrap_content" 
+        android:text="@string/column_employee_dept_header"    	
+        />   
+    <TextView android:id="@+id/column_position_header"
+        android:layout_width="0dp"
+    	android:layout_weight="1.5" 
+    	android:layout_marginRight="30dp"    	   
+    	android:padding="5dp"   
+    	android:textSize="12sp" 
+    	android:textStyle="bold"         	 
+    	android:layout_height="wrap_content" 
+        android:text="@string/column_employee_position_header"    	
+        />                                        
+</LinearLayout>

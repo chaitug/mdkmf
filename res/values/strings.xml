@@ -38,7 +38,7 @@
     <string name="title_feature3">Payments</string>
     <string name="title_feature4">Catalog</string>
     <string name="title_feature5">Outlets</string>
-    <string name="title_feature6">Feature 6</string>
+    <string name="title_feature6">HR</string>
     
     <string name="account_summary"><u>Account Summary for </u></string>
 
@@ -98,7 +98,12 @@
     <string name="column_facility_name_header">Name</string>
     <string name="column_facility_category_header">Category</string>
     <string name="column_facility_route_header">Route</string>       
-    <string name="column_facility_phone_header">Phone</string>       
+    <string name="column_facility_phone_header">Phone</string>    
+    
+    <string name="column_employee_id_header">Code</string>
+    <string name="column_employee_name_header">Name</string>
+    <string name="column_employee_dept_header">Department</string>
+    <string name="column_employee_position_header">Position</string>       
     
     <style name="ButtonText">
 	    <item name="android:layout_width">fill_parent</item>
