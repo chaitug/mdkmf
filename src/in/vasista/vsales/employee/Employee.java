@@ -10,6 +10,10 @@ public class Employee {
 	String phoneNum;
 	Date joinDate;
 
+	Date leaveBalanceDate;
+	float earnedLeave;
+	float casualLeave;
+	float halfPayLeave;
 	
 	public Employee(String id, String name, String dept, String position, String phoneNum,
 			Date joinDate) {
@@ -41,6 +45,38 @@ public class Employee {
 		return joinDate;
 	}	
 	
+	public Date getLeaveBalanceDate() {
+		return leaveBalanceDate;
+	}
+
+	public void setLeaveBalanceDate(Date leaveBalanceDate) {
+		this.leaveBalanceDate = leaveBalanceDate;
+	}
+
+	public float getEarnedLeave() {
+		return earnedLeave;
+	}
+
+	public void setEarnedLeave(float earnedLeave) {
+		this.earnedLeave = earnedLeave;
+	}
+
+	public float getCasualLeave() {
+		return casualLeave;
+	}
+
+	public void setCasualLeave(float casualLeave) {
+		this.casualLeave = casualLeave;
+	}
+
+	public float getHalfPayLeave() {
+		return halfPayLeave;
+	}
+
+	public void setHalfPayLeave(float halfPayLeave) {
+		this.halfPayLeave = halfPayLeave;
+	}
+
 	@Override
 	public String toString() {
 		return id;

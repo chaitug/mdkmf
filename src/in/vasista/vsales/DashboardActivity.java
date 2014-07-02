@@ -208,7 +208,8 @@ public void onClickFeature (View v)
            startActivity (new Intent(getApplicationContext(), FacilityActivity.class));
            break;
       case R.id.home_btn_hr : 
-           startActivity (new Intent(getApplicationContext(), EmployeeActivity.class));
+           //startActivity (new Intent(getApplicationContext(), EmployeeActivity.class));
+           startActivity (new Intent(getApplicationContext(), MyEmployeeDetailsActivity.class));           
            break;
       default:    
     	   break;    

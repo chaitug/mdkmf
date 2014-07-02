@@ -223,7 +223,7 @@ public class MainActivity extends DashboardActivity  {
  
 	protected void onStop () 
 	{
-	   super.onStop ();
+	   super.onStop ();  
 	}
 
     @Override

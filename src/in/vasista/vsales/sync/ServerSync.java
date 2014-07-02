@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import in.vasista.vsales.EmployeeActivity;
 import in.vasista.vsales.MainActivity;
+import in.vasista.vsales.MyEmployeeDetailsActivity;
 import in.vasista.vsales.catalog.CatalogListFragment;
 import in.vasista.vsales.catalog.Product;
 import in.vasista.vsales.db.EmployeeDataSource;
@@ -474,7 +476,6 @@ public class ServerSync {
 
 	public void updateEmployees(ProgressBar progressBar, final EmployeeListFragment listFragment) {
 		final EmployeeDataSource datasource = new EmployeeDataSource(context);
-		datasource.open();  
 		Map paramMap = new HashMap();
 		try {   
 			XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(context);
@@ -503,12 +504,30 @@ public class ServerSync {
 										joinDate = format.parse(joinDateStr);
 									} catch (ParseException e) {
 										// just go with default date for now
-									}
-																    								    	
+									}																    								    	
 							    	Employee employee = new Employee(id, name, department, 
 							    			position, phoneNumber, joinDate);
-							    	//Log.d(module, "facility = " + facility);	  
-							    	datasource.insertEmployee(employee);
+					    			if (employeeMap.get("leaveBalanceDate") != null) {
+					    				Date leaveBalanceDate = (Date)employeeMap.get("leaveBalanceDate");
+					    				//Log.d(module, "leaveBalanceDate=" + leaveBalanceDate);	
+					    				BigDecimal earnedLeaveBalance = BigDecimal.ZERO;
+					    				BigDecimal casualLeaveBalance = BigDecimal.ZERO;
+					    				BigDecimal halfPayLeaveBalance = BigDecimal.ZERO;				    					
+					    				if (employeeMap.get("earnedLeaveBalance") != null) {
+					    					earnedLeaveBalance = (BigDecimal)employeeMap.get("earnedLeaveBalance");				    						
+					    				}				    					
+					    				if (employeeMap.get("casualLeaveBalance") != null) {
+					    					casualLeaveBalance = (BigDecimal)employeeMap.get("casualLeaveBalance");				    						
+					    				}
+					    				if (employeeMap.get("halfPayLeaveBalance") != null) {
+					    					halfPayLeaveBalance = (BigDecimal)employeeMap.get("halfPayLeaveBalance");				    						
+					    				}	
+					    				employee.setLeaveBalanceDate(leaveBalanceDate);
+				    					employee.setEarnedLeave(earnedLeaveBalance.floatValue());
+				    					employee.setCasualLeave(casualLeaveBalance.floatValue());
+				    					employee.setHalfPayLeave(halfPayLeaveBalance.floatValue());	
+					    			}
+					    			datasource.insertEmployee(employee);
 				    		  	}   
 				    		}	
 				    	}
@@ -536,7 +555,86 @@ public class ServerSync {
 	    	//Log.d(module, "calling listFragment notifyChange..." + listFragment.getClass().getName());						    		
     		listFragment.notifyChange();
     	}
+	}	
+	
+	public void fetchMyEmployeeDetails(ProgressBar progressBar, final MyEmployeeDetailsActivity activity) {
+		Map paramMap = new HashMap();		
+		final EmployeeDataSource datasource = new EmployeeDataSource(context);
+		datasource.open();
+		try {   
+			XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(context);
+			adapter.call("fetchEmployeeDetails", paramMap, progressBar, new XMLRPCMethodCallback() {	
+				public void callFinished(Object result, ProgressBar progressBar) {
+					if (result != null) { 
+						SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd");  		    	  						
+				    	Map employeeDetailsResult = (Map)((Map)result).get("employeeDetailsResult");
+				    	Map employeeMap = (Map)((Map)employeeDetailsResult).get("employeeProfile");
+				    	if (employeeMap != null) {
+				    		String id = (String)employeeMap.get("employeeId");
+				    		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+				    		SharedPreferences.Editor prefEditor = prefs.edit();
+				    		prefEditor.putString("employeeId", id);
+				    		prefEditor.commit(); 					    	
+				    		String name = (String)employeeMap.get("name");
+				    		String department = (String)employeeMap.get("department");	
+				    		String position = (String)employeeMap.get("position");	
+				    		String phoneNumber = (String)employeeMap.get("phoneNumber");
+				    		Date joinDate = new Date();
+				    		String joinDateStr = (String)employeeMap.get("joinDate");
+				    		try {
+				    			joinDate = format.parse(joinDateStr);
+				    		} catch (ParseException e) {
+				    			// just go with default date for now
+				    		}																    								    	
+				    		Employee employee = new Employee(id, name, department, 
+				    				position, phoneNumber, joinDate);
+				    		if (employeeMap.get("leaveBalanceDate") != null) {
+				    			Date leaveBalanceDate = (Date)employeeMap.get("leaveBalanceDate");
+				    			//Log.d(module, "leaveBalanceDate=" + leaveBalanceDate);	
+				    			BigDecimal earnedLeaveBalance = BigDecimal.ZERO;
+				    			BigDecimal casualLeaveBalance = BigDecimal.ZERO;
+				    			BigDecimal halfPayLeaveBalance = BigDecimal.ZERO;				    					
+				    			if (employeeMap.get("earnedLeaveBalance") != null) {
+				    				earnedLeaveBalance = (BigDecimal)employeeMap.get("earnedLeaveBalance");				    						
+				    			}				    					
+				    			if (employeeMap.get("casualLeaveBalance") != null) {
+				    				casualLeaveBalance = (BigDecimal)employeeMap.get("casualLeaveBalance");				    						
+				    			}
+				    			if (employeeMap.get("halfPayLeaveBalance") != null) {
+				    				halfPayLeaveBalance = (BigDecimal)employeeMap.get("halfPayLeaveBalance");				    						
+				    			}	
+				    			employee.setLeaveBalanceDate(leaveBalanceDate);
+				    			employee.setEarnedLeave(earnedLeaveBalance.floatValue());
+				    			employee.setCasualLeave(casualLeaveBalance.floatValue());
+				    			employee.setHalfPayLeave(halfPayLeaveBalance.floatValue());
+			    				Log.d(module, "employeeId=" + employee.getId());	
+			    				Log.d(module, "leaveBalanceDate=" + employee.getLeaveBalanceDate());	
+			    				Log.d(module, "earnedLeaveBalance=" + employee.getEarnedLeave());				    				
+				    		}
+				    		datasource.updateEmployee(employee); 				    		
+					    	if (activity != null) {
+					    		activity.updateEmployeeDetails(employee);
+					    	}				    		
+				    	}
+				    	datasource.close();
+
+					}
+					if (progressBar != null) {
+						progressBar.setVisibility(View.INVISIBLE);
+					}
+					//Toast.makeText( context, "got facility dues!", Toast.LENGTH_SHORT ).show();	    		    			
+				}
+			});
+		}
+		catch (Exception e) {
+			Log.e(module, "Exception: ", e);
+			if (progressBar != null) {
+				progressBar.setVisibility(View.INVISIBLE);
+			}
+			Toast.makeText( context, "fetchMyEmployeeDetails failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
+		}		
 	}		
+	
 	
 	public static boolean isNetworkAvailable(Context context) 
 	{

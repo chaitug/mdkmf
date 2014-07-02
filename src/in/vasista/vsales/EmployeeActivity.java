@@ -16,10 +16,20 @@
 
 package in.vasista.vsales;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import in.vasista.vsales.R;
+import in.vasista.vsales.db.IndentsDataSource;
+import in.vasista.vsales.indent.Indent;
+import in.vasista.vsales.indent.IndentListFragment;
+import in.vasista.vsales.sync.ServerSync;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 /**
  * This is the activity for feature 6 in the dashboard application.
@@ -58,14 +68,15 @@ protected void onCreate(Bundle savedInstanceState)
  *
  */
 
-protected void onResume ()
+protected void onResume () 
 {
    super.onResume ();
+   /*
 	final EditText inputSearch = (EditText) findViewById(R.id.inputSearch);
 	if (inputSearch != null) {
 		inputSearch.setVisibility(View.GONE);	
 		inputSearch.setText("");
-	}
-   
+	}	
+	*/
 }
 } // end class

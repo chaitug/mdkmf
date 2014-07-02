@@ -113,6 +113,7 @@ public class EmployeeListFragment extends ListFragment {
 				
 			}
         });
+		/*
 		inputSearch.setVisibility(View.GONE);
 		ImageButton searchButton = (ImageButton)getActivity().findViewById(R.id.employeeSearch);
 		searchButton.setOnClickListener(new OnClickListener() { 
@@ -125,6 +126,7 @@ public class EmployeeListFragment extends ListFragment {
 				}
 			}
 		});
+		*/
 	}
 
 	/**

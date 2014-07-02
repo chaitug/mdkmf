@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="13" />
+        android:targetSdkVersion="8" />
 
     <application 
       android:theme="@style/Theme.D1"
@@ -68,7 +68,10 @@
     	</activity>   
         <activity android:name="in.vasista.vsales.EmployeeDetailsActivity"
       			android:label="Employee Details">
-    	</activity>     	  	    	
+    	</activity> 
+        <activity android:name="in.vasista.vsales.MyEmployeeDetailsActivity"
+      			android:label="My Employee Details">
+    	</activity>       	    	  	    	
     	<activity android:name="in.vasista.vsales.preference.FragmentPreferences"/>  
       
       </application>

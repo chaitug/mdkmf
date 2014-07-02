@@ -66,11 +66,27 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_EMPLOYEE_POSITION = "POSITION";			  
 	  public static final String COLUMN_EMPLOYEE_PHONE_NUM = "PHONE_NUM";	
 	  public static final String COLUMN_EMPLOYEE_JOIN_DATE = "JOIN_DATE";		  
+	  public static final String COLUMN_EMPLOYEE_LEAVE_BALANCE_DATE = "LEAVE_BALANCE_DATE";		  
+	  public static final String COLUMN_EMPLOYEE_EARNED_LEAVE = "EARNED_LEAVE";		  
+	  public static final String COLUMN_EMPLOYEE_CASUAL_LEAVE = "CASUAL_LEAVE";		  
+	  public static final String COLUMN_EMPLOYEE_HALF_PAY_LEAVE = "HALF_PAY_LEAVE";		  
 	
+	  public static final String TABLE_PAYROLL_HEADER = "PAYROLL_HEADER";
+	  public static final String COLUMN_PAYROLL_HEADER_ID = "PAYROLL_HEADER_ID";
+	  public static final String COLUMN_PAYROLL_DATE = "PAYROLL_DATE";	
+	  public static final String COLUMN_PAYROLL_PERIOD = "PAYROLL_PERIOD";	  	  
+	  public static final String COLUMN_PAYROLL_EMPLOYEE_ID = "EMPLOYEE_ID";
+	  public static final String COLUMN_PAYROLL_NET_AMOUNT = "NET_AMOUNT";	  
+	  
+	  
+	  public static final String TABLE_PAYROLL_HEADER_ITEM = "PAYROLL_HEADER_ITEM";
+	  public static final String COLUMN_PAYROLL_HEADER_ITEM_ID = "_ID";	  
+	  public static final String COLUMN_PAYROLL_ITEM_NAME = "NAME";
+	  public static final String COLUMN_PAYROLL_ITEM_AMOUNT = "AMOUNT";	
 	  
 	  
 	  private static final String DATABASE_NAME = "vsalesagent.db";
-	  private static final int DATABASE_VERSION = 11; 
+	  private static final int DATABASE_VERSION = 12; 
 
 	  // Database creation sql statement
 	  private static final String DATABASE_CREATE_PRODUCT = "create table "
@@ -142,8 +158,26 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		      + " text, " + COLUMN_EMPLOYEE_DEPT	
 		      + " text, " + COLUMN_EMPLOYEE_POSITION
 		      + " text, " + COLUMN_EMPLOYEE_PHONE_NUM		      
-		      + " text, " + COLUMN_EMPLOYEE_JOIN_DATE				      
-		      + " text);";		  
+		      + " text, " + COLUMN_EMPLOYEE_JOIN_DATE	
+		      + " text, " + COLUMN_EMPLOYEE_LEAVE_BALANCE_DATE	
+		      + " text, " + COLUMN_EMPLOYEE_EARNED_LEAVE
+		      + " real, " + COLUMN_EMPLOYEE_CASUAL_LEAVE	
+		      + " real, " + COLUMN_EMPLOYEE_HALF_PAY_LEAVE			      		      		      		      
+		      + " real);";		
+	  
+	  private static final String DATABASE_CREATE_PAYROLL_HEADER = "create table "
+		      + TABLE_PAYROLL_HEADER + " (" + COLUMN_PAYROLL_HEADER_ID
+		      + " text primary key, " + COLUMN_PAYROLL_DATE
+		      + " text not null, " + COLUMN_PAYROLL_PERIOD		      
+		      + " text, " + COLUMN_PAYROLL_EMPLOYEE_ID	      
+		      + " text, " + COLUMN_PAYROLL_NET_AMOUNT
+		      + " real);";
+	  
+	  private static final String DATABASE_CREATE_PAYROLL_HEADER_ITEM = "create table "
+		      + TABLE_PAYROLL_HEADER_ITEM + " (" + COLUMN_PAYROLL_HEADER_ITEM_ID
+		      + " integer primary key autoincrement, " + COLUMN_PAYROLL_ITEM_NAME
+		      + " text not null, " + COLUMN_PAYROLL_ITEM_AMOUNT			            
+		      + " real not null);";			  
 	  
 	  public MySQLiteHelper(Context context) {
 	    super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -172,7 +206,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    //db.execSQL("drop table FACILITY");		    	    
 	    //db.execSQL(DATABASE_CREATE_FACILITY);	
 	    //db.execSQL("drop table PRODUCT");		    	    
-	    //db.execSQL(DATABASE_CREATE_PRODUCT);		    
+	    //db.execSQL(DATABASE_CREATE_PRODUCT);	
+	    db.execSQL("drop table EMPLOYEE");		    	    	    
 	    db.execSQL(DATABASE_CREATE_EMPLOYEE);	
 
 	    //db.execSQL(DATABASE_CREATE_PAYMENT);

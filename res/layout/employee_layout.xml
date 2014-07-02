@@ -35,7 +35,7 @@
             <ImageButton
                 android:id="@+id/refreshEmployeesButton"
                 style="@style/TitleBarAction"
-                android:layout_toLeftOf="@+id/employeeSearch"
+                android:layout_alignParentRight="true"                
                 android:src="@drawable/title_refresh" />             
 
             <ProgressBar
@@ -47,14 +47,14 @@
                 android:layout_toLeftOf="@+id/refreshEmployeesButton"
                 android:indeterminate="true"
                 android:visibility="invisible" />
-        <ImageView style="@style/TitleBarSeparator" 
+<!--         <ImageView style="@style/TitleBarSeparator" 
                 android:layout_toLeftOf="@+id/employeeSearch"
             />
             <ImageButton
                 android:id="@+id/employeeSearch"
                 style="@style/TitleBarAction"
                 android:layout_alignParentRight="true"                
-                android:src="@drawable/title_search2" /> 
+                android:src="@drawable/title_search2" />  -->
         </RelativeLayout>
     </LinearLayout>
 

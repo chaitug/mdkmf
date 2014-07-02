@@ -23,7 +23,7 @@ public class EmployeeDetailsActivity extends DashboardActivity  {
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
 
-		// Inflate your view 
+		// Inflate your view   
 		setContentView(R.layout.employeedetails_layout);    
 		
 		Intent employeeDetailsIntent= getIntent();
@@ -42,7 +42,7 @@ public class EmployeeDetailsActivity extends DashboardActivity  {
 		TextView idView = (TextView)findViewById(R.id.employeeId);
 		idView.setText(employeeId);
 		TextView nameView = (TextView)findViewById(R.id.employeeName);
-		nameView.setText(employee.getName());		
+		nameView.setText(employee.getName());		 
 		TextView deptView = (TextView)findViewById(R.id.employeeDept);
 		deptView.setText(employee.getDept());	
 		TextView employeePositionView = (TextView)findViewById(R.id.employeePosition);
