@@ -56,7 +56,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/retailerdetail_border"
+        android:background="@drawable/myemployeedetail_border"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_toRightOf="@+id/employeeNameLabel"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
             
             <TextView
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"                
                 android:layout_margin="2dp"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />            
         </RelativeLayout>
 
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_toRightOf="@+id/employeeDeptLabel"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
@@ -158,10 +158,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_toRightOf="@+id/employeePosLabel"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </RelativeLayout>
-
+<!--  
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_toRightOf="@+id/employeeJoinDateLabel"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
             
             <TextView
@@ -199,14 +199,15 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_alignParentRight="true"                
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />            
         </RelativeLayout>
+-->        
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@drawable/listheader_border"
+            android:background="@drawable/employeeheader_border"
             android:padding="5dp" >
 
             <TextView
@@ -239,7 +240,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_toRightOf="@+id/employeeEarnedLeaveLabel"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
@@ -262,7 +263,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_toRightOf="@+id/employeeCasualLeaveLabel"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
@@ -285,7 +286,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_toRightOf="@+id/employeeHalfPayLeaveLabel"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </RelativeLayout>
         <RelativeLayout
@@ -305,6 +306,11 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
         </RelativeLayout>
-    </LinearLayout>
-
+            <fragment
+        android:id="@+id/payslip_list_fragment"
+        android:name="in.vasista.hr.payslip.PayslipListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" /> 
+    </LinearLayout>   
 </LinearLayout>

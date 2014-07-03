@@ -15,7 +15,7 @@ public class Payslip {
 		this.payrollHeaderId = payrollHeaderId;
 		this.payrollDate = payrollDate;
 		this.payrollPeriod = payrollPeriod;
-		this.netAmount = netAmount;
+		this.netAmount = netAmount;  
 	}
 
 	public String getEmployeeId() {

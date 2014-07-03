@@ -9,6 +9,7 @@ import java.util.Map;
 
 import in.vasista.vsales.R; 
 import in.vasista.vsales.adapter.FacilityAutoAdapter;
+import in.vasista.vsales.adapter.PayslipItemAdapter;
 import in.vasista.vsales.catalog.Product;
 import in.vasista.vsales.db.FacilityDataSource;
 import in.vasista.vsales.db.IndentsDataSource;
@@ -29,6 +30,7 @@ import android.graphics.Paint;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,6 +48,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends DashboardActivity  {   
+	public static final String module = MainActivity.class.getName();
 
     static final private int MENU_PREFERENCES = Menu.FIRST+1;
     private static final int SHOW_PREFERENCES = 1;
@@ -83,7 +86,31 @@ public class MainActivity extends DashboardActivity  {
 	{   
 	    super.onCreate(savedInstanceState);   
 	    setContentView(R.layout.activity_home);
-	    
+
+    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		SharedPreferences.Editor prefEditor = prefs.edit();
+    	String serverURL;
+    	serverURL = prefs.getString("serverURL", "");	    	
+    	if (serverURL.isEmpty()) {
+    		serverURL = "http://motherdairykmf.vasista.in:58080/webtools/control/xmlrpc";
+    		prefEditor.putString("serverURL", serverURL);
+    		prefEditor.commit();
+    	}
+    	String tenantId;
+    	tenantId = prefs.getString("tenantId", "");	    	
+    	if (tenantId.isEmpty()) {
+    		tenantId = "MDKMF";
+    		prefEditor.putString("tenantId", tenantId);
+    		prefEditor.commit();
+    	}  
+    	String storeId; 
+    	storeId = prefs.getString("storeId", "");	    	
+    	if (storeId.isEmpty()) {
+    		storeId = "B80504";
+    		prefEditor.putString("storeId", storeId);
+    		prefEditor.commit();
+    	} 
+    	
     	FacilityDataSource facilityDS = new FacilityDataSource(this);
     	facilityDS.open();
     	List<Facility> facilityList = facilityDS.getAllFacilities();

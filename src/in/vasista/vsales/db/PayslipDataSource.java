@@ -1,17 +1,12 @@
 package in.vasista.vsales.db;
 
 import in.vasista.hr.payslip.Payslip;
-import in.vasista.vsales.catalog.Product;
-import in.vasista.vsales.order.Order;
-import in.vasista.vsales.order.OrderItem;
+import in.vasista.hr.payslip.PayslipItem;
+
 
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -21,7 +16,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class PayslipDataSource {
 	public static final String module = PayslipDataSource.class.getName();	
@@ -35,6 +29,10 @@ public class PayslipDataSource {
 			  MySQLiteHelper.COLUMN_PAYROLL_PERIOD,	      
 			  MySQLiteHelper.COLUMN_PAYROLL_NET_AMOUNT};
 
+	  private String[] allPayslipItemColumns = { MySQLiteHelper.COLUMN_PAYROLL_HEADER_ITEM_ID,
+		      MySQLiteHelper.COLUMN_PAYROLL_HEADER_ID,
+		      MySQLiteHelper.COLUMN_PAYROLL_ITEM_NAME,
+		      MySQLiteHelper.COLUMN_PAYROLL_ITEM_AMOUNT};	
 	  
 	  public PayslipDataSource(Context context) {
 		  this.context = context;		  
@@ -49,7 +47,8 @@ public class PayslipDataSource {
 	    dbHelper.close();
 	  }
 	  
-	  public void deleteAllOrders() {
+	  public void deleteAllPayslips() {
+		  database.delete(MySQLiteHelper.TABLE_PAYROLL_HEADER_ITEM, null, null);		  		  
 		  database.delete(MySQLiteHelper.TABLE_PAYROLL_HEADER, null, null);
 	  }	  
 
@@ -61,10 +60,10 @@ public class PayslipDataSource {
 		    values.put(MySQLiteHelper.COLUMN_PAYROLL_PERIOD, payslip.getPayrollPeriod());
 		    values.put(MySQLiteHelper.COLUMN_PAYROLL_EMPLOYEE_ID, payslip.getEmployeeId());		    
 		    values.put(MySQLiteHelper.COLUMN_PAYROLL_NET_AMOUNT, payslip.getNetAmount());		    		    
-		    return database.insert(MySQLiteHelper.TABLE_ORDER, null, values);
+		    return database.insert(MySQLiteHelper.TABLE_PAYROLL_HEADER, null, values);
 	  }  
 	  
-	  public Payslip getPayslipDetails(long payrollHeaderId) {
+	  public Payslip getPayslipDetails(String payrollHeaderId) {
 		    Cursor cursor = database.query(MySQLiteHelper.TABLE_PAYROLL_HEADER,
 		        allColumns, MySQLiteHelper.COLUMN_PAYROLL_HEADER_ID + " = " + payrollHeaderId, null, null, null, null);
 
@@ -101,5 +100,64 @@ public class PayslipDataSource {
 	    		cursor.getFloat(4));
 	    return payslip;
 	  }
+
+	  public void insertPayslips(String employeeId, Object[] payslips) {
+		  for (int i = 0; i < payslips.length; ++i) {
+			  Map payslipMap = (Map)payslips[i];
+			  if (payslipMap != null) {
+				  String payrollHeaderId = (String)payslipMap.get("payrollHeaderId");
+				  Date payrollDate = (Date)payslipMap.get("payrollDate");
+				  String payrollPeriod = (String)payslipMap.get("payrollPeriod");				  
+				  float netAmount = ((BigDecimal)payslipMap.get("netAmount")).floatValue();	
+				  Payslip payslip = new Payslip(employeeId, payrollHeaderId, payrollDate,
+						  payrollPeriod, netAmount);
+				  insertPayslip(payslip);
+				  
+				  List<PayslipItem> payslipItems = new ArrayList<PayslipItem>();
+				  Object[] payrollItems = (Object[])payslipMap.get("payrollItems");
+				  for (int j = 0; j < payrollItems.length; ++j) {
+					  Map itemMap = (Map)payrollItems[j];
+					  Map.Entry<String, BigDecimal> entry = (Entry<String, BigDecimal>) itemMap.entrySet().iterator().next();
+					  PayslipItem payslipItem = new PayslipItem(entry.getKey(),
+							  entry.getValue().floatValue());
+					  payslipItems.add(payslipItem);
+				  }
+				  insertPayslipItems(payrollHeaderId, payslipItems);
+			  }
+		  }
+		   		  
+	  }
 	  
+	  public void insertPayslipItems(String payrollHeaderId, List<PayslipItem> payslipItems) {
+		  	for (int i=0; i < payslipItems.size(); ++i) {
+		  		PayslipItem payslipItem = payslipItems.get(i);
+
+		  		ContentValues values = new ContentValues();
+		  		values.put(MySQLiteHelper.COLUMN_PAYROLL_HEADER_ID, payrollHeaderId);
+		  		values.put(MySQLiteHelper.COLUMN_PAYROLL_ITEM_NAME, payslipItem.getPayheadType());		    		  		
+		  		values.put(MySQLiteHelper.COLUMN_PAYROLL_ITEM_AMOUNT, payslipItem.getPayheadAmount());		    		  		
+		  		database.insert(MySQLiteHelper.TABLE_PAYROLL_HEADER_ITEM, null, values);
+		  	}
+	  }	
+	  
+	  public List<PayslipItem> getPayslipItems(String payrollHeaderId) {
+		  List<PayslipItem> payslipItems = new ArrayList<PayslipItem>();	
+		  Cursor cursor = database.query(MySQLiteHelper.TABLE_PAYROLL_HEADER_ITEM,
+		        allPayslipItemColumns, MySQLiteHelper.COLUMN_PAYROLL_HEADER_ID + " = " + payrollHeaderId, null, null, null, null);
+		  cursor.moveToFirst();
+		  while (!cursor.isAfterLast()) {
+			  PayslipItem payslipItem = cursorToPayslipItem(cursor);
+			  payslipItems.add(payslipItem);
+		      cursor.moveToNext();
+		  }
+		  // Make sure to close the cursor
+		  cursor.close();
+		  return payslipItems;
+	  }
+	  
+	  private PayslipItem cursorToPayslipItem(Cursor cursor) {
+		  PayslipItem payslipItem = new PayslipItem(cursor.getString(2),
+				  cursor.getFloat(3));
+		    return payslipItem;
+	  }		  
 }

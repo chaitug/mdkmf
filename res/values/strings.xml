@@ -104,6 +104,9 @@
     <string name="column_employee_name_header">Name</string>
     <string name="column_employee_dept_header">Department</string>
     <string name="column_employee_position_header">Position</string>       
+
+    <string name="column_payhead_name_header">Payhead</string>       
+    <string name="column_payhead_amount_header">Amount</string>       
     
     <style name="ButtonText">
 	    <item name="android:layout_width">fill_parent</item>

@@ -3,13 +3,13 @@ package in.vasista.vsales;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
-public class IndentItemsListActivity extends DashboardActivity {
+public class PayslipItemsListActivity extends DashboardActivity  {
 	
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
 
 		// Inflate your view 
-		setContentView(R.layout.indentitems_layout);
+		setContentView(R.layout.payslipitems_layout); 
 
 		
 /*        if (savedInstanceState == null) {

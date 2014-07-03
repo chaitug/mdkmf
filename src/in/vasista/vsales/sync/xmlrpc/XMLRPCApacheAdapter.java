@@ -98,7 +98,7 @@ public class XMLRPCApacheAdapter {
 						if (progressBar != null) {
 							progressBar.setVisibility(View.INVISIBLE);
 						}
-						Toast.makeText( context, "Upload failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
+						Toast.makeText( context, "Remote call failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
 					}
 				});
 			}

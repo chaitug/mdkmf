@@ -71,7 +71,9 @@
     	</activity> 
         <activity android:name="in.vasista.vsales.MyEmployeeDetailsActivity"
       			android:label="My Employee Details">
-    	</activity>       	    	  	    	
+    	</activity>  
+        <activity android:name="in.vasista.vsales.PayslipItemsListActivity"
+      			android:label="Payslip Details"/>    	     	    	  	    	
     	<activity android:name="in.vasista.vsales.preference.FragmentPreferences"/>  
       
       </application>

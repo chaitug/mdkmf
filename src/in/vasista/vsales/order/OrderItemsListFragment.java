@@ -71,7 +71,7 @@ public class OrderItemsListFragment extends ListFragment{
 
 		if (listView.getHeaderViewsCount() == 0) {	
 			TextView orderDetailsTitle = (TextView)getActivity().findViewById(R.id.orderDetailsTitle);
-			orderDetailsTitle.setText(retailerId + ": Order Details");
+			orderDetailsTitle.setText(retailerId + ": Order Details"); 
 			final View headerView2 = getActivity().getLayoutInflater().inflate(R.layout.orderitems_header, null);
 			listView.addHeaderView(headerView2);
 		}

@@ -86,7 +86,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  
 	  
 	  private static final String DATABASE_NAME = "vsalesagent.db";
-	  private static final int DATABASE_VERSION = 12; 
+	  private static final int DATABASE_VERSION = 15; 
 
 	  // Database creation sql statement
 	  private static final String DATABASE_CREATE_PRODUCT = "create table "
@@ -175,12 +175,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  
 	  private static final String DATABASE_CREATE_PAYROLL_HEADER_ITEM = "create table "
 		      + TABLE_PAYROLL_HEADER_ITEM + " (" + COLUMN_PAYROLL_HEADER_ITEM_ID
-		      + " integer primary key autoincrement, " + COLUMN_PAYROLL_ITEM_NAME
+		      + " integer primary key autoincrement, " + COLUMN_PAYROLL_HEADER_ID
+		      + " text not null, " + COLUMN_PAYROLL_ITEM_NAME
 		      + " text not null, " + COLUMN_PAYROLL_ITEM_AMOUNT			            
 		      + " real not null);";			  
 	  
 	  public MySQLiteHelper(Context context) {
-	    super(context, DATABASE_NAME, null, DATABASE_VERSION);
+	    super(context, DATABASE_NAME, null, DATABASE_VERSION); 
 	  }
 
 	  @Override
@@ -192,7 +193,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    database.execSQL(DATABASE_CREATE_ORDER_ITEM);		    
 	    database.execSQL(DATABASE_CREATE_PAYMENT);		
 	    database.execSQL(DATABASE_CREATE_FACILITY);		
-	    database.execSQL(DATABASE_CREATE_EMPLOYEE);		    	    	    
+	    database.execSQL(DATABASE_CREATE_EMPLOYEE);		
+	    database.execSQL(DATABASE_CREATE_PAYROLL_HEADER);		    	    	    
+	    database.execSQL(DATABASE_CREATE_PAYROLL_HEADER_ITEM);		    	    	    	    
 	  } 
 
 	  @Override
@@ -207,11 +210,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    //db.execSQL(DATABASE_CREATE_FACILITY);	
 	    //db.execSQL("drop table PRODUCT");		    	    
 	    //db.execSQL(DATABASE_CREATE_PRODUCT);	
-	    db.execSQL("drop table EMPLOYEE");		    	    	    
-	    db.execSQL(DATABASE_CREATE_EMPLOYEE);	
+	    //db.execSQL("drop table EMPLOYEE");		    	    	    
+	    //db.execSQL(DATABASE_CREATE_EMPLOYEE);	
+	    //db.execSQL(DATABASE_CREATE_PAYROLL_HEADER);
+	    //db.execSQL(DATABASE_CREATE_PAYROLL_HEADER_ITEM);
+	    db.execSQL("delete from PAYROLL_HEADER");
+	    db.execSQL("delete from PAYROLL_HEADER_ITEM");
 
-	    //db.execSQL(DATABASE_CREATE_PAYMENT);
-//	    db.execSQL("delete from PRODUCT");
 
 //	    if (oldVersion < 2 && newVersion == 2) {
 //	    	db.execSQL(DATABASE_CREATE_LOCATION);

@@ -23,6 +23,7 @@ import in.vasista.vsales.db.FacilityDataSource;
 import in.vasista.vsales.db.IndentsDataSource;
 import in.vasista.vsales.db.OrdersDataSource;
 import in.vasista.vsales.db.PaymentsDataSource;
+import in.vasista.vsales.db.PayslipDataSource;
 import in.vasista.vsales.db.ProductsDataSource;
 import in.vasista.vsales.employee.Employee;
 import in.vasista.vsales.employee.EmployeeListFragment;
@@ -607,15 +608,24 @@ public class ServerSync {
 				    			employee.setEarnedLeave(earnedLeaveBalance.floatValue());
 				    			employee.setCasualLeave(casualLeaveBalance.floatValue());
 				    			employee.setHalfPayLeave(halfPayLeaveBalance.floatValue());
-			    				Log.d(module, "employeeId=" + employee.getId());	
-			    				Log.d(module, "leaveBalanceDate=" + employee.getLeaveBalanceDate());	
-			    				Log.d(module, "earnedLeaveBalance=" + employee.getEarnedLeave());				    				
+			    				//Log.d(module, "employeeId=" + employee.getId());	
+			    				//Log.d(module, "leaveBalanceDate=" + employee.getLeaveBalanceDate());	
+			    				//Log.d(module, "earnedLeaveBalance=" + employee.getEarnedLeave());				    				
 				    		}
-				    		datasource.updateEmployee(employee); 				    		
+				    		datasource.updateEmployee(employee); 
+				    		Object[] payslips = (Object[])((Map)employeeDetailsResult).get("payslips");
+					    	if (payslips != null) {
+					    		final PayslipDataSource payslipDS = new PayslipDataSource(context);
+					    		payslipDS.open();
+					    		payslipDS.deleteAllPayslips();
+					    		payslipDS.insertPayslips(id, payslips);
+					    		payslipDS.close();
+					    	}
 					    	if (activity != null) {
 					    		activity.updateEmployeeDetails(employee);
 					    	}				    		
 				    	}
+
 				    	datasource.close();
 
 					}

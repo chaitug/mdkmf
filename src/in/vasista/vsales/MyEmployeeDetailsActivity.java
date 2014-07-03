@@ -37,13 +37,21 @@ public class MyEmployeeDetailsActivity extends DashboardActivity  {
 		deptView.setText(employee.getDept());	
 		TextView employeePositionView = (TextView)findViewById(R.id.employeePosition);
 		employeePositionView.setText(employee.getPosition());			
+		
+		TextView leaveBalanceDateView = (TextView)findViewById(R.id.employeeLeaveBalanceHeader);
+	    Date leaveBalanceDate = employee.getLeaveBalanceDate(); 
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");	
+	    String dateStr = dateFormat.format(leaveBalanceDate);
+	    leaveBalanceDateView.setText("Leave Balance as of " + dateStr);	 	    
+		/*
 		TextView joinDateView = (TextView)findViewById(R.id.employeeJoinDate);
 	    Date date = employee.getJoinDate();
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");
 	    String dateStr = dateFormat.format(date);
 		joinDateView.setText(dateStr);	
-		TextView phoneView = (TextView)findViewById(R.id.employeePhone);
-		phoneView.setText(employee.getPhoneNum()); 	
+		TextView phoneView = (TextView)findViewById(R.id.employeePhone); 
+		phoneView.setText(employee.getPhoneNum()); 
+		*/	
 		TextView elView = (TextView)findViewById(R.id.employeeEarnedLeave);
 		elView.setText(String.format("%.1f", employee.getEarnedLeave())); 	
 		TextView clView = (TextView)findViewById(R.id.employeeCasualLeave);
@@ -57,21 +65,6 @@ public class MyEmployeeDetailsActivity extends DashboardActivity  {
 
 		// Inflate your view   
 		setContentView(R.layout.myemployeedetails_layout);    
-
-		String employeeId = "";		
-    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-    	employeeId = prefs.getString("employeeId", "");
-		
-		final Employee employee;
-		EmployeeDataSource datasource = new EmployeeDataSource(this);  
-		datasource.open();
-		employee = datasource.getEmployeeDetails(employeeId);		
-		datasource.close();
-		if (employee == null) {        
-			return;
-		}   
-		updateEmployeeDetails(employee);
-		
 		final Activity myActivity = this; 
 		ImageButton employeeSearch = (ImageButton) findViewById(R.id.employeeSearch);
 		employeeSearch.setClickable(true);
@@ -79,8 +72,27 @@ public class MyEmployeeDetailsActivity extends DashboardActivity  {
 			public void onClick(View view) {
             	Intent employeesIntent = new Intent(myActivity, EmployeeActivity.class);
             	startActivity(employeesIntent);
-            }   
+            }    
 		});
+		
+		String employeeId = "";		
+    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    	employeeId = prefs.getString("employeeId", "");
+		Employee employee = null;
+		if (! employeeId.isEmpty()) {
+			EmployeeDataSource datasource = new EmployeeDataSource(this);  
+			datasource.open();
+			employee = datasource.getEmployeeDetails(employeeId);		
+			datasource.close();
+		}
+		if (employee == null) {    
+			TextView nameView = (TextView)findViewById(R.id.employeeName);
+			nameView.setText("<No employee mapping found>");				
+			return;
+		}   
+		updateEmployeeDetails(employee);
+		
+
 	}
 	
 	/**
