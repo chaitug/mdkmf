@@ -57,10 +57,10 @@ protected void onCreate(Bundle savedInstanceState)
     super.onCreate(savedInstanceState);
     //setContentView (R.layout.activity_f6);
     //setTitleFromActivityLabel (R.id.title_text);
-	setContentView(R.layout.employee_layout);
+	setContentView(R.layout.employee_layout);   
 }
 
-/**
+/**  
  * onResume
  * Called when the activity will start interacting with the user. 
  * At this point your activity is at the top of the activity stack, with user input going to it.
@@ -68,7 +68,7 @@ protected void onCreate(Bundle savedInstanceState)
  *
  */
 
-protected void onResume () 
+protected void onResume ()        
 {
    super.onResume ();
    /*

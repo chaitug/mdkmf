@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ProgressBar
+        android:id="@+id/splashProgress"
+        style="@android:style/Widget.ProgressBar.Small"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"        
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"
+        android:indeterminate="true"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/milkosoftLogo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/vasistaLogo"
+        android:gravity="center_horizontal"
+        android:src="@drawable/title_logo_default" />
+
+    <ImageView
+        android:id="@+id/vasistaLogo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/poweredbyvasista" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
+        android:text="www.vasista.in"
+        android:textColor="#454545"
+        android:textSize="12dp" />
+
+</RelativeLayout>

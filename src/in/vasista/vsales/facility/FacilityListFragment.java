@@ -26,6 +26,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -80,6 +81,8 @@ public class FacilityListFragment extends ListFragment {
 		}
 		setListAdapter(adapter);
 		final EditText inputSearch = (EditText) getActivity().findViewById(R.id.inputSearch);
+		final FrameLayout inputSearchFrame = (FrameLayout) getActivity().findViewById(R.id.inputSearchFrame);
+		
 		listView.setClickable(true);
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 		  @Override
@@ -117,18 +120,25 @@ public class FacilityListFragment extends ListFragment {
 				
 			}
         });
-		inputSearch.setVisibility(View.GONE);
+		ImageButton searchClearButton = (ImageButton)getActivity().findViewById(R.id.inputSearchClear);
+		searchClearButton.setOnClickListener(new OnClickListener() { 
+			public void onClick(View view) {  
+				inputSearch.setText("");
+			}
+		});
+		
+		inputSearchFrame.setVisibility(View.GONE);
 		ImageButton searchButton = (ImageButton)getActivity().findViewById(R.id.facilitySearch);
 		searchButton.setOnClickListener(new OnClickListener() { 
 			public void onClick(View view) { 
-				if (inputSearch.isShown()) {
-					inputSearch.setVisibility(View.GONE);					
+				if (inputSearchFrame.isShown()) {
+					inputSearchFrame.setVisibility(View.GONE);					
 				}
 				else {
-					inputSearch.setVisibility(View.VISIBLE);
+					inputSearchFrame.setVisibility(View.VISIBLE);
 				}
-			}
-		});
+			}  
+		});  
 	}
 
 	/**

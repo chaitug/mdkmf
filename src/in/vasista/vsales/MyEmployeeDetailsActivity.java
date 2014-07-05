@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import in.vasista.vsales.db.EmployeeDataSource;
+import in.vasista.vsales.db.PayslipDataSource;
 import in.vasista.vsales.employee.Employee;
 import in.vasista.vsales.sync.ServerSync;
 import android.app.Activity;
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -27,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MyEmployeeDetailsActivity extends DashboardActivity  {
+	public static final String module = MyEmployeeDetailsActivity.class.getName();	
 	
 	public void updateEmployeeDetails(Employee employee) {
 		TextView idView = (TextView)findViewById(R.id.employeeId);
@@ -74,11 +77,15 @@ public class MyEmployeeDetailsActivity extends DashboardActivity  {
             	startActivity(employeesIntent);
             }    
 		});
+
 		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this); 
 		String employeeId = "";		
-    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    	prefs = PreferenceManager.getDefaultSharedPreferences(this);
     	employeeId = prefs.getString("employeeId", "");
-		Employee employee = null;
+   	    	
+Log.d(module, "employeeId=" + employeeId);	    	
+		Employee employee =null;
 		if (! employeeId.isEmpty()) {
 			EmployeeDataSource datasource = new EmployeeDataSource(this);  
 			datasource.open();

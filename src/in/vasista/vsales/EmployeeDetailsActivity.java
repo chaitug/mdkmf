@@ -30,15 +30,16 @@ public class EmployeeDetailsActivity extends DashboardActivity  {
 		String employeeId = "";
 		employeeId = employeeDetailsIntent.getStringExtra("employeeId");	
 		final Employee employee;
+		
 		EmployeeDataSource datasource = new EmployeeDataSource(this);  
 		datasource.open();
 		employee = datasource.getEmployeeDetails(employeeId);		
 		datasource.close();
 		if (employee == null) {        
 			return;
-		}
+		} 
 		TextView employeeHeaderView = (TextView)findViewById(R.id.employeeIdHeader);
-		employeeHeaderView.setText(employee.getName());		
+		//employeeHeaderView.setText(employee.getName());		
 		TextView idView = (TextView)findViewById(R.id.employeeId);
 		idView.setText(employeeId);
 		TextView nameView = (TextView)findViewById(R.id.employeeName);

@@ -5,12 +5,15 @@
   android:layout_height="match_parent">
   <LinearLayout style="@style/TitleBar"
       android:id="@+id/orderTitle">
-        <ImageButton style="@style/TitleBarAction"
+        <ImageButton 
+            android:id="@+id/homeButton"                                                
+            style="@style/TitleBarAction"
             android:contentDescription="@string/description_home"
             android:src="@drawable/title_home"
             android:onClick="onClickHome" />
 
-        <ImageView style="@style/TitleBarSeparator" />
+        <ImageView style="@style/TitleBarSeparator" 
+            android:layout_toRightOf="@+id/homeButton"/>
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="match_parent" >

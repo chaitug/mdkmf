@@ -86,7 +86,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  
 	  
 	  private static final String DATABASE_NAME = "vsalesagent.db";
-	  private static final int DATABASE_VERSION = 15; 
+	  private static final int DATABASE_VERSION = 16; 
 
 	  // Database creation sql statement
 	  private static final String DATABASE_CREATE_PRODUCT = "create table "
@@ -214,6 +214,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    //db.execSQL(DATABASE_CREATE_EMPLOYEE);	
 	    //db.execSQL(DATABASE_CREATE_PAYROLL_HEADER);
 	    //db.execSQL(DATABASE_CREATE_PAYROLL_HEADER_ITEM);
+	    db.execSQL("delete from EMPLOYEE");	    
 	    db.execSQL("delete from PAYROLL_HEADER");
 	    db.execSQL("delete from PAYROLL_HEADER_ITEM");
 

@@ -64,7 +64,7 @@ public class EmployeeDataSource {
 		        allColumns, MySQLiteHelper.COLUMN_EMPLOYEE_ID + " = '" + employeeId + "'", null, null, null, null);
 
 		    cursor.moveToFirst();
-		    if (cursor == null) {
+		    if (cursor.isAfterLast()) {
 		    	return null;
 		    }
 		    Employee employee = cursorToEmployee(cursor);

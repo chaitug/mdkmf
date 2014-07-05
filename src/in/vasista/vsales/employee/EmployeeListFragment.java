@@ -113,20 +113,14 @@ public class EmployeeListFragment extends ListFragment {
 				
 			}
         });
-		/*
-		inputSearch.setVisibility(View.GONE);
-		ImageButton searchButton = (ImageButton)getActivity().findViewById(R.id.employeeSearch);
-		searchButton.setOnClickListener(new OnClickListener() { 
-			public void onClick(View view) { 
-				if (inputSearch.isShown()) {
-					inputSearch.setVisibility(View.GONE);					
-				}
-				else {
-					inputSearch.setVisibility(View.VISIBLE);
-				}
+		
+		ImageButton searchClearButton = (ImageButton)getActivity().findViewById(R.id.inputSearchClear);
+		searchClearButton.setOnClickListener(new OnClickListener() { 
+			public void onClick(View view) {  
+				inputSearch.setText("");
 			}
 		});
-		*/
+		
 	}
 
 	/**
@@ -141,7 +135,7 @@ public class EmployeeListFragment extends ListFragment {
 	    adapter = new EmployeeAdapter(getActivity(),
                 R.layout.employeelist_item,
                 employeeItems);	
-		setListAdapter(adapter);
+		setListAdapter(adapter); 
 	}
 	
 	public void onDestroyView() {

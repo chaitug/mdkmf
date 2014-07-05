@@ -1,16 +1,7 @@
 package in.vasista.vsales;
 
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import in.vasista.vsales.R; 
 import in.vasista.vsales.adapter.FacilityAutoAdapter;
-import in.vasista.vsales.adapter.PayslipItemAdapter;
-import in.vasista.vsales.catalog.Product;
 import in.vasista.vsales.db.FacilityDataSource;
 import in.vasista.vsales.db.IndentsDataSource;
 import in.vasista.vsales.db.OrdersDataSource;
@@ -19,33 +10,28 @@ import in.vasista.vsales.db.ProductsDataSource;
 import in.vasista.vsales.facility.Facility;
 import in.vasista.vsales.preference.FragmentPreferences;
 import in.vasista.vsales.sync.ServerSync;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.app.Activity;
+
+import java.util.HashMap; 
+import java.util.List;
+import java.util.Map;
+       
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
-import android.util.Log;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends DashboardActivity  {   
 	public static final String module = MainActivity.class.getName();

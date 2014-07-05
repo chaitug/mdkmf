@@ -81,7 +81,7 @@ public class IndentsDataSource {
 		    values.put(MySQLiteHelper.COLUMN_INDENT_TOTAL, indentTotal);		    
 		    return database.insert(MySQLiteHelper.TABLE_INDENT, null, values);
 	  }  
-	  
+	         
 	  /*
 	   * Returns the indent if it exists for the supplydate and shift, else
 	   * null

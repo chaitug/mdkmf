@@ -8,19 +8,23 @@
         android:id="@+id/orderTitle"
         style="@style/TitleBar" >
 
-        <ImageButton
-            style="@style/TitleBarAction"
-            android:contentDescription="@string/description_home"
-            android:onClick="onClickHome"
-            android:src="@drawable/title_home" />
 
-        <ImageView style="@style/TitleBarSeparator" />
 
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:gravity="bottom" >
 
+           <ImageButton
+            android:id="@+id/homeButton"                                       
+            style="@style/TitleBarAction"
+            android:contentDescription="@string/description_home"
+            android:onClick="onClickHome"
+            android:src="@drawable/title_home" />
+
+        <ImageView style="@style/TitleBarSeparator" 
+            android:layout_toRightOf="@+id/homeButton"/>
+        
             <TextView
                 android:id="@+id/retailerId"
                 style="@style/TitleBarText"

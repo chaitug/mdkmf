@@ -8,6 +8,10 @@
         android:id="@+id/employeeTitle"
         style="@style/TitleBar" >
 
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom" >
         <ImageButton
             style="@style/TitleBarAction"
             android:contentDescription="@string/description_home"
@@ -15,17 +19,12 @@
             android:src="@drawable/title_home" />
 
         <ImageView style="@style/TitleBarSeparator" />
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:gravity="bottom" >
-
+        
             <TextView
                 style="@style/TitleBarText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/employeesRefreshSeparator"
+                android:layout_centerInParent="true"
                 android:text="Employees"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -59,17 +58,31 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <!-- Editext for Search -->
-
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="9dp"
+    android:padding="5dp">
         <EditText
             android:id="@+id/inputSearch"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search by name, dept. or position"
+            android:hint="Enter search text"
             android:inputType="textVisiblePassword" />
+<ImageButton
+        android:id="@+id/inputSearchClear"      
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="right|center_vertical"
+        android:background="@drawable/ic_delete" />
+
+</FrameLayout>        
+        
     </LinearLayout>
 
     <fragment

@@ -20,6 +20,7 @@ import in.vasista.vsales.R;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
 /**
  * This is the activity for feature 5 in the dashboard application.
@@ -62,10 +63,11 @@ protected void onCreate(Bundle savedInstanceState)
 protected void onResume ()
 {
    super.onResume ();
-	final EditText inputSearch = (EditText) findViewById(R.id.inputSearch);
-	if (inputSearch != null) {
-		inputSearch.setVisibility(View.GONE);	
-		inputSearch.setText("");
+	final FrameLayout inputSearchFrame = (FrameLayout) findViewById(R.id.inputSearchFrame);   
+	//final EditText inputSearch = (EditText) findViewById(R.id.inputSearch);
+	if (inputSearchFrame != null) {
+		inputSearchFrame.setVisibility(View.GONE);	
+		//inputSearchFrame.setText("");
 	}
    
 }
