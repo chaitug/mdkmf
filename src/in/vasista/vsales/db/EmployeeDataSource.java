@@ -71,7 +71,7 @@ public class EmployeeDataSource {
 		    // Make sure to close the cursor
 		    cursor.close();
 		    return employee;  
-	  }
+	  } 
 	  
 	  public List<Employee> getAllEmployees() {
 		List<Employee> employees = new ArrayList<Employee>();
