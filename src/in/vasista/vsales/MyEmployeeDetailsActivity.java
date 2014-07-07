@@ -43,9 +43,11 @@ public class MyEmployeeDetailsActivity extends DashboardActivity  {
 		
 		TextView leaveBalanceDateView = (TextView)findViewById(R.id.employeeLeaveBalanceHeader);
 	    Date leaveBalanceDate = employee.getLeaveBalanceDate(); 
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");	
-	    String dateStr = dateFormat.format(leaveBalanceDate);
-	    leaveBalanceDateView.setText("Leave Balance as of " + dateStr);	 	    
+	    if (leaveBalanceDate != null ) {
+	    	SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");	
+	    	String dateStr = dateFormat.format(leaveBalanceDate);
+	    	leaveBalanceDateView.setText("Leave Balance as of " + dateStr);	 	    
+	    }
 		/*
 		TextView joinDateView = (TextView)findViewById(R.id.employeeJoinDate);
 	    Date date = employee.getJoinDate();
@@ -86,7 +88,7 @@ public class MyEmployeeDetailsActivity extends DashboardActivity  {
    	    	
 Log.d(module, "employeeId=" + employeeId);	    	
 		Employee employee =null;
-		if (! employeeId.isEmpty()) {
+		if (! employeeId.isEmpty()) { 
 			EmployeeDataSource datasource = new EmployeeDataSource(this);  
 			datasource.open();
 			employee = datasource.getEmployeeDetails(employeeId);		

@@ -201,8 +201,13 @@ Log.d(module, "Order Item: [" + orderDateStr + ";" + productId + ";" + quantity 
 	  
 	  
 	  private OrderItem cursorToOrderItem(Cursor cursor,  Map<String, Product> productMap) {
-		  OrderItem orderItem = new OrderItem(cursor.getString(2),
-				  productMap.get(cursor.getString(2)).getName(),
+		  String productId = cursor.getString(2);
+		  String productName = productId;
+		  if (productMap.containsKey(productId)) {
+			  productName = productMap.get(productId).getName();
+		  }
+		  OrderItem orderItem = new OrderItem(productId,
+				  productName,
 				  cursor.getInt(3),
 				  cursor.getDouble(4));
 		    return orderItem;
