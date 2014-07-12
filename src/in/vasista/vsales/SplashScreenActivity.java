@@ -1,16 +1,26 @@
 package in.vasista.vsales;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import in.vasista.vsales.R; 
+import in.vasista.vsales.sync.ServerSync;
+import in.vasista.vsales.sync.xmlrpc.XMLRPCApacheAdapter;
+import in.vasista.vsales.sync.xmlrpc.XMLRPCMethodCallback;
 import android.app.Activity;  
 import android.app.ProgressDialog;  
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;  
 import android.os.Bundle;   
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
 public class SplashScreenActivity extends Activity  
 {  
+	public static final String module = SplashScreenActivity.class.getName();		
 	private ProgressBar progressBar;  
 
 	/** Called when the activity is first created. */  
@@ -48,7 +58,45 @@ public class SplashScreenActivity extends Activity
 			{  
 				//Get the current thread's token  
 				synchronized (this)  
-				{  
+				{
+					Map paramMap = new HashMap();		
+					XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(getBaseContext());
+					Object result = adapter.callSync("getMobilePermissions", paramMap);	
+					if (result != null) { 
+						Map  permissions = (Map)((Map)result).get("permissionResults");
+						if (permissions != null) {
+							Log.d(module, "permissions.size() = " + permissions.size());
+							Object[]  permissionList = (Object[] )((Map)permissions).get("permissionList");
+							if (permissionList != null)  {
+								Log.d(module, "permissionList.length = " + permissionList.length);	
+						    	String retailerPerm = "N";
+						    	String salesRepPerm = "N";
+						    	String hrPerm = "N";
+								for (int i = 0; i < permissionList.length; ++i) {
+									String dashboardPermission = (String)permissionList[i];
+									Log.d(module, "dashboardPermission = " + dashboardPermission);
+									if (MainActivity.RETAILER_DB_PERM.equals(dashboardPermission)) {
+										retailerPerm = "Y";
+									}
+									else if (MainActivity.SALESREP_DB_PERM.equals(dashboardPermission)) {
+										salesRepPerm = "Y";
+									}
+									else if (MainActivity.HR_DB_PERM.equals(dashboardPermission)) {
+										hrPerm = "Y";
+									}
+								}
+								// refresh permissions prefs
+						    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());								
+								SharedPreferences.Editor prefEditor = prefs.edit();
+					    		prefEditor.putString(MainActivity.RETAILER_DB_PERM, retailerPerm);
+					    		prefEditor.putString(MainActivity.SALESREP_DB_PERM, salesRepPerm);
+					    		prefEditor.putString(MainActivity.HR_DB_PERM, hrPerm);					    		
+					    		prefEditor.commit();
+							}
+						}
+					}
+					
+					/*
 					//Initialize an integer (that will act as a counter) to zero  
 					int counter = 0;  
 					//While the counter is smaller than four  
@@ -59,12 +107,16 @@ public class SplashScreenActivity extends Activity
 						counter++;  
 
 					}  
+					*/
 				}  
 			}  
-			catch (InterruptedException e)  
+/*			catch (InterruptedException e)  
 			{  
 				e.printStackTrace();  
-			}  
+			} */ 
+			catch (Exception e) {
+				e.printStackTrace();  				
+			}
 			return null;  
 		}  
 
@@ -83,6 +135,9 @@ public class SplashScreenActivity extends Activity
 			progressBar.setVisibility(View.INVISIBLE);
 			Intent i = new Intent(SplashScreenActivity.this, MainActivity.class);
             startActivity(i); 
+            
+         // close this activity
+            finish();
 		}  
 	}  
 }  

@@ -21,6 +21,7 @@ import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -40,63 +42,15 @@ public class MainActivity extends DashboardActivity  {
     private static final int SHOW_PREFERENCES = 1;
     private static final int RETAILER_DASHBOARD = 1;
     private static final int SALESREP_DASHBOARD = 2;
+    
+    public static final String RETAILER_DB_PERM = "MOB_RTLR_DB_VIEW";    
+    public static final String SALESREP_DB_PERM = "MOB_SREP_DB_VIEW";
+    public static final String HR_DB_PERM = "MOB_HR_DB_VIEW";
+    
 	private Map facilityMap = new HashMap<String, Facility> ();
     
-    
-    void setDashboard() {
-    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-    	int dashboardEnum = prefs.getInt("dashboardEnum", SALESREP_DASHBOARD);      
 
-    	//SharedPreferences.Editor prefEditor = prefs.edit();
-    	//prefEditor.putString("storeId", retailerId);
-    	//prefEditor.commit(); 
-    	if (dashboardEnum == RETAILER_DASHBOARD) {
-    		ImageButton searchButton = (ImageButton)findViewById(R.id.homeSearch);
-    		searchButton.setVisibility(View.GONE); 
-    		Button outletsButton = (Button)findViewById(R.id.home_btn_outlets);
-    		outletsButton.setVisibility(View.GONE);       		
-    	}
-    }
-	
-	/**
-	 * onCreate - called when the activity is first created.
-	 * Called when the activity is first created. 
-	 * This is where you should do all of your normal static set up: create views, bind data to lists, etc. 
-	 * This method also provides you with a Bundle containing the activity's previously frozen state, if there was one.
-	 * 
-	 * Always followed by onStart().   
-	 *
-	 */
-
-	protected void onCreate(Bundle savedInstanceState) 
-	{   
-	    super.onCreate(savedInstanceState);   
-	    setContentView(R.layout.activity_home);
-
-    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		SharedPreferences.Editor prefEditor = prefs.edit();
-    	String serverURL;
-    	serverURL = prefs.getString("serverURL", "");	    	
-    	if (serverURL.isEmpty()) {
-    		serverURL = "http://motherdairykmf.vasista.in:58080/webtools/control/xmlrpc";
-    		prefEditor.putString("serverURL", serverURL);
-    		prefEditor.commit();
-    	}
-    	String tenantId;
-    	tenantId = prefs.getString("tenantId", "");	    	
-    	if (tenantId.isEmpty()) {
-    		tenantId = "MDKMF";
-    		prefEditor.putString("tenantId", tenantId);
-    		prefEditor.commit();
-    	}  
-    	String storeId; 
-    	storeId = prefs.getString("storeId", "");	    	
-    	if (storeId.isEmpty()) {
-    		storeId = "B80504";
-    		prefEditor.putString("storeId", storeId);
-    		prefEditor.commit();
-    	} 
-    	
+	private void setupFacilityDashboard() {
     	FacilityDataSource facilityDS = new FacilityDataSource(this);
     	facilityDS.open();
     	List<Facility> facilityList = facilityDS.getAllFacilities();
@@ -150,8 +104,121 @@ public class MainActivity extends DashboardActivity  {
 			}
 		});
 
-	    initializeRetailer(null, false);
+	    initializeRetailer(null, false);		
+	}
+	
+    void setDashboard() {
+    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);    	
+    	/*
+    	int dashboardEnum = prefs.getInt("dashboardEnum", SALESREP_DASHBOARD);      
+    	if (dashboardEnum == RETAILER_DASHBOARD) {
+    		ImageButton searchButton = (ImageButton)findViewById(R.id.homeSearch);
+    		searchButton.setVisibility(View.GONE); 
+    		Button outletsButton = (Button)findViewById(R.id.home_btn_outlets);
+    		outletsButton.setVisibility(View.GONE);       		
+    	}
+    	*/
+    	String retailerPerm = prefs.getString(RETAILER_DB_PERM, "N");
+    	String salesRepPerm = prefs.getString(SALESREP_DB_PERM, "N");
+    	String hrPerm = prefs.getString(HR_DB_PERM, "N");   
+
+    	if (salesRepPerm.equals("N") && retailerPerm.equals("N")) {
+    		
+    	    LinearLayout paymentsCatalogLayout = (LinearLayout) findViewById(R.id.paymentsCatalogLayout); 
+    	    ((LinearLayout)paymentsCatalogLayout.getParent()).removeView(paymentsCatalogLayout); 
+/*    	    
+    		Button catalogButton = (Button)findViewById(R.id.home_btn_catalog);
+    	    ((LinearLayout)catalogButton.getParent()).removeView(catalogButton);        		
+    		//catalogButton.setVisibility(View.GONE);     		
+    		
+    		Button paymentsButton = (Button)findViewById(R.id.home_btn_payments);
+    	    ((LinearLayout)paymentsButton.getParent()).removeView(paymentsButton);        		    		
+    		//paymentsButton.setVisibility(View.GONE); 
+*/
+    	    LinearLayout indentsOrdersLayout = (LinearLayout) findViewById(R.id.indentsOrdersLayout); 
+    	    ((LinearLayout)indentsOrdersLayout.getParent()).removeView(indentsOrdersLayout);  
+/*    	    
+    		Button ordersButton = (Button)findViewById(R.id.home_btn_orders);
+    	    ((LinearLayout)ordersButton.getParent()).removeView(ordersButton);    
+    		//ordersButton.setVisibility(View.GONE); 
+
+    		Button indentsButton = (Button)findViewById(R.id.home_btn_indents);
+    	    ((LinearLayout)indentsButton.getParent()).removeView(indentsButton);        		
+    		//indentsButton.setVisibility(View.GONE); 
+*/
+    	    LinearLayout facilityHeader = (LinearLayout) findViewById(R.id.facilityHeader); 
+    	    ((LinearLayout)facilityHeader.getParent()).removeView(facilityHeader);    
+    	    //facilityHeader.setVisibility(View.GONE); 
+    	    
+    	    AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteRetailer); 
+    	    ((LinearLayout)actv.getParent()).removeView(actv);    	    
+//    	    actv.setVisibility(View.GONE);  
+    	    
+    		ImageButton searchButton = (ImageButton)findViewById(R.id.homeSearch);
+    		searchButton.setVisibility(View.GONE); 
+    		Button outletsButton = (Button)findViewById(R.id.home_btn_outlets);
+    		outletsButton.setVisibility(View.GONE); 
+    	}
+    	else if (salesRepPerm.equals("N")) {
+    	    AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteRetailer); 	     
+    	    actv.setVisibility(View.GONE);     		
+    		ImageButton searchButton = (ImageButton)findViewById(R.id.homeSearch);
+    		searchButton.setVisibility(View.GONE); 
+    		Button outletsButton = (Button)findViewById(R.id.home_btn_outlets);
+    		outletsButton.setVisibility(View.GONE);    		
+    	}		
+    	if (hrPerm.equals("N")) {
+    		Button hrButton = (Button)findViewById(R.id.home_btn_hr);
+    		hrButton.setVisibility(View.GONE);      		
+    	}
+    	
+    	// Do facility dashboard initialization if required
+    	if (salesRepPerm.equals("Y") || retailerPerm.equals("Y")) {
+    		setupFacilityDashboard();
+    	}
+    }
+	
+	/**
+	 * onCreate - called when the activity is first created.
+	 * Called when the activity is first created. 
+	 * This is where you should do all of your normal static set up: create views, bind data to lists, etc. 
+	 * This method also provides you with a Bundle containing the activity's previously frozen state, if there was one.
+	 * 
+	 * Always followed by onStart().   
+	 *
+	 */
+
+	protected void onCreate(Bundle savedInstanceState) 
+	{   
+	    super.onCreate(savedInstanceState);   
+	    setContentView(R.layout.activity_home);
+
+    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		SharedPreferences.Editor prefEditor = prefs.edit();
+    	String serverURL;
+    	serverURL = prefs.getString("serverURL", "");	    	
+    	if (serverURL.isEmpty()) {
+    		serverURL = "http://motherdairykmf.vasista.in:58080/webtools/control/xmlrpc";
+    		prefEditor.putString("serverURL", serverURL);
+    		prefEditor.commit();
+    	}
+    	String tenantId;
+    	tenantId = prefs.getString("tenantId", "");	    	
+    	if (tenantId.isEmpty()) {
+    		tenantId = "MDKMF";
+    		prefEditor.putString("tenantId", tenantId);
+    		prefEditor.commit();
+    	}  
+    	String storeId; 
+    	storeId = prefs.getString("storeId", "");	    	
+    	if (storeId.isEmpty()) {
+    		storeId = "B80504";
+    		prefEditor.putString("storeId", storeId);
+    		prefEditor.commit();
+    	} 
+
 	    setDashboard();
+	    
 
 	}
 	    

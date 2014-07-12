@@ -192,16 +192,16 @@ public void onClickFeature (View v)
 {
     int id = v.getId ();
     switch (id) {
-      case R.id.home_btn_feature1 :
+      case R.id.home_btn_indents :
           startActivity (new Intent(getApplicationContext(), IndentActivity.class));
            break;
-      case R.id.home_btn_feature2 :
+      case R.id.home_btn_orders :
           startActivity (new Intent(getApplicationContext(), OrderActivity.class));
            break; 
-      case R.id.home_btn_feature3 :
+      case R.id.home_btn_payments :
            startActivity (new Intent(getApplicationContext(), PaymentActivity.class));
            break;
-      case R.id.home_btn_feature4 :
+      case R.id.home_btn_catalog :
            startActivity (new Intent(getApplicationContext(), CatalogActivity.class));
            break;
       case R.id.home_btn_outlets :

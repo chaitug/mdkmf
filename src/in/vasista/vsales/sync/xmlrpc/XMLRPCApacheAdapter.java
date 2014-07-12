@@ -49,6 +49,28 @@ public class XMLRPCApacheAdapter {
 	    client.setConfig(config);
 	}
 	
+	public Object callSync(String method, Map<String, Object> params) {
+		Map allParamsMap = new HashMap<String, Object>();
+		allParamsMap.putAll(credentialsMap);
+		if (params != null) {
+			allParamsMap.putAll(params);
+		}
+	    Object[] allParams = {
+	    		allParamsMap,
+	    };	
+	    Object result = null;
+		try {
+			long t0 = System.currentTimeMillis();
+			result = client.execute(method, allParams);
+			long t1 = System.currentTimeMillis();
+			Log.d( module, "XML-RPC call took " + (t1-t0) + "ms");			
+		} catch (final Exception e) {
+			Log.e( module, "Error", e);
+			Toast.makeText( context, "Remote call failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
+		}
+		return result;
+	}
+	
 	public void call(String method, Map<String, Object> params, ProgressBar progressBar, XMLRPCMethodCallback callBack) {		
 		Map allParamsMap = new HashMap<String, Object>();
 		allParamsMap.putAll(credentialsMap);
