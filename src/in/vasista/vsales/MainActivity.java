@@ -40,8 +40,6 @@ public class MainActivity extends DashboardActivity  {
 
     static final private int MENU_PREFERENCES = Menu.FIRST+1;
     private static final int SHOW_PREFERENCES = 1;
-    private static final int RETAILER_DASHBOARD = 1;
-    private static final int SALESREP_DASHBOARD = 2;
     
     public static final String RETAILER_DB_PERM = "MOB_RTLR_DB_VIEW";    
     public static final String SALESREP_DB_PERM = "MOB_SREP_DB_VIEW";
@@ -49,7 +47,6 @@ public class MainActivity extends DashboardActivity  {
     
 	private Map facilityMap = new HashMap<String, Facility> ();
     
-
 	private void setupFacilityDashboard() {
     	FacilityDataSource facilityDS = new FacilityDataSource(this);
     	facilityDS.open();
@@ -67,8 +64,6 @@ public class MainActivity extends DashboardActivity  {
 	      index++;
 	    }	               
 	    final MainActivity mainActivity = this;      
-	    
-	    //final ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,retailers);
 	    final FacilityAutoAdapter adapter = new FacilityAutoAdapter(this, R.layout.autocomplete_item, facilityList);
 	    final AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteRetailer); 	    
 	    actv.setAdapter(adapter); 
@@ -80,11 +75,7 @@ public class MainActivity extends DashboardActivity  {
 	    	    InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 	    	    in.hideSoftInputFromWindow(actv.getWindowToken(), 0);
 	    	    actv.clearFocus();  
-	    	    //String retailerId =  (String)parent.getItemAtPosition(position);
-	    	    Facility retailer =  (Facility)parent.getItemAtPosition(position);
-	    	    
-	    	    //actv.setInputType(InputType.TYPE_NULL);
-				//Toast.makeText( mainActivity, "Clicked actv: " + retailerId, Toast.LENGTH_SHORT ).show();	    		    			
+	    	    Facility retailer =  (Facility)parent.getItemAtPosition(position);	    	       		    			
 	    	    mainActivity.initializeRetailer(retailer.getId(), true); 
 	    	    actv.setText("");
 				actv.setVisibility(View.GONE);		      			
@@ -107,17 +98,8 @@ public class MainActivity extends DashboardActivity  {
 	    initializeRetailer(null, false);		
 	}
 	
-    void setDashboard() {
+    void setupDashboard() {
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);    	
-    	/*
-    	int dashboardEnum = prefs.getInt("dashboardEnum", SALESREP_DASHBOARD);      
-    	if (dashboardEnum == RETAILER_DASHBOARD) {
-    		ImageButton searchButton = (ImageButton)findViewById(R.id.homeSearch);
-    		searchButton.setVisibility(View.GONE); 
-    		Button outletsButton = (Button)findViewById(R.id.home_btn_outlets);
-    		outletsButton.setVisibility(View.GONE);       		
-    	}
-    	*/
     	String retailerPerm = prefs.getString(RETAILER_DB_PERM, "N");
     	String salesRepPerm = prefs.getString(SALESREP_DB_PERM, "N");
     	String hrPerm = prefs.getString(HR_DB_PERM, "N");   
@@ -126,33 +108,15 @@ public class MainActivity extends DashboardActivity  {
     		
     	    LinearLayout paymentsCatalogLayout = (LinearLayout) findViewById(R.id.paymentsCatalogLayout); 
     	    ((LinearLayout)paymentsCatalogLayout.getParent()).removeView(paymentsCatalogLayout); 
-/*    	    
-    		Button catalogButton = (Button)findViewById(R.id.home_btn_catalog);
-    	    ((LinearLayout)catalogButton.getParent()).removeView(catalogButton);        		
-    		//catalogButton.setVisibility(View.GONE);     		
-    		
-    		Button paymentsButton = (Button)findViewById(R.id.home_btn_payments);
-    	    ((LinearLayout)paymentsButton.getParent()).removeView(paymentsButton);        		    		
-    		//paymentsButton.setVisibility(View.GONE); 
-*/
+
     	    LinearLayout indentsOrdersLayout = (LinearLayout) findViewById(R.id.indentsOrdersLayout); 
     	    ((LinearLayout)indentsOrdersLayout.getParent()).removeView(indentsOrdersLayout);  
-/*    	    
-    		Button ordersButton = (Button)findViewById(R.id.home_btn_orders);
-    	    ((LinearLayout)ordersButton.getParent()).removeView(ordersButton);    
-    		//ordersButton.setVisibility(View.GONE); 
 
-    		Button indentsButton = (Button)findViewById(R.id.home_btn_indents);
-    	    ((LinearLayout)indentsButton.getParent()).removeView(indentsButton);        		
-    		//indentsButton.setVisibility(View.GONE); 
-*/
     	    LinearLayout facilityHeader = (LinearLayout) findViewById(R.id.facilityHeader); 
     	    ((LinearLayout)facilityHeader.getParent()).removeView(facilityHeader);    
-    	    //facilityHeader.setVisibility(View.GONE); 
     	    
     	    AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteRetailer); 
     	    ((LinearLayout)actv.getParent()).removeView(actv);    	    
-//    	    actv.setVisibility(View.GONE);  
     	    
     		ImageButton searchButton = (ImageButton)findViewById(R.id.homeSearch);
     		searchButton.setVisibility(View.GONE); 
@@ -216,10 +180,7 @@ public class MainActivity extends DashboardActivity  {
     		prefEditor.putString("storeId", storeId);
     		prefEditor.commit();
     	} 
-
-	    setDashboard();
-	    
-
+	    setupDashboard();
 	}
 	    
 	/**
@@ -327,24 +288,16 @@ public class MainActivity extends DashboardActivity  {
         return false;
     } 
     
-	/**
-	 */
 	// Click Methods
     public void onClick(View v) {
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
     	String retailerId = prefs.getString("storeId", "");
-		//Toast.makeText( this, "Clicked " + retailerId, Toast.LENGTH_SHORT ).show();	 
         if (!retailerId.isEmpty()) { 
         	Intent facilityDetailsIntent = new Intent(this, FacilityDetailsActivity.class);
         	facilityDetailsIntent.putExtra("facilityId", retailerId);
         	startActivity(facilityDetailsIntent);
         } 
-
     } 
-
-	/**
-	 */
-	// More Methods
     
     public void cleanupRetailerProducts() {
     	ProductsDataSource productDS = new ProductsDataSource(this);
@@ -405,12 +358,10 @@ public class MainActivity extends DashboardActivity  {
 		progressBar.setVisibility(View.VISIBLE);
 		ServerSync serverSync = new ServerSync(this);
 		serverSync.getFacilityDues(progressBar, this);	   
-		
 		if (fetchProducts) {
 			cleanupRetailerData();
 			serverSync.updateProducts(progressBar, null); 
-		}
-    	
+		}    	
     }
     
     public void updateDues(Map boothDues, Map boothTotalDues) {
