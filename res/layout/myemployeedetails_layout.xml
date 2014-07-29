@@ -165,7 +165,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
         </RelativeLayout>
-<!--  
+ 
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -205,116 +205,7 @@
                 android:layout_alignParentRight="true"                
                 android:textSize="14sp"
                 android:textStyle="bold" />            
-        </RelativeLayout>
--->        
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/employeeheader_border"
-            android:padding="5dp" >
+        </RelativeLayout>       
 
-            <TextView
-                android:id="@+id/employeeLeaveBalanceHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:layout_centerInParent="true"
-                android:text="Leave Balance"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-        
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp" >
-
-            <TextView
-                android:id="@+id/employeeEarnedLeaveLabel"
-                style="@style/TextLabel"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:text="Earned Leave Balance: " />
-
-            <TextView
-                android:id="@+id/employeeEarnedLeave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:layout_toRightOf="@+id/employeeEarnedLeaveLabel"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp" >
-
-            <TextView
-                android:id="@+id/employeeCasualLeaveLabel"
-                style="@style/TextLabel"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:text="Casual Leave Balance: " />
-
-            <TextView
-                android:id="@+id/employeeCasualLeave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:layout_toRightOf="@+id/employeeCasualLeaveLabel"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp" >
-
-            <TextView
-                android:id="@+id/employeeHalfPayLeaveLabel"
-                style="@style/TextLabel"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:text="Half Pay Leave Balance: " />
-
-            <TextView
-                android:id="@+id/employeeHalfPayLeave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:layout_toRightOf="@+id/employeeHalfPayLeaveLabel"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/listheader_border"
-            android:padding="5dp" >
-
-            <TextView
-                android:id="@+id/employeePaySlipHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:layout_centerInParent="true"
-                android:text="Payslips"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-            <fragment
-        android:id="@+id/payslip_list_fragment"
-        android:name="in.vasista.hr.payslip.PayslipListFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" /> 
     </LinearLayout>   
 </LinearLayout>

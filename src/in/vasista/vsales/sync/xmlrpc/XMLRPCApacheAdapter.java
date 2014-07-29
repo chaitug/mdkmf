@@ -65,8 +65,8 @@ public class XMLRPCApacheAdapter {
 			long t1 = System.currentTimeMillis();
 			Log.d( module, "XML-RPC call took " + (t1-t0) + "ms");			
 		} catch (final Exception e) {
-			Log.e( module, "Error", e);
-			Toast.makeText( context, "Remote call failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
+			Log.e( module, "Error " + e, e);
+			//Toast.makeText( context, "Remote call failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
 		}
 		return result;
 	}

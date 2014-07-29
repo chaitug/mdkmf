@@ -38,8 +38,13 @@
     <string name="title_feature3">Payments</string>
     <string name="title_feature4">Catalog</string>
     <string name="title_feature5">Outlets</string>
-    <string name="title_feature6">HR</string>
-    
+    <string name="title_sales">Sales</string>
+    <string name="title_hr">HR</string>
+    <string name="title_employeeprofile">My Profile</string>
+    <string name="title_leave">Leaves</string>
+    <string name="title_payslip">Payslips</string>
+    <string name="title_emplsearch">Search</string>
+        
     <string name="account_summary"><u>Account Summary for </u></string>
 
     <string name="default_intro">This is the default content view for an activity. Be sure to change your activity\'s onCreate method. Use setContentView on a custom layout.</string>

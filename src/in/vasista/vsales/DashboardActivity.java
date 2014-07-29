@@ -192,24 +192,12 @@ public void onClickFeature (View v)
 {
     int id = v.getId ();
     switch (id) {
-      case R.id.home_btn_indents :
-          startActivity (new Intent(getApplicationContext(), IndentActivity.class));
-           break;
-      case R.id.home_btn_orders :
-          startActivity (new Intent(getApplicationContext(), OrderActivity.class));
-           break; 
-      case R.id.home_btn_payments :
-           startActivity (new Intent(getApplicationContext(), PaymentActivity.class));
-           break;
-      case R.id.home_btn_catalog :
-           startActivity (new Intent(getApplicationContext(), CatalogActivity.class));
-           break;
-      case R.id.home_btn_outlets :
-           startActivity (new Intent(getApplicationContext(), FacilityActivity.class));
+      case R.id.home_btn_sales :
+          startActivity (new Intent(getApplicationContext(), SalesDashboardActivity.class));
            break;
       case R.id.home_btn_hr : 
            //startActivity (new Intent(getApplicationContext(), EmployeeActivity.class));
-           startActivity (new Intent(getApplicationContext(), MyEmployeeDetailsActivity.class));           
+           startActivity (new Intent(getApplicationContext(), HRDashboardActivity.class));           
            break;
       default:    
     	   break;    
@@ -229,7 +217,7 @@ public void onClickFeature (View v)
 
 public void goHome(Context context) 
 {
-    final Intent intent = new Intent(context, MainActivity.class);
+    final Intent intent = new Intent(context, SalesDashboardActivity.class);
     intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
     context.startActivity (intent); 
 }

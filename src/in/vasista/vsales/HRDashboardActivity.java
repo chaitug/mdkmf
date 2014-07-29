@@ -2,11 +2,13 @@ package in.vasista.vsales;
 
 
 import in.vasista.vsales.adapter.FacilityAutoAdapter;
+import in.vasista.vsales.db.EmployeeDataSource;
 import in.vasista.vsales.db.FacilityDataSource;
 import in.vasista.vsales.db.IndentsDataSource;
 import in.vasista.vsales.db.OrdersDataSource;
 import in.vasista.vsales.db.PaymentsDataSource;
 import in.vasista.vsales.db.ProductsDataSource;
+import in.vasista.vsales.employee.Employee;
 import in.vasista.vsales.facility.Facility;
 import in.vasista.vsales.preference.FragmentPreferences;
 import in.vasista.vsales.sync.ServerSync;
@@ -35,30 +37,15 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class MainActivity extends DashboardActivity  {   
-	public static final String module = MainActivity.class.getName();
+public class HRDashboardActivity extends DashboardActivity  {   
+	public static final String module = HRDashboardActivity.class.getName();
 
     static final private int MENU_PREFERENCES = Menu.FIRST+1;
     private static final int SHOW_PREFERENCES = 1;
-    
-    public static final String RETAILER_DB_PERM = "MOB_RTLR_DB_VIEW";    
-    public static final String SALESREP_DB_PERM = "MOB_SREP_DB_VIEW";
-    public static final String HR_DB_PERM = "MOB_HR_DB_VIEW";
-    
-	private Map facilityMap = new HashMap<String, Facility> ();
+        
 	
     void setupDashboard() {
-    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);    	
-    	String retailerPerm = prefs.getString(RETAILER_DB_PERM, "N");
-    	String salesRepPerm = prefs.getString(SALESREP_DB_PERM, "N");
-    	String hrPerm = prefs.getString(HR_DB_PERM, "N");   
-    	
-    	// Do facility dashboard initialization if required
-    	if ((salesRepPerm.equals("Y") || retailerPerm.equals("Y")) && hrPerm.equals("N")) {
-    	    startActivity (new Intent(getApplicationContext(), SalesDashboardActivity.class));
-    	    return;
-    	}
-	    setContentView(R.layout.activity_home);
+    	//
     }
 	
 	/**
@@ -74,24 +61,13 @@ public class MainActivity extends DashboardActivity  {
 	protected void onCreate(Bundle savedInstanceState) 
 	{   
 	    super.onCreate(savedInstanceState);   
-
-    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		SharedPreferences.Editor prefEditor = prefs.edit();
-    	String serverURL;
-    	serverURL = prefs.getString("serverURL", "");	    	
-    	if (serverURL.isEmpty()) {
-    		serverURL = "http://motherdairykmf.vasista.in:58080/webtools/control/xmlrpc";
-    		prefEditor.putString("serverURL", serverURL);
-    		prefEditor.commit();
-    	}
-    	String tenantId;
-    	tenantId = prefs.getString("tenantId", "");	    	
-    	if (tenantId.isEmpty()) {
-    		tenantId = "MDKMF";
-    		prefEditor.putString("tenantId", tenantId);
-    		prefEditor.commit();
-    	}  
+	    setContentView(R.layout.activity_hr_home);
 	    setupDashboard();
+
+	    ProgressBar progressBar = (ProgressBar) findViewById(R.id.myEmployeeRefreshProgress);
+		progressBar.setVisibility(View.VISIBLE);
+		ServerSync serverSync = new ServerSync(this);
+		serverSync.fetchMyEmployeeDetails(progressBar, this);	    
 	}
 	    
 	/**
@@ -147,7 +123,7 @@ public class MainActivity extends DashboardActivity  {
 
 	protected void onResume ()
 	{
-	   super.onResume ();
+	   super.onResume ();		   
 	}
 
 	/**
@@ -198,5 +174,29 @@ public class MainActivity extends DashboardActivity  {
         }
         return false;
     } 
+    
+	// Click Methods
+    
+    
+    public void onClickFeature (View v)
+    {
+        int id = v.getId ();
+        switch (id) {
+          case R.id.home_btn_employeeprofile :
+              startActivity (new Intent(getApplicationContext(), MyEmployeeDetailsActivity.class));           
+               break;
+          case R.id.home_btn_leave :
+              startActivity (new Intent(getApplicationContext(), LeaveActivity.class));           
+               break; 
+          case R.id.home_btn_payslip :
+              startActivity (new Intent(getApplicationContext(), PayslipActivity.class));            
+               break;
+          case R.id.home_btn_emplsearch :
+              startActivity (new Intent(getApplicationContext(), EmployeeActivity.class));  
+               break;
+          default:    
+        	   break;    
+        }
+    }    
     
 }

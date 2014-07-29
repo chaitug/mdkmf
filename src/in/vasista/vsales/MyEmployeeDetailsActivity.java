@@ -41,28 +41,14 @@ public class MyEmployeeDetailsActivity extends DashboardActivity  {
 		TextView employeePositionView = (TextView)findViewById(R.id.employeePosition);
 		employeePositionView.setText(employee.getPosition());			
 		
-		TextView leaveBalanceDateView = (TextView)findViewById(R.id.employeeLeaveBalanceHeader);
-	    Date leaveBalanceDate = employee.getLeaveBalanceDate(); 
-	    if (leaveBalanceDate != null ) {
-	    	SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");	
-	    	String dateStr = dateFormat.format(leaveBalanceDate);
-	    	leaveBalanceDateView.setText("Leave Balance as of " + dateStr);	 	    
-	    }
-		/*
 		TextView joinDateView = (TextView)findViewById(R.id.employeeJoinDate);
 	    Date date = employee.getJoinDate();
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");
 	    String dateStr = dateFormat.format(date);
 		joinDateView.setText(dateStr);	
 		TextView phoneView = (TextView)findViewById(R.id.employeePhone); 
-		phoneView.setText(employee.getPhoneNum()); 
-		*/	
-		TextView elView = (TextView)findViewById(R.id.employeeEarnedLeave);
-		elView.setText(String.format("%.1f", employee.getEarnedLeave())); 	
-		TextView clView = (TextView)findViewById(R.id.employeeCasualLeave);
-		clView.setText(String.format("%.1f", employee.getCasualLeave()));
-		TextView hplView = (TextView)findViewById(R.id.employeeHalfPayLeave);
-		hplView.setText(String.format("%.1f", employee.getHalfPayLeave()));				
+		phoneView.setText(employee.getPhoneNum()); 	
+			
 	}
 	
 	public void onCreate(Bundle savedInstanceState) { 
@@ -79,8 +65,6 @@ public class MyEmployeeDetailsActivity extends DashboardActivity  {
             	startActivity(employeesIntent);
             }    
 		});
-
-		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this); 
 		String employeeId = "";		
     	prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -99,9 +83,7 @@ Log.d(module, "employeeId=" + employeeId);
 			nameView.setText("<No employee mapping found>");				
 			return;
 		}   
-		updateEmployeeDetails(employee);
-		
-
+		updateEmployeeDetails(employee);		
 	}
 	
 	/**
@@ -115,11 +97,5 @@ Log.d(module, "employeeId=" + employeeId);
 	protected void onResume () 
 	{
 	   super.onResume ();
-
-		//::TODO:: temp code
-		ProgressBar progressBar = (ProgressBar) findViewById(R.id.myEmployeeRefreshProgress);
-		progressBar.setVisibility(View.VISIBLE);
-		ServerSync serverSync = new ServerSync(this);
-		serverSync.fetchMyEmployeeDetails(progressBar, this);	
 	}
 }

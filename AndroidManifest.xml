@@ -24,8 +24,14 @@
          </intent-filter>
       </activity>
         <activity android:name="in.vasista.vsales.MainActivity"
-      			android:label="Main Dashboard">
+      			android:label="Milkosoft">
+    	</activity>       
+        <activity android:name="in.vasista.vsales.SalesDashboardActivity"
+      			android:label="Sales Dashboard">
     	</activity> 
+        <activity android:name="in.vasista.vsales.HRDashboardActivity"
+      			android:label="HR Dashboard">
+    	</activity>     	
       <activity android:name="in.vasista.vsales.OrderActivity"
             android:theme="@style/Theme.D1"
             android:label="@string/title_feature1"
@@ -48,7 +54,7 @@
             />
       <activity android:name="in.vasista.vsales.EmployeeActivity"
             android:theme="@style/Theme.D1"
-            android:label="@string/title_feature6"
+            android:label="@string/title_hr"
             />
       <activity android:name="in.vasista.vsales.AboutActivity"
             android:theme="@style/Theme.D1"
@@ -73,7 +79,11 @@
     	</activity> 
         <activity android:name="in.vasista.vsales.MyEmployeeDetailsActivity"
       			android:label="My Employee Details">
-    	</activity>  
+    	</activity> 
+         <activity android:name="in.vasista.vsales.LeaveActivity"
+      			android:label="Leaves"/>      	 
+        <activity android:name="in.vasista.vsales.PayslipActivity"
+      			android:label="Payslip"/>     	
         <activity android:name="in.vasista.vsales.PayslipItemsListActivity"
       			android:label="Payslip Details"/>    	     	    	  	    	
     	<activity android:name="in.vasista.vsales.preference.FragmentPreferences"/>  

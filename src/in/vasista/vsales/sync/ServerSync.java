@@ -14,7 +14,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import in.vasista.vsales.EmployeeActivity;
-import in.vasista.vsales.MainActivity;
+import in.vasista.vsales.HRDashboardActivity;
+import in.vasista.vsales.SalesDashboardActivity;
 import in.vasista.vsales.MyEmployeeDetailsActivity;
 import in.vasista.vsales.catalog.CatalogListFragment;
 import in.vasista.vsales.catalog.Product;
@@ -330,7 +331,7 @@ public class ServerSync {
     	}
 	}		
 	
-	public void getFacilityDues(ProgressBar progressBar, final MainActivity activity) {
+	public void getFacilityDues(ProgressBar progressBar, final SalesDashboardActivity activity) {
 		Map paramMap = new HashMap();
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		String storeId = prefs.getString("storeId", "");			
@@ -558,7 +559,7 @@ public class ServerSync {
     	}
 	}	
 	
-	public void fetchMyEmployeeDetails(ProgressBar progressBar, final MyEmployeeDetailsActivity activity) {
+	public void fetchMyEmployeeDetails(ProgressBar progressBar, final HRDashboardActivity activity) {
 		Map paramMap = new HashMap();		
 		final EmployeeDataSource datasource = new EmployeeDataSource(context);
 		datasource.open();
@@ -621,9 +622,9 @@ public class ServerSync {
 					    		payslipDS.insertPayslips(id, payslips);
 					    		payslipDS.close();
 					    	}
-					    	if (activity != null) {
-					    		activity.updateEmployeeDetails(employee);
-					    	}				    		
+//					    	if (activity != null) {
+//					    		activity.updateEmployeeDetails(employee);
+//					    	}				    		
 				    	}
 
 				    	datasource.close();

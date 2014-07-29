@@ -3,7 +3,7 @@ package in.vasista.vsales.catalog;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.vasista.vsales.MainActivity;
+import in.vasista.vsales.SalesDashboardActivity;
 import in.vasista.vsales.R;
 import in.vasista.vsales.adapter.IndentAdapter;
 import in.vasista.vsales.adapter.ProductAdapter;

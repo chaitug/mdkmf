@@ -28,36 +28,67 @@
                     android:src="@drawable/title_about" />
 
                 <ImageView
+                android:id="@+id/titleBarLogo"                    
                     style="@style/TitleBarLogo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/description_logo"
                     android:src="@drawable/title_logo" />
-
+            <ProgressBar
+                android:id="@+id/myEmployeeRefreshProgress"
+                style="@android:style/Widget.ProgressBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@+id/titleBarLogo"
+                android:indeterminate="true"
+                android:visibility="invisible" />
             </RelativeLayout>
         </LinearLayout>
 
-
-
             <LinearLayout
+                android:id="@+id/profileLeaveLayout"                
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal" >
 
                 <Button
-                    android:id="@+id/home_btn_sales"
+                    android:id="@+id/home_btn_employeeprofile"
                     style="@style/HomeButton"
-                    android:drawableTop="@drawable/sales_button"
+                    android:drawableTop="@drawable/employeeprofile_button"
                     android:onClick="onClickFeature"
-                    android:text="@string/title_sales" />
+                    android:text="@string/title_employeeprofile" />
+
                 <Button
-                    android:id="@+id/home_btn_hr"
+                    android:id="@+id/home_btn_leave"
                     style="@style/HomeButton"
-                    android:drawableTop="@drawable/hr_button"
+                    android:drawableTop="@drawable/leave_button"
                     android:onClick="onClickFeature"
-                    android:text="@string/title_hr" />                
+                    android:text="@string/title_leave" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/payslipSearchLayout"                                
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/home_btn_payslip"
+                    style="@style/HomeButton"
+                    android:drawableTop="@drawable/payslip_button"
+                    android:onClick="onClickFeature"
+                    android:text="@string/title_payslip" />
+
+                <Button
+                    android:id="@+id/home_btn_emplsearch"
+                    style="@style/HomeButton"
+                    android:drawableTop="@drawable/emplsearch_button"
+                    android:onClick="onClickFeature"
+                    android:text="@string/title_emplsearch" />
             </LinearLayout>
     </LinearLayout>
 
