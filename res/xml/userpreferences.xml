@@ -6,7 +6,7 @@
         	android:title="Server URL"
             android:summary="Sync Cloud Server"
             android:key="serverURL"/>
-		<CheckBoxPreference
+<!-- 		<CheckBoxPreference
 		    android:key="PREF_AUTO_UPDATE"
 			android:title="Auto sync"
 			android:summary="Select to turn on automatic updating" 
@@ -20,7 +20,7 @@
 		    android:entryValues="@array/update_freq_values" 
 		    android:dialogTitle="Sync frequency" 
 		    android:defaultValue="60" 
-		/>
+		/> -->
 	</PreferenceCategory>
     <PreferenceCategory	
 		android:title="User Credentials"> 
@@ -46,7 +46,7 @@
             android:summary="Store Name"
             android:key="storeName"/>                         	
 	</PreferenceCategory>
-    <PreferenceCategory	
+<!--     <PreferenceCategory	
 		android:title="Location Settings"> 
 		<CheckBoxPreference
 		    android:key="PREF_LOCATION_AUTO_SAVE"
@@ -63,5 +63,5 @@
 		    android:dialogTitle="Save frequency" 
 		    android:defaultValue="15" 
 		/>
-	</PreferenceCategory>		
+	</PreferenceCategory> -->		
 </PreferenceScreen>

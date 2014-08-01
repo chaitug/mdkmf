@@ -44,10 +44,6 @@ public class HRDashboardActivity extends DashboardActivity  {
     private static final int SHOW_PREFERENCES = 1;
         
 	
-    void setupDashboard() {
-    	//
-    }
-	
 	/**
 	 * onCreate - called when the activity is first created.
 	 * Called when the activity is first created. 
@@ -60,9 +56,17 @@ public class HRDashboardActivity extends DashboardActivity  {
 
 	protected void onCreate(Bundle savedInstanceState) 
 	{   
-	    super.onCreate(savedInstanceState);   
-	    setContentView(R.layout.activity_hr_home);
-	    setupDashboard();
+	    super.onCreate(savedInstanceState);   	   
+    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this); 
+    	String onlyHRDashboard = prefs.getString("onlyHRDashboard", "N");	
+Log.d(module, "onlyHRDashboard equals " + onlyHRDashboard);						    		    		
+    	
+    	if (onlyHRDashboard.equals("Y")) {
+    	    setContentView(R.layout.activity_hr_home);   		
+    	} 
+    	else { 
+    	    setContentView(R.layout.activity_hr_home_alt);    		
+    	}
 
 	    ProgressBar progressBar = (ProgressBar) findViewById(R.id.myEmployeeRefreshProgress);
 		progressBar.setVisibility(View.VISIBLE);

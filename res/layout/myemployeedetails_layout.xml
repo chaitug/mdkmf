@@ -100,12 +100,17 @@
                 android:layout_toRightOf="@+id/employeeNameLabel"
                 android:textSize="14sp"
                 android:textStyle="bold" />
-            
+        </RelativeLayout>       
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp" >             
             <TextView
                 android:id="@+id/employeeIdLabel"
                 style="@style/TextLabel"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/employeeId"                
+                android:layout_alignParentLeft="true"                
                 android:layout_margin="2dp"
                 android:text="Code: " />
 
@@ -113,7 +118,7 @@
                 android:id="@+id/employeeId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"                
+                android:layout_toRightOf="@+id/employeeIdLabel"                
                 android:layout_margin="2dp"
                 android:textSize="14sp"
                 android:textStyle="bold" />            
@@ -188,12 +193,17 @@
                 android:layout_toRightOf="@+id/employeeJoinDateLabel"
                 android:textSize="14sp"
                 android:textStyle="bold" />
-            
+        </RelativeLayout>       
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp" >            
             <TextView
                 android:id="@+id/employeePhoneLabel"
                 style="@style/TextLabel"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/employeePhone"                
+                android:layout_alignParentLeft="true"                                
                 android:layout_margin="2dp"
                 android:text="Phone: " />
 
@@ -202,7 +212,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
-                android:layout_alignParentRight="true"                
+                android:layout_toRightOf="@+id/employeePhoneLabel"                
                 android:textSize="14sp"
                 android:textStyle="bold" />            
         </RelativeLayout>       

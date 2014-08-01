@@ -23,7 +23,7 @@ public class EmployeeDetailsActivity extends DashboardActivity  {
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
 
-		// Inflate your view   
+		// Inflate your view    
 		setContentView(R.layout.employeedetails_layout);    
 		
 		Intent employeeDetailsIntent= getIntent();

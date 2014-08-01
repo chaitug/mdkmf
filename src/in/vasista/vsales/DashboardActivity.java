@@ -20,7 +20,9 @@ import in.vasista.vsales.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
@@ -217,7 +219,16 @@ public void onClickFeature (View v)
 
 public void goHome(Context context) 
 {
-    final Intent intent = new Intent(context, SalesDashboardActivity.class);
+	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this); 
+	String onlyHRDashboard = prefs.getString("onlyHRDashboard", "N");
+	String onlySalesDashboard = prefs.getString("onlySalesDashboard", "N");	
+    Intent intent = new Intent(context, MainActivity.class);
+	if (onlyHRDashboard.equals("Y")) {
+		intent = new Intent(context, HRDashboardActivity.class);
+	}
+	if (onlySalesDashboard.equals("Y")) {
+		intent = new Intent(context, SalesDashboardActivity.class);
+	}	 
     intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
     context.startActivity (intent); 
 }

@@ -48,17 +48,41 @@ public class MainActivity extends DashboardActivity  {
 	private Map facilityMap = new HashMap<String, Facility> ();
 	
     void setupDashboard() {
-    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);    	
+    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this); 
+		SharedPreferences.Editor prefEditor = prefs.edit();
+    	
     	String retailerPerm = prefs.getString(RETAILER_DB_PERM, "N");
     	String salesRepPerm = prefs.getString(SALESREP_DB_PERM, "N");
     	String hrPerm = prefs.getString(HR_DB_PERM, "N");   
-    	
-    	// Do facility dashboard initialization if required
+
+    	prefEditor.putString("onlySalesDashboard", "N");
+    	prefEditor.putString("onlyHRDashboard", "N");
+    	prefEditor.commit();   		
+
     	if ((salesRepPerm.equals("Y") || retailerPerm.equals("Y")) && hrPerm.equals("N")) {
+        	prefEditor.putString("onlySalesDashboard", "Y");
+        	prefEditor.commit();   		
     	    startActivity (new Intent(getApplicationContext(), SalesDashboardActivity.class));
+            finish();    	    
     	    return;
     	}
+    	if ((salesRepPerm.equals("N") && retailerPerm.equals("N")) && hrPerm.equals("Y")) {
+        	prefEditor.putString("onlyHRDashboard", "Y");
+        	prefEditor.commit();   	    		
+    	    startActivity (new Intent(getApplicationContext(), HRDashboardActivity.class));
+            finish();    	    
+    	    return;
+    	}   
+    	
 	    setContentView(R.layout.activity_home);
+    	if (salesRepPerm.equals("N") && retailerPerm.equals("N")) {    		
+    		Button button = (Button)findViewById(R.id.home_btn_sales);
+    		button.setVisibility(View.GONE); 
+    	}
+    	if (hrPerm.equals("N")) {    		
+    		Button button = (Button)findViewById(R.id.home_btn_hr);
+    		button.setVisibility(View.GONE); 
+    	}    	
     }
 	
 	/**

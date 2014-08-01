@@ -148,9 +148,17 @@ public class SalesDashboardActivity extends DashboardActivity  {
 
 	protected void onCreate(Bundle savedInstanceState) 
 	{   
-	    super.onCreate(savedInstanceState);   
-	    setContentView(R.layout.activity_sales_home);
-    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+	    super.onCreate(savedInstanceState);   	    
+    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this); 
+    	String onlySalesDashboard = prefs.getString("onlySalesDashboard", "N");	
+Log.d(module, "onlySalesDashboard equals " + onlySalesDashboard);						    		    		    		    	
+    	if (onlySalesDashboard.equals("Y")) {
+    	    setContentView(R.layout.activity_sales_home);    		
+    	} 
+    	else { 
+    	    setContentView(R.layout.activity_sales_home_alt);
+    	}	    
+	    
 		SharedPreferences.Editor prefEditor = prefs.edit(); 
     	String storeId; 
     	storeId = prefs.getString("storeId", "");	    	
@@ -340,10 +348,10 @@ public class SalesDashboardActivity extends DashboardActivity  {
     
     void initializeRetailer(String retailerId, boolean fetchProducts) {
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-    	if (retailerId == null) {
+    	if (retailerId == null) { 
     		retailerId = prefs.getString("storeId", "");
     	}      
-    	if (retailerId == null || retailerId.isEmpty()) {
+    	if (retailerId == null || retailerId.isEmpty()) { 
     		cleanupRetailerData();
     		return;
     	}

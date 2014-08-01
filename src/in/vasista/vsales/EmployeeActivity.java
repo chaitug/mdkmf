@@ -70,7 +70,7 @@ protected void onCreate(Bundle savedInstanceState)
 
 protected void onResume ()        
 {
-   super.onResume ();
+   super.onResume (); 
    /*
 	final EditText inputSearch = (EditText) findViewById(R.id.inputSearch);
 	if (inputSearch != null) {
