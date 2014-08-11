@@ -111,7 +111,13 @@
     <string name="column_employee_position_header">Position</string>       
 
     <string name="column_payhead_name_header">Payhead</string>       
-    <string name="column_payhead_amount_header">Amount</string>       
+    <string name="column_payhead_amount_header">Amount</string>   
+    
+    <string name="column_leave_type_header">Leave Type</string>
+    <string name="column_leave_status_header">Status</string>
+    <string name="column_leave_fromdate_header">From</string>
+    <string name="column_leave_thrudate_header">To</string>
+    
     
     <style name="ButtonText">
 	    <item name="android:layout_width">fill_parent</item>

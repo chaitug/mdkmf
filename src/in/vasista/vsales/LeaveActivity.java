@@ -19,9 +19,13 @@ package in.vasista.vsales;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
+import in.vasista.hr.leave.LeaveListFragment;
 import in.vasista.vsales.db.EmployeeDataSource;
 import in.vasista.vsales.employee.Employee;
+import in.vasista.vsales.indent.IndentListFragment;
+import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -67,9 +71,12 @@ protected void onCreate(Bundle savedInstanceState)
 		employee = datasource.getEmployeeDetails(employeeId);		
 		datasource.close();
 	}
-	TextView leaveBalanceDateView = (TextView)findViewById(R.id.employeeLeaveBalanceHeader);
-	
-	if (employee == null) {    
+	updateLeaveDetails(employee);
+}
+
+public void updateLeaveDetails(Employee employee) {	
+	TextView leaveBalanceDateView = (TextView)findViewById(R.id.employeeLeaveBalanceHeader);	
+	if (employee == null) {     
 		leaveBalanceDateView.setText("<No employee mapping found>");				
 		return;
 	}
@@ -85,7 +92,11 @@ protected void onCreate(Bundle savedInstanceState)
 	TextView clView = (TextView)findViewById(R.id.employeeCasualLeave);
 	clView.setText(String.format("%.1f", employee.getCasualLeave()));
 	TextView hplView = (TextView)findViewById(R.id.employeeHalfPayLeave);
-	hplView.setText(String.format("%.1f", employee.getHalfPayLeave()));		
+	hplView.setText(String.format("%.1f", employee.getHalfPayLeave()));	
+
+	FragmentManager fm = getFragmentManager();	
+	LeaveListFragment leaveListFragment = (LeaveListFragment) fm.findFragmentById(R.id.leave_list_fragment);
+	leaveListFragment.notifyChange();
+
 }
-    
 } // end class

@@ -70,6 +70,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_EMPLOYEE_EARNED_LEAVE = "EARNED_LEAVE";		  
 	  public static final String COLUMN_EMPLOYEE_CASUAL_LEAVE = "CASUAL_LEAVE";		  
 	  public static final String COLUMN_EMPLOYEE_HALF_PAY_LEAVE = "HALF_PAY_LEAVE";		  
+	  public static final String COLUMN_EMPLOYEE_WEEKLY_OFF = "WEEKLY_OFF";		  
 	
 	  public static final String TABLE_PAYROLL_HEADER = "PAYROLL_HEADER";
 	  public static final String COLUMN_PAYROLL_HEADER_ID = "PAYROLL_HEADER_ID";
@@ -84,9 +85,15 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_PAYROLL_ITEM_NAME = "NAME";
 	  public static final String COLUMN_PAYROLL_ITEM_AMOUNT = "AMOUNT";	
 	  
-	  
+	  public static final String TABLE_EMPLOYEE_LEAVE = "EMPLOYEE_LEAVE";
+	  public static final String COLUMN_EMPLOYEE_LEAVE_ID = "_ID";	  
+	  public static final String COLUMN_EMPLOYEE_LEAVE_TYPE_ID = "LEAVE_TYPE_ID";	  
+	  public static final String COLUMN_EMPLOYEE_LEAVE_STATUS = "LEAVE_STATUS";	  
+	  public static final String COLUMN_EMPLOYEE_LEAVE_FROM_DATE = "FROM_DATE";	  
+	  public static final String COLUMN_EMPLOYEE_LEAVE_THRU_DATE = "THRU_DATE";	  
+	  	  	  
 	  private static final String DATABASE_NAME = "vsalesagent.db";
-	  private static final int DATABASE_VERSION = 16; 
+	  private static final int DATABASE_VERSION = 18; 
 
 	  // Database creation sql statement
 	  private static final String DATABASE_CREATE_PRODUCT = "create table "
@@ -163,7 +170,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		      + " text, " + COLUMN_EMPLOYEE_EARNED_LEAVE
 		      + " real, " + COLUMN_EMPLOYEE_CASUAL_LEAVE	
 		      + " real, " + COLUMN_EMPLOYEE_HALF_PAY_LEAVE			      		      		      		      
-		      + " real);";		
+		      + " real, " + COLUMN_EMPLOYEE_WEEKLY_OFF		      
+		      + " text);";		
 	  
 	  private static final String DATABASE_CREATE_PAYROLL_HEADER = "create table "
 		      + TABLE_PAYROLL_HEADER + " (" + COLUMN_PAYROLL_HEADER_ID
@@ -178,7 +186,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		      + " integer primary key autoincrement, " + COLUMN_PAYROLL_HEADER_ID
 		      + " text not null, " + COLUMN_PAYROLL_ITEM_NAME
 		      + " text not null, " + COLUMN_PAYROLL_ITEM_AMOUNT			            
-		      + " real not null);";			  
+		      + " real not null);";	
+	  
+	  private static final String DATABASE_CREATE_EMPLOYEE_LEAVE = "create table "
+		      + TABLE_EMPLOYEE_LEAVE + " (" + COLUMN_EMPLOYEE_LEAVE_ID
+		      + " text primary key, " + COLUMN_EMPLOYEE_ID
+		      + " text, " + COLUMN_EMPLOYEE_LEAVE_TYPE_ID
+		      + " text, " + COLUMN_EMPLOYEE_LEAVE_STATUS	
+		      + " text, " + COLUMN_EMPLOYEE_LEAVE_FROM_DATE
+		      + " text, " + COLUMN_EMPLOYEE_LEAVE_THRU_DATE		      	      
+		      + " text);";		  
 	  
 	  public MySQLiteHelper(Context context) {
 	    super(context, DATABASE_NAME, null, DATABASE_VERSION); 
@@ -195,7 +212,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    database.execSQL(DATABASE_CREATE_FACILITY);		
 	    database.execSQL(DATABASE_CREATE_EMPLOYEE);		
 	    database.execSQL(DATABASE_CREATE_PAYROLL_HEADER);		    	    	    
-	    database.execSQL(DATABASE_CREATE_PAYROLL_HEADER_ITEM);		    	    	    	    
+	    database.execSQL(DATABASE_CREATE_PAYROLL_HEADER_ITEM);	
+	    database.execSQL(DATABASE_CREATE_EMPLOYEE_LEAVE);		    	    	    	    	    
 	  } 
 
 	  @Override
@@ -214,9 +232,12 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    //db.execSQL(DATABASE_CREATE_EMPLOYEE);	
 	    //db.execSQL(DATABASE_CREATE_PAYROLL_HEADER);
 	    //db.execSQL(DATABASE_CREATE_PAYROLL_HEADER_ITEM);
-	    //db.execSQL("delete from EMPLOYEE");	    
-	    //db.execSQL("delete from PAYROLL_HEADER");
-	    //db.execSQL("delete from PAYROLL_HEADER_ITEM");
+	    //db.execSQL("delete from EMPLOYEE");
+	    db.execSQL("delete from PAYROLL_HEADER_ITEM");	    
+	    db.execSQL("delete from PAYROLL_HEADER");
+	    db.execSQL("drop table EMPLOYEE");	
+	    db.execSQL(DATABASE_CREATE_EMPLOYEE);		    
+	    db.execSQL(DATABASE_CREATE_EMPLOYEE_LEAVE);	
 
 
 //	    if (oldVersion < 2 && newVersion == 2) {

@@ -15,6 +15,7 @@ import java.util.Map.Entry;
 
 import in.vasista.vsales.EmployeeActivity;
 import in.vasista.vsales.HRDashboardActivity;
+import in.vasista.vsales.LeaveActivity;
 import in.vasista.vsales.SalesDashboardActivity;
 import in.vasista.vsales.MyEmployeeDetailsActivity;
 import in.vasista.vsales.catalog.CatalogListFragment;
@@ -22,6 +23,7 @@ import in.vasista.vsales.catalog.Product;
 import in.vasista.vsales.db.EmployeeDataSource;
 import in.vasista.vsales.db.FacilityDataSource;
 import in.vasista.vsales.db.IndentsDataSource;
+import in.vasista.vsales.db.LeavesDataSource;
 import in.vasista.vsales.db.OrdersDataSource;
 import in.vasista.vsales.db.PaymentsDataSource;
 import in.vasista.vsales.db.PayslipDataSource;
@@ -646,6 +648,81 @@ public class ServerSync {
 		}		
 	}		
 	
+	public void fetchEmployeeRecentLeaves(ProgressBar progressBar, final LeaveActivity leaveActivity) {
+		Map paramMap = new HashMap();		
+		final EmployeeDataSource emplDatasource = new EmployeeDataSource(context);
+		try {   
+			XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(context);
+			adapter.call("fetchEmployeeRecentLeaves", paramMap, progressBar, new XMLRPCMethodCallback() {	
+				public void callFinished(Object result, ProgressBar progressBar) {
+					if (result != null) { 
+						SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd");  		    	  						
+				    	Map employeeLeavesResult = (Map)((Map)result).get("employeeLeavesResult");
+			    		Object[] recentLeaves = (Object[])((Map)employeeLeavesResult).get("recentLeaves");
+				    	if (recentLeaves != null) {
+				    		String id = (String)employeeLeavesResult.get("employeeId");
+				    		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+				    		SharedPreferences.Editor prefEditor = prefs.edit();
+				    		prefEditor.putString("employeeId", id);
+				    		prefEditor.commit(); 	
+				    		emplDatasource.open();
+				    		Employee employee = emplDatasource.getEmployeeDetails(id);		
+				    		if (employee != null) {        
+					    		if (employeeLeavesResult.get("leaveBalanceDate") != null) {
+					    			Date leaveBalanceDate = (Date)employeeLeavesResult.get("leaveBalanceDate");
+					    			//Log.d(module, "leaveBalanceDate=" + leaveBalanceDate);	
+					    			BigDecimal earnedLeaveBalance = BigDecimal.ZERO;
+					    			BigDecimal casualLeaveBalance = BigDecimal.ZERO;
+					    			BigDecimal halfPayLeaveBalance = BigDecimal.ZERO;				    					
+					    			if (employeeLeavesResult.get("earnedLeaveBalance") != null) {
+					    				earnedLeaveBalance = (BigDecimal)employeeLeavesResult.get("earnedLeaveBalance");				    						
+					    			}				    					
+					    			if (employeeLeavesResult.get("casualLeaveBalance") != null) {
+					    				casualLeaveBalance = (BigDecimal)employeeLeavesResult.get("casualLeaveBalance");				    						
+					    			}
+					    			if (employeeLeavesResult.get("halfPayLeaveBalance") != null) {
+					    				halfPayLeaveBalance = (BigDecimal)employeeLeavesResult.get("halfPayLeaveBalance");				    						
+					    			}	
+					    			employee.setLeaveBalanceDate(leaveBalanceDate);
+					    			employee.setEarnedLeave(earnedLeaveBalance.floatValue());
+					    			employee.setCasualLeave(casualLeaveBalance.floatValue());
+					    			employee.setHalfPayLeave(halfPayLeaveBalance.floatValue());
+					    		}
+						    	Object[] leaves = (Object[])((Map)employeeLeavesResult).get("recentLeaves");
+						    	if (leaves != null) {
+						    		final LeavesDataSource leavesDS = new LeavesDataSource(context);
+						    		leavesDS.open();
+						    		leavesDS.deleteAllLeaves();
+						    		leavesDS.insertLeaves(id, leaves);
+						    		leavesDS.close();		
+						    	}
+				    				//Log.d(module, "employeeId=" + employee.getId());	
+				    				//Log.d(module, "leaveBalanceDate=" + employee.getLeaveBalanceDate());	
+				    				//Log.d(module, "earnedLeaveBalance=" + employee.getEarnedLeave());				    				
+					    		emplDatasource.updateEmployee(employee); 
+					    		emplDatasource.close();
+						    	if (leaveActivity != null) {
+						    		leaveActivity.updateLeaveDetails(employee);
+						    	}						    		
+				    		}
+			    		
+				    	}
+					}
+					if (progressBar != null) {
+						progressBar.setVisibility(View.INVISIBLE);
+					}
+					//Toast.makeText( context, "got facility dues!", Toast.LENGTH_SHORT ).show();	    		    			
+				}
+			});
+		}
+		catch (Exception e) {
+			Log.e(module, "Exception: ", e);
+			if (progressBar != null) {
+				progressBar.setVisibility(View.INVISIBLE);
+			}
+			Toast.makeText( context, "fetchEmployeeRecentLeaves failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
+		}		
+	}	
 	
 	public static boolean isNetworkAvailable(Context context) 
 	{

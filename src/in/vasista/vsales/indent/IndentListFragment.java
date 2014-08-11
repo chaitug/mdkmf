@@ -104,7 +104,7 @@ public class IndentListFragment extends ListFragment{
                 R.layout.indentlist_item,
                 indentItems);	
 		setListAdapter(adapter);
-	}
+	} 
 	
 	public void onDestroyView() {
 		super.onDestroyView();

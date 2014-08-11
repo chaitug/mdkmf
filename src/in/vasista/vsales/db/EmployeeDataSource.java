@@ -112,9 +112,13 @@ public class EmployeeDataSource {
 		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_NAME, employee.getName());
 		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_DEPT, employee.getDept());	
 		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_POSITION, employee.getPosition());	
-		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_PHONE_NUM, employee.getPhoneNum());		    		    		    
-		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_JOIN_DATE, employee.getJoinDate().getTime());	 		    
-		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_LEAVE_BALANCE_DATE, employee.getLeaveBalanceDate().getTime());		    	    
+		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_PHONE_NUM, employee.getPhoneNum());
+		    if (employee.getJoinDate() != null) {
+		    	values.put(MySQLiteHelper.COLUMN_EMPLOYEE_JOIN_DATE, employee.getJoinDate().getTime());
+		    }
+		    if (employee.getLeaveBalanceDate() != null) {		    
+		    	values.put(MySQLiteHelper.COLUMN_EMPLOYEE_LEAVE_BALANCE_DATE, employee.getLeaveBalanceDate().getTime());		    	    
+		    }
 		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_EARNED_LEAVE, employee.getEarnedLeave());		    	    
 		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_CASUAL_LEAVE, employee.getCasualLeave());		    	    
 		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_HALF_PAY_LEAVE, employee.getHalfPayLeave());		    	    
