@@ -508,9 +508,11 @@ public class ServerSync {
 										joinDate = format.parse(joinDateStr);
 									} catch (ParseException e) {
 										// just go with default date for now
-									}																    								    	
+									}	
+							    	String weeklyOff = (String)employeeMap.get("weeklyOff");
+									
 							    	Employee employee = new Employee(id, name, department, 
-							    			position, phoneNumber, joinDate);
+							    			position, phoneNumber, joinDate, weeklyOff);
 					    			if (employeeMap.get("leaveBalanceDate") != null) {
 					    				Date leaveBalanceDate = (Date)employeeMap.get("leaveBalanceDate");
 					    				//Log.d(module, "leaveBalanceDate=" + leaveBalanceDate);	
@@ -589,9 +591,10 @@ public class ServerSync {
 				    			joinDate = format.parse(joinDateStr);
 				    		} catch (ParseException e) {
 				    			// just go with default date for now
-				    		}																    								    	
+				    		}
+					    	String weeklyOff = (String)employeeMap.get("weeklyOff");				    		
 				    		Employee employee = new Employee(id, name, department, 
-				    				position, phoneNumber, joinDate);
+				    				position, phoneNumber, joinDate, weeklyOff);
 				    		if (employeeMap.get("leaveBalanceDate") != null) {
 				    			Date leaveBalanceDate = (Date)employeeMap.get("leaveBalanceDate");
 				    			//Log.d(module, "leaveBalanceDate=" + leaveBalanceDate);	

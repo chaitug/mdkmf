@@ -25,6 +25,7 @@ public class EmployeeDataSource {
 	      MySQLiteHelper.COLUMN_EMPLOYEE_POSITION,	 
 	      MySQLiteHelper.COLUMN_EMPLOYEE_PHONE_NUM,	 
 	      MySQLiteHelper.COLUMN_EMPLOYEE_JOIN_DATE,
+	      MySQLiteHelper.COLUMN_EMPLOYEE_WEEKLY_OFF,
 	      MySQLiteHelper.COLUMN_EMPLOYEE_LEAVE_BALANCE_DATE,
 	      MySQLiteHelper.COLUMN_EMPLOYEE_EARNED_LEAVE,
 	      MySQLiteHelper.COLUMN_EMPLOYEE_CASUAL_LEAVE,	  
@@ -51,7 +52,7 @@ public class EmployeeDataSource {
 		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_POSITION, employee.getPosition());	
 		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_PHONE_NUM, employee.getPhoneNum());		    		    		    
 		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_JOIN_DATE, employee.getJoinDate().getTime());	    		    
-		    
+		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_WEEKLY_OFF, employee.getWeeklyOff());		    		    		    		    
 		    database.insert(MySQLiteHelper.TABLE_EMPLOYEE, null, values);
 	  }
 	  
@@ -97,12 +98,13 @@ public class EmployeeDataSource {
 	    		cursor.getString(2),
 	    		cursor.getString(3),
 	    		cursor.getString(4),	    		
-	    		new Date(cursor.getLong(5))); 
-		  if (!cursor.isNull(6)) {
-			  employee.setLeaveBalanceDate(new Date(cursor.getLong(6)));
-			  employee.setEarnedLeave(cursor.getFloat(7));
-			  employee.setCasualLeave(cursor.getFloat(8));
-			  employee.setHalfPayLeave(cursor.getFloat(9));			  
+	    		new Date(cursor.getLong(5)),
+	    		cursor.getString(6)); 
+		  if (!cursor.isNull(7)) {
+			  employee.setLeaveBalanceDate(new Date(cursor.getLong(7)));
+			  employee.setEarnedLeave(cursor.getFloat(8));
+			  employee.setCasualLeave(cursor.getFloat(9));
+			  employee.setHalfPayLeave(cursor.getFloat(10));			  
 		  }
 	    return employee;
 	  }
@@ -116,6 +118,7 @@ public class EmployeeDataSource {
 		    if (employee.getJoinDate() != null) {
 		    	values.put(MySQLiteHelper.COLUMN_EMPLOYEE_JOIN_DATE, employee.getJoinDate().getTime());
 		    }
+		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_WEEKLY_OFF, employee.getWeeklyOff());			    
 		    if (employee.getLeaveBalanceDate() != null) {		    
 		    	values.put(MySQLiteHelper.COLUMN_EMPLOYEE_LEAVE_BALANCE_DATE, employee.getLeaveBalanceDate().getTime());		    	    
 		    }

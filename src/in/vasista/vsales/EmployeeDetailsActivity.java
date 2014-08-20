@@ -52,7 +52,9 @@ public class EmployeeDetailsActivity extends DashboardActivity  {
 	    Date date = employee.getJoinDate();
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");
 	    String dateStr = dateFormat.format(date);
-		joinDateView.setText(dateStr);	
+		joinDateView.setText(dateStr);   
+		TextView employeeWeeklyOffView = (TextView)findViewById(R.id.employeeWeeklyOff);
+		employeeWeeklyOffView.setText(employee.getWeeklyOff());			
 		TextView phoneView = (TextView)findViewById(R.id.employeePhone);
 		phoneView.setText(employee.getPhoneNum()); 	
 		

@@ -45,9 +45,11 @@ public class MyEmployeeDetailsActivity extends DashboardActivity  {
 	    Date date = employee.getJoinDate();
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");
 	    String dateStr = dateFormat.format(date);
-		joinDateView.setText(dateStr);	
+		joinDateView.setText(dateStr);
+		TextView employeeWeeklyOffView = (TextView)findViewById(R.id.employeeWeeklyOff);
+		employeeWeeklyOffView.setText(employee.getWeeklyOff());			
 		TextView phoneView = (TextView)findViewById(R.id.employeePhone); 
-		phoneView.setText(employee.getPhoneNum()); 	
+		phoneView.setText(employee.getPhoneNum()); 	 
 			
 	}
 	
@@ -57,14 +59,6 @@ public class MyEmployeeDetailsActivity extends DashboardActivity  {
 		// Inflate your view   
 		setContentView(R.layout.myemployeedetails_layout);    
 		final Activity myActivity = this; 
-		ImageButton employeeSearch = (ImageButton) findViewById(R.id.employeeSearch);
-		employeeSearch.setClickable(true);
-		employeeSearch.setOnClickListener(new OnClickListener() { 
-			public void onClick(View view) {
-            	Intent employeesIntent = new Intent(myActivity, EmployeeActivity.class);
-            	startActivity(employeesIntent);
-            }    
-		});
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this); 
 		String employeeId = "";		
     	prefs = PreferenceManager.getDefaultSharedPreferences(this);
