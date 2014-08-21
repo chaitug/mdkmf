@@ -91,9 +91,12 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_EMPLOYEE_LEAVE_STATUS = "LEAVE_STATUS";	  
 	  public static final String COLUMN_EMPLOYEE_LEAVE_FROM_DATE = "FROM_DATE";	  
 	  public static final String COLUMN_EMPLOYEE_LEAVE_THRU_DATE = "THRU_DATE";	  
-	  	  	  
-	  private static final String DATABASE_NAME = "vsalesagent.db";
-	  private static final int DATABASE_VERSION = 18; 
+	  
+	  public static final String TABLE_EMPLOYEE_ATTENDANCE = "EMPLOYEE_ATTENDANCE";
+	  public static final String COLUMN_EMPLOYEE_ATTENDANCE_ID = "_ID";	  
+	  public static final String COLUMN_EMPLOYEE_ATTENDANCE_IN_TIME = "IN_TIME";	  
+	  public static final String COLUMN_EMPLOYEE_ATTENDANCE_OUT_TIME = "OUT_TIME";	  
+	  public static final String COLUMN_EMPLOYEE_ATTENDANCE_DURATION = "DURATION";	  
 
 	  // Database creation sql statement
 	  private static final String DATABASE_CREATE_PRODUCT = "create table "
@@ -195,7 +198,18 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		      + " text, " + COLUMN_EMPLOYEE_LEAVE_STATUS	
 		      + " text, " + COLUMN_EMPLOYEE_LEAVE_FROM_DATE
 		      + " text, " + COLUMN_EMPLOYEE_LEAVE_THRU_DATE		      	      
+		      + " text);";	
+	  
+	  private static final String DATABASE_CREATE_EMPLOYEE_ATTENDANCE = "create table "
+		      + TABLE_EMPLOYEE_ATTENDANCE + " (" + COLUMN_EMPLOYEE_ATTENDANCE_ID
+		      + " text primary key, " + COLUMN_EMPLOYEE_ID
+		      + " text, " + COLUMN_EMPLOYEE_ATTENDANCE_IN_TIME
+		      + " text, " + COLUMN_EMPLOYEE_ATTENDANCE_OUT_TIME	
+		      + " text, " + COLUMN_EMPLOYEE_ATTENDANCE_DURATION		      	      
 		      + " text);";		  
+
+	  private static final String DATABASE_NAME = "vsalesagent.db";
+	  private static final int DATABASE_VERSION = 19; 
 	  
 	  public MySQLiteHelper(Context context) {
 	    super(context, DATABASE_NAME, null, DATABASE_VERSION); 
@@ -233,12 +247,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    //db.execSQL(DATABASE_CREATE_PAYROLL_HEADER);
 	    //db.execSQL(DATABASE_CREATE_PAYROLL_HEADER_ITEM);
 	    //db.execSQL("delete from EMPLOYEE");
-	    db.execSQL("delete from PAYROLL_HEADER_ITEM");	    
-	    db.execSQL("delete from PAYROLL_HEADER");
-	    db.execSQL("drop table EMPLOYEE");	
-	    db.execSQL(DATABASE_CREATE_EMPLOYEE);		    
-	    db.execSQL(DATABASE_CREATE_EMPLOYEE_LEAVE);	
-
+	    if (oldVersion < 18) {
+	    	db.execSQL("delete from PAYROLL_HEADER_ITEM");	    
+	    	db.execSQL("delete from PAYROLL_HEADER");
+	    	db.execSQL("drop table EMPLOYEE");	
+	    	db.execSQL(DATABASE_CREATE_EMPLOYEE);		    
+	    	db.execSQL(DATABASE_CREATE_EMPLOYEE_LEAVE);	
+	    }
+    	db.execSQL(DATABASE_CREATE_EMPLOYEE_ATTENDANCE);	
 
 //	    if (oldVersion < 2 && newVersion == 2) {
 //	    	db.execSQL(DATABASE_CREATE_LOCATION);

@@ -44,7 +44,8 @@
     <string name="title_leave">Leaves</string>
     <string name="title_payslip">Payslips</string>
     <string name="title_emplsearch">Search</string>
-        
+    <string name="title_attendance">Attendance</string>
+    
     <string name="account_summary"><u>Account Summary for </u></string>
 
     <string name="default_intro">This is the default content view for an activity. Be sure to change your activity\'s onCreate method. Use setContentView on a custom layout.</string>
@@ -117,6 +118,10 @@
     <string name="column_leave_status_header">Status</string>
     <string name="column_leave_fromdate_header">From</string>
     <string name="column_leave_thrudate_header">To</string>
+
+    <string name="column_attendance_intime_header">In Time</string>
+    <string name="column_attendance_outtime_header">Out Time</string>
+    <string name="column_attendance_duration_header">Duration (hrs)</string>
     
     
     <style name="ButtonText">

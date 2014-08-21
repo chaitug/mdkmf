@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import in.vasista.hr.attendance.AttendanceListFragment;
 import in.vasista.vsales.EmployeeActivity;
 import in.vasista.vsales.HRDashboardActivity;
 import in.vasista.vsales.LeaveActivity;
@@ -20,6 +21,7 @@ import in.vasista.vsales.SalesDashboardActivity;
 import in.vasista.vsales.MyEmployeeDetailsActivity;
 import in.vasista.vsales.catalog.CatalogListFragment;
 import in.vasista.vsales.catalog.Product;
+import in.vasista.vsales.db.AttendanceDataSource;
 import in.vasista.vsales.db.EmployeeDataSource;
 import in.vasista.vsales.db.FacilityDataSource;
 import in.vasista.vsales.db.IndentsDataSource;
@@ -724,6 +726,46 @@ public class ServerSync {
 				progressBar.setVisibility(View.INVISIBLE);
 			}
 			Toast.makeText( context, "fetchEmployeeRecentLeaves failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
+		}		
+	}	
+
+	
+	public void fetchEmployeeAttendance(ProgressBar progressBar, final AttendanceListFragment listFragment) {
+		Map paramMap = new HashMap();		
+		try {   
+			XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(context);
+			adapter.call("fetchEmployeeAttendance", paramMap, progressBar, new XMLRPCMethodCallback() {	
+				public void callFinished(Object result, ProgressBar progressBar) {
+					if (result != null) {
+				    	Map employeeAttendanceResult = (Map)((Map)result).get("employeeAttendanceResult");
+			    		Object[] recentPunches = (Object[])((Map)employeeAttendanceResult).get("recentPunches");
+				    	if (recentPunches != null) {
+					    	Object[] punches = (Object[])((Map)employeeAttendanceResult).get("recentPunches");
+					    	if (punches != null) {
+					    		String id = (String)employeeAttendanceResult.get("employeeId");
+					    		final AttendanceDataSource attendanceDS = new AttendanceDataSource(context);
+					    		attendanceDS.open();
+					    		attendanceDS.deleteAllPunches();
+					    		attendanceDS.insertPunches(id, punches);
+					    		attendanceDS.close();		
+					    	} 
+					    	if (listFragment != null) {
+					    		listFragment.notifyChange();
+					    	}
+				    	}				    		  	
+					} 
+					if (progressBar != null) {
+						progressBar.setVisibility(View.INVISIBLE);
+					}
+				}
+			});
+		}
+		catch (Exception e) {
+			Log.e(module, "Exception: ", e);
+			if (progressBar != null) {
+				progressBar.setVisibility(View.INVISIBLE);
+			}
+			Toast.makeText( context, "fetchEmployeeAttendance failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
 		}		
 	}	
 	

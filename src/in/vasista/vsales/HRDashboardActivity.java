@@ -155,7 +155,7 @@ Log.d(module, "onlyHRDashboard equals " + onlyHRDashboard);
  
 	protected void onStop () 
 	{
-	   super.onStop ();  
+	   super.onStop ();   
 	}
 
     @Override
@@ -189,6 +189,9 @@ Log.d(module, "onlyHRDashboard equals " + onlyHRDashboard);
           case R.id.home_btn_employeeprofile :
               startActivity (new Intent(getApplicationContext(), MyEmployeeDetailsActivity.class));           
                break;
+          case R.id.home_btn_attendance : 
+              startActivity (new Intent(getApplicationContext(), AttendanceActivity.class));  
+               break;               
           case R.id.home_btn_leave :
               startActivity (new Intent(getApplicationContext(), LeaveActivity.class));           
                break; 
@@ -197,7 +200,7 @@ Log.d(module, "onlyHRDashboard equals " + onlyHRDashboard);
                break;
           case R.id.home_btn_emplsearch :
               startActivity (new Intent(getApplicationContext(), EmployeeActivity.class));  
-               break;
+               break;               
           default:    
         	   break;    
         }

@@ -88,7 +88,8 @@
         <activity android:name="in.vasista.vsales.PayslipItemsListActivity"
       			android:label="Payslip Details"/>    	     	    	  	    	
     	<activity android:name="in.vasista.vsales.preference.FragmentPreferences"/>  
-      
+        <activity android:name="in.vasista.vsales.AttendanceActivity"
+      			android:label="Attendance"/>       
       </application>
       
       <uses-permission android:name="android.permission.INTERNET"></uses-permission> 

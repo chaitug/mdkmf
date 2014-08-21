@@ -202,7 +202,7 @@ public void onClickFeature (View v)
            startActivity (new Intent(getApplicationContext(), HRDashboardActivity.class));           
            break;
       default:    
-    	   break;    
+    	   break;     
     }
 }
 

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:id="@+id/attendanceTitle"
+        style="@style/TitleBar" >
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom" >
+        <ImageButton
+            android:id="@+id/homeButton"
+            style="@style/TitleBarAction"
+            android:contentDescription="@string/description_home"
+            android:onClick="onClickHome"
+            android:src="@drawable/title_home" />
+
+        <ImageView style="@style/TitleBarSeparator" 
+             android:layout_toRightOf="@+id/homeButton" />
+
+        <TextView
+            android:id="@+id/attendanceHeader"
+            style="@style/TitleBarText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="My Attendance"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        
+            <ImageView style="@style/TitleBarSeparator" 
+                android:layout_toLeftOf="@+id/syncAttendanceButton"/>
+            <ImageButton
+                android:id="@+id/syncAttendanceButton"
+                style="@style/TitleBarAction"
+            	android:layout_alignParentRight="true"
+                android:src="@drawable/title_refresh" /> 
+
+            <ProgressBar
+                android:id="@+id/attendanceRefreshProgress"
+                style="@android:style/Widget.ProgressBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@+id/syncAttendanceButton"
+                android:indeterminate="true"
+                android:visibility="invisible" />           
+        </RelativeLayout>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/attendanceListHeader"        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/listheader_border"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/column_attendance_intime_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="3dp"
+            android:text="@string/column_attendance_intime_header"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/column_attendance_outtime_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="3dp"
+            android:text="@string/column_attendance_outtime_header"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/column_attendance_duration_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.1"
+            android:padding="2dp"
+            android:text="@string/column_attendance_duration_header"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <fragment
+        android:id="@+id/attendance_list_fragment"
+        android:name="in.vasista.hr.attendance.AttendanceListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/attendanceListHeader"
+        android:layout_weight="1" />
+</LinearLayout>
