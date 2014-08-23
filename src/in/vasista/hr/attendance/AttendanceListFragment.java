@@ -63,7 +63,7 @@ public class AttendanceListFragment extends ListFragment {
 			return; // nothing to do since most probably fragment is not yet created
 		}
 		setListAdapter(null);    
-	    datasource.open();
+	    datasource.open();  
 	    punchItems = datasource.getAllPunches();
 	    
 	    adapter = new AttendanceAdapter(getActivity(),

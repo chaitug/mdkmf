@@ -15,6 +15,7 @@ import java.util.Map.Entry;
 
 import in.vasista.hr.attendance.AttendanceListFragment;
 import in.vasista.vsales.EmployeeActivity;
+import in.vasista.vsales.EmployeeDetailsActivity;
 import in.vasista.vsales.HRDashboardActivity;
 import in.vasista.vsales.LeaveActivity;
 import in.vasista.vsales.SalesDashboardActivity;
@@ -768,6 +769,35 @@ public class ServerSync {
 			Toast.makeText( context, "fetchEmployeeAttendance failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
 		}		
 	}	
+	
+	public void fetchEmployeeLastPunch(String employeeId, final EmployeeDetailsActivity activity) {
+		Map paramMap = new HashMap();		
+		paramMap.put("partyId", employeeId); 
+//Log.d( module, "paramMap =" + paramMap); 
+		
+		try {   
+			XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(context);
+			adapter.call("fetchEmployeeLastPunch", paramMap, null, new XMLRPCMethodCallback() {	
+				public void callFinished(Object result, ProgressBar progressBar) {
+					if (result != null) {
+				    	Map employeeLastPunchResult = (Map)((Map)result).get("employeeLastPunchResult");
+				    	Map punchMap = (Map)((Map)employeeLastPunchResult).get("punch");
+				    	if (punchMap != null) {
+				    		String punchTime = (String)punchMap.get("punchTime");
+				    		String inOut = (String)punchMap.get("inOut");
+					    	if (activity != null && punchTime != null) {
+					    		activity.updateLastPunchTime(punchTime, inOut);
+					    	}
+				    	}				    		  	
+					} 
+				}
+			});
+		}
+		catch (Exception e) {
+			Log.e(module, "Exception: ", e);
+			//Toast.makeText( context, "fetchEmployeeLastPunch failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
+		}		
+	}		
 	
 	public static boolean isNetworkAvailable(Context context) 
 	{

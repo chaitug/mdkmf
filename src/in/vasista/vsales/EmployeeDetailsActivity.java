@@ -6,6 +6,7 @@ import java.util.Date;
 
 import in.vasista.vsales.db.EmployeeDataSource;
 import in.vasista.vsales.employee.Employee;
+import in.vasista.vsales.sync.ServerSync;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -39,7 +40,7 @@ public class EmployeeDetailsActivity extends DashboardActivity  {
 			return;
 		} 
 		TextView employeeHeaderView = (TextView)findViewById(R.id.employeeIdHeader);
-		//employeeHeaderView.setText(employee.getName());		
+		employeeHeaderView.setText(employee.getName());		
 		TextView idView = (TextView)findViewById(R.id.employeeId);
 		idView.setText(employeeId);
 		TextView nameView = (TextView)findViewById(R.id.employeeName);
@@ -52,19 +53,20 @@ public class EmployeeDetailsActivity extends DashboardActivity  {
 	    Date date = employee.getJoinDate();
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");
 	    String dateStr = dateFormat.format(date);
-		joinDateView.setText(dateStr);   
+		joinDateView.setText(dateStr);    
 		TextView employeeWeeklyOffView = (TextView)findViewById(R.id.employeeWeeklyOff);
 		employeeWeeklyOffView.setText(employee.getWeeklyOff());			
 		TextView phoneView = (TextView)findViewById(R.id.employeePhone);
-		phoneView.setText(employee.getPhoneNum()); 	
-		
-		
+		phoneView.setText(employee.getPhoneNum()); 			
 		Button callBtn = (Button) findViewById(R.id.callButton);
    
 		if (employee.getPhoneNum() == null || employee.getPhoneNum().isEmpty()) {
 			callBtn.setVisibility(View.GONE);
-			return; 
+			return;  
 		} 
+		
+		ServerSync serverSync = new ServerSync(this);
+		serverSync.fetchEmployeeLastPunch(employeeId, this);			
 		// add PhoneStateListener for monitoring
 		MyPhoneListener phoneListener = new MyPhoneListener();
 		TelephonyManager telephonyManager = 
@@ -124,13 +126,22 @@ public class EmployeeDetailsActivity extends DashboardActivity  {
 					restart.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(restart);
  
-					onCall = false;
+					onCall = false;    
 				}
-				break;
+				break;    
 			default:
-				break;   
+				break;    
 			}
 			
+		}   
+	}
+	 
+	public void updateLastPunchTime (String punchTime, String inOut) 
+	{
+		if (!punchTime.isEmpty()) {
+			TextView employeePunchTimeView = (TextView)findViewById(R.id.employeeLastPunchTime);
+			String text = "Today's Last Punch: " + punchTime + " (" + inOut + ")";
+			employeePunchTimeView.setText(text);
 		}
-	}	
+	}
 }
