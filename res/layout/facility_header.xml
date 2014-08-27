@@ -6,7 +6,7 @@
     android:background="@drawable/listheader_border">
     <TextView android:id="@+id/column_id_header"
         android:layout_width="0dp"
-    	android:layout_weight="1"    
+    	android:layout_weight="1.2"    
     	android:padding="5dp" 
     	android:textSize="12sp" 
     	android:textStyle="bold"        	   

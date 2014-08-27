@@ -49,7 +49,7 @@ public class OrderListFragment extends ListFragment{
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
     	final String retailerId = prefs.getString("storeId", "");
 		TextView retailerIdView = (TextView)getActivity().findViewById(R.id.retailerId);
-		retailerIdView.setText(retailerId);		
+		retailerIdView.setText(retailerId + " : Orders");		 
 		
 		if (adapter == null) {			
     	    datasource = new OrdersDataSource(getActivity());
@@ -61,7 +61,7 @@ public class OrderListFragment extends ListFragment{
 
 		if (listView.getHeaderViewsCount() == 0) {	
 			ImageButton button = (ImageButton)orderListFragment.getActivity().findViewById(R.id.fetchOrdersButton);
-			button.setOnClickListener(new OnClickListener() {  
+			button.setOnClickListener(new OnClickListener() {   
 				public void onClick(View view) {
 						ProgressBar progressBar = (ProgressBar) orderListFragment.getActivity().findViewById(R.id.ordersRefreshProgress);
 						progressBar.setVisibility(View.VISIBLE);

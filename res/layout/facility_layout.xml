@@ -7,9 +7,6 @@
     <LinearLayout
         android:id="@+id/facilityTitle"
         style="@style/TitleBar" >
-
-
-
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
@@ -21,13 +18,15 @@
             android:onClick="onClickHome"
             android:src="@drawable/title_home" />
 
-        <ImageView style="@style/TitleBarSeparator" 
+        <ImageView 
+            android:id="@+id/homeSeparator"
+            style="@style/TitleBarSeparator" 
             android:layout_toRightOf="@+id/homeButton"/>
             <TextView
                 style="@style/TitleBarText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-            	android:layout_centerInParent="true"                
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+				android:gravity="center"           
                 android:text="Outlets"
                 android:textSize="20sp"
                 android:textStyle="bold" />

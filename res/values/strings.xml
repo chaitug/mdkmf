@@ -83,11 +83,11 @@
     <string name="column_order_supply_header">Supply</string>
     <string name="column_order_total_header">Amount (Rs)</string>
         
-    <string name="column_orderitem_qty_header">Quantity</string>
+    <string name="column_orderitem_qty_header">Qty (pkts)</string>
     <string name="column_orderitem_amount_header">Amount (Rs)</string>
 
     <string name="add_product_hint">Select Product</string>
-    <string name="add_product_qty_hint">Quantity</string>
+    <string name="add_product_qty_hint">Qty (pkts)</string>
     
     <string name="column_indent_id_header">Id</string>
     <string name="column_indent_date_header">Supply Date</string>

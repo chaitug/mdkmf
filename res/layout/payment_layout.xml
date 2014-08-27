@@ -26,22 +26,10 @@
                 style="@style/TitleBarText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/paymentsLabel"                
                 android:layout_centerInParent="true" 
                 android:text=""
                 android:textSize="20sp"
                 android:textStyle="bold" />            
-        <TextView
-            android:id="@+id/paymentsLabel"                                            
-            style="@style/TitleBarText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/syncPaymentButton"
-            android:layout_centerInParent="true"
-            android:text=": Payments"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
         <ImageView style="@style/TitleBarSeparator" 
                 android:layout_toLeftOf="@+id/syncPaymentButton"/>
             <ImageButton

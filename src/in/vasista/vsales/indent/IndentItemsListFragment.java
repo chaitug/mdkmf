@@ -202,13 +202,13 @@ public class IndentItemsListFragment extends ListFragment{
 						.getItemAtPosition(position);
 
 				alert.setTitle("Enter quantity for "  + item.getProductName());
-				alert.setMessage("Quantity"); 
+				alert.setMessage("Quantity (Pkts)"); 
 
 				// Set an EditText view to get user input
 				final EditText input = new EditText(getActivity());
 				input.setInputType(InputType.TYPE_CLASS_NUMBER);
 				String qtyStr = Integer.toString(item.getQty());
-				if (item.getQty() == -1) {
+				if (item.getQty() == -1) { 
 					qtyStr = "";
 				} 
 				input.setText(qtyStr);

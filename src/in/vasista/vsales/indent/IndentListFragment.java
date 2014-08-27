@@ -45,10 +45,10 @@ public class IndentListFragment extends ListFragment{
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
     	final String retailerId = prefs.getString("storeId", "");
 		TextView retailerIdView = (TextView)getActivity().findViewById(R.id.retailerId);
-		retailerIdView.setText(retailerId);  
+		retailerIdView.setText(retailerId + " : Indents");    
  
 		if (adapter == null) {			
-    	    datasource = new IndentsDataSource(getActivity());
+    	    datasource = new IndentsDataSource(getActivity());    
     	    datasource.open();
     	    indentItems = datasource.getAllIndents();
 		}

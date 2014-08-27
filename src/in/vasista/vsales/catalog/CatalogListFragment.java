@@ -44,7 +44,7 @@ public class CatalogListFragment extends ListFragment {
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
     	String retailerId = prefs.getString("storeId", "");
 		TextView retailerIdView = (TextView)getActivity().findViewById(R.id.retailerId);
-		retailerIdView.setText(retailerId); 		
+		retailerIdView.setText(retailerId + " : Catalog");  		
 		final ListView listView = getListView();
 		final CatalogListFragment catalogListFragment = this; 
 		if (listView.getHeaderViewsCount() == 0) {           

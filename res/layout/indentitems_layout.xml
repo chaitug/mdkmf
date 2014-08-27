@@ -7,8 +7,12 @@
     <LinearLayout
         android:id="@+id/orderTitle"
         style="@style/TitleBar" >
-
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom" >
         <ImageButton
+            android:id="@+id/homeButton"            
             style="@style/TitleBarAction"
             android:contentDescription="@string/description_home"
             android:onClick="onClickHome"
@@ -16,20 +20,17 @@
 
         <ImageView             
             android:id="@+id/homeSeparator"
-            style="@style/TitleBarSeparator" />
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:gravity="bottom" >
+            style="@style/TitleBarSeparator" 
+            android:layout_toRightOf="@+id/homeButton"/>
         <TextView
             android:id="@+id/indentDetailsTitle"                            
             style="@style/TitleBarText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/homeSeparator"
-            android:layout_gravity="center"
-            android:text="Indent Details"
-            android:textSize="14sp"
+            android:layout_height="match_parent"
+			android:layout_toRightOf="@+id/homeSeparator" 
+			android:gravity="center_vertical"           
+			android:text="Indent Details"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <ProgressBar

@@ -227,7 +227,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    database.execSQL(DATABASE_CREATE_EMPLOYEE);		
 	    database.execSQL(DATABASE_CREATE_PAYROLL_HEADER);		    	    	    
 	    database.execSQL(DATABASE_CREATE_PAYROLL_HEADER_ITEM);	
-	    database.execSQL(DATABASE_CREATE_EMPLOYEE_LEAVE);		    	    	    	    	    
+	    database.execSQL(DATABASE_CREATE_EMPLOYEE_LEAVE);
+	    database.execSQL(DATABASE_CREATE_EMPLOYEE_ATTENDANCE);		    
 	  } 
 
 	  @Override
@@ -252,9 +253,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    	db.execSQL("delete from PAYROLL_HEADER");
 	    	db.execSQL("drop table EMPLOYEE");	
 	    	db.execSQL(DATABASE_CREATE_EMPLOYEE);		    
-	    	db.execSQL(DATABASE_CREATE_EMPLOYEE_LEAVE);	
-	    }
-    	db.execSQL(DATABASE_CREATE_EMPLOYEE_ATTENDANCE);	
+	    	db.execSQL(DATABASE_CREATE_EMPLOYEE_LEAVE);	 
+	    } 
+    	db.execSQL(DATABASE_CREATE_EMPLOYEE_ATTENDANCE);	              
 
 //	    if (oldVersion < 2 && newVersion == 2) {
 //	    	db.execSQL(DATABASE_CREATE_LOCATION);

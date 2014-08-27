@@ -8,9 +8,6 @@
     <LinearLayout
         android:id="@+id/indentTitle"
         style="@style/TitleBar" >
-
-
-
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
@@ -29,24 +26,10 @@
                 style="@style/TitleBarText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/indentsLabel"                
                 android:layout_centerInParent="true"                
                 android:text=""
                 android:textSize="20sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/indentsLabel"                
-                style="@style/TitleBarText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/syncIndentButton"
-                android:layout_centerInParent="true"
-                android:gravity="left"
-                android:text=": Indents"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-            
             <ImageView style="@style/TitleBarSeparator" 
                 android:layout_toLeftOf="@+id/syncIndentButton"/>
             <ImageButton

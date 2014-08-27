@@ -79,7 +79,8 @@ public class XMLRPCApacheAdapter {
 		}
 	    Object[] allParams = {
 	    		allParamsMap,
-	    };		
+	    };	
+Log.d( module, "method=" + method); 	    
 		XMLRPCMethod xmlRpcMethod = new XMLRPCMethod(context, method, allParams, progressBar, callBack);
 		xmlRpcMethod.start();
 	}
@@ -113,14 +114,15 @@ public class XMLRPCApacheAdapter {
 						callBack.callFinished(result, progressBar);
 					}
 				});
-			} catch (final Exception e) {
+			} catch (final Exception e) { 
 				handler.post(new Runnable() {
 					public void run() {
 						Log.e( module, "Error", e);
 						if (progressBar != null) {
-							progressBar.setVisibility(View.INVISIBLE);
-						}
-						Toast.makeText( context, "Remote call failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
+							progressBar.setVisibility(View.INVISIBLE);  
+						} 
+						Log.d( module,"Remote call failed: " + e);
+						//Toast.makeText( context, "Remote call failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
 					}
 				});
 			}

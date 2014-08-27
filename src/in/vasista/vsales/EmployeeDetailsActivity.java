@@ -53,15 +53,15 @@ public class EmployeeDetailsActivity extends DashboardActivity  {
 	    Date date = employee.getJoinDate();
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");
 	    String dateStr = dateFormat.format(date);
-		joinDateView.setText(dateStr);    
+		joinDateView.setText(dateStr);     
 		TextView employeeWeeklyOffView = (TextView)findViewById(R.id.employeeWeeklyOff);
 		employeeWeeklyOffView.setText(employee.getWeeklyOff());			
 		TextView phoneView = (TextView)findViewById(R.id.employeePhone);
-		phoneView.setText(employee.getPhoneNum()); 			
-		Button callBtn = (Button) findViewById(R.id.callButton);
+		phoneView.setText(employee.getPhoneNum()); 	 		
+		Button callBtn = (Button) findViewById(R.id.callButton); 
    
 		if (employee.getPhoneNum() == null || employee.getPhoneNum().isEmpty()) {
-			callBtn.setVisibility(View.GONE);
+			callBtn.setVisibility(View.GONE);   
 			return;  
 		} 
 		

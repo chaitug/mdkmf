@@ -24,7 +24,7 @@
         />
     <TextView android:id="@+id/column_payment_method_header"
         android:layout_width="0dp"
-    	android:layout_weight="2"    
+    	android:layout_weight="1.2"    
     	android:padding="2dp"  
     	android:textSize="11sp"
    	 	android:textStyle="bold"       	  

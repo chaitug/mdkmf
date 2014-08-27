@@ -119,15 +119,17 @@ public class SalesDashboardActivity extends DashboardActivity  {
     		ImageButton searchButton = (ImageButton)findViewById(R.id.homeSearch);
     		searchButton.setVisibility(View.GONE); 
     		Button outletsButton = (Button)findViewById(R.id.home_btn_outlets);
-    		outletsButton.setVisibility(View.GONE); 
+    		outletsButton.setVisibility(View.GONE);  
     	}
     	else if (salesRepPerm.equals("N")) {
     	    AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteRetailer); 	     
-    	    actv.setVisibility(View.GONE);     		
+    	    actv.setVisibility(View.GONE);     		         
     		ImageButton searchButton = (ImageButton)findViewById(R.id.homeSearch);
     		searchButton.setVisibility(View.GONE); 
     		Button outletsButton = (Button)findViewById(R.id.home_btn_outlets);
-    		outletsButton.setVisibility(View.GONE);    		
+    		outletsButton.setVisibility(View.GONE);     
+    	    TextView accSum = (TextView) findViewById(R.id.accntSummary); 	     
+    	    accSum.setClickable(false);      		
     	}		
     	
     	// Do facility dashboard initialization if required

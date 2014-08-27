@@ -29,7 +29,7 @@
     <TextView
     android:id="@+id/orderitemRowAmount"
     android:layout_width="0dp"
-    android:layout_weight="1"   
+    android:layout_weight="1.2"   
     android:gravity="right" 
     android:padding="5dp" 
     android:textSize="15sp" 

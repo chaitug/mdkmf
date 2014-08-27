@@ -29,13 +29,13 @@ public class PaymentListFragment extends ListFragment {
 	PaymentAdapter adapter;
 	PaymentsDataSource datasource;
 	
-	public void onActivityCreated(Bundle savedInstanceState) {
+	public void onActivityCreated(Bundle savedInstanceState) { 
 		
 		super.onActivityCreated(savedInstanceState);
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
     	String retailerId = prefs.getString("storeId", "");
 		TextView retailerIdView = (TextView)getActivity().findViewById(R.id.retailerId);
-		retailerIdView.setText(retailerId);  
+		retailerIdView.setText(retailerId + " : Payments");  
 		
 		if (adapter == null) {			
     	    datasource = new PaymentsDataSource(getActivity());   

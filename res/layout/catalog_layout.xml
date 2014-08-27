@@ -32,17 +32,6 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
-            	android:id="@+id/catalogLabel"                                                            
-                style="@style/TitleBarText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/refreshCatalogButton"
-                android:layout_centerInParent="true"
-                android:text=": Catalog"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
             <ImageView style="@style/TitleBarSeparator" 
                 android:layout_toLeftOf="@+id/refreshCatalogButton"/>
             <ImageButton

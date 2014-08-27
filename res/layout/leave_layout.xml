@@ -3,16 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
     <LinearLayout
         android:id="@+id/orderTitle"
         style="@style/TitleBar" >
-
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:gravity="bottom" >
-
             <ImageButton
                 android:id="@+id/homeButton"
                 style="@style/TitleBarAction"

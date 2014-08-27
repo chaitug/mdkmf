@@ -379,7 +379,7 @@ public class ServerSync {
 		paramMap.put("facilityId", storeId);
 	  	final Date thruDate = new Date();
 		final Date fromDate = DateUtil.addDays(thruDate, -31);
-		paramMap.put("fromDate", fromDate.getTime());					
+		paramMap.put("fromDate", fromDate.getTime());	 				
 		paramMap.put("thruDate", thruDate.getTime());			
 		try {   
 			XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(context);
@@ -389,7 +389,7 @@ public class ServerSync {
 						final OrdersDataSource ordersDataSource = new OrdersDataSource (context);
 						ordersDataSource.open();  
 				    	Map ordersResult = (Map)((Map)result).get("ordersResult");
-				    	Log.d(module, "ordersResult.size() = " + ordersResult.size());	
+				    	Log.d(module, "ordersResult.size() = " + ordersResult.size());	  
 				    	ordersDataSource.deleteAllOrders();	 
 				    	if (ordersResult.size() > 0) {
 			    		  	ordersDataSource.insertOrderAndItems(ordersResult);				    		
