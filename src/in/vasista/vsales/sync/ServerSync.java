@@ -111,11 +111,10 @@ public class ServerSync {
 			}
 			Toast.makeText( context, "Upload failed: " + e, Toast.LENGTH_LONG ).show();	    		    			
 		}	
+		datasource.close();
 	}
 	
 	public void updateProducts(ProgressBar progressBar, final CatalogListFragment listFragment) {
-		final ProductsDataSource datasource = new ProductsDataSource(context);
-		datasource.open();  
 		Map paramMap = new HashMap();
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		String storeId = prefs.getString("storeId", "");			
@@ -125,6 +124,7 @@ public class ServerSync {
 			adapter.call("getProductPrices", paramMap, progressBar, new XMLRPCMethodCallback() {
 				public void callFinished(Object result, ProgressBar progressBar) {
 					if (result != null) {
+						final ProductsDataSource datasource = new ProductsDataSource(context);
 				    	Map priceResults = (Map)((Map)result).get("productsPrice");
 				    	Log.d(module, "priceResults.size() = " + priceResults.size());
 				    	datasource.open();
