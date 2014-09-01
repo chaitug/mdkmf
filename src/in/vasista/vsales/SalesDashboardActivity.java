@@ -363,7 +363,14 @@ Log.d(module, "onlySalesDashboard equals " + onlySalesDashboard);
     	
 		TextView accountSummaryView = (TextView)findViewById(R.id.accntSummary);
 		Facility facility = (Facility)facilityMap.get(retailerId);
-		String facilityName = (facility != null)?facility.getName():"";
+		String facilityName = "";
+		if (facility != null) {
+			facility.getName();
+		} 
+		else {
+			// check if Store Name is set in preferences
+			facilityName = prefs.getString("storeName", "");
+		}
 		accountSummaryView.setText("" + retailerId + 
 				" [" + facilityName +  "] :");
 		accountSummaryView.setPaintFlags(accountSummaryView.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
