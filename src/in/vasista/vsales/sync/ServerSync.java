@@ -482,7 +482,6 @@ public class ServerSync {
 	}		
 
 	public void updateEmployees(ProgressBar progressBar, final EmployeeListFragment listFragment) {
-		final EmployeeDataSource datasource = new EmployeeDataSource(context);
 		Map paramMap = new HashMap();
 		try {   
 			XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(context);
@@ -492,6 +491,7 @@ public class ServerSync {
 						SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd");  		    	  
 				    	Map employeesResult = (Map)((Map)result).get("employeesResult");
 				    	Log.d(module, "employeesResult.size() = " + employeesResult.size());
+						final EmployeeDataSource datasource = new EmployeeDataSource(context);
 				    	datasource.open();
 				    	datasource.deleteAllEmployees();
 				    	if (employeesResult.size() > 0) {
