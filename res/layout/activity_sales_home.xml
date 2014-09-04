@@ -26,7 +26,14 @@
                     android:contentDescription="@string/description_about"
                     android:onClick="onClickAbout"
                     android:src="@drawable/title_about" />
-
+                <ImageButton
+                    android:id="@+id/homeSettings"
+                    style="@style/TitleBarAction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"                    
+					android:layout_toRightOf="@+id/about"
+                    android:onClick="onClickSettings"                    
+                    android:src="@drawable/title_settings" />  
                 <ImageView
                     style="@style/TitleBarLogo"
                     android:layout_width="wrap_content"
@@ -34,7 +41,7 @@
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/description_logo"
                     android:src="@drawable/title_logo" />
-
+                    
                 <ImageButton
                     android:id="@+id/homeSearch"
                     style="@style/TitleBarAction"

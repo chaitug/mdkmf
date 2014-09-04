@@ -66,7 +66,7 @@ public class XMLRPCApacheAdapter {
 			Log.d( module, "XML-RPC call took " + (t1-t0) + "ms");			
 		} catch (final Exception e) {
 			Log.e( module, "Error " + e, e);
-			//Toast.makeText( context, "Remote call failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
+			Toast.makeText( context, "Remote call failed: " + e.getMessage(), Toast.LENGTH_SHORT ).show();	    		    			
 		}
 		return result;
 	}
@@ -122,7 +122,7 @@ Log.d( module, "method=" + method);
 							progressBar.setVisibility(View.INVISIBLE);  
 						} 
 						Log.d( module,"Remote call failed: " + e);
-						//Toast.makeText( context, "Remote call failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
+						Toast.makeText( context, "Remote call failed: " + e.getMessage(), Toast.LENGTH_SHORT ).show();	    		    			
 					}
 				});
 			}

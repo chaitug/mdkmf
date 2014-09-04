@@ -256,7 +256,7 @@ Log.d(module, "onlySalesDashboard equals " + onlySalesDashboard);
 	   super.onStop ();  
 	}
 
-    @Override
+/*    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.main, menu);
@@ -275,7 +275,7 @@ Log.d(module, "onlySalesDashboard equals " + onlySalesDashboard);
           }
         }
         return false;
-    } 
+    } */
     
 	// Click Methods
     public void onClick(View v) {
@@ -358,14 +358,14 @@ Log.d(module, "onlySalesDashboard equals " + onlySalesDashboard);
     		return;
     	}
     	SharedPreferences.Editor prefEditor = prefs.edit();
-    	prefEditor.putString("storeId", retailerId);
+    	prefEditor.putString("storeId", retailerId);  
     	prefEditor.commit();          
     	
 		TextView accountSummaryView = (TextView)findViewById(R.id.accntSummary);
 		Facility facility = (Facility)facilityMap.get(retailerId);
 		String facilityName = "";
 		if (facility != null) {
-			facility.getName();
+			facilityName = facility.getName();
 		} 
 		else {
 			// check if Store Name is set in preferences

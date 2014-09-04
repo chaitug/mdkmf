@@ -17,6 +17,7 @@
 package in.vasista.vsales;
 
 import in.vasista.vsales.R;
+import in.vasista.vsales.preference.FragmentPreferences;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -181,6 +182,19 @@ public void onClickSearch (View v)
 public void onClickAbout (View v)
 {
     startActivity (new Intent(getApplicationContext(), AboutActivity.class));
+}
+
+/**
+ * Handle the click on the About button.
+ * 
+ * @param v View
+ * @return void 
+ */        
+
+public void onClickSettings (View v)       
+{
+    Intent i = new Intent(this, FragmentPreferences.class);
+    startActivityForResult(i, 1);    
 }
 
 /**
