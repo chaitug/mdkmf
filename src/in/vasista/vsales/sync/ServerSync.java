@@ -70,13 +70,14 @@ public class ServerSync {
 	}
 	
 	public void uploadIndent(final Indent indent, ProgressBar progressBar, final IndentItemsListFragment listFragment) {
-		final IndentsDataSource datasource = new IndentsDataSource(context);
+		IndentsDataSource datasource = new IndentsDataSource(context);
 		datasource.open();
 		if (indent == null || !indent.getStatus().equals("Created")) {
 			progressBar.setVisibility(View.INVISIBLE);
 			return;
 		}
 		Map[] indentItems = datasource.getXMLRPCSerializedIndentItems(indent.getId());
+		datasource.close();
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		String storeId = prefs.getString("storeId", "");		
 		Map paramMap = new HashMap();
@@ -92,7 +93,10 @@ public class ServerSync {
 					if (result != null) {
 				    	Map indentResults = (Map)((Map)result).get("indentResults");
 				    	Log.d(module, "numIndentItems = " + indentResults.get("numIndentItems"));
-				    	datasource.setIndentSyncStatus(indent.getId(), true);
+						IndentsDataSource ds = new IndentsDataSource(context);
+						ds.open();
+				    	ds.setIndentSyncStatus(indent.getId(), true);
+				    	ds.close();
 				    	if (listFragment != null) {
 				    		listFragment.notifyChange();   
 				    	}
@@ -111,7 +115,6 @@ public class ServerSync {
 			}
 			Toast.makeText( context, "Upload failed: " + e, Toast.LENGTH_LONG ).show();	    		    			
 		}	
-		datasource.close();
 	}
 	
 	public void updateProducts(ProgressBar progressBar, final CatalogListFragment listFragment) {

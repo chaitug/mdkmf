@@ -218,6 +218,7 @@ public class IndentsDataSource {
 		  }
 		  // Make sure to close the cursor
 		  cursor.close();
+		  datasource.close();
 		  return indentItems;
 	  }
 	  
