@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import in.vasista.hr.attendance.AttendanceListFragment;
+import in.vasista.vsales.db.LocationsDataSource;
 import in.vasista.vsales.EmployeeActivity;
 import in.vasista.vsales.EmployeeDetailsActivity;
 import in.vasista.vsales.HRDashboardActivity;
@@ -801,6 +802,46 @@ public class ServerSync {
 			//Toast.makeText( context, "fetchEmployeeLastPunch failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
 		}		
 	}		
+
+	public void syncLocations(ProgressBar progressBar) {
+		final LocationsDataSource datasource = new LocationsDataSource(context);
+		datasource.open();  
+		final Map [] locations = datasource.getXMLRPCSerializedUnsyncedLocations();
+		if (locations ==null || locations.length == 0) {
+			progressBar.setVisibility(View.INVISIBLE);
+			return;
+		}
+		Map paramMap = new HashMap();
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+	    paramMap.put("locations",locations);	 
+
+		try {   
+			XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(context);
+			adapter.call("uploadPartyLocations", paramMap, progressBar, new XMLRPCMethodCallback() {
+				public void callFinished(Object result, ProgressBar progressBar) {
+					if (result != null) {
+						if (result != null) {
+					    	Map uploadLocationsResults = (Map)((Map)result).get("uploadLocationsResults");
+					    	Log.d(module, "uploadLocationsResults = " + uploadLocationsResults);
+					    	datasource.changeLocationsSyncStatus();
+				    	}
+				    	datasource.close();
+					}
+					if (progressBar != null) {
+						progressBar.setVisibility(View.INVISIBLE);
+					}
+				}
+			});
+		}
+		catch (Exception e) {
+			Log.e(module, "Exception: ", e);
+			if (progressBar != null) {
+				progressBar.setVisibility(View.INVISIBLE);
+			}
+			Toast.makeText( context, "Sync locations failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
+		}	
+		
+	}	
 	
 	public static boolean isNetworkAvailable(Context context) 
 	{

@@ -16,6 +16,7 @@
 
 package in.vasista.vsales;
 
+import in.vasista.location.LocationActivity;
 import in.vasista.vsales.R;
 import in.vasista.vsales.preference.FragmentPreferences;
 import android.app.Activity;
@@ -195,6 +196,11 @@ public void onClickSettings (View v)
 {
     Intent i = new Intent(this, FragmentPreferences.class);
     startActivityForResult(i, 1);    
+}
+
+public void onClickPlace (View v)
+{
+    startActivity (new Intent(getApplicationContext(), LocationActivity.class));
 }
 
 /**

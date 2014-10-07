@@ -97,6 +97,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_EMPLOYEE_ATTENDANCE_IN_TIME = "IN_TIME";	  
 	  public static final String COLUMN_EMPLOYEE_ATTENDANCE_OUT_TIME = "OUT_TIME";	  
 	  public static final String COLUMN_EMPLOYEE_ATTENDANCE_DURATION = "DURATION";	  
+	  
+	  public static final String TABLE_LOCATION = "LOCATION";
+	  public static final String COLUMN_LOCATION_ID = "LOCATION_ID";
+	  public static final String COLUMN_LOCATION_CRDATE = "LOCATION_CRDATE";
+	  public static final String COLUMN_LOCATION_LAT = "LOCATION_LAT";	  
+	  public static final String COLUMN_LOCATION_LONG = "LOCATION_LONG";	  
+	  public static final String COLUMN_LOCATION_IS_SYNCED = "LOCATION_IS_SYNCED";		  
 
 	  // Database creation sql statement
 	  private static final String DATABASE_CREATE_PRODUCT = "create table "
@@ -206,10 +213,18 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		      + " text, " + COLUMN_EMPLOYEE_ATTENDANCE_IN_TIME
 		      + " text, " + COLUMN_EMPLOYEE_ATTENDANCE_OUT_TIME	
 		      + " text, " + COLUMN_EMPLOYEE_ATTENDANCE_DURATION		      	      
-		      + " text);";		  
+		      + " text);";	
+	  
+	  private static final String DATABASE_CREATE_LOCATION = "create table "
+		      + TABLE_LOCATION + " (" + COLUMN_LOCATION_ID
+		      + " integer primary key autoincrement, " + COLUMN_LOCATION_CRDATE
+		      + " integer not null, " + COLUMN_LOCATION_LAT	      
+		      + " real not null, " + COLUMN_LOCATION_LONG
+		      + " real not null, " + COLUMN_LOCATION_IS_SYNCED	      
+		      + " integer not null);";		  
 
 	  private static final String DATABASE_NAME = "vsalesagent.db";
-	  private static final int DATABASE_VERSION = 19; 
+	  private static final int DATABASE_VERSION = 20; 
 	  
 	  public MySQLiteHelper(Context context) {
 	    super(context, DATABASE_NAME, null, DATABASE_VERSION); 
@@ -228,7 +243,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    database.execSQL(DATABASE_CREATE_PAYROLL_HEADER);		    	    	    
 	    database.execSQL(DATABASE_CREATE_PAYROLL_HEADER_ITEM);	
 	    database.execSQL(DATABASE_CREATE_EMPLOYEE_LEAVE);
-	    database.execSQL(DATABASE_CREATE_EMPLOYEE_ATTENDANCE);		    
+	    database.execSQL(DATABASE_CREATE_EMPLOYEE_ATTENDANCE);
+	    database.execSQL(DATABASE_CREATE_LOCATION);		    
+	    
 	  } 
 
 	  @Override
@@ -248,14 +265,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    //db.execSQL(DATABASE_CREATE_PAYROLL_HEADER);
 	    //db.execSQL(DATABASE_CREATE_PAYROLL_HEADER_ITEM);
 	    //db.execSQL("delete from EMPLOYEE");
-	    if (oldVersion < 18) {
+/*	    if (oldVersion < 18) {
 	    	db.execSQL("delete from PAYROLL_HEADER_ITEM");	    
 	    	db.execSQL("delete from PAYROLL_HEADER");
 	    	db.execSQL("drop table EMPLOYEE");	
 	    	db.execSQL(DATABASE_CREATE_EMPLOYEE);		    
 	    	db.execSQL(DATABASE_CREATE_EMPLOYEE_LEAVE);	 
-	    } 
-    	db.execSQL(DATABASE_CREATE_EMPLOYEE_ATTENDANCE);	              
+	    } */
+    	db.execSQL(DATABASE_CREATE_LOCATION);	              
 
 //	    if (oldVersion < 2 && newVersion == 2) {
 //	    	db.execSQL(DATABASE_CREATE_LOCATION);

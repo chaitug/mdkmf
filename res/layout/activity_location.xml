@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="fill_parent"
+   android:layout_height="fill_parent"
+   android:orientation="vertical" >
+
+
+
+   <Button android:id="@+id/disconnect"
+   android:layout_width="fill_parent"
+   android:layout_height="wrap_content"
+   android:text="Disconnect"/>
+  
+   <Button android:id="@+id/connect"
+   android:layout_width="fill_parent"
+   android:layout_height="wrap_content"
+   android:text="Connect"/>
+
+      <Button android:id="@+id/getLocation"
+   android:layout_width="fill_parent"
+   android:layout_height="wrap_content"
+   android:text="Get Location"/>
+      
+    <TextView
+   android:id="@+id/locationLabel"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"/>
+    
+   <Button android:id="@+id/syncLocationsButton"
+   android:layout_width="fill_parent"
+   android:layout_height="wrap_content"
+   android:text="Sync Locations"/> 
+   
+                <ProgressBar
+                    android:id="@+id/locationsSyncProgress"
+                    style="@android:style/Widget.ProgressBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:visibility="invisible" />   
+    
+</LinearLayout>
