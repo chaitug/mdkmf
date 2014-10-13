@@ -27,6 +27,8 @@ public class LocationsDataSource {
 			MySQLiteHelper.COLUMN_LOCATION_CRDATE,
 			MySQLiteHelper.COLUMN_LOCATION_LAT,
 			MySQLiteHelper.COLUMN_LOCATION_LONG,
+			MySQLiteHelper.COLUMN_LOCATION_NOTE_NAME,
+			MySQLiteHelper.COLUMN_LOCATION_NOTE_INFO,			
 			MySQLiteHelper.COLUMN_LOCATION_IS_SYNCED };
 
 	public LocationsDataSource(Context context) {
@@ -76,6 +78,30 @@ public class LocationsDataSource {
 		return database.insert(MySQLiteHelper.TABLE_LOCATION, null, values);
 	}	
 
+	public long insertLocation(double latitude,
+			double longitude, long time, String noteName, String noteInfo) {
+		String orderBy = MySQLiteHelper.COLUMN_LOCATION_CRDATE + " DESC";
+		Cursor cursor = database.query(MySQLiteHelper.TABLE_LOCATION,
+				allColumns, null, null, null, null, orderBy, "1");
+		Location lastLocation = null;
+		cursor.moveToFirst();
+		if (!cursor.isAfterLast()) {
+			lastLocation = cursorToLocation(cursor);
+		}
+		cursor.close();
+		if (lastLocation != null && lastLocation.getCreatedDate().getTime() == time) {
+			// don't insert
+			return lastLocation.getId();
+		}
+		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.COLUMN_LOCATION_CRDATE, time);
+		values.put(MySQLiteHelper.COLUMN_LOCATION_LAT, latitude);
+		values.put(MySQLiteHelper.COLUMN_LOCATION_LONG, longitude);
+		values.put(MySQLiteHelper.COLUMN_LOCATION_NOTE_NAME, noteName);
+		values.put(MySQLiteHelper.COLUMN_LOCATION_NOTE_INFO, noteInfo);		
+		values.put(MySQLiteHelper.COLUMN_LOCATION_IS_SYNCED, 0);
+		return database.insert(MySQLiteHelper.TABLE_LOCATION, null, values);
+	}	
 	public List<Location> getAllLocations() {
 		List<Location> locations = new ArrayList<Location>();
 		String orderBy = MySQLiteHelper.COLUMN_LOCATION_CRDATE + " DESC";
@@ -96,7 +122,8 @@ public class LocationsDataSource {
 	private Location cursorToLocation(Cursor cursor) {
 		Location location = new Location(cursor.getInt(0), new Date(
 				cursor.getLong(1)), cursor.getDouble(2), cursor.getDouble(3),
-				(cursor.getInt(4) == 1) ? true : false);
+				cursor.getString(4), cursor.getString(5),
+				(cursor.getInt(6) == 1) ? true : false);
 		return location;
 	}
 	
@@ -127,7 +154,9 @@ public class LocationsDataSource {
 			  Map item = new TreeMap();
 			  item.put("createdDate", loc.getCreatedDate());	    
 			  item.put("latitude", loc.getLatitude());	   
-			  item.put("longitude", loc.getLongitude());	   
+			  item.put("longitude", loc.getLongitude());
+			  item.put("noteName", loc.getNoteName());	   
+			  item.put("noteInfo", loc.getNoteInfo());	   			  
 			  result[i] = item;	
 		  }	     
 		  return result;

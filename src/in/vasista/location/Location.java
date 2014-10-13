@@ -7,13 +7,18 @@ public class Location {
 	Date createdDate;
 	double latitude;
 	double longitude;	
+	String noteName;
+	String noteInfo;
 	boolean isSynced;
 	
-	public Location (int id, Date createdDate, double latitude, double longitude, boolean isSynced) {
+	public Location (int id, Date createdDate, double latitude, double longitude, String noteName,
+			String noteInfo, boolean isSynced) {
 		this.id = id;
 		this.createdDate = createdDate;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.noteName = noteName;
+		this.noteInfo = noteInfo;
 		this.isSynced = isSynced;
 	}
 	
@@ -23,12 +28,18 @@ public class Location {
 	public Date getCreatedDate() {
 		return createdDate;
 	}
-	public double getLatitude() {
+	public double getLatitude() {  
 		return latitude;
 	}
 	public double getLongitude() {
 		return longitude;
 	}
+	public String getNoteName() {
+		return noteName;
+	}
+	public String getNoteInfo() {
+		return noteInfo;
+	}	
 	public boolean isSynced() {
 		return isSynced;
 	}

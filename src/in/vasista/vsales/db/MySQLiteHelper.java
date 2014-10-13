@@ -102,7 +102,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_LOCATION_ID = "LOCATION_ID";
 	  public static final String COLUMN_LOCATION_CRDATE = "LOCATION_CRDATE";
 	  public static final String COLUMN_LOCATION_LAT = "LOCATION_LAT";	  
-	  public static final String COLUMN_LOCATION_LONG = "LOCATION_LONG";	  
+	  public static final String COLUMN_LOCATION_LONG = "LOCATION_LONG";	
+	  public static final String COLUMN_LOCATION_NOTE_NAME = "LOCATION_NOTE_NAME";	  
+	  public static final String COLUMN_LOCATION_NOTE_INFO = "LOCATION_NOTE_INFO";	  	  
 	  public static final String COLUMN_LOCATION_IS_SYNCED = "LOCATION_IS_SYNCED";		  
 
 	  // Database creation sql statement
@@ -220,11 +222,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		      + " integer primary key autoincrement, " + COLUMN_LOCATION_CRDATE
 		      + " integer not null, " + COLUMN_LOCATION_LAT	      
 		      + " real not null, " + COLUMN_LOCATION_LONG
-		      + " real not null, " + COLUMN_LOCATION_IS_SYNCED	      
+		      + " real not null, " + COLUMN_LOCATION_NOTE_NAME
+		      + " text, " + COLUMN_LOCATION_NOTE_INFO	
+		      + " text, " + COLUMN_LOCATION_IS_SYNCED	      
 		      + " integer not null);";		  
 
 	  private static final String DATABASE_NAME = "vsalesagent.db";
-	  private static final int DATABASE_VERSION = 20; 
+	  private static final int DATABASE_VERSION = 21; 
 	  
 	  public MySQLiteHelper(Context context) {
 	    super(context, DATABASE_NAME, null, DATABASE_VERSION); 
@@ -238,7 +242,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    database.execSQL(DATABASE_CREATE_ORDER);	
 	    database.execSQL(DATABASE_CREATE_ORDER_ITEM);		    
 	    database.execSQL(DATABASE_CREATE_PAYMENT);		
-	    database.execSQL(DATABASE_CREATE_FACILITY);		
+	    database.execSQL(DATABASE_CREATE_FACILITY);		 
 	    database.execSQL(DATABASE_CREATE_EMPLOYEE);		
 	    database.execSQL(DATABASE_CREATE_PAYROLL_HEADER);		    	    	    
 	    database.execSQL(DATABASE_CREATE_PAYROLL_HEADER_ITEM);	
@@ -272,7 +276,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    	db.execSQL(DATABASE_CREATE_EMPLOYEE);		    
 	    	db.execSQL(DATABASE_CREATE_EMPLOYEE_LEAVE);	 
 	    } */
-    	db.execSQL(DATABASE_CREATE_LOCATION);	              
+	    //if (oldVersion > 20) {
+	    //	db.execSQL("drop table LOCATION");		    	    	    	    
+	    //	db.execSQL(DATABASE_CREATE_LOCATION);	 
+	    //}
 
 //	    if (oldVersion < 2 && newVersion == 2) {
 //	    	db.execSQL(DATABASE_CREATE_LOCATION);
