@@ -105,7 +105,18 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_LOCATION_LONG = "LOCATION_LONG";	
 	  public static final String COLUMN_LOCATION_NOTE_NAME = "LOCATION_NOTE_NAME";	  
 	  public static final String COLUMN_LOCATION_NOTE_INFO = "LOCATION_NOTE_INFO";	  	  
-	  public static final String COLUMN_LOCATION_IS_SYNCED = "LOCATION_IS_SYNCED";		  
+	  public static final String COLUMN_LOCATION_IS_SYNCED = "LOCATION_IS_SYNCED";	
+	  
+	  public static final String TABLE_TICKET = "TICKET";
+	  public static final String COLUMN_TICKET_ID_INTERNAL = "_ID";	  	  
+	  public static final String COLUMN_TICKET_ID = "TICKET_ID";
+	  public static final String COLUMN_TICKET_CRDATE = "TICKET_CRDATE";
+	  public static final String COLUMN_TICKET_LAT = "TICKET_LAT";	  
+	  public static final String COLUMN_TICKET_LONG = "TICKET_LONG";	
+	  public static final String COLUMN_TICKET_TYPE_ID = "TICKET_TYPE_ID";	  
+	  public static final String COLUMN_TICKET_DESC = "TICKET_DESC";	  	
+	  public static final String COLUMN_TICKET_STATUS = "TICKET_STATUS";	  	  
+	  public static final String COLUMN_TICKET_IS_SYNCED = "TICKET_IS_SYNCED";	  
 
 	  // Database creation sql statement
 	  private static final String DATABASE_CREATE_PRODUCT = "create table "
@@ -225,10 +236,23 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		      + " real not null, " + COLUMN_LOCATION_NOTE_NAME
 		      + " text, " + COLUMN_LOCATION_NOTE_INFO	
 		      + " text, " + COLUMN_LOCATION_IS_SYNCED	      
-		      + " integer not null);";		  
+		      + " integer not null);";	
+	  
+	  private static final String DATABASE_CREATE_TICKET = "create table "
+		      + TABLE_TICKET + " (" + COLUMN_TICKET_ID_INTERNAL
+		      + " integer primary key autoincrement, " + COLUMN_TICKET_CRDATE
+		      + " integer not null, " + COLUMN_TICKET_LAT	      
+		      + " real not null, " + COLUMN_TICKET_LONG
+		      + " real not null, " + COLUMN_TICKET_DESC
+		      + " text, " + COLUMN_TICKET_ID	
+		      + " text, " + COLUMN_TICKET_TYPE_ID	
+		      + " text, " + COLUMN_TICKET_STATUS			      
+		      + " text, " + COLUMN_TICKET_IS_SYNCED	      
+		      + " integer not null);";	
+	  
 
 	  private static final String DATABASE_NAME = "vsalesagent.db";
-	  private static final int DATABASE_VERSION = 21; 
+	  private static final int DATABASE_VERSION = 22; 
 	  
 	  public MySQLiteHelper(Context context) {
 	    super(context, DATABASE_NAME, null, DATABASE_VERSION); 
@@ -249,7 +273,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    database.execSQL(DATABASE_CREATE_EMPLOYEE_LEAVE);
 	    database.execSQL(DATABASE_CREATE_EMPLOYEE_ATTENDANCE);
 	    database.execSQL(DATABASE_CREATE_LOCATION);		    
-	    
+	    database.execSQL(DATABASE_CREATE_TICKET);		    	    
 	  } 
 
 	  @Override
@@ -286,6 +310,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 //		    Log.w(MySQLiteHelper.class.getName(),
 //			        "created LOCATION table!");	    	
 //	    }
+	    db.execSQL(DATABASE_CREATE_TICKET);
+
 	  }
 
 }
