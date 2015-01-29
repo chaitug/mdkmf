@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/ticketTitle"
+        style="@style/TitleBar" >        
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom" >
+        <ImageButton
+            android:id="@+id/homeButton"                                                
+            style="@style/TitleBarAction"
+            android:contentDescription="@string/description_home"
+            android:onClick="onClickHome"
+            android:src="@drawable/title_home" />
+
+        <ImageView style="@style/TitleBarSeparator"             
+            android:layout_toRightOf="@+id/homeButton"/>    
+            <TextView
+                android:id="@+id/ticketsId"
+                style="@style/TitleBarText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" 
+                android:text="My Tickets"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageView style="@style/TitleBarSeparator" 
+                android:layout_toLeftOf="@+id/refreshTicketsButton"/>
+            <ImageButton
+                android:id="@+id/refreshTicketsButton"
+                style="@style/TitleBarAction"
+            	android:layout_alignParentRight="true"
+                android:src="@drawable/title_refresh" /> 
+
+            <ProgressBar
+                android:id="@+id/ticketsRefreshProgress"
+                style="@android:style/Widget.ProgressBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@+id/refreshTicketsButton"
+                android:indeterminate="true"
+                android:visibility="invisible" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/catalog_list_fragment"
+        android:name="in.vasista.tm.TicketListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/catalogTitle"
+        android:layout_weight="1" />
+
+</RelativeLayout>

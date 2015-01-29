@@ -8,6 +8,7 @@ import in.vasista.vsales.sync.ServerSync;
 
 import java.util.List;
  
+import android.annotation.SuppressLint;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -77,12 +78,12 @@ public class AttendanceListFragment extends ListFragment {
 		setListAdapter(null);
 	}
 	
-    @Override
+    @SuppressLint("NewApi") @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         setUserVisibleHint(true);
     }
-    
+     
     @Override
     public void onResume() {
     	super.onResume();
