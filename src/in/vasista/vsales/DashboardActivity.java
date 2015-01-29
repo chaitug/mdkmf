@@ -17,6 +17,7 @@
 package in.vasista.vsales;
 
 import in.vasista.location.LocationActivity;
+import in.vasista.tm.TicketDashboardActivity;
 import in.vasista.vsales.R;
 import in.vasista.vsales.preference.FragmentPreferences;
 import android.app.Activity;
@@ -221,6 +222,9 @@ public void onClickFeature (View v)
            //startActivity (new Intent(getApplicationContext(), EmployeeActivity.class));
            startActivity (new Intent(getApplicationContext(), HRDashboardActivity.class));           
            break;
+/*      case R.id.home_btn_ticket : 
+          startActivity (new Intent(getApplicationContext(), TicketDashboardActivity.class));           
+          break;  */         
       default:    
     	   break;     
     }
