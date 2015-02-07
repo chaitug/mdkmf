@@ -40,6 +40,6 @@ public class Product {
 	}
 	
 	public String toString() {
-		return id + " " + name + " " + price + " " + mrpPrice;
+		return id + " " + name + " " + description + " " + price + " " + mrpPrice;
 	}
 }

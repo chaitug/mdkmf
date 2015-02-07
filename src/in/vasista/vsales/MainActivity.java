@@ -1,6 +1,7 @@
 package in.vasista.vsales;
 
 
+import in.vasista.rest.ServerRestSync;
 import in.vasista.vsales.adapter.FacilityAutoAdapter;
 import in.vasista.vsales.db.FacilityDataSource;
 import in.vasista.vsales.db.IndentsDataSource;
@@ -116,6 +117,9 @@ public class MainActivity extends DashboardActivity  {
     		prefEditor.commit();
     	}  
 	    setupDashboard();
+	    
+	    ServerRestSync sync = new ServerRestSync(this);
+	    sync.fetchMaterials(); 
 	}
 	    
 	/**
