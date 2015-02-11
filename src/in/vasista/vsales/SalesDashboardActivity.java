@@ -316,7 +316,7 @@ Log.d(module, "onlySalesDashboard equals " + onlySalesDashboard);
     public void cleanupRetailerProducts() {
     	ProductsDataSource productDS = new ProductsDataSource(this);
     	productDS.open();
-    	productDS.deleteAllProducts();
+    	productDS.deleteAllSaleProducts();
     	productDS.close();    	
     }
 

@@ -132,7 +132,7 @@ public class ServerSync {
 				    	Map priceResults = (Map)((Map)result).get("productsPrice");
 				    	Log.d(module, "priceResults.size() = " + priceResults.size());
 				    	datasource.open();
-				    	datasource.deleteAllProducts();
+				    	datasource.deleteAllSaleProducts();
 				    	Iterator entries = priceResults.entrySet().iterator();
 				    	while (entries.hasNext()) {
 				    	  Entry thisEntry = (Entry) entries.next(); 
@@ -143,7 +143,7 @@ public class ServerSync {
 				    	  int sequenceNum = ((Long)value.get("sequenceNum")).intValue();				    	  
 				    	  float price = ((BigDecimal)value.get("totalAmount")).setScale(2,BigDecimal.ROUND_HALF_UP).floatValue();
 				    	  float mrpPrice = ((BigDecimal)value.get("mrpPrice")).setScale(2,BigDecimal.ROUND_HALF_UP).floatValue();
-				    	  Product product = new Product(productId, name, description, sequenceNum, price, mrpPrice);
+				    	  Product product = new Product(productId, name, description, sequenceNum, price, mrpPrice, "", false, true);
 				    	  //Log.d(module, "product = " + product);		
 				    	  datasource.insertProduct(product);
 				    	} 
@@ -181,7 +181,7 @@ public class ServerSync {
 		final Map productsMap = new HashMap();
 		ProductsDataSource prodDataSource = new ProductsDataSource (context);
 		prodDataSource.open();
-		List<Product> products = prodDataSource.getAllProducts();
+		List<Product> products = prodDataSource.getAllSaleProducts();
 		for (int i =0; i < products.size(); ++i) {
 			Product product = products.get(i);
 			productsMap.put(product.getId(), product);

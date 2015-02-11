@@ -16,6 +16,7 @@
 
 package in.vasista.vsales;
 
+import in.vasista.inventory.InventoryActivity;
 import in.vasista.location.LocationActivity;
 import in.vasista.tm.TicketDashboardActivity;
 import in.vasista.vsales.R;
@@ -222,6 +223,9 @@ public void onClickFeature (View v)
            //startActivity (new Intent(getApplicationContext(), EmployeeActivity.class));
            startActivity (new Intent(getApplicationContext(), HRDashboardActivity.class));           
            break;
+      case R.id.home_btn_inventory : 
+           startActivity (new Intent(getApplicationContext(), InventoryActivity.class));           
+           break;               
 /*      case R.id.home_btn_ticket : 
           startActivity (new Intent(getApplicationContext(), TicketDashboardActivity.class));           
           break;  */         

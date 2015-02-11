@@ -1,6 +1,7 @@
 package in.vasista.rest;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpStatus;
 
@@ -10,11 +11,18 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+import in.vasista.inventory.InventoryDetail;
+import in.vasista.inventory.InventoryDetailsActivity;
+import in.vasista.inventory.InventoryListFragment;
 import in.vasista.vsales.catalog.Product;
+import in.vasista.vsales.db.ProductsDataSource;
+import in.vasista.vsales.indent.IndentListFragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 public class ServerRestSync {
 	public static final String module = ServerRestSync.class.getName();	
@@ -49,22 +57,62 @@ public class ServerRestSync {
 		this.context = context; 
 	}
 	
-	public void fetchMaterials() {
+	public void fetchMaterials(final ProgressBar progressBar, final InventoryListFragment listFragment) {
 		api.fetchMaterials( new Callback <List<Product>>() {
 
 		    @Override  
 		    public void failure(RetrofitError retrofitError) {
 		    	Log.d(module, "retrofitError = " + retrofitError);
+				if (progressBar != null) {
+					progressBar.setVisibility(View.INVISIBLE);
+				}
 		    }
 
 			@Override
 			public void success(List<Product> products, Response response) {
 				// TODO Auto-generated method stub
+				Log.d(module, "products.size = " + products.size());
+				final ProductsDataSource datasource = new ProductsDataSource(context);
+		    	datasource.open();
+		    	datasource.deleteAllInventoryProducts();
 				for (int i = 0; i < products.size(); ++i) {
-					Log.d(module, "product = " + products.get(i));	
+					//Log.d(module, "product = " + products.get(i));
+					datasource.insertProduct(products.get(i));
 				}
-		    	Log.d(module, "response = " + response);						    	
+				datasource.close();
+		    	Log.d(module, "response = " + response);	
+		    	if (listFragment != null) {
+			    	//Log.d(module, "calling listFragment notifyChange..." + listFragment.getClass().getName());						    		
+		    		listFragment.notifyChange();
+		    	}
+		    	if (progressBar != null) {
+		    		progressBar.setVisibility(View.INVISIBLE);
+		    	}
 			}			
 		});
 	}
+	
+	public void fetchMaterialInventory(String productId, final ProgressBar progressBar, final InventoryDetailsActivity activity) {
+		api.fetchMaterialInventory( productId, new Callback <InventoryDetail>() {
+		    @Override  
+		    public void failure(RetrofitError retrofitError) {
+		    	Log.d(module, "retrofitError = " + retrofitError);
+				if (progressBar != null) {
+					progressBar.setVisibility(View.INVISIBLE);
+				}
+		    }
+
+			@Override
+			public void success(InventoryDetail inventoryDetail, Response response) {
+		    	Log.d(module, "inventoryDetail = " + inventoryDetail);
+
+		    	if (progressBar != null) {
+		    		progressBar.setVisibility(View.INVISIBLE);
+		    	}				
+		    	if (activity != null && inventoryDetail != null) {
+		    		activity.updateInventoryDetail(inventoryDetail);
+		    	}
+			}			
+		});
+	}	
 }

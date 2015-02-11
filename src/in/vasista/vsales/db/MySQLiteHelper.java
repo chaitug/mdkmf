@@ -15,6 +15,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_PRODUCT_PRICE = "PRODUCT_PRICE";
 	  public static final String COLUMN_PRODUCT_MRP_PRICE = "PRODUCT_MRP_PRICE";	  
 	  public static final String COLUMN_PRODUCT_SEQUENCE_NUM = "PRODUCT_SEQ_NUM";
+	  public static final String COLUMN_PRODUCT_CATEGORY_ID = "PRODUCT_CATEGORY_ID";
+	  public static final String COLUMN_PRODUCT_TRACK_INVENTORY = "PRODUCT_TRACK_INVENTORY";
+	  public static final String COLUMN_PRODUCT_TRACK_SALES = "PRODUCT_TRACK_SALES";
   
 	  
 	  public static final String TABLE_INDENT = "INDENT";
@@ -126,7 +129,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	      + " text, " + COLUMN_PRODUCT_SEQUENCE_NUM
 	      + " integer, " + COLUMN_PRODUCT_PRICE
 	      + " real, " + COLUMN_PRODUCT_MRP_PRICE	      
-	      + " real not null);"; 
+	      + " real not null, " + COLUMN_PRODUCT_CATEGORY_ID	
+	      + " text, " + COLUMN_PRODUCT_TRACK_INVENTORY    
+	      + " integer not null, " + COLUMN_PRODUCT_TRACK_SALES   
+	      + " integer not null);"; 
 
 	  
 	  private static final String DATABASE_CREATE_INDENT = "create table "
@@ -252,7 +258,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  
 
 	  private static final String DATABASE_NAME = "vsalesagent.db";
-	  private static final int DATABASE_VERSION = 22; 
+	  private static final int DATABASE_VERSION = 24; 
 	  
 	  public MySQLiteHelper(Context context) {
 	    super(context, DATABASE_NAME, null, DATABASE_VERSION); 
@@ -281,25 +287,26 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    Log.w(MySQLiteHelper.class.getName(),
 	        "Upgrading database from version " + oldVersion + " to "
 	            + newVersion);
-	    //db.execSQL("delete from INDENT");
-	    //db.execSQL(DATABASE_CREATE_ORDER);
-	    //db.execSQL(DATABASE_CREATE_ORDER_ITEM);
-	    //db.execSQL("drop table FACILITY");		    	    
-	    //db.execSQL(DATABASE_CREATE_FACILITY);	
-	    //db.execSQL("drop table PRODUCT");		    	    
-	    //db.execSQL(DATABASE_CREATE_PRODUCT);	
-	    //db.execSQL("drop table EMPLOYEE");		    	    	    
-	    //db.execSQL(DATABASE_CREATE_EMPLOYEE);	
-	    //db.execSQL(DATABASE_CREATE_PAYROLL_HEADER);
-	    //db.execSQL(DATABASE_CREATE_PAYROLL_HEADER_ITEM);
-	    //db.execSQL("delete from EMPLOYEE");
-/*	    if (oldVersion < 18) {
-	    	db.execSQL("delete from PAYROLL_HEADER_ITEM");	    
-	    	db.execSQL("delete from PAYROLL_HEADER");
-	    	db.execSQL("drop table EMPLOYEE");	
-	    	db.execSQL(DATABASE_CREATE_EMPLOYEE);		    
-	    	db.execSQL(DATABASE_CREATE_EMPLOYEE_LEAVE);	 
-	    } */
+	    if (oldVersion < 24 ) { 
+
+	    db.execSQL("drop table PRODUCT");	
+	    db.execSQL("drop table INDENT_ITEM");		    	    	    
+	    db.execSQL("drop table INDENT");		    	    
+	    db.execSQL("drop table ORDER_ITEM");		    	    
+	    db.execSQL("drop table ORDER_HEADER");		    	    
+	    db.execSQL("drop table PAYMENT");		    	    
+	    db.execSQL("drop table FACILITY");		    	    
+	    db.execSQL("drop table EMPLOYEE");		    	    
+	    db.execSQL("drop table PAYROLL_HEADER_ITEM");		    	    
+	    db.execSQL("drop table PAYROLL_HEADER");		    	    
+	    db.execSQL("drop table EMPLOYEE_LEAVE");		    	    
+	    db.execSQL("drop table EMPLOYEE_ATTENDANCE");		    	    
+	    db.execSQL("drop table LOCATION");		    	    
+	    db.execSQL("drop table TICKET");	
+	    
+	    onCreate(db);
+	    }
+
 	    //if (oldVersion > 20) {
 	    //	db.execSQL("drop table LOCATION");		    	    	    	    
 	    //	db.execSQL(DATABASE_CREATE_LOCATION);	 
@@ -310,7 +317,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 //		    Log.w(MySQLiteHelper.class.getName(),
 //			        "created LOCATION table!");	    	
 //	    }
-	    db.execSQL(DATABASE_CREATE_TICKET);
+//	    db.execSQL(DATABASE_CREATE_TICKET);
 
 	  }
 

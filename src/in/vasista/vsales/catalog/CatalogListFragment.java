@@ -64,7 +64,7 @@ public class CatalogListFragment extends ListFragment {
 		if (adapter == null) { 
     	    datasource = new ProductsDataSource(getActivity());
     	    datasource.open();
-    	    catalogItems = datasource.getAllProducts();
+    	    catalogItems = datasource.getAllSaleProducts();
     	    
 		    adapter = new ProductAdapter(getActivity(), 
                     R.layout.cataloglist_item,
@@ -79,7 +79,7 @@ public class CatalogListFragment extends ListFragment {
 	public void notifyChange() {
 		setListAdapter(null);
 	    datasource.open();
-	    catalogItems = datasource.getAllProducts();
+	    catalogItems = datasource.getAllSaleProducts();
     	Log.d(module, "catalogItems.size() = " + catalogItems.size());
 	    
 	    adapter = new ProductAdapter(getActivity(),

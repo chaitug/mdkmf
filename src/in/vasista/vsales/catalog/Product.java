@@ -7,14 +7,24 @@ public class Product {
 	float price;
 	float mrpPrice;	
 	int sequenceNum;
+
+
+	String productCategoryId;
+	boolean trackInventory;
+	boolean trackSales;
 	
-	public Product(String id, String name, String description, int sequenceNum, float price, float mrpPrice) {
+	
+	public Product(String id, String name, String description, int sequenceNum, float price, float mrpPrice,
+			String productCategoryId, boolean trackInventory, boolean trackSales) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.sequenceNum = sequenceNum;
 		this.price = price;
 		this.mrpPrice = mrpPrice;
+		this.productCategoryId = productCategoryId;
+		this.trackInventory = trackInventory;
+		this.trackSales = trackSales;
 	}
 	
 	public String getId() {
@@ -38,6 +48,18 @@ public class Product {
 	public float getMrpPrice() {
 		return mrpPrice;
 	}
+	
+	public String getProductCategoryId() {
+		return productCategoryId;
+	}
+
+	public boolean isTrackInventory() {
+		return trackInventory;
+	}
+
+	public boolean isTrackSales() {
+		return trackSales;
+	}	
 	
 	public String toString() {
 		return id + " " + name + " " + description + " " + price + " " + mrpPrice;

@@ -126,7 +126,7 @@ public class OrdersDataSource {
 		  Map productsMap = new HashMap();
 		  final ProductsDataSource prodDataSource = new ProductsDataSource (context);
 		  prodDataSource.open();
-		  List<Product> products = prodDataSource.getAllProducts();
+		  List<Product> products = prodDataSource.getAllSaleProducts();
 		  for (int i =0; i < products.size(); ++i) {
 			  Product product = products.get(i);
 			  productsMap.put(product.getId(), product);
@@ -187,7 +187,7 @@ Log.d(module, "Order Item: [" + orderDateStr + ";" + productId + ";" + quantity 
 		        allOrderItemColumns, MySQLiteHelper.COLUMN_ORDER_ID + " = " + orderId, null, null, null, null);
 		  ProductsDataSource datasource = new ProductsDataSource(context);
 		  datasource.open();
-		  Map productMap = datasource.getProductMap();	
+		  Map productMap = datasource.getSaleProductMap();	
 		  cursor.moveToFirst();
 		  while (!cursor.isAfterLast()) {
 			  OrderItem orderItem = cursorToOrderItem(cursor, productMap);

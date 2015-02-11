@@ -306,7 +306,7 @@ public class IndentItemsListFragment extends ListFragment{
 	void initializeIndentItems() {  
 		ProductsDataSource prodsDatasource = new ProductsDataSource(getActivity());
 		prodsDatasource.open();
-		List<Product> products = prodsDatasource.getAllProducts();
+		List<Product> products = prodsDatasource.getAllSaleProducts();
 		for (int i = 0; i < products.size(); ++i) {
 			Product product = products.get(i);
 			IndentItem item = new IndentItem(product.getId(), product.getName(), -1, product.getPrice());
@@ -321,7 +321,7 @@ public class IndentItemsListFragment extends ListFragment{
 		List <IndentItem> newItemsList = new ArrayList<IndentItem>();
 		ProductsDataSource prodsDatasource = new ProductsDataSource(getActivity());
 		prodsDatasource.open();
-		List<Product> products = prodsDatasource.getAllProducts();
+		List<Product> products = prodsDatasource.getAllSaleProducts();
 		for (int i = 0; i < products.size(); ++i) {
 			Product product = products.get(i);
 			boolean productExists = false;

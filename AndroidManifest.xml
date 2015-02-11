@@ -91,8 +91,11 @@
         <activity android:name="in.vasista.vsales.AttendanceActivity"
       			android:label="Attendance"/>  
         <activity android:name="in.vasista.location.LocationActivity"
-      			android:label="Location"/>     
-      			
+      			android:label="Location"/>   
+        <activity android:name="in.vasista.inventory.InventoryActivity"
+      			android:label="Inventory"/>        			  
+        <activity android:name="in.vasista.inventory.InventoryDetailsActivity"
+      			android:label="InventoryDetails"/>        			
         <service android:enabled="true" android:name="in.vasista.location.LocationService"/>
         			     
       </application>

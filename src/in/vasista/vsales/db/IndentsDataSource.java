@@ -209,7 +209,7 @@ public class IndentsDataSource {
 		        allIndentItemColumns, MySQLiteHelper.COLUMN_INDENT_ID + " = " + indentId, null, null, null, null);
 		  ProductsDataSource datasource = new ProductsDataSource(context);
 		  datasource.open();
-		  Map productMap = datasource.getProductMap();	
+		  Map productMap = datasource.getSaleProductMap();	
 		  cursor.moveToFirst();
 		  while (!cursor.isAfterLast()) {
 			  IndentItem indentItem = cursorToIndentItem(cursor, productMap);

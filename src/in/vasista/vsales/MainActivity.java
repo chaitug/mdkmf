@@ -118,8 +118,8 @@ public class MainActivity extends DashboardActivity  {
     	}  
 	    setupDashboard();
 	    
-	    ServerRestSync sync = new ServerRestSync(this);
-	    sync.fetchMaterials(); 
+//	    ServerRestSync sync = new ServerRestSync(this);
+//	    sync.fetchMaterials(); 
 	}
 	    
 	/**
