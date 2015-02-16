@@ -45,6 +45,8 @@ public class MainActivity extends DashboardActivity  {
     public static final String RETAILER_DB_PERM = "MOB_RTLR_DB_VIEW";    
     public static final String SALESREP_DB_PERM = "MOB_SREP_DB_VIEW";
     public static final String HR_DB_PERM = "MOB_HR_DB_VIEW";
+    public static final String INVENTORY_DB_PERM = "MOB_INVENTORY_DB_VIEW";
+    
     
 	private Map facilityMap = new HashMap<String, Facility> ();
 	
@@ -55,19 +57,20 @@ public class MainActivity extends DashboardActivity  {
     	String retailerPerm = prefs.getString(RETAILER_DB_PERM, "N");
     	String salesRepPerm = prefs.getString(SALESREP_DB_PERM, "N");
     	String hrPerm = prefs.getString(HR_DB_PERM, "N");   
-
+    	String inventoryPerm = prefs.getString(INVENTORY_DB_PERM, "N");   
+inventoryPerm = "Y"; //::TODO::
     	prefEditor.putString("onlySalesDashboard", "N");
     	prefEditor.putString("onlyHRDashboard", "N");
     	prefEditor.commit();   		
 
-    	if ((salesRepPerm.equals("Y") || retailerPerm.equals("Y")) && hrPerm.equals("N")) {
+    	if ((salesRepPerm.equals("Y") || retailerPerm.equals("Y")) && hrPerm.equals("N") && inventoryPerm.equals("N")) {
         	prefEditor.putString("onlySalesDashboard", "Y");
         	prefEditor.commit();   		
     	    startActivity (new Intent(getApplicationContext(), SalesDashboardActivity.class));
             finish();    	    
     	    return;
     	}
-    	if ((salesRepPerm.equals("N") && retailerPerm.equals("N")) && hrPerm.equals("Y")) {
+    	if ((salesRepPerm.equals("N") && retailerPerm.equals("N")) && inventoryPerm.equals("N") && hrPerm.equals("Y")) {
         	prefEditor.putString("onlyHRDashboard", "Y");
         	prefEditor.commit();   	    		
     	    startActivity (new Intent(getApplicationContext(), HRDashboardActivity.class));
@@ -83,7 +86,11 @@ public class MainActivity extends DashboardActivity  {
     	if (hrPerm.equals("N")) {    		
     		Button button = (Button)findViewById(R.id.home_btn_hr);
     		button.setVisibility(View.GONE); 
-    	}    	
+    	}  
+    	if (inventoryPerm.equals("N")) {    		
+    		Button button = (Button)findViewById(R.id.home_btn_inventory);
+    		button.setVisibility(View.GONE); 
+    	}      	
     }
 	
 	/**

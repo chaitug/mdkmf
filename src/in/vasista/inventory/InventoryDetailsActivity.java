@@ -50,13 +50,15 @@ public class InventoryDetailsActivity extends DashboardActivity  {
 		materialCodeView.setText(inventoryDetail.getName());
 		TextView materialNameView = (TextView)findViewById(R.id.materialName);
 		materialNameView.setText(inventoryDetail.getDescription());	 
+		TextView materialCategoryView = (TextView)findViewById(R.id.materialCategory);
+		materialCategoryView.setText(inventoryDetail.getCategoryId());	 		
 		TextView uomView = (TextView)findViewById(R.id.uom);
 		uomView.setText(inventoryDetail.getUom());			
-		TextView inventoryQtyView = (TextView)findViewById(R.id.inventoryQty);
+		TextView inventoryQtyView = (TextView)findViewById(R.id.inventoryQty); 
 		String inventoryCountStr = ""; 
 		if (inventoryDetail.getInventoryCount() != null) {
 			float inventoryCount = inventoryDetail.getInventoryCount().setScale(2,BigDecimal.ROUND_HALF_UP).floatValue();
-			inventoryCountStr = String.format("%.2f", inventoryCount);
+			inventoryCountStr = String.format("%.2f (%s)", inventoryCount, inventoryDetail.getUom());   
 		}
 		inventoryQtyView.setText(inventoryCountStr);	
 		TextView inventoryValueView = (TextView)findViewById(R.id.inventoryValue);
@@ -75,7 +77,11 @@ public class InventoryDetailsActivity extends DashboardActivity  {
 			float supplierRate = inventoryDetail.getSupplierRate().setScale(2,BigDecimal.ROUND_HALF_UP).floatValue();
 	    	supplierRateStr = String.format("Rs %.2f", supplierRate);
 		}
-	    supplierRateView.setText(supplierRateStr);			
+	    supplierRateView.setText(supplierRateStr);	
+	    
+		TextView specificationView = (TextView)findViewById(R.id.specification);
+		specificationView.setText(inventoryDetail.getSpecification()); 
+		
 		/*
 		if (!punchTime.isEmpty()) {
 			TextView employeePunchTimeView = (TextView)findViewById(R.id.employeeLastPunchTime);

@@ -6,6 +6,7 @@ public class InventoryDetail {
 	String productId;
 	String name;
 	String description;
+	String categoryId;	
 	String uom;
 	String specification;
 	String supplierId;
@@ -22,6 +23,9 @@ public class InventoryDetail {
 	public String getDescription() {
 		return description;
 	}
+	public String getCategoryId() { 
+		return categoryId;
+	}	
 	public String getUom() {
 		return uom;
 	}
