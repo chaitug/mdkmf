@@ -2,7 +2,9 @@ package in.vasista.inventory;
 
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import in.vasista.rest.ServerRestSync;
@@ -17,6 +19,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import java.text.DateFormat;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -81,6 +84,13 @@ public class InventoryDetailsActivity extends DashboardActivity  {
 	    
 		TextView specificationView = (TextView)findViewById(R.id.specification);
 		specificationView.setText(inventoryDetail.getSpecification()); 
+		 
+		//String currentDateTimeString = DecimalFormat.getInstance().format(new Date());
+		Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String text = "Stock Position as of: " + df.format(c.getTime());		
+		TextView inventoryDetailsLastFetchTimeView = (TextView)findViewById(R.id.inventoryDetailsLastFetchTime);
+		inventoryDetailsLastFetchTimeView.setText(text);   
 		
 		/*
 		if (!punchTime.isEmpty()) {

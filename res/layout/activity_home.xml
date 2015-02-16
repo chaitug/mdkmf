@@ -34,14 +34,14 @@
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/description_logo"
                     android:src="@drawable/title_logo" />
-                <ImageButton
+<!--                 <ImageButton
                     android:id="@+id/place"
                     style="@style/TitleBarAction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                 	android:layout_toLeftOf="@+id/homeSettings"
                     android:onClick="onClickPlace"                    
-                    android:src="@drawable/title_place" />  
+                    android:src="@drawable/title_place" />   -->
                 <ImageButton
                     android:id="@+id/homeSettings"
                     style="@style/TitleBarAction"
@@ -83,7 +83,7 @@
                 <Button
                     android:id="@+id/home_btn_inventory"
                     style="@style/HomeButton"
-                    android:drawableTop="@drawable/catalog_button"
+                    android:drawableTop="@drawable/inventory_button"
                     android:onClick="onClickFeature"
                     android:text="Inventory" />             
             </LinearLayout>                  

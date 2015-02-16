@@ -288,7 +288,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:layout_toRightOf="@+id/supplierRate"
+                    android:layout_toRightOf="@+id/supplierRateLabel"
                     android:textSize="12sp"
                     android:textStyle="bold" />
             </RelativeLayout>
