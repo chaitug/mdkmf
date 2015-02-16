@@ -440,7 +440,8 @@ public class ServerSync {
 				    	if (facilitiesResult.size() > 0) {
 				    		if (facilitiesResult.get("boothsDetailsList") != null) {
 					    		Object[] boothsDetailsList = (Object[])facilitiesResult.get("boothsDetailsList");
-						    	Log.d(module, "boothsDetailsList.size() = " + boothsDetailsList.length);	
+						    	Log.d(module, "boothsDetailsList.size() = " + boothsDetailsList.length);
+						    	List <Facility> facilities = new ArrayList();
 				    		  	for (int i=0; i < boothsDetailsList.length; ++i) {
 				    		  		Map boothMap = (Map)boothsDetailsList[i];				    		  		
 							    	String id = (String)boothMap.get("facilityId");
@@ -454,9 +455,10 @@ public class ServerSync {
 							    	String longitude = (String)boothMap.get("longitude");							    	
 							    	Facility facility = new Facility(id, name, category, 
 							    			ownerPhone, salesRep, amRouteId, pmRouteId, latitude, longitude);
+							    	facilities.add(facility);
 							    	//Log.d(module, "facility = " + facility);	  
-							    	datasource.insertFacility(facility);
-				    		  	}   
+				    		  	}  
+						    	datasource.insertFacilities(facilities);
 				    		}	
 				    	}
 				    	datasource.close();
@@ -501,7 +503,8 @@ public class ServerSync {
 				    	if (employeesResult.size() > 0) {
 				    		if (employeesResult.get("employeeList") != null) {
 					    		Object[] employeesList = (Object[])employeesResult.get("employeeList");
-						    	Log.d(module, "employeesList.size() = " + employeesList.length);	
+						    	Log.d(module, "employeesList.size() = " + employeesList.length);
+						    	List <Employee> employees = new ArrayList();
 				    		  	for (int i=0; i < employeesList.length; ++i) {
 				    		  		Map employeeMap = (Map)employeesList[i];				    		  		
 							    	String id = (String)employeeMap.get("employeeId");
@@ -539,9 +542,10 @@ public class ServerSync {
 				    					employee.setEarnedLeave(earnedLeaveBalance.floatValue());
 				    					employee.setCasualLeave(casualLeaveBalance.floatValue());
 				    					employee.setHalfPayLeave(halfPayLeaveBalance.floatValue());	
+				    					employees.add(employee);
 					    			}
-					    			datasource.insertEmployee(employee);
 				    		  	}   
+				    			datasource.insertEmployees(employees);
 				    		}	
 				    	}
 				    	datasource.close();

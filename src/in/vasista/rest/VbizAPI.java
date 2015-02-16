@@ -12,7 +12,7 @@ import in.vasista.vsales.catalog.Product;
 public interface VbizAPI {
 	
 	@GET("/materialmgmt/fetchMaterials")
-	void fetchMaterials(Callback <List<Product>> callback);
+	List<Product> fetchMaterials();
 	
 	@GET("/materialmgmt/fetchMaterialInventory")
 	void fetchMaterialInventory(@Query("productId") String productId, Callback <InventoryDetail> callback);	

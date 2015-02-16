@@ -57,39 +57,16 @@ public class ServerRestSync {
 		this.context = context; 
 	}
 	
-	public void fetchMaterials(final ProgressBar progressBar, final InventoryListFragment listFragment) {
-		api.fetchMaterials( new Callback <List<Product>>() {
-
-		    @Override  
-		    public void failure(RetrofitError retrofitError) {
-		    	Log.d(module, "retrofitError = " + retrofitError);
-				if (progressBar != null) {
-					progressBar.setVisibility(View.INVISIBLE);
-				}
-		    }
-
-			@Override
-			public void success(List<Product> products, Response response) {
-				// TODO Auto-generated method stub
-				Log.d(module, "products.size = " + products.size());
-				final ProductsDataSource datasource = new ProductsDataSource(context);
-		    	datasource.open();
-		    	datasource.deleteAllInventoryProducts();
-				for (int i = 0; i < products.size(); ++i) {
-					//Log.d(module, "product = " + products.get(i));
-					datasource.insertProduct(products.get(i));
-				}
-				datasource.close();
-		    	Log.d(module, "response = " + response);	
-		    	if (listFragment != null) {
-			    	//Log.d(module, "calling listFragment notifyChange..." + listFragment.getClass().getName());						    		
-		    		listFragment.notifyChange();
-		    	}
-		    	if (progressBar != null) {
-		    		progressBar.setVisibility(View.INVISIBLE);
-		    	}
-			}			
-		});
+	public void fetchMaterials() {
+		List<Product> products = api.fetchMaterials();
+			Log.d(module, "products.size = " + products.size());
+			final ProductsDataSource datasource = new ProductsDataSource(context);
+	    	datasource.open();
+	    	datasource.deleteAllInventoryProducts();
+	    	datasource.insertProducts(products);
+			datasource.close();
+	    	Log.d(module, "products loaded into db");	
+	    	
 	}
 	
 	public void fetchMaterialInventory(String productId, final ProgressBar progressBar, final InventoryDetailsActivity activity) {

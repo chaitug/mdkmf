@@ -10,9 +10,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import in.vasista.inventory.InventoryListFragment;
 import in.vasista.vsales.catalog.Product;
 public class ProductsDataSource {
-  
+	public static final String module = ProductsDataSource.class.getName();	  
 	  // Database fields 
 	  private SQLiteDatabase database;
 	  private MySQLiteHelper dbHelper;
@@ -65,6 +67,31 @@ public class ProductsDataSource {
 		    values.put(MySQLiteHelper.COLUMN_PRODUCT_TRACK_SALES, product.isTrackSales() ? 1 :0);		    
 		    database.insert(MySQLiteHelper.TABLE_PRODUCT, null, values);    
 	  }
+	  
+	  public void insertProducts(List<Product> products) {    
+		  database.beginTransaction();
+		  try{
+			  for (int i = 0; i < products.size(); ++i) {
+				  Product product = products.get(i);
+				  ContentValues values = new ContentValues();
+				  values.put(MySQLiteHelper.COLUMN_PRODUCT_ID, product.getId());
+				  values.put(MySQLiteHelper.COLUMN_PRODUCT_NAME, product.getName());
+				  values.put(MySQLiteHelper.COLUMN_PRODUCT_DESC, product.getDescription());
+				  values.put(MySQLiteHelper.COLUMN_PRODUCT_SEQUENCE_NUM, product.getSequenceNum());		    		    		    
+				  values.put(MySQLiteHelper.COLUMN_PRODUCT_PRICE, product.getPrice());
+				  values.put(MySQLiteHelper.COLUMN_PRODUCT_MRP_PRICE, product.getMrpPrice());	
+				  values.put(MySQLiteHelper.COLUMN_PRODUCT_CATEGORY_ID, product.getProductCategoryId());		    
+				  values.put(MySQLiteHelper.COLUMN_PRODUCT_TRACK_INVENTORY, product.isTrackInventory() ? 1 :0);		    
+				  values.put(MySQLiteHelper.COLUMN_PRODUCT_TRACK_SALES, product.isTrackSales() ? 1 :0);		    
+				  database.insert(MySQLiteHelper.TABLE_PRODUCT, null, values);   
+			  }
+			  database.setTransactionSuccessful();
+	  	  } catch(Exception e){
+	  			Log.d(module, "products insert into db failed: " + e);	
+	  	  } finally{
+	  		 database.endTransaction();
+	  	  }
+	  }	  
 	  
 	  public void deleteAllProducts() {
 		  database.delete(MySQLiteHelper.TABLE_PRODUCT, null, null);

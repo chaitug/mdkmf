@@ -2,14 +2,14 @@ package in.vasista.vsales.catalog;
 
 public class Product {
 	String id;
-	String name;
-	String description;
+	String name = "";
+	String description = "";
 	float price;
 	float mrpPrice;	
 	int sequenceNum;
 
 
-	String productCategoryId;
+	String productCategoryId = "";
 	boolean trackInventory;
 	boolean trackSales;
 	
@@ -31,10 +31,10 @@ public class Product {
 		return id;
 	}
 	public String getName() {
-		return name;
+		return (name == null) ? "" : name;
 	}
 	public String getDescription() {
-		return description;
+		return (description == null) ? "" : description;
 	}
 	
 	public int getSequenceNum() {
@@ -50,7 +50,7 @@ public class Product {
 	}
 	
 	public String getProductCategoryId() {
-		return productCategoryId;
+		return (productCategoryId == null) ? "" : productCategoryId;
 	}
 
 	public boolean isTrackInventory() {

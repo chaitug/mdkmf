@@ -1,7 +1,6 @@
 package in.vasista.vsales.db;
 
 import in.vasista.vsales.facility.Facility;
-import in.vasista.vsales.order.Order;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,8 +12,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class FacilityDataSource {
+	public static final String module = FacilityDataSource.class.getName();	  
 	  
 	  // Database fields 
 	  private SQLiteDatabase database;
@@ -55,6 +56,32 @@ public class FacilityDataSource {
 		    
 		    database.insert(MySQLiteHelper.TABLE_FACILITY, null, values);
 	  }
+
+	  public void insertFacilities(List<Facility> facilities) {    
+		  database.beginTransaction();
+		  try{
+			  for (int i = 0; i < facilities.size(); ++i) {
+				  Facility facility = facilities.get(i);
+				    ContentValues values = new ContentValues();
+				    values.put(MySQLiteHelper.COLUMN_FACILITY_ID, facility.getId());
+				    values.put(MySQLiteHelper.COLUMN_FACILITY_NAME, facility.getName());
+				    values.put(MySQLiteHelper.COLUMN_FACILITY_CAT, facility.getCategory());	
+				    values.put(MySQLiteHelper.COLUMN_FACILITY_PHONE_NUM, facility.getOwnerPhone());	
+				    values.put(MySQLiteHelper.COLUMN_FACILITY_SALESREP, facility.getSalesRep());		    		    		    
+				    values.put(MySQLiteHelper.COLUMN_FACILITY_AM_ROUTE, facility.getAmRouteId());
+				    values.put(MySQLiteHelper.COLUMN_FACILITY_PM_ROUTE, facility.getPmRouteId());
+				    values.put(MySQLiteHelper.COLUMN_FACILITY_LATITUDE, facility.getLatitude());		    		    
+				    values.put(MySQLiteHelper.COLUMN_FACILITY_LONGITUDE, facility.getLongitude());		    		    
+				    
+				    database.insert(MySQLiteHelper.TABLE_FACILITY, null, values);  
+			  }
+			  database.setTransactionSuccessful();
+	  	  } catch(Exception e){
+	  			Log.d(module, "facilities insert into db failed: " + e);	
+	  	  } finally{
+	  		 database.endTransaction();
+	  	  }
+	  }	
 	  
 	  public void deleteAllFacilities() {
 		  database.delete(MySQLiteHelper.TABLE_FACILITY, null, null);

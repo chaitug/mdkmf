@@ -22,6 +22,7 @@ import in.vasista.vsales.sync.ServerSync;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
@@ -61,10 +62,36 @@ public class InventoryListFragment extends ListFragment {
 			button.setOnClickListener(new OnClickListener() { 
 				public void onClick(View view) {
 					//Toast.makeText( getActivity(), "Updating product catalog...", Toast.LENGTH_SHORT ).show();	    		    
-					ProgressBar progressBar = (ProgressBar) inventoryListFragment.getActivity().findViewById(R.id.productsRefreshProgress);
-					progressBar.setVisibility(View.VISIBLE);                       
-					ServerRestSync serverSync = new ServerRestSync(getActivity());
-					serverSync.fetchMaterials(progressBar, inventoryListFragment);					
+					final ProgressBar progressBar = (ProgressBar) inventoryListFragment.getActivity().findViewById(R.id.productsRefreshProgress);
+					//progressBar.setVisibility(View.VISIBLE);                       
+
+				    final class LoadMaterialsTask extends AsyncTask<String, Integer, String> {
+				        
+				        @Override
+				        protected void onPreExecute() {
+							progressBar.setVisibility(View.VISIBLE);                       
+				        }
+				        
+				        @Override
+				        protected String doInBackground(String... urls) {
+							ServerRestSync serverSync = new ServerRestSync(getActivity());
+							serverSync.fetchMaterials();
+							return "";
+				        }
+				        
+				        @Override
+				        protected void onProgressUpdate(Integer... values) {                                 // 4
+				        }
+				        
+				        @Override
+				        protected void onPostExecute(String result) {
+				        	notifyChange();				    		
+				        	progressBar.setVisibility(View.INVISIBLE);
+				        }
+				    }	
+				    LoadMaterialsTask task = new LoadMaterialsTask();
+				    task.execute("");
+					
 				}
 			});			
 			View headerView2 = getActivity().getLayoutInflater().inflate(R.layout.inventory_header, null);

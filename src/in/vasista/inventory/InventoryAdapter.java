@@ -8,7 +8,9 @@ import in.vasista.vsales.R;
 import in.vasista.vsales.catalog.Product;
 import in.vasista.vsales.employee.Employee;
 import in.vasista.vsales.facility.Facility;
+import in.vasista.vsales.facility.FacilityListFragment;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,8 @@ import android.widget.TextView;
 
 
 public class InventoryAdapter extends ArrayAdapter<Product> {
+	public static final String module = InventoryAdapter.class.getName();	
+	
 	  int resource;
 	  public ArrayList<Product> items = new ArrayList<Product>();;
 	    public ArrayList<Product> filtered = new ArrayList<Product>();;
@@ -103,7 +107,7 @@ public class InventoryAdapter extends ArrayAdapter<Product> {
 	                //synchronized (this)
 	                {
 	                    lItems.addAll(items);
-	                }
+	                }	                
 	                for(int i = 0, l = lItems.size(); i < l; i++)
 	                {
 	                	Product product = lItems.get(i); 

@@ -1,6 +1,7 @@
 package in.vasista.vsales.db;
 
 import in.vasista.vsales.employee.Employee;
+import in.vasista.vsales.facility.Facility;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,8 +14,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class EmployeeDataSource {
+	public static final String module = EmployeeDataSource.class.getName();	  
 	  
 	  // Database fields 
 	  private SQLiteDatabase database;
@@ -54,6 +57,29 @@ public class EmployeeDataSource {
 		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_JOIN_DATE, employee.getJoinDate().getTime());	    		    
 		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_WEEKLY_OFF, employee.getWeeklyOff());		    		    		    		    
 		    database.insert(MySQLiteHelper.TABLE_EMPLOYEE, null, values);
+	  }
+
+	  public void insertEmployees(List<Employee> employees) {    
+		  database.beginTransaction();
+		  try{
+			  for (int i = 0; i < employees.size(); ++i) {
+				  Employee employee = employees.get(i);
+				    ContentValues values = new ContentValues();
+				    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_ID, employee.getId());
+				    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_NAME, employee.getName());
+				    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_DEPT, employee.getDept());	
+				    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_POSITION, employee.getPosition());	
+				    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_PHONE_NUM, employee.getPhoneNum());		    		    		    
+				    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_JOIN_DATE, employee.getJoinDate().getTime());	    		    
+				    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_WEEKLY_OFF, employee.getWeeklyOff());		    		    		    		    
+				    database.insert(MySQLiteHelper.TABLE_EMPLOYEE, null, values);
+			  }
+			  database.setTransactionSuccessful();
+	  	  } catch(Exception e){
+	  			Log.d(module, "employees insert into db failed: " + e);	
+	  	  } finally{
+	  		 database.endTransaction();
+	  	  }
 	  }
 	  
 	  public void deleteAllEmployees() {
