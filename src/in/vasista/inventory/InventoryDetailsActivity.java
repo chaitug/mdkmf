@@ -10,6 +10,7 @@ import java.util.Date;
 import in.vasista.rest.ServerRestSync;
 import in.vasista.vsales.DashboardActivity;
 import in.vasista.vsales.R;
+import in.vasista.vsales.catalog.Product;
 import in.vasista.vsales.db.EmployeeDataSource;
 import in.vasista.vsales.employee.Employee;
 import in.vasista.vsales.sync.ServerSync;
@@ -20,6 +21,9 @@ import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import java.text.DateFormat;
+
+import com.google.gson.Gson;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -37,11 +41,19 @@ public class InventoryDetailsActivity extends DashboardActivity  {
 		// Inflate your view    
 		setContentView(R.layout.inventorydetails_layout);     		
 		Intent inventoryDetailsIntent= getIntent();
-		productId = inventoryDetailsIntent.getStringExtra("productId");					
+		Product product = (new Gson()).fromJson(inventoryDetailsIntent.getStringExtra("product"), Product.class);
+		if (product != null) { 
+			TextView materialCodeView = (TextView)findViewById(R.id.materialCode);
+			materialCodeView.setText(product.getName());
+			TextView materialNameView = (TextView)findViewById(R.id.materialName);
+			materialNameView.setText(product.getDescription());	 
+			TextView materialCategoryView = (TextView)findViewById(R.id.materialCategory);
+			materialCategoryView.setText(product.getProductCategoryId());	 			
+		}
 		ProgressBar progressBar = (ProgressBar) findViewById(R.id.inventoryDetailsProgress);
 		progressBar.setVisibility(View.VISIBLE);
 		ServerRestSync serverSync = new ServerRestSync(this);
-		serverSync.fetchMaterialInventory(productId, progressBar, this);	
+		serverSync.fetchMaterialInventory(product.getId(), progressBar, this);	
 	}
 	
 	 

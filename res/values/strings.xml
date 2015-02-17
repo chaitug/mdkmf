@@ -57,12 +57,14 @@
     <string name="feature6_intro">Feature 6 content goes here.</string>
 
     <string name="about_intro1">Milkosoft is the first cloud-based Dairy ERP built exclusively for the Indian Dairy 
-        Industry developed by Vasista Enterprise Solutions Pvt Ltd. All operations from procurement, production, marketing and finance are 
-        seamlessly integrated into Milkosoft.</string>
+        Industry developed by Vasista Enterprise Solutions Pvt Ltd. All operations from procurement, production, sales,
+        human resources, material management and finance are seamlessly integrated into Milkosoft.</string>
 
     <string name="about_intro2">This Android app provides easy access to all the daily Marketing 
         activities related to sales of Milk and Milk Products.  This app is also available for 
-        agents who can track their purchases, payments and even place indents right from their fingertips.</string>
+        agents who can track their purchases, payments and even place indents right from their fingertips. The HR 
+        module provides access to key HR data relevant to an employee. The inventory module provides a convenient way 
+        for users to track the latest stock position for all materials available in stores</string>
 
     
     <string name="search_intro">Content for the Search page goes here.</string>

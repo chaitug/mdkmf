@@ -16,6 +16,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class PayslipDataSource {
 	public static final String module = PayslipDataSource.class.getName();	
@@ -129,6 +130,8 @@ public class PayslipDataSource {
 	  }
 	  
 	  public void insertPayslipItems(String payrollHeaderId, List<PayslipItem> payslipItems) {
+		  database.beginTransaction();
+		  try{		  
 		  	for (int i=0; i < payslipItems.size(); ++i) {
 		  		PayslipItem payslipItem = payslipItems.get(i);
 
@@ -138,6 +141,12 @@ public class PayslipDataSource {
 		  		values.put(MySQLiteHelper.COLUMN_PAYROLL_ITEM_AMOUNT, payslipItem.getPayheadAmount());		    		  		
 		  		database.insert(MySQLiteHelper.TABLE_PAYROLL_HEADER_ITEM, null, values);
 		  	}
+			  database.setTransactionSuccessful();
+	  	  } catch(Exception e){
+	  			Log.d(module, "payslip items insert into db failed: " + e);	
+	  	  } finally{
+	  		 database.endTransaction();
+	  	  }		  	
 	  }	
 	  
 	  public List<PayslipItem> getPayslipItems(String payrollHeaderId) {

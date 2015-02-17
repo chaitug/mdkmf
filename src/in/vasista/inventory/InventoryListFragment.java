@@ -3,6 +3,8 @@ package in.vasista.inventory;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+
 import in.vasista.rest.ServerRestSync;
 import in.vasista.vsales.EmployeeDetailsActivity;
 import in.vasista.vsales.FacilityDetailsActivity;
@@ -106,7 +108,7 @@ public class InventoryListFragment extends ListFragment {
                     R.layout.inventorylist_item,
                     inventoryItems); 
 		}
-		setListAdapter(adapter);
+		setListAdapter(adapter); 
 		
 		listView.setClickable(true);
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -114,10 +116,10 @@ public class InventoryListFragment extends ListFragment {
 		  public void onItemClick(AdapterView<?> listView, View arg1, int position, long arg3) {
 
 		    Product product = (Product)listView.getItemAtPosition(position);
-			Toast.makeText( getActivity(), "Clicked item [" +product.getId() + "]", Toast.LENGTH_SHORT ).show();	
+			//Toast.makeText( getActivity(), "Clicked item [" +product.getId() + "]", Toast.LENGTH_SHORT ).show();	
             if (product != null) {
             	Intent inventoryItemsIntent = new Intent(getActivity(), InventoryDetailsActivity.class);
-            	inventoryItemsIntent.putExtra("productId", product.getId());
+            	inventoryItemsIntent.putExtra("product", (new Gson()).toJson(product));
             	startActivity(inventoryItemsIntent);
             }
 		  }
