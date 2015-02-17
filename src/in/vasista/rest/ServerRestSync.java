@@ -35,7 +35,7 @@ public class ServerRestSync {
 	public ServerRestSync(Context context) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		String urlStr = prefs.getString("serverURL", "");
-		urlStr = urlStr + "/rest";
+		urlStr = "https://" + urlStr + "/rest";
 		final String userName = prefs.getString("userName", "");
 		final String password = prefs.getString("password", "");
 		final String tenantId = prefs.getString("tenantId", "");		
@@ -50,7 +50,7 @@ public class ServerRestSync {
 			  }
 		};
 		restAdapter = new RestAdapter.Builder()
-	    	.setEndpoint("https://milkosoft.motherdairykmf.in/rest")
+	    	.setEndpoint(urlStr)
 	    	.setRequestInterceptor(requestInterceptor)
 	    	.build();
 		api = restAdapter.create(VbizAPI.class);

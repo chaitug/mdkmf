@@ -58,7 +58,7 @@ public class MainActivity extends DashboardActivity  {
     	String salesRepPerm = prefs.getString(SALESREP_DB_PERM, "N");
     	String hrPerm = prefs.getString(HR_DB_PERM, "N");   
     	String inventoryPerm = prefs.getString(INVENTORY_DB_PERM, "N");   
-inventoryPerm = "Y"; //::TODO::
+//inventoryPerm = "Y"; //::TODO::
     	prefEditor.putString("onlySalesDashboard", "N");
     	prefEditor.putString("onlyHRDashboard", "N");
     	prefEditor.commit();   		

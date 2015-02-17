@@ -28,7 +28,7 @@ public class XMLRPCApacheAdapter {
 	public XMLRPCApacheAdapter(Context context) throws MalformedURLException  {
 		this.context = context;		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		String urlStr = prefs.getString("serverURL", "");
+		String urlStr = "http://" + prefs.getString("serverURL", "") + ":58080/webtools/control/xmlrpc"; //::TODO::
 		String userName = prefs.getString("userName", "");
 		String password = prefs.getString("password", "");
 		String tenantId = prefs.getString("tenantId", "");		
