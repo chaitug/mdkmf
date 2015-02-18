@@ -45,7 +45,7 @@ protected void onCreate(Bundle savedInstanceState)
 {  
     super.onCreate(savedInstanceState);
 
-    setContentView (R.layout.activity_about);    
+    setContentView (R.layout.activity_about);     
     setTitleFromActivityLabel (R.id.title_text);  
     
     WebView view = ((WebView)findViewById(R.id.about_content));

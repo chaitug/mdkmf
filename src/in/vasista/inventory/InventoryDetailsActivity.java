@@ -42,7 +42,7 @@ public class InventoryDetailsActivity extends DashboardActivity  {
 		setContentView(R.layout.inventorydetails_layout);     		
 		Intent inventoryDetailsIntent= getIntent();
 		Product product = (new Gson()).fromJson(inventoryDetailsIntent.getStringExtra("product"), Product.class);
-		if (product != null) { 
+		if (product != null) {   
 			TextView materialCodeView = (TextView)findViewById(R.id.materialCode);
 			materialCodeView.setText(product.getName());
 			TextView materialNameView = (TextView)findViewById(R.id.materialName);

@@ -8,8 +8,6 @@
         android:id="@+id/orderTitle"
         style="@style/TitleBar" >
 
-
-
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
@@ -40,7 +38,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:background="@drawable/myemployeedetail_border"
         android:orientation="vertical" >
 

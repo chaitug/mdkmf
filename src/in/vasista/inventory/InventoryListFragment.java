@@ -117,7 +117,7 @@ public class InventoryListFragment extends ListFragment {
 
 		    Product product = (Product)listView.getItemAtPosition(position);
 			//Toast.makeText( getActivity(), "Clicked item [" +product.getId() + "]", Toast.LENGTH_SHORT ).show();	
-            if (product != null) {
+            if (product != null) {    
             	Intent inventoryItemsIntent = new Intent(getActivity(), InventoryDetailsActivity.class);
             	inventoryItemsIntent.putExtra("product", (new Gson()).toJson(product));
             	startActivity(inventoryItemsIntent);
