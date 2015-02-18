@@ -112,7 +112,7 @@ public class MainActivity extends DashboardActivity  {
     	String serverURL;
     	serverURL = prefs.getString("serverURL", "");	    	
     	if (serverURL.isEmpty()) {
-    		serverURL = "http://motherdairykmf.vasista.in:58080/webtools/control/xmlrpc";
+    		serverURL = "milkosoft.motherdairykmf.in";
     		prefEditor.putString("serverURL", serverURL);
     		prefEditor.commit();
     	}
