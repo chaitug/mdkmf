@@ -107,18 +107,26 @@ public class OrdersDataSource {
 	  }
 	  
 	  void insertOrderItems(long orderId, List<OrderItem> orderItems) {
-		  	for (int i=0; i < orderItems.size(); ++i) {
-		  		OrderItem orderItem = orderItems.get(i);
-		  		if (orderItem.getQty() == -1) {
-		  			continue;
+		  database.beginTransaction();
+		  try {		  
+			  for (int i=0; i < orderItems.size(); ++i) {
+				  OrderItem orderItem = orderItems.get(i);
+		  			if (orderItem.getQty() == -1) {
+		  				continue;
+		  			} 
+		  			ContentValues values = new ContentValues();
+		  			values.put(MySQLiteHelper.COLUMN_ORDER_ID, orderId);
+		  			values.put(MySQLiteHelper.COLUMN_PRODUCT_ID, orderItem.getProductId());		    		  		
+		  			values.put(MySQLiteHelper.COLUMN_ORDER_ITEM_QTY, orderItem.getQty());	
+		  			values.put(MySQLiteHelper.COLUMN_ORDER_ITEM_UNIT_PRICE, orderItem.getUnitPrice());		    		  		
+		  			database.insert(MySQLiteHelper.TABLE_ORDER_ITEM, null, values);
 		  		}
-		  		ContentValues values = new ContentValues();
-		  		values.put(MySQLiteHelper.COLUMN_ORDER_ID, orderId);
-		  		values.put(MySQLiteHelper.COLUMN_PRODUCT_ID, orderItem.getProductId());		    		  		
-		  		values.put(MySQLiteHelper.COLUMN_ORDER_ITEM_QTY, orderItem.getQty());	
-		  		values.put(MySQLiteHelper.COLUMN_ORDER_ITEM_UNIT_PRICE, orderItem.getUnitPrice());		    		  		
-		  		database.insert(MySQLiteHelper.TABLE_ORDER_ITEM, null, values);
-		  	}
+			  	database.setTransactionSuccessful();
+		  } catch(Exception e){
+	  			Log.d(module, "orderitems insert into db failed: " + e);	
+	  	  } finally{
+	  		 database.endTransaction();
+	  	  }		  	
 	  }
 	  
 	  // populate order for one day, one shift
