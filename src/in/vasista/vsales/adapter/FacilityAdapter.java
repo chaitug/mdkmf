@@ -110,11 +110,11 @@ public class FacilityAdapter extends ArrayAdapter<Facility> {
 	                for(int i = 0, l = lItems.size(); i < l; i++)
 	                {
 	                	Facility facility = lItems.get(i);
-    	                if (facility.getId().toLowerCase(Locale.getDefault()).contains(constraint) ||
-    	                		facility.getName().toLowerCase(Locale.getDefault()).contains(constraint)	) {
+    	                if (facility.getId().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault())) ||
+    	                		facility.getName().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault()))	) {
     	                	filt.add(facility); 
     	                }
-	                }
+	                }  
 	                result.count = filt.size();
 	                result.values = filt;
 	            }

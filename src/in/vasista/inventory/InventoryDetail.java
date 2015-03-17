@@ -12,6 +12,7 @@ public class InventoryDetail {
 	String supplierId;
 	String supplierName;
 	BigDecimal supplierRate;
+	String lastSupplyDate;	
 	BigDecimal inventoryCount;
 	BigDecimal inventoryCost;
 	public String getProductId() {
@@ -41,6 +42,9 @@ public class InventoryDetail {
 	public BigDecimal getSupplierRate() {
 		return supplierRate;
 	}
+	public String getLastSupplyDate() {
+		return lastSupplyDate;
+	}	
 	public BigDecimal getInventoryCount() {
 		return inventoryCount;
 	}

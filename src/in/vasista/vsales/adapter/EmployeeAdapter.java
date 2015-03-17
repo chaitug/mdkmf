@@ -106,9 +106,9 @@ public class EmployeeAdapter extends ArrayAdapter<Employee> {
 	                for(int i = 0, l = lItems.size(); i < l; i++)
 	                {
 	                	Employee employee = lItems.get(i); 
-    	                if (employee.getName().toLowerCase(Locale.getDefault()).contains(constraint) ||
-    	                		employee.getDept().toLowerCase(Locale.getDefault()).contains(constraint) ||
-    	                		employee.getPosition().toLowerCase(Locale.getDefault()).contains(constraint)) {
+    	                if (employee.getName().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault())) ||
+    	                		employee.getDept().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault())) ||
+    	                		employee.getPosition().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault()))) {
     	                	filt.add(employee); 
     	                }
 	                }

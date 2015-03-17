@@ -165,28 +165,7 @@
                     android:textStyle="bold" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp" >
 
-                <TextView
-                    android:id="@+id/uomLabel"
-                    style="@style/TextLabel"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:text="UOM: " />
-
-                <TextView
-                    android:id="@+id/uom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_toRightOf="@+id/uomLabel"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
 
             <View
                 android:layout_width="fill_parent"
@@ -294,6 +273,29 @@
                     android:textSize="12sp"
                     android:textStyle="bold" />
             </RelativeLayout>
+            
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/lastSupplyDateLabel"
+                    style="@style/TextLabel"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:text="Last Supply Date: " />
+
+                <TextView
+                    android:id="@+id/lastSupplyDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:layout_toRightOf="@+id/lastSupplyDateLabel"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>            
 
             <View
                 android:layout_width="fill_parent"

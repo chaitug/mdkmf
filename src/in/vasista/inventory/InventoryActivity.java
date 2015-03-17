@@ -22,7 +22,7 @@ public class InventoryActivity extends DashboardActivity
  * @param savedInstanceState Bundle
  */
 
-protected void onCreate(Bundle savedInstanceState) 
+protected void onCreate(Bundle savedInstanceState)  
 {
     super.onCreate(savedInstanceState);
     //setContentView (R.layout.activity_f5);

@@ -111,9 +111,9 @@ public class InventoryAdapter extends ArrayAdapter<Product> {
 	                for(int i = 0, l = lItems.size(); i < l; i++)
 	                {
 	                	Product product = lItems.get(i); 
-    	                if (product.getName().toLowerCase(Locale.getDefault()).contains(constraint) ||
-    	                		product.getDescription().toLowerCase(Locale.getDefault()).contains(constraint) ||
-    	                		product.getProductCategoryId().toLowerCase(Locale.getDefault()).contains(constraint)) {
+    	                if (product.getName().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault())) ||
+    	                		product.getDescription().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault())) ||
+    	                		product.getProductCategoryId().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault()))) {
     	                	filt.add(product); 
     	                }
 	                }
