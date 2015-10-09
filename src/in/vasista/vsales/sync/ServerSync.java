@@ -353,8 +353,8 @@ public class ServerSync {
 					if (result != null) { 
 				    	Map boothDues = (Map)((Map)result).get("boothDues");
 				    	Map boothTotalDues = (Map)((Map)result).get("boothTotalDues");				    	
-				    	Log.d(module, "boothDues.size() = " + boothDues.size());
-				    	Log.d(module, "boothTotalDues.size() = " + boothTotalDues.size());					    	
+				    	Log.d(module, "boothDues.size() = " + boothDues.size() + ";boothDues=" + boothDues);
+				    	Log.d(module, "boothTotalDues.size() = " + boothTotalDues.size() + ";boothTotalDues=" + boothTotalDues);					    	
 				    	if (activity != null) {
 					    	//Log.d(module, "calling listFragment notifyChange..." + listFragment.getClass().getName());						    		
 				    		activity.updateDues(boothDues, boothTotalDues);

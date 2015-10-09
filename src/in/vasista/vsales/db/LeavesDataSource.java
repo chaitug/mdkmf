@@ -18,6 +18,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class LeavesDataSource {
 	public static final String module = LeavesDataSource.class.getName();	
@@ -86,23 +87,37 @@ public class LeavesDataSource {
 	  }
 	  
 	  public void insertLeaves(String employeeId, Object[] leaves) {
-		  SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd");  		    	  
-		  for (int i = 0; i < leaves.length; ++i) {
-			  Map leaveMap = (Map)leaves[i];
-			  if (leaveMap != null) {
-				  String leaveType = (String)leaveMap.get("leaveTypeId");
-				  String leaveStatus = (String)leaveMap.get("leaveStatus");	
-				  try  {
-					  Date fromDate = format.parse((String)leaveMap.get("leaveFromDate"));
-					  Date thruDate = format.parse((String)leaveMap.get("leaveThruDate"));
-					  Leave leave = new Leave(employeeId, leaveType, leaveStatus,
-						  fromDate, thruDate);
-					  insertLeave(leave);
-				  } catch (ParseException e) {  
-					  // do nothing for now
-				  }	
+		  SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+		  database.beginTransaction();
+		  try{		  
+			  for (int i = 0; i < leaves.length; ++i) {
+				  Map leaveMap = (Map)leaves[i];
+				  if (leaveMap != null) {
+					  String leaveType = (String)leaveMap.get("leaveTypeId");
+					  String leaveStatus = (String)leaveMap.get("leaveStatus");	
+					  try  {
+						  Date fromDate = format.parse((String)leaveMap.get("leaveFromDate"));
+						  Date thruDate = format.parse((String)leaveMap.get("leaveThruDate"));
+						  Leave leave = new Leave(employeeId, leaveType, leaveStatus,
+								  fromDate, thruDate);
+						  ContentValues values = new ContentValues();
+						  values.put(MySQLiteHelper.COLUMN_EMPLOYEE_ID, leave.getEmployeeId());
+						  values.put(MySQLiteHelper.COLUMN_EMPLOYEE_LEAVE_TYPE_ID, leave.getLeaveTypeId());		    		    
+						  values.put(MySQLiteHelper.COLUMN_EMPLOYEE_LEAVE_STATUS, leave.getLeaveStatus());		    		    
+						  values.put(MySQLiteHelper.COLUMN_EMPLOYEE_LEAVE_FROM_DATE, leave.getFromDate().getTime());		    		    
+						  values.put(MySQLiteHelper.COLUMN_EMPLOYEE_LEAVE_THRU_DATE, leave.getThruDate().getTime());		    		    
+						  database.insert(MySQLiteHelper.TABLE_EMPLOYEE_LEAVE, null, values);
+					  } catch (ParseException e) {  
+						  // do nothing for now
+					  }	
+				  }
 			  }
-		  }
+			  database.setTransactionSuccessful();
+	  	  } catch(Exception e){
+	  			Log.d(module, "leaves insert into db failed: " + e);	
+	  	  } finally{
+	  		 database.endTransaction();
+	  	  }
 		   		  
 	  }	  
 }

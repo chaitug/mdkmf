@@ -97,13 +97,35 @@ public class PayslipItemsListFragment extends ListFragment{
 	
 	void updatePayslipHeaderViewInternal(Payslip payslip) {
 		float netAmount = payslip.getNetAmount();
-		String netAmountStr = "Net Amount: Rs " + netAmount;
+		String netAmountStr = "Net: Rs " + netAmount;
 		String payrollPeriod = payslip.getPayrollPeriod();
 
 		TextView netAmountView = (TextView)listView.getRootView().findViewById(R.id.payslipNetAmount);
 		if (netAmountView != null) {
 			netAmountView.setText(netAmountStr);   
 		} 
+		float benefitsAmount = 0;
+		float deductionsAmount = 0;  
+		for (int i = 0; i < payslipItems.size(); ++ i) {
+			PayslipItem item = payslipItems.get(i);
+			if (item.getPayheadAmount() < 0) {
+				deductionsAmount += item.getPayheadAmount(); 
+			}
+			else { 
+				benefitsAmount += item.getPayheadAmount();				
+			}
+		}
+		String earningStr = "Earnings: Rs " + benefitsAmount;
+		TextView earningsView = (TextView)listView.getRootView().findViewById(R.id.payslipEarnings);
+		if (earningsView != null) {
+			earningsView.setText(earningStr);   
+		} 
+		String deductionsStr = "Deductions: Rs " + -deductionsAmount;
+		TextView deductionsView = (TextView)listView.getRootView().findViewById(R.id.payslipDeductions);
+		if (deductionsView != null) {
+			deductionsView.setText(deductionsStr);   
+		}		
+		Log.d(module, "Earnings=" + benefitsAmount + "; Deductions=" + deductionsAmount);	 
 
 /*		TextView payrollPeriodView = (TextView)listView.getRootView().findViewById(R.id.payslipPeriod);	
 		if (payrollPeriodView != null) {

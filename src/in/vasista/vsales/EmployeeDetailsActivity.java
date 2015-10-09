@@ -68,11 +68,11 @@ public class EmployeeDetailsActivity extends DashboardActivity  {
 		ServerSync serverSync = new ServerSync(this);
 		serverSync.fetchEmployeeLastPunch(employeeId, this);			
 		// add PhoneStateListener for monitoring
-		MyPhoneListener phoneListener = new MyPhoneListener();
-		TelephonyManager telephonyManager = 
-			(TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+//		MyPhoneListener phoneListener = new MyPhoneListener();
+//		TelephonyManager telephonyManager = 
+//			(TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
 		// receive notifications of telephony state changes 
-		telephonyManager.listen(phoneListener,PhoneStateListener.LISTEN_CALL_STATE);
+//		telephonyManager.listen(phoneListener,PhoneStateListener.LISTEN_CALL_STATE);
 				
 		callBtn.setOnClickListener(new OnClickListener() {
 			
@@ -80,8 +80,8 @@ public class EmployeeDetailsActivity extends DashboardActivity  {
 			public void onClick(View v) {
 				try {
 					// set the data
-					String uri = "tel:"+employee.getPhoneNum();
-					Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse(uri));
+					String uri = "tel:"+ "+91" + employee.getPhoneNum();
+					Intent callIntent = new Intent(Intent.ACTION_DIAL, Uri.parse(uri));
 					
 					startActivity(callIntent);
 				}catch(Exception e) {

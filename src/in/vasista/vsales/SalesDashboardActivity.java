@@ -386,7 +386,7 @@ Log.d(module, "onlySalesDashboard equals " + onlySalesDashboard);
     }
     
     public void updateDues(Map boothDues, Map boothTotalDues) {
-    	if (boothDues != null && boothDues.get("amount") != null) {
+    	if (boothDues != null && boothDues.get("amount") != null) {  
     		double currentDues = (Double)boothDues.get("amount");
     		TextView amountView = (TextView)findViewById(R.id.currentDues);
     		amountView.setText(String.format("Rs %.2f", currentDues));
@@ -395,6 +395,11 @@ Log.d(module, "onlySalesDashboard equals " + onlySalesDashboard);
     		double totalDues = (Double)boothTotalDues.get("totalDueAmount");
     		TextView amountView = (TextView)findViewById(R.id.totalDues);
     		amountView.setText(String.format("Rs %.2f", totalDues));
-    	}	    
+    	}	
+    	if (boothTotalDues != null && boothTotalDues.get("fdrAmount") != null) { 
+    		double fdrAmount = (Double)boothTotalDues.get("fdrAmount");
+    		TextView amountView = (TextView)findViewById(R.id.fdrAmount);
+    		amountView.setText(String.format("Rs %.2f", fdrAmount));  
+    	}	    	
     }
 }
