@@ -149,7 +149,7 @@ public class OrdersDataSource {
 	    	  String productId = (String)itemEntry.getKey();
 	    	  Map productItem = (Map)itemEntry.getValue();
 	    	  int quantity = ((BigDecimal)productItem.get("packetQuantity")).intValue();
-	    	  double amount = ((BigDecimal)productItem.get("totalRevenue")).intValue();	
+	    	  double amount = ((BigDecimal)productItem.get("totalRevenue")).doubleValue();	       
 	    	  orderTotal += amount;
 Log.d(module, "Order Item: [" + orderDateStr + ";" + productId + ";" + quantity + ";" + amount + "]");				    	  
 	    	  Product product = (Product)productsMap.get(productId);

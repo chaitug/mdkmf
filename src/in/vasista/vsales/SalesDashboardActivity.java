@@ -42,7 +42,7 @@ public class SalesDashboardActivity extends DashboardActivity  {
     private static final int SHOW_PREFERENCES = 1;
     
     public static final String RETAILER_DB_PERM = "MOB_RTLR_DB_VIEW";    
-    public static final String SALESREP_DB_PERM = "MOB_SREP_DB_VIEW";
+    public static final String SALESREP_DB_PERM = "MOB_SREP_DB_VIEW"; 
     
 	private Map facilityMap = new HashMap<String, Facility> ();
     
@@ -53,7 +53,7 @@ public class SalesDashboardActivity extends DashboardActivity  {
     	facilityDS.close(); 
 		  for (int i = 0; i < facilityList.size(); ++i) {
 			  Facility facility = facilityList.get(i);
-			  facilityMap.put(facility.getId(), facility);
+			  facilityMap.put(facility.getId(), facility);   
 		  }
 		  
 	    final String[] retailers = new String[facilityList.size()];

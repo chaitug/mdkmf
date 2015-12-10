@@ -65,9 +65,9 @@ public class ServerSync {
 	private Context context;
 	//private MySQLiteHelper dbHelper;
 	
-	public ServerSync(Context context) {
+	public ServerSync(Context context) { 
 		this.context = context; 
-	    //dbHelper = new MySQLiteHelper(context); 		
+	    //dbHelper = new MySQLiteHelper(context); 	 	
 	}
 	
 	public void uploadIndent(final Indent indent, ProgressBar progressBar, final IndentItemsListFragment listFragment) {

@@ -6,7 +6,7 @@
   <TextView
     android:id="@+id/orderitemRowProductName"
     android:layout_width="0dp"
-    android:layout_weight="1"    
+    android:layout_weight="1.5"    
     android:padding="5dp"  
     android:textSize="15sp" 
     android:textStyle="bold"        
@@ -34,7 +34,7 @@
     android:padding="5dp" 
     android:textSize="15sp" 
     android:textStyle="bold"      
-    android:layout_marginRight="20dp"
+    android:layout_marginRight="10dp"
     android:layout_height="wrap_content" 
     android:scrollbars="vertical"
     android:fadingEdge="vertical"
