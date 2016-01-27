@@ -1,8 +1,13 @@
 package in.vasista.vsales.db;
 
-import in.vasista.hr.payslip.Payslip;
-import in.vasista.hr.payslip.PayslipItem;
-
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -11,12 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+import in.vasista.hr.payslip.Payslip;
+import in.vasista.hr.payslip.PayslipItem;
 
 public class PayslipDataSource {
 	public static final String module = PayslipDataSource.class.getName();	
@@ -75,7 +76,7 @@ public class PayslipDataSource {
 		    return payslip;  
 	  }
 	  
-	  public List<Payslip> getAllPayslips() {
+	  public List<Payslip> getAllPayslips(ProgressBar progressBar) {
 	    List<Payslip> payslips = new ArrayList<Payslip>();
 	    String orderBy =  MySQLiteHelper.COLUMN_PAYROLL_DATE + " DESC";
 	    Cursor cursor = database.query(MySQLiteHelper.TABLE_PAYROLL_HEADER,
@@ -89,6 +90,10 @@ public class PayslipDataSource {
 	    }
 	    // Make sure to close the cursor
 	    cursor.close();
+		  if (progressBar != null) {
+			  progressBar.setVisibility(View.INVISIBLE);
+			  progressBar.setIndeterminate(false);
+		  }
 	    return payslips;
 	  }
 

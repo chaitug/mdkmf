@@ -1,42 +1,22 @@
 package in.vasista.vsales;
 
 
-import in.vasista.rest.ServerRestSync;
-import in.vasista.vsales.adapter.FacilityAutoAdapter;
-import in.vasista.vsales.db.FacilityDataSource;
-import in.vasista.vsales.db.IndentsDataSource;
-import in.vasista.vsales.db.OrdersDataSource;
-import in.vasista.vsales.db.PaymentsDataSource;
-import in.vasista.vsales.db.ProductsDataSource;
-import in.vasista.vsales.facility.Facility;
-import in.vasista.vsales.preference.FragmentPreferences;
-import in.vasista.vsales.sync.ServerSync;
-
-import java.util.HashMap; 
-import java.util.List;
-import java.util.Map;
-       
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
-public class MainActivity extends DashboardActivity  {   
+import java.util.HashMap;
+import java.util.Map;
+
+import in.vasista.vsales.facility.Facility;
+import in.vasista.vsales.preference.FragmentPreferences;
+
+public class MainActivity extends DashboardAppCompatActivity  {   
 	public static final String module = MainActivity.class.getName();
 
     static final private int MENU_PREFERENCES = Menu.FIRST+1;
@@ -78,7 +58,7 @@ public class MainActivity extends DashboardActivity  {
     	    return;
     	}   
     	
-	    setContentView(R.layout.activity_home);
+	    setContentChildView(R.layout.activity_home);
     	if (salesRepPerm.equals("N") && retailerPerm.equals("N")) {    		
     		Button button = (Button)findViewById(R.id.home_btn_sales);
     		button.setVisibility(View.GONE); 
@@ -169,7 +149,7 @@ public class MainActivity extends DashboardActivity  {
 
 	protected void onRestart ()
 	{
-	   super.onRestart ();
+	   super.onRestart();
 	}
 
 	/**
@@ -182,7 +162,7 @@ public class MainActivity extends DashboardActivity  {
 
 	protected void onResume ()
 	{
-	   super.onResume ();
+	   super.onResume();
 	}
 
 	/**
@@ -194,7 +174,7 @@ public class MainActivity extends DashboardActivity  {
 
 	protected void onStart ()
 	{
-	   super.onStart ();
+	   super.onStart();
 	}
 
 	/**
@@ -210,28 +190,31 @@ public class MainActivity extends DashboardActivity  {
  
 	protected void onStop () 
 	{
-	   super.onStop ();  
+	   super.onStop();
 	}
 
-/*    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.main, menu);
-        
-        menu.add(0, MENU_PREFERENCES, Menu.NONE, R.string.menu_preferences);        
-        return true; 
-    }
-    
-    public boolean onOptionsItemSelected(MenuItem item){
-        super.onOptionsItemSelected(item);
-        switch (item.getItemId()) {
-          case (MENU_PREFERENCES): {
-            Intent i = new Intent(this, FragmentPreferences.class);
-            startActivityForResult(i, SHOW_PREFERENCES);
-            return true;
-          }
-        }
-        return false;
-    } */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		menu.removeItem(R.id.homeSearch);
+		menu.removeItem(R.id.action_refresh);
+		return super.onCreateOptionsMenu(menu);
+	}
+	public boolean onOptionsItemSelected(MenuItem item){
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+			case R.id.action_settings:
+				Intent i = new Intent(this.getBaseContext(), FragmentPreferences.class);
+				startActivityForResult(i, SHOW_PREFERENCES);
+				return true;
+			case R.id.action_about:
+				onClickAbout();
+				return true;
+
+		}
+		return false;
+	}
+
+  
     
 }

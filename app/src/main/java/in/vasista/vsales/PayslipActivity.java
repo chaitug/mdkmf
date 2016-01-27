@@ -18,6 +18,9 @@ package in.vasista.vsales;
 
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.view.Gravity;
+import android.widget.ProgressBar;
 
 /**
  * This is the activity for feature 1 in the dashboard application.
@@ -25,7 +28,7 @@ import android.os.Bundle;
  *
  */
 
-public class PayslipActivity extends DashboardActivity 
+public class PayslipActivity extends DashboardAppCompatActivity 
 {
 
 /**
@@ -45,7 +48,19 @@ protected void onCreate(Bundle savedInstanceState)
     super.onCreate(savedInstanceState);
     //setContentView (R.layout.activity_f1);
     //setTitleFromActivityLabel (R.id.title_text);
-	setContentView(R.layout.payslip_layout);    
+	setContentChildView(R.layout.payslip_layout);
+	setPageTitle(R.string.title_employeeplayslip);
+
+	ProgressBar progressBar = new ProgressBar(this);
+	progressBar.setId(R.id.progress_sync);
+	//progressBar.setVisibility(View.GONE);
+	progressBar.setIndeterminate(true);
+	getSupportActionBar().setDisplayShowCustomEnabled(true);
+	ActionBar.LayoutParams params = new ActionBar.LayoutParams(
+			ActionBar.LayoutParams.WRAP_CONTENT,
+			ActionBar.LayoutParams.WRAP_CONTENT,
+			Gravity.RIGHT);
+	getSupportActionBar().setCustomView(progressBar, params);
 }
     
 } // end class

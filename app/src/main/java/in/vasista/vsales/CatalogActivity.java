@@ -16,15 +16,12 @@
 
 package in.vasista.vsales;
 
-import in.vasista.vsales.R;
-import in.vasista.vsales.catalog.CatalogListFragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTransaction;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ProgressBar;
+
+import in.vasista.vsales.catalog.CatalogListFragment;
 
 /**
  * This is the activity for feature 4 in the dashboard application.
@@ -32,7 +29,7 @@ import android.support.v4.app.FragmentTransaction;
  *
  */
 
-public class CatalogActivity extends DashboardActivity 
+public class CatalogActivity extends DashboardAppCompatActivity
 {
 
 /**
@@ -44,17 +41,36 @@ public class CatalogActivity extends DashboardActivity
  * 
  * Always followed by onStart().
  *
- * @param savedInstanceState Bundle
  */
-
+private MenuItem menuItem;
+    ProgressBar progressBar;
 protected void onCreate(Bundle savedInstanceState) 
 {
     super.onCreate(savedInstanceState);
     //setContentView (R.layout.activity_f4);
     //setTitleFromActivityLabel (R.id.title_text);
-	setContentView(R.layout.catalog_layout);
-
+	setContentChildView(R.layout.catalog_layout);
+    setSalesDashboardTitle(R.string.title_feature4);
 
 }
-    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.refresh, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                menuItem = item;
+                menuItem.setActionView(R.layout.progressbar);
+                progressBar=(ProgressBar)menuItem.getActionView().findViewById(R.id.menuitem_progress);
+                android.app.FragmentManager fm = getFragmentManager();
+                CatalogListFragment catalogListFragment = (CatalogListFragment) fm.findFragmentById(R.id.catalog_list_fragment);
+                catalogListFragment.syncCatalog(menuItem);
+                return true;
+
+        }
+        return false;
+    }
 } // end class

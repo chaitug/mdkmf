@@ -17,20 +17,20 @@
 package in.vasista.vsales;
 
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
-
-import in.vasista.hr.leave.LeaveListFragment;
-import in.vasista.vsales.db.EmployeeDataSource;
-import in.vasista.vsales.employee.Employee;
-import in.vasista.vsales.indent.IndentListFragment;
 import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import in.vasista.hr.leave.LeaveListFragment;
+import in.vasista.vsales.db.EmployeeDataSource;
+import in.vasista.vsales.employee.Employee;
 
 /**
  * This is the activity for feature 1 in the dashboard application.
@@ -38,7 +38,7 @@ import android.widget.TextView;
  *
  */
 
-public class LeaveActivity extends DashboardActivity 
+public class LeaveActivity extends DashboardAppCompatActivity
 {
 
 /**
@@ -52,13 +52,14 @@ public class LeaveActivity extends DashboardActivity
  *
  * @param savedInstanceState Bundle
  */
-
+MenuItem menuItem;
 protected void onCreate(Bundle savedInstanceState) 
 {
     super.onCreate(savedInstanceState);
     //setContentView (R.layout.activity_f1);
     //setTitleFromActivityLabel (R.id.title_text); 
-	setContentView(R.layout.leave_layout);  
+	setContentChildView(R.layout.leave_layout);
+	setPageTitle(R.string.title_employeeleave);
 	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this); 
 	String employeeId = "";		
 	prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -99,4 +100,24 @@ public void updateLeaveDetails(Employee employee) {
 	leaveListFragment.notifyChange();
 
 }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.refresh, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	public boolean onOptionsItemSelected(MenuItem item){
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+			case R.id.action_refresh:
+				menuItem = item;
+				menuItem.setActionView(R.layout.progressbar);
+				//ProgressBar progressBar=(ProgressBar)menuItem.getActionView().findViewById(R.id.menuitem_progress);
+				android.app.FragmentManager fm = getFragmentManager();
+				LeaveListFragment leaveListFragment = (LeaveListFragment) fm.findFragmentById(R.id.leave_list_fragment);
+				leaveListFragment.syncLeaves(menuItem);
+				return true;
+
+		}
+		return false;
+	}
 } // end class

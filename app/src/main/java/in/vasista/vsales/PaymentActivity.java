@@ -16,8 +16,13 @@
 
 package in.vasista.vsales;
 
-import in.vasista.vsales.R;
+import android.app.FragmentManager;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ProgressBar;
+
+import in.vasista.vsales.payment.PaymentListFragment;
 
 /**
  * This is the activity for feature 3 in the dashboard application.
@@ -25,7 +30,7 @@ import android.os.Bundle;
  *
  */
 
-public class PaymentActivity extends DashboardActivity 
+public class PaymentActivity extends DashboardAppCompatActivity
 {
 
 /**
@@ -37,16 +42,37 @@ public class PaymentActivity extends DashboardActivity
  * 
  * Always followed by onStart().
  *
- * @param savedInstanceState Bundle
  */
-
+private MenuItem menuItem;
+    ProgressBar progressBar;
 protected void onCreate(Bundle savedInstanceState) 
 {
     super.onCreate(savedInstanceState);
     //setContentView (R.layout.activity_f3);
     //setTitleFromActivityLabel (R.id.title_text);
-	setContentView(R.layout.payment_layout);
+//	setContentView(R.layout.payment_layout);
+    setContentChildView(R.layout.payment_layout);
+    setSalesDashboardTitle(R.string.title_feature3);
 
 }
-    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.refresh, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                menuItem = item;
+                menuItem.setActionView(R.layout.progressbar);
+                progressBar=(ProgressBar)menuItem.getActionView().findViewById(R.id.menuitem_progress);
+                FragmentManager fm = getFragmentManager();
+                PaymentListFragment paymentListFragment = (PaymentListFragment) fm.findFragmentById(R.id.payment_list_fragment);
+                paymentListFragment.syncPayments(menuItem);
+                return true;
+
+        }
+        return false;
+    }
 } // end class

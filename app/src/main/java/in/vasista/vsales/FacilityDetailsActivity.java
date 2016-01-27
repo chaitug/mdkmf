@@ -1,22 +1,6 @@
 package in.vasista.vsales;
 
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-import com.google.android.gms.maps.SupportMapFragment;
-
-
-import in.vasista.vsales.db.FacilityDataSource;
-import in.vasista.vsales.facility.Facility;
-
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -30,7 +14,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FacilityDetailsActivity extends DashboardActivity {
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import in.vasista.vsales.db.FacilityDataSource;
+import in.vasista.vsales.facility.Facility;
+
+public class FacilityDetailsActivity extends DashboardAppCompatActivity {
 
 	MapView mapView;
 	GoogleMap map;
@@ -39,7 +34,8 @@ public class FacilityDetailsActivity extends DashboardActivity {
 		super.onCreate(savedInstanceState);
 
 		// Inflate your view 
-		setContentView(R.layout.facilitydetails_layout);
+		setContentChildView(R.layout.facilitydetails_layout);
+		actionBarHomeEnabled();
 
 		Intent facilityDetailsIntent = getIntent();
 		String facilityId = "";
@@ -52,8 +48,7 @@ public class FacilityDetailsActivity extends DashboardActivity {
 		if (facility == null) {
 			return;
 		}
-		TextView retailerHeaderView = (TextView) findViewById(R.id.retailerIdHeader);
-		retailerHeaderView.setText(facilityId + " Details");
+		setTitle(facilityId + " Details");
 		TextView idView = (TextView) findViewById(R.id.facilityId);
 		idView.setText(facilityId);
 		TextView nameView = (TextView) findViewById(R.id.facilityName);
@@ -73,13 +68,12 @@ public class FacilityDetailsActivity extends DashboardActivity {
 		if (map != null) {
 			String latStr = facility.getLatitude();
 			String longStr = facility.getLongitude();
-			double latitude = 13.095042; // default MD coordinates
-			double longitude = 77.573120;
+			double latitude = 12.914133; // default MD coordinates
+			double longitude = 74.855949;
 			if (latStr != null && !latStr.isEmpty() && longStr != null && !longStr.isEmpty()) {
 				latitude = Double.valueOf(latStr);
 				longitude = Double.valueOf(longStr);
-				map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude))
-						.title(facilityId)).showInfoWindow();
+
 			}
 			//map.getUiSettings().setMyLocationButtonEnabled(false);
 			if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
@@ -96,6 +90,8 @@ public class FacilityDetailsActivity extends DashboardActivity {
 			MapsInitializer.initialize(this);
 			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 12);
 			map.animateCamera(cameraUpdate);
+			map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude))
+					.title(facilityId)).showInfoWindow();
 		}
 		
 		Button callBtn = (Button) findViewById(R.id.callButton);

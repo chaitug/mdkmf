@@ -16,20 +16,11 @@
 
 package in.vasista.vsales;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import in.vasista.vsales.R;
-import in.vasista.vsales.db.IndentsDataSource;
-import in.vasista.vsales.indent.Indent;
-import in.vasista.vsales.indent.IndentListFragment;
-import in.vasista.vsales.sync.ServerSync;
-import android.app.FragmentManager;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import in.vasista.vsales.employee.EmployeeListFragment;
 
 /**
  * This is the activity for feature 6 in the dashboard application.
@@ -37,7 +28,7 @@ import android.widget.ProgressBar;
  *
  */
 
-public class EmployeeActivity extends DashboardActivity 
+public class EmployeeActivity extends DashboardAppCompatActivity
 {
 
 /**
@@ -51,13 +42,14 @@ public class EmployeeActivity extends DashboardActivity
  *
  * @param savedInstanceState Bundle
  */
-
+MenuItem menuItem;
 protected void onCreate(Bundle savedInstanceState) 
 {
     super.onCreate(savedInstanceState);
     //setContentView (R.layout.activity_f6);
     //setTitleFromActivityLabel (R.id.title_text);
-	setContentView(R.layout.employee_layout);   
+	setContentChildView(R.layout.employee_layout);
+	setPageTitle(R.string.title_employees);
 }
 
 /**  
@@ -79,4 +71,24 @@ protected void onResume ()
 	}	
 	*/
 }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.refresh, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	public boolean onOptionsItemSelected(MenuItem item){
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+			case R.id.action_refresh:
+				menuItem = item;
+				menuItem.setActionView(R.layout.progressbar);
+				//ProgressBar progressBar=(ProgressBar)menuItem.getActionView().findViewById(R.id.menuitem_progress);
+				android.app.FragmentManager fm = getFragmentManager();
+				EmployeeListFragment employeeListFragment = (EmployeeListFragment) fm.findFragmentById(R.id.facility_list_fragment);
+				employeeListFragment.syncEmployees(menuItem);
+				return true;
+
+		}
+		return false;
+	}
 } // end class

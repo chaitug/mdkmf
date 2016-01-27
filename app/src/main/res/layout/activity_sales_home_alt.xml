@@ -3,48 +3,16 @@
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
     android:fillViewport="true" >
 
     <LinearLayout
         android:id="@+id/db1_root"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <LinearLayout style="@style/TitleBar" >
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:gravity="bottom" >
-
-        <ImageButton
-            android:id="@+id/homeButton"                        
-            style="@style/TitleBarAction"
-            android:contentDescription="@string/description_home"
-            android:onClick="onClickHome"
-            android:src="@drawable/title_home" />
-
-        <ImageView style="@style/TitleBarSeparator" 
-            android:layout_toRightOf="@+id/homeButton"/>
-                    
-            <TextView
-                android:id="@+id/salesDBHeader"
-                style="@style/TitleBarText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Sales Dashboard"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-                <ImageButton
-                    android:id="@+id/homeSearch"
-                    style="@style/TitleBarAction"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/title_search2" />
-            </RelativeLayout>
-        </LinearLayout>
+        
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -185,6 +153,7 @@
                 <Button
                     android:id="@+id/home_btn_indents"
                     style="@style/HomeButton"
+                    android:textStyle="normal"
                     android:drawableTop="@drawable/indent_button"
                     android:onClick="onClickFeature"
                     android:text="@string/title_feature1" />

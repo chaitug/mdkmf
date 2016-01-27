@@ -1,37 +1,28 @@
 package in.vasista.vsales.facility;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import in.vasista.vsales.FacilityDetailsActivity;
-import in.vasista.vsales.SalesDashboardActivity;
-import in.vasista.vsales.OrderItemsListActivity;
-import in.vasista.vsales.R;
-import in.vasista.vsales.adapter.FacilityAdapter;
-import in.vasista.vsales.db.FacilityDataSource;
-import in.vasista.vsales.order.Order;
-import in.vasista.vsales.sync.ServerSync;
 import android.app.ListFragment;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.List;
+
+import in.vasista.vsales.FacilityDetailsActivity;
+import in.vasista.vsales.R;
+import in.vasista.vsales.adapter.FacilityAdapter;
+import in.vasista.vsales.db.FacilityDataSource;
+import in.vasista.vsales.sync.ServerSync;
 
 
 public class FacilityListFragment extends ListFragment {
@@ -39,27 +30,18 @@ public class FacilityListFragment extends ListFragment {
 	
 	FacilityAdapter adapter;
 	FacilityDataSource datasource;
-	List<Facility> facilityItems;   
- 
-	
-	
+	List<Facility> facilityItems;
+
+	final FacilityListFragment facilityListFragment = this;
+
 	public void onActivityCreated(Bundle savedInstanceState) {
 		
 		super.onActivityCreated(savedInstanceState);  
 		
 		final ListView listView = getListView();
-		final FacilityListFragment facilityListFragment = this; 
+
 		if (listView.getHeaderViewsCount() == 0) {           
-			ImageButton button = (ImageButton)facilityListFragment.getActivity().findViewById(R.id.refreshFacilitiesButton);
-			button.setOnClickListener(new OnClickListener() { 
-				public void onClick(View view) {
-					//Toast.makeText( getActivity(), "Updating product catalog...", Toast.LENGTH_SHORT ).show();	    		    
-					ProgressBar progressBar = (ProgressBar) facilityListFragment.getActivity().findViewById(R.id.facilitiesRefreshProgress);
-					progressBar.setVisibility(View.VISIBLE);                       
-					ServerSync serverSync = new ServerSync(getActivity());
-					serverSync.updateFacilities(progressBar, facilityListFragment);					
-				}
-			});			
+						
 			View headerView2 = getActivity().getLayoutInflater().inflate(R.layout.facility_header, null);
 			listView.addHeaderView(headerView2);
 		}
@@ -128,17 +110,7 @@ public class FacilityListFragment extends ListFragment {
 		});
 		
 		inputSearchFrame.setVisibility(View.GONE);
-		ImageButton searchButton = (ImageButton)getActivity().findViewById(R.id.facilitySearch);
-		searchButton.setOnClickListener(new OnClickListener() { 
-			public void onClick(View view) { 
-				if (inputSearchFrame.isShown()) {
-					inputSearchFrame.setVisibility(View.GONE);					
-				}
-				else {
-					inputSearchFrame.setVisibility(View.VISIBLE);
-				}
-			}  
-		});  
+		  
 	}
 
 	/**
@@ -160,5 +132,11 @@ public class FacilityListFragment extends ListFragment {
 		super.onDestroyView();
 		setListAdapter(null);
 	}
+	public void syncOutlets(MenuItem menuItem){
 
+		ProgressBar p=(ProgressBar)menuItem.getActionView().findViewById(R.id.menuitem_progress);
+		menuItem.expandActionView();
+		ServerSync serverSync = new ServerSync(getActivity());
+		serverSync.updateFacilities(menuItem, p, facilityListFragment);
+	}
 }

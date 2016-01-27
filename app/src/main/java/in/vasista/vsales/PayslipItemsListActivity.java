@@ -1,16 +1,23 @@
 package in.vasista.vsales;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
-public class PayslipItemsListActivity extends DashboardActivity  {
-	
+import in.vasista.hr.payslip.Payslip;
+import in.vasista.vsales.db.PayslipDataSource;
+
+public class PayslipItemsListActivity extends DashboardAppCompatActivity  {
+	Payslip payslip;
+	PayslipDataSource datasource;
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
 
 		// Inflate your view 
-		setContentView(R.layout.payslipitems_layout); 
-
+		setContentChildView(R.layout.payslipitems_layout);
+		String payrollHeaderId = getIntent().getStringExtra("payrollHeaderId");
+		datasource = new PayslipDataSource(this);
+		datasource.open();
+		payslip = datasource.getPayslipDetails(payrollHeaderId);
+		setPageTitle(payslip.getPayrollPeriod() + " Payslip");
 		
 /*        if (savedInstanceState == null) {
     		PayslipItemsListFragment orderItemsFragment = 

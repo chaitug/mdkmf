@@ -18,7 +18,6 @@
     android:dropDownWidth="wrap_content" />  --> 
   <Spinner
     android:id="@+id/indentitemSpinnerProductId"
-    android:layout_toLeftOf="@+id/orderitemEditTextProductQty" 
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
 	android:layout_margin="10dp"        

@@ -16,8 +16,13 @@
 
 package in.vasista.vsales;
 
-import in.vasista.vsales.R;
+import android.app.FragmentManager;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ProgressBar;
+
+import in.vasista.vsales.order.OrderListFragment;
 
 /**
  * This is the activity for feature 1 in the dashboard application.
@@ -25,7 +30,7 @@ import android.os.Bundle;
  *
  */
 
-public class OrderActivity extends DashboardActivity 
+public class OrderActivity extends DashboardAppCompatActivity
 {
 
 /**
@@ -39,13 +44,35 @@ public class OrderActivity extends DashboardActivity
  *
  * @param savedInstanceState Bundle
  */
-
+private MenuItem menuItem;
+    ProgressBar progressBar;
 protected void onCreate(Bundle savedInstanceState) 
 {
     super.onCreate(savedInstanceState);
     //setContentView (R.layout.activity_f1);
     //setTitleFromActivityLabel (R.id.title_text);
-	setContentView(R.layout.order_layout);
+//	setContentView(R.layout.order_layout);
+    setContentChildView(R.layout.order_layout);
+    setSalesDashboardTitle(R.string.title_feature2);
 }
-    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.refresh, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                menuItem = item;
+                menuItem.setActionView(R.layout.progressbar);
+                progressBar=(ProgressBar)menuItem.getActionView().findViewById(R.id.menuitem_progress);
+                FragmentManager fm = getFragmentManager();
+                OrderListFragment indentListFragment = (OrderListFragment) fm.findFragmentById(R.id.order_list_fragment);
+                indentListFragment.syncOrder(menuItem);
+                return true;
+
+        }
+        return false;
+    }
 } // end class

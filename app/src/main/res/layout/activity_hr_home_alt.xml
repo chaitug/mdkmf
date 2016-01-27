@@ -3,52 +3,15 @@
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
     android:fillViewport="true" >
 
     <LinearLayout
         android:id="@+id/db1_root"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-    <LinearLayout
-        style="@style/TitleBar" >
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:gravity="bottom" >
-
-        <ImageButton
-            android:id="@+id/homeButton"                        
-            style="@style/TitleBarAction"
-            android:contentDescription="@string/description_home"
-            android:onClick="onClickHome"
-            android:src="@drawable/title_home" />
-
-        <ImageView style="@style/TitleBarSeparator" 
-            android:layout_toRightOf="@+id/homeButton"/>
-                    
-            <TextView
-                android:id="@+id/hrDBHeader"
-                style="@style/TitleBarText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="HR Dashboard"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <ProgressBar
-                android:id="@+id/myEmployeeRefreshProgress"
-                style="@android:style/Widget.ProgressBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_toRightOf="@+id/hrDBHeader"
-                android:indeterminate="true"
-                android:visibility="invisible" />
-        </RelativeLayout>
-    </LinearLayout>
             <LinearLayout
                 android:id="@+id/profileLeaveLayout"                
                 android:layout_width="fill_parent"

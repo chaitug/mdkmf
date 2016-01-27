@@ -3,52 +3,16 @@
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
     android:fillViewport="true" >
 
     <LinearLayout
         android:id="@+id/db1_root"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <LinearLayout style="@style/TitleBar2" >
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
-
-                <ImageButton
-                    android:id="@+id/about"
-                    style="@style/TitleBarAction"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:contentDescription="@string/description_about"
-                    android:onClick="onClickAbout"
-                    android:src="@drawable/title_about" />
-                <ImageButton
-                    android:id="@+id/homeSettings"
-                    style="@style/TitleBarAction"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"                    
-					android:layout_toRightOf="@+id/about"
-                    android:onClick="onClickSettings"                    
-                    android:src="@drawable/title_settings" />  
-                <ImageView
-                    style="@style/TitleBarLogo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:contentDescription="@string/description_logo"
-                    android:src="@drawable/title_logo" />
-                    
-                <ImageButton
-                    android:id="@+id/homeSearch"
-                    style="@style/TitleBarAction"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/title_search" />
-            </RelativeLayout>
-        </LinearLayout>
+  
 
         <LinearLayout
             android:layout_width="fill_parent"

@@ -1,37 +1,24 @@
 package in.vasista.inventory;
 
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import in.vasista.rest.ServerRestSync;
-import in.vasista.vsales.DashboardActivity;
-import in.vasista.vsales.R;
-import in.vasista.vsales.catalog.Product;
-import in.vasista.vsales.db.EmployeeDataSource;
-import in.vasista.vsales.employee.Employee;
-import in.vasista.vsales.sync.ServerSync;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.PhoneStateListener;
-import android.telephony.TelephonyManager;
-import java.text.DateFormat;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
-public class InventoryDetailsActivity extends DashboardActivity  {
+import in.vasista.rest.ServerRestSync;
+import in.vasista.vsales.DashboardAppCompatActivity;
+import in.vasista.vsales.R;
+import in.vasista.vsales.catalog.Product;
+
+public class InventoryDetailsActivity extends DashboardAppCompatActivity {
 	
 	private String productId = "";
 	
@@ -39,7 +26,8 @@ public class InventoryDetailsActivity extends DashboardActivity  {
 		super.onCreate(savedInstanceState);
 
 		// Inflate your view    
-		setContentView(R.layout.inventorydetails_layout);     		
+		setContentChildView(R.layout.inventorydetails_layout);
+		actionBarHomeEnabled();
 		Intent inventoryDetailsIntent= getIntent();
 		Product product = (new Gson()).fromJson(inventoryDetailsIntent.getStringExtra("product"), Product.class);
 		if (product != null) {   

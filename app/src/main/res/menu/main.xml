@@ -1,9 +1,24 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
+        android:id="@+id/action_about"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_about_24dp"
+        android:title="@string/title_about"/>
+    <item
+        android:id="@+id/action_refresh"
+        app:showAsAction="always"
+        android:icon="@drawable/title_refresh_default"
+        android:title="@string/title_refresh"/>
+    <item
+        android:id="@+id/homeSearch"
+        app:showAsAction="always"
+        android:icon="@drawable/title_search_pressed"
+        android:title="@string/title_search"/>
+    <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_settings_24dp"
         android:title="@string/action_settings"/>
 
 </menu>

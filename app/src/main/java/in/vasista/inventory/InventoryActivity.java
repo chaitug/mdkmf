@@ -1,13 +1,15 @@
 package in.vasista.inventory;
 
-import in.vasista.vsales.DashboardActivity;
-import in.vasista.vsales.R;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 
-public class InventoryActivity extends DashboardActivity 
+import in.vasista.vsales.DashboardAppCompatActivity;
+import in.vasista.vsales.R;
+
+public class InventoryActivity extends DashboardAppCompatActivity
 {
 
 /**
@@ -19,15 +21,15 @@ public class InventoryActivity extends DashboardActivity
  * 
  * Always followed by onStart().
  *
- * @param savedInstanceState Bundle
  */
-
+MenuItem menuItem;
 protected void onCreate(Bundle savedInstanceState)  
 {
     super.onCreate(savedInstanceState);
     //setContentView (R.layout.activity_f5);
     //setTitleFromActivityLabel (R.id.title_text); 
-	setContentView(R.layout.inventory_layout);
+	setContentChildView(R.layout.inventory_layout);
+	actionBarHomeEnabled();
 
 }
 
@@ -50,5 +52,25 @@ protected void onResume ()
 	}
    
 }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.refresh, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	public boolean onOptionsItemSelected(MenuItem item){
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+			case R.id.action_refresh:
+				menuItem = item;
+				menuItem.setActionView(R.layout.progressbar);
+				//ProgressBar progressBar=(ProgressBar)menuItem.getActionView().findViewById(R.id.menuitem_progress);
+				android.app.FragmentManager fm = getFragmentManager();
+				InventoryListFragment inventoryListFragment = (InventoryListFragment) fm.findFragmentById(R.id.inventory_list_fragment);
+				inventoryListFragment.syncInventory(menuItem);
+				return true;
+
+		}
+		return false;
+	}
     
 } // end class

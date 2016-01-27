@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -42,14 +43,15 @@ public class OrderListFragment extends ListFragment{
 	List<Order> orderItems; 
 	OrderAdapter adapter;
 	OrdersDataSource datasource;
-	
+	final OrderListFragment orderListFragment = this;
+
 	public void onActivityCreated(Bundle savedInstanceState) {  
 		
 		super.onActivityCreated(savedInstanceState);
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
     	final String retailerId = prefs.getString("storeId", "");
-		TextView retailerIdView = (TextView)getActivity().findViewById(R.id.retailerId);
-		retailerIdView.setText(retailerId + " : Orders");		 
+//		TextView retailerIdView = (TextView)getActivity().findViewById(R.id.retailerId);
+//		retailerIdView.setText(retailerId + " : Orders");
 		
 		if (adapter == null) {			
     	    datasource = new OrdersDataSource(getActivity());
@@ -57,18 +59,10 @@ public class OrderListFragment extends ListFragment{
     	    orderItems = datasource.getAllOrders();
 		}
 		final ListView listView = getListView();
-		final OrderListFragment orderListFragment = this; 
+
 
 		if (listView.getHeaderViewsCount() == 0) {	
-			ImageButton button = (ImageButton)orderListFragment.getActivity().findViewById(R.id.fetchOrdersButton);
-			button.setOnClickListener(new OnClickListener() {   
-				public void onClick(View view) {
-						ProgressBar progressBar = (ProgressBar) orderListFragment.getActivity().findViewById(R.id.ordersRefreshProgress);
-						progressBar.setVisibility(View.VISIBLE);
-						ServerSync serverSync = new ServerSync(getActivity());
-						serverSync.fetchOrders(progressBar, orderListFragment);											
-				} 
-			}); 
+
 			View headerView2 = getActivity().getLayoutInflater().inflate(R.layout.order_header, null);
 			listView.addHeaderView(headerView2);
 		}
@@ -95,7 +89,13 @@ public class OrderListFragment extends ListFragment{
 		  }
 		});		 
 	}
+	public void syncOrder(MenuItem menuItem){
 
+		ProgressBar p=(ProgressBar)menuItem.getActionView().findViewById(R.id.menuitem_progress);
+		menuItem.expandActionView();
+		ServerSync serverSync = new ServerSync(getActivity());
+		serverSync.fetchOrders(menuItem, p, orderListFragment);
+	}
 	/**
 	 * Brute force update of list
 	 */

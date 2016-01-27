@@ -16,7 +16,6 @@
 
 package in.vasista.vsales;
 
-import in.vasista.vsales.R;
 import android.os.Bundle;
 import android.webkit.WebView;
 
@@ -26,7 +25,7 @@ import android.webkit.WebView;
  *
  */
 
-public class AboutActivity extends DashboardActivity 
+public class AboutActivity extends DashboardAppCompatActivity
 {
 
 /**
@@ -45,9 +44,9 @@ protected void onCreate(Bundle savedInstanceState)
 {  
     super.onCreate(savedInstanceState);
 
-    setContentView (R.layout.activity_about);     
-    setTitleFromActivityLabel (R.id.title_text);  
-    
+    setContentChildView(R.layout.activity_about);
+    actionBarHomeEnabled();
+
     WebView view = ((WebView)findViewById(R.id.about_content));
     view.setVerticalScrollBarEnabled(false);
 

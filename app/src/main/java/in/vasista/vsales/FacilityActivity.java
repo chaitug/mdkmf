@@ -16,11 +16,16 @@
 
 package in.vasista.vsales;
 
-import in.vasista.vsales.R;
+import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
+
+import in.vasista.vsales.facility.FacilityListFragment;
 
 /**
  * This is the activity for feature 5 in the dashboard application.
@@ -28,7 +33,7 @@ import android.widget.FrameLayout;
  *
  */
 
-public class FacilityActivity extends DashboardActivity 
+public class FacilityActivity extends DashboardAppCompatActivity
 {
 
 /**
@@ -42,14 +47,17 @@ public class FacilityActivity extends DashboardActivity
  *
  * @param savedInstanceState Bundle
  */
-
+private MenuItem menuItem;
+	ProgressBar progressBar;
 protected void onCreate(Bundle savedInstanceState) 
 {
     super.onCreate(savedInstanceState);
     //setContentView (R.layout.activity_f5);
     //setTitleFromActivityLabel (R.id.title_text);
-	setContentView(R.layout.facility_layout);
-
+	setContentChildView(R.layout.facility_layout);
+	getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME
+			| ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_CUSTOM);
+	actionBarHomeEnabled();
 }
 
 /**
@@ -71,5 +79,35 @@ protected void onResume ()
 	}
    
 }
-    
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		menu.removeItem(R.id.action_about);
+		menu.removeItem(R.id.action_settings);
+		return super.onCreateOptionsMenu(menu);
+	}
+	public boolean onOptionsItemSelected(MenuItem item){
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+			case R.id.action_refresh:
+				menuItem = item;
+				menuItem.setActionView(R.layout.progressbar);
+				progressBar=(ProgressBar)menuItem.getActionView().findViewById(R.id.menuitem_progress);
+				FragmentManager fm = getFragmentManager();
+				FacilityListFragment facilityListFragment = (FacilityListFragment) fm.findFragmentById(R.id.facility_list_fragment);
+				facilityListFragment.syncOutlets(menuItem);
+				return true;
+			case  R.id.homeSearch:
+				final FrameLayout inputSearchFrame = (FrameLayout) findViewById(R.id.inputSearchFrame);
+				if (inputSearchFrame.isShown()) {
+					inputSearchFrame.setVisibility(View.GONE);
+				}
+				else {
+					inputSearchFrame.setVisibility(View.VISIBLE);
+				}
+				return true;
+
+		}
+		return false;
+	}
 } // end class

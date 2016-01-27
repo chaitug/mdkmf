@@ -1,15 +1,15 @@
 package in.vasista.vsales;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
-public class OrderItemsListActivity extends DashboardActivity  {
+public class OrderItemsListActivity extends DashboardAppCompatActivity  {
 	
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
 
 		// Inflate your view 
-		setContentView(R.layout.orderitems_layout); 
+		setContentChildView(R.layout.orderitems_layout);
+		setSalesDashboardTitle(R.string.title_feature2_list);
 
 		
 /*        if (savedInstanceState == null) {

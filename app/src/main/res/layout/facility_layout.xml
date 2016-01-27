@@ -2,61 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="?attr/actionBarSize"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/facilityTitle"
-        style="@style/TitleBar" >
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:gravity="bottom" >
-        <ImageButton
-            android:id="@+id/homeButton"                        
-            style="@style/TitleBarAction"
-            android:contentDescription="@string/description_home"
-            android:onClick="onClickHome"
-            android:src="@drawable/title_home" />
-
-        <ImageView 
-            android:id="@+id/homeSeparator"
-            style="@style/TitleBarSeparator" 
-            android:layout_toRightOf="@+id/homeButton"/>
-            <TextView
-                style="@style/TitleBarText"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-				android:gravity="center"           
-                android:text="Outlets"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        <ImageView style="@style/TitleBarSeparator" 
-                android:layout_toLeftOf="@+id/refreshFacilitiesButton"/>
-            <ImageButton
-                android:id="@+id/refreshFacilitiesButton"
-                style="@style/TitleBarAction"
-                android:layout_toLeftOf="@+id/facilitySearch"
-                android:src="@drawable/title_refresh" />             
-
-            <ProgressBar
-                android:id="@+id/facilitiesRefreshProgress"
-                style="@android:style/Widget.ProgressBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_toLeftOf="@+id/refreshFacilitiesButton"
-                android:indeterminate="true"
-                android:visibility="invisible" />
-        <ImageView style="@style/TitleBarSeparator" 
-                android:layout_toLeftOf="@+id/facilitySearch"
-            />
-            <ImageButton
-                android:id="@+id/facilitySearch"
-                style="@style/TitleBarAction"
-                android:layout_alignParentRight="true"                
-                android:src="@drawable/title_search2" /> 
-        </RelativeLayout>
-    </LinearLayout>
+    
 
     <LinearLayout
         android:layout_width="match_parent"

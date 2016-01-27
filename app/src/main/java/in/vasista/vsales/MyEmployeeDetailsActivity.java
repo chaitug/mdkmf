@@ -1,34 +1,20 @@
 package in.vasista.vsales;
 
 
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
+import android.widget.TextView;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import in.vasista.vsales.db.EmployeeDataSource;
-import in.vasista.vsales.db.PayslipDataSource;
 import in.vasista.vsales.employee.Employee;
-import in.vasista.vsales.sync.ServerSync;
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.telephony.PhoneStateListener;
-import android.telephony.TelephonyManager;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
-public class MyEmployeeDetailsActivity extends DashboardActivity  {
+public class MyEmployeeDetailsActivity extends DashboardAppCompatActivity  {
 	public static final String module = MyEmployeeDetailsActivity.class.getName();	
 	
 	public void updateEmployeeDetails(Employee employee) {
@@ -57,7 +43,8 @@ public class MyEmployeeDetailsActivity extends DashboardActivity  {
 		super.onCreate(savedInstanceState);
 
 		// Inflate your view   
-		setContentView(R.layout.myemployeedetails_layout);    
+		setContentChildView(R.layout.myemployeedetails_layout);
+		actionBarHomeEnabled();
 		final Activity myActivity = this; 
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this); 
 		String employeeId = "";		

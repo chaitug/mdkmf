@@ -1,46 +1,20 @@
 package in.vasista.vsales.order;
 
-import in.vasista.vsales.R;
-import in.vasista.vsales.adapter.IndentItemAdapter;
-import in.vasista.vsales.adapter.OrderItemAdapter;
-import in.vasista.vsales.catalog.Product;
-import in.vasista.vsales.db.OrdersDataSource;
-import in.vasista.vsales.db.ProductsDataSource;
-import in.vasista.vsales.db.IndentsDataSource;
-import in.vasista.vsales.sync.ServerSync;
-import in.vasista.vsales.ui.SwipeDetector;
-import in.vasista.vsales.util.DateUtil;
+import android.app.ListFragment;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import android.app.AlertDialog;
-import android.app.ListFragment;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.text.InputType;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
+import in.vasista.vsales.R;
+import in.vasista.vsales.adapter.OrderItemAdapter;
+import in.vasista.vsales.db.OrdersDataSource;
+import in.vasista.vsales.util.DateUtil;
 
 
 public class OrderItemsListFragment extends ListFragment{
@@ -70,8 +44,7 @@ public class OrderItemsListFragment extends ListFragment{
 		final OrderItemsListFragment orderItemsListFragment = this;
 
 		if (listView.getHeaderViewsCount() == 0) {	
-			TextView orderDetailsTitle = (TextView)getActivity().findViewById(R.id.orderDetailsTitle);
-			orderDetailsTitle.setText(retailerId + " : Order Details"); 
+
 			final View headerView2 = getActivity().getLayoutInflater().inflate(R.layout.orderitems_header, null);
 			listView.addHeaderView(headerView2);
 		}

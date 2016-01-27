@@ -1,13 +1,6 @@
 package in.vasista.vsales;
 
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import in.vasista.vsales.db.EmployeeDataSource;
-import in.vasista.vsales.employee.Employee;
-import in.vasista.vsales.sync.ServerSync;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,13 +12,21 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class EmployeeDetailsActivity extends DashboardActivity  {
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import in.vasista.vsales.db.EmployeeDataSource;
+import in.vasista.vsales.employee.Employee;
+import in.vasista.vsales.sync.ServerSync;
+
+public class EmployeeDetailsActivity extends DashboardAppCompatActivity  {
 	
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
 
 		// Inflate your view    
-		setContentView(R.layout.employeedetails_layout);    
+		setContentChildView(R.layout.employeedetails_layout);
+		actionBarHomeEnabled();    
 		
 		Intent employeeDetailsIntent= getIntent();
 		String employeeId = "";
@@ -39,8 +40,7 @@ public class EmployeeDetailsActivity extends DashboardActivity  {
 		if (employee == null) {        
 			return;
 		} 
-		TextView employeeHeaderView = (TextView)findViewById(R.id.employeeIdHeader);
-		employeeHeaderView.setText(employee.getName());		
+		setTitle(employee.getName());	
 		TextView idView = (TextView)findViewById(R.id.employeeId);
 		idView.setText(employeeId);
 		TextView nameView = (TextView)findViewById(R.id.employeeName);

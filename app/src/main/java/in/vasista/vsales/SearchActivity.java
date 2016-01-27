@@ -16,7 +16,6 @@
 
 package in.vasista.vsales;
 
-import in.vasista.vsales.R;
 import android.os.Bundle;
 
 /**
@@ -25,7 +24,7 @@ import android.os.Bundle;
  *
  */
 
-public class SearchActivity extends DashboardActivity 
+public class SearchActivity extends DashboardAppCompatActivity
 {
 
 /**
@@ -43,8 +42,8 @@ public class SearchActivity extends DashboardActivity
 protected void onCreate(Bundle savedInstanceState) 
 {
     super.onCreate(savedInstanceState);
-    setContentView (R.layout.activity_search);
-    setTitleFromActivityLabel (R.id.title_text);
+    setContentChildView(R.layout.activity_search);
+    setTitle(R.id.title_text);
 }
     
 } // end class

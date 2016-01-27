@@ -1,48 +1,27 @@
 package in.vasista.vsales;
 
 
-import in.vasista.vsales.adapter.FacilityAutoAdapter;
-import in.vasista.vsales.db.EmployeeDataSource;
-import in.vasista.vsales.db.FacilityDataSource;
-import in.vasista.vsales.db.IndentsDataSource;
-import in.vasista.vsales.db.OrdersDataSource;
-import in.vasista.vsales.db.PaymentsDataSource;
-import in.vasista.vsales.db.ProductsDataSource;
-import in.vasista.vsales.employee.Employee;
-import in.vasista.vsales.facility.Facility;
-import in.vasista.vsales.preference.FragmentPreferences;
-import in.vasista.vsales.sync.ServerSync;
-
-import java.util.HashMap; 
-import java.util.List;
-import java.util.Map;
-       
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
-public class HRDashboardActivity extends DashboardActivity  {   
+import in.vasista.vsales.sync.ServerSync;
+
+public class HRDashboardActivity extends DashboardAppCompatActivity  {   
 	public static final String module = HRDashboardActivity.class.getName();
 
     static final private int MENU_PREFERENCES = Menu.FIRST+1;
     private static final int SHOW_PREFERENCES = 1;
-        
+	private boolean hideMenu = false;
+	MenuItem menuItem;
 	
 	/**
 	 * onCreate - called when the activity is first created.
@@ -62,16 +41,32 @@ public class HRDashboardActivity extends DashboardActivity  {
 Log.d(module, "onlyHRDashboard equals " + onlyHRDashboard);						    		    		
     	
     	if (onlyHRDashboard.equals("Y")) {
-    	    setContentView(R.layout.activity_hr_home);   		
+    	   // setContentView(R.layout.activity_hr_home);
+			setContentChildView(R.layout.activity_hr_home);
+			getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     	} 
     	else { 
-    	    setContentView(R.layout.activity_hr_home_alt);    		
+//    	    setContentView(R.layout.activity_hr_home_alt);
+			setContentChildView(R.layout.activity_hr_home_alt);
+			actionBarHomeEnabled();
     	}
 
-	    ProgressBar progressBar = (ProgressBar) findViewById(R.id.myEmployeeRefreshProgress);
-		progressBar.setVisibility(View.VISIBLE);
+		ProgressBar progressBar = new ProgressBar(this);
+		//progressBar.setVisibility(View.GONE);
+		progressBar.setIndeterminate(true);
+		getSupportActionBar().setDisplayShowCustomEnabled(true);
+		ActionBar.LayoutParams params = new ActionBar.LayoutParams(
+				ActionBar.LayoutParams.WRAP_CONTENT,
+				ActionBar.LayoutParams.WRAP_CONTENT,
+				Gravity.RIGHT);
+		getSupportActionBar().setCustomView(progressBar,params);
+
+//		ProgressBar progressBar = (ProgressBar) findViewById(R.id.myEmployeeRefreshProgress);
+//		progressBar.setVisibility(View.VISIBLE);
 		ServerSync serverSync = new ServerSync(this);
-		serverSync.fetchMyEmployeeDetails(progressBar, this);	    
+
+		serverSync.fetchMyEmployeeDetails(progressBar, this);
+
 	}
 	    
 	/**

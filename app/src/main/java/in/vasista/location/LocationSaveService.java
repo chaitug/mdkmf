@@ -1,10 +1,5 @@
 package in.vasista.location;
 
-import in.vasista.vsales.db.LocationsDataSource;
-
-import java.text.SimpleDateFormat;
-import java.util.List;
-
 import android.Manifest;
 import android.app.AlarmManager;
 import android.app.IntentService;
@@ -19,7 +14,11 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
-import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import in.vasista.vsales.db.LocationsDataSource;
 
 public class LocationSaveService extends IntentService {
 	public static String TAG = "LOCATION_SAVE_SERVICE";
@@ -52,7 +51,7 @@ public class LocationSaveService extends IntentService {
 
 		for (int i = 0; i < providers.size(); i++) {
 			android.location.Location loc;
-			if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED  ) {
+			if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 				// TODO: Consider calling
 				//    ActivityCompat#requestPermissions
 				// here to request the missing permissions, and then overriding

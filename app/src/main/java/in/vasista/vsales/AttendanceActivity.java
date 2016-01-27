@@ -17,20 +17,11 @@
 package in.vasista.vsales;
 
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
-
-import in.vasista.hr.leave.LeaveListFragment;
-import in.vasista.vsales.db.EmployeeDataSource;
-import in.vasista.vsales.employee.Employee;
-import in.vasista.vsales.indent.IndentListFragment;
-import android.app.FragmentManager;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
-import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import in.vasista.hr.attendance.AttendanceListFragment;
 
 /**
  * This is the activity for feature 1 in the dashboard application.
@@ -38,7 +29,7 @@ import android.widget.TextView;
  *
  */
 
-public class AttendanceActivity extends DashboardActivity 
+public class AttendanceActivity extends DashboardAppCompatActivity
 {
 
 /**
@@ -52,13 +43,35 @@ public class AttendanceActivity extends DashboardActivity
  *
  * @param savedInstanceState Bundle
  */
-
+	MenuItem menuItem;
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 	    super.onCreate(savedInstanceState);
 	    //setContentView (R.layout.activity_f1);
 	    //setTitleFromActivityLabel (R.id.title_text);
-		setContentView(R.layout.attendance_layout);    
+		setContentChildView(R.layout.attendance_layout);
+		setPageTitle(R.string.title_employeeattendance);
+
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.refresh, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	public boolean onOptionsItemSelected(MenuItem item){
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+			case R.id.action_refresh:
+				menuItem = item;
+				menuItem.setActionView(R.layout.progressbar);
+				//ProgressBar progressBar=(ProgressBar)menuItem.getActionView().findViewById(R.id.menuitem_progress);
+				android.app.FragmentManager fm = getFragmentManager();
+				AttendanceListFragment attendanceListFragment = (AttendanceListFragment) fm.findFragmentById(R.id.attendance_list_fragment);
+				attendanceListFragment.syncAttendance(menuItem);
+				return true;
+
+		}
+		return false;
 	}
 	
 } // end class

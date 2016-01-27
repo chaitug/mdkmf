@@ -34,6 +34,7 @@
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
     <string name="title_feature1">Indent</string>
+    <string name="title_feature1_plurer">Indents</string>
     <string name="title_feature2">Orders</string>
     <string name="title_feature3">Payments</string>
     <string name="title_feature4">Catalog</string>
@@ -45,7 +46,13 @@
     <string name="title_payslip">Payslips</string>
     <string name="title_emplsearch">Search</string>
     <string name="title_attendance">Attendance</string>
-    
+    <string name="title_feature1_list">Indent Details</string>
+    <string name="title_feature2_list">Order Details</string>
+    <string name="title_employeeattendance">My Attendance</string>
+    <string name="title_employeeleave">My Leaves</string>
+    <string name="title_employeeplayslip">My Payslips</string>
+    <string name="title_employees">Employees</string>
+
     <string name="account_summary"><u>Account Summary for </u></string>
 
     <string name="default_intro">This is the default content view for an activity. Be sure to change your activity\'s onCreate method. Use setContentView on a custom layout.</string>
@@ -158,5 +165,9 @@
       <item >B80604</item>
       <item >B80902</item>
     </string-array>
-    
+    <string name="title_activity_main_app_compact">MainAppCompactActivity</string>
+    <string name="title_refresh">Refresh</string>
+    <string name="title_edit">Edit</string>
+    <string name="title_done">Done</string>
+    <string name="title_upload">Upload</string>
 </resources>

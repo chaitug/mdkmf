@@ -16,21 +16,20 @@
 
 package in.vasista.vsales;
 
+import android.app.FragmentManager;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ProgressBar;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import in.vasista.vsales.R;
 import in.vasista.vsales.db.IndentsDataSource;
 import in.vasista.vsales.indent.Indent;
 import in.vasista.vsales.indent.IndentListFragment;
 import in.vasista.vsales.sync.ServerSync;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 
 /**
  * This is the activity for feature 2 in the dashboard application.
@@ -38,7 +37,7 @@ import android.widget.ProgressBar;
  *
  */
 
-public class IndentActivity extends DashboardActivity 
+public class IndentActivity extends DashboardAppCompatActivity
 {
 
 /**
@@ -52,16 +51,41 @@ public class IndentActivity extends DashboardActivity
  *
  * @param savedInstanceState Bundle 
  */
-
+private MenuItem menuItem;
+ProgressBar progressBar;
 protected void onCreate(Bundle savedInstanceState) 
 {
     super.onCreate(savedInstanceState);
     //setContentView (R.layout.activity_f2);
     //setTitleFromActivityLabel (R.id.title_text);
-	setContentView(R.layout.indent_layout);
+	setContentChildView(R.layout.indent_layout);
 
+	setSalesDashboardTitle(R.string.title_feature1_plurer);
 }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		menu.removeItem(R.id.action_about);
+		menu.removeItem(R.id.action_settings);
+		menu.removeItem(R.id.homeSearch);
+		return super.onCreateOptionsMenu(menu);
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+			case R.id.action_refresh:
+				menuItem = item;
+				menuItem.setActionView(R.layout.progressbar);
+				progressBar=(ProgressBar)menuItem.getActionView().findViewById(R.id.menuitem_progress);
+				FragmentManager fm = getFragmentManager();
+				IndentListFragment indentListFragment = (IndentListFragment) fm.findFragmentById(R.id.indent_list_fragment);
+				indentListFragment.syncIndent(menuItem);
+				return true;
 
+		}
+		return false;
+	}
 protected void onResume ()
 {
    super.onResume ();
@@ -86,10 +110,8 @@ protected void onResume ()
    if (fetchIndents) {
 	   FragmentManager fm = getFragmentManager();
 	   IndentListFragment indentListFragment = (IndentListFragment) fm.findFragmentById(R.id.indent_list_fragment);
-	   ProgressBar progressBar = (ProgressBar) findViewById(R.id.indentsRefreshProgress);
-	   progressBar.setVisibility(View.VISIBLE);
 	   ServerSync serverSync = new ServerSync(this);
-	   serverSync.fetchActiveIndents(progressBar, indentListFragment);	
+	   serverSync.fetchActiveIndents(null, progressBar, indentListFragment);
    }
    datasource.close();
    

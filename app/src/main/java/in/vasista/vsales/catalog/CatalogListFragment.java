@@ -1,32 +1,21 @@
 package in.vasista.vsales.catalog;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import in.vasista.vsales.SalesDashboardActivity;
-import in.vasista.vsales.R;
-import in.vasista.vsales.adapter.IndentAdapter;
-import in.vasista.vsales.adapter.ProductAdapter;
-import in.vasista.vsales.db.ProductsDataSource;
-import in.vasista.vsales.indent.Indent;
-import in.vasista.vsales.indent.IndentListFragment;
-import in.vasista.vsales.sync.ServerSync;
 import android.app.ListFragment;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.List;
+
+import in.vasista.vsales.R;
+import in.vasista.vsales.adapter.ProductAdapter;
+import in.vasista.vsales.db.ProductsDataSource;
+import in.vasista.vsales.sync.ServerSync;
 
 
 public class CatalogListFragment extends ListFragment {
@@ -34,8 +23,8 @@ public class CatalogListFragment extends ListFragment {
 	
 	ProductAdapter adapter;
 	ProductsDataSource datasource;
-	List<Product> catalogItems;   
- 
+	List<Product> catalogItems;
+	final CatalogListFragment catalogListFragment = this;
 	
 	
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -43,21 +32,10 @@ public class CatalogListFragment extends ListFragment {
 		super.onActivityCreated(savedInstanceState);  
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
     	String retailerId = prefs.getString("storeId", "");
-		TextView retailerIdView = (TextView)getActivity().findViewById(R.id.retailerId);
-		retailerIdView.setText(retailerId + " : Catalog");  		
+
 		final ListView listView = getListView();
-		final CatalogListFragment catalogListFragment = this; 
-		if (listView.getHeaderViewsCount() == 0) {           
-			ImageButton button = (ImageButton)catalogListFragment.getActivity().findViewById(R.id.refreshCatalogButton);
-			button.setOnClickListener(new OnClickListener() { 
-				public void onClick(View view) {   
-					//Toast.makeText( getActivity(), "Updating product catalog...", Toast.LENGTH_SHORT ).show();	    		    
-					ProgressBar progressBar = (ProgressBar) catalogListFragment.getActivity().findViewById(R.id.productsRefreshProgress);
-					progressBar.setVisibility(View.VISIBLE);                       
-					ServerSync serverSync = new ServerSync(getActivity());
-					serverSync.updateProducts(progressBar, catalogListFragment);					
-				}
-			});			
+		 
+		if (listView.getHeaderViewsCount() == 0) {
 			View headerView2 = getActivity().getLayoutInflater().inflate(R.layout.catalog_header, null);
 			listView.addHeaderView(headerView2);
 		}
@@ -72,7 +50,13 @@ public class CatalogListFragment extends ListFragment {
 		}
 		setListAdapter(adapter);
 	}
+	public void syncCatalog(MenuItem menuItem){
 
+		ProgressBar p=(ProgressBar)menuItem.getActionView().findViewById(R.id.menuitem_progress);
+		menuItem.expandActionView();
+		ServerSync serverSync = new ServerSync(getActivity());
+		serverSync.updateProducts(menuItem, p, catalogListFragment);
+	}
 	/**
 	 * Brute force update of list
 	 */

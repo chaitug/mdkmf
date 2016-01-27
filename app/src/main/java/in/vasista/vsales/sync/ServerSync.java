@@ -1,11 +1,19 @@
 package in.vasista.vsales.sync;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.preference.PreferenceManager;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,13 +22,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import in.vasista.hr.attendance.AttendanceListFragment;
-import in.vasista.vsales.db.LocationsDataSource;
-import in.vasista.vsales.EmployeeActivity;
 import in.vasista.vsales.EmployeeDetailsActivity;
 import in.vasista.vsales.HRDashboardActivity;
 import in.vasista.vsales.LeaveActivity;
 import in.vasista.vsales.SalesDashboardActivity;
-import in.vasista.vsales.MyEmployeeDetailsActivity;
 import in.vasista.vsales.catalog.CatalogListFragment;
 import in.vasista.vsales.catalog.Product;
 import in.vasista.vsales.db.AttendanceDataSource;
@@ -28,6 +33,7 @@ import in.vasista.vsales.db.EmployeeDataSource;
 import in.vasista.vsales.db.FacilityDataSource;
 import in.vasista.vsales.db.IndentsDataSource;
 import in.vasista.vsales.db.LeavesDataSource;
+import in.vasista.vsales.db.LocationsDataSource;
 import in.vasista.vsales.db.OrdersDataSource;
 import in.vasista.vsales.db.PaymentsDataSource;
 import in.vasista.vsales.db.PayslipDataSource;
@@ -41,21 +47,10 @@ import in.vasista.vsales.indent.IndentItem;
 import in.vasista.vsales.indent.IndentItemsListFragment;
 import in.vasista.vsales.indent.IndentListFragment;
 import in.vasista.vsales.order.OrderListFragment;
-import in.vasista.vsales.payment.Payment;
 import in.vasista.vsales.payment.PaymentListFragment;
 import in.vasista.vsales.sync.xmlrpc.XMLRPCApacheAdapter;
 import in.vasista.vsales.sync.xmlrpc.XMLRPCMethodCallback;
 import in.vasista.vsales.util.DateUtil;
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.View;
-import android.widget.ListAdapter;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 public class ServerSync {
 
@@ -70,7 +65,7 @@ public class ServerSync {
 	    //dbHelper = new MySQLiteHelper(context); 	 	
 	}
 	
-	public void uploadIndent(final Indent indent, ProgressBar progressBar, final IndentItemsListFragment listFragment) {
+	public void uploadIndent(final MenuItem menuItem, final Indent indent, ProgressBar progressBar, final IndentItemsListFragment listFragment) {
 		IndentsDataSource datasource = new IndentsDataSource(context);
 		datasource.open();
 		if (indent == null || !indent.getStatus().equals("Created")) {
@@ -105,7 +100,11 @@ public class ServerSync {
 					if (progressBar != null) {
 						progressBar.setVisibility(View.INVISIBLE);
 					}
-					Toast.makeText( context, "Indent upload succeeded!", Toast.LENGTH_LONG ).show();	    		    			
+					if(menuItem !=null){
+						progressBar.setVisibility(View.VISIBLE);
+						menuItem.setActionView(null);
+					}
+					Toast.makeText( context, "Indent upload succeeded!", Toast.LENGTH_LONG ).show();
 				}
 			});
 		}
@@ -114,11 +113,15 @@ public class ServerSync {
 			if (progressBar != null) {
 				progressBar.setVisibility(View.INVISIBLE);
 			}
+			if(menuItem !=null){
+				progressBar.setVisibility(View.VISIBLE);
+				menuItem.setActionView(null);
+			}
 			Toast.makeText( context, "Upload failed: " + e, Toast.LENGTH_LONG ).show();	    		    			
 		}	
 	}
 	
-	public void updateProducts(ProgressBar progressBar, final CatalogListFragment listFragment) {
+	public void updateProducts(final MenuItem menuItem, ProgressBar progressBar, final CatalogListFragment listFragment) {
 		Map paramMap = new HashMap();
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		String storeId = prefs.getString("storeId", "");			
@@ -156,6 +159,10 @@ public class ServerSync {
 					if (progressBar != null) {
 						progressBar.setVisibility(View.INVISIBLE);
 					}
+					if(menuItem !=null){
+						progressBar.setVisibility(View.VISIBLE);
+						menuItem.setActionView(null);
+					}
 					Toast.makeText( context, "Updated product catalog!", Toast.LENGTH_SHORT ).show();	    		    			
 				}
 			});
@@ -169,7 +176,7 @@ public class ServerSync {
 		}	
 	}	
 
-	public void fetchActiveIndents(ProgressBar progressBar, final IndentListFragment listFragment) {
+	public void fetchActiveIndents(final MenuItem menuItem, ProgressBar progressBar, final IndentListFragment listFragment) {
 		Map paramMap = new HashMap();
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		String storeId = prefs.getString("storeId", "");			
@@ -261,6 +268,11 @@ public class ServerSync {
 					}
 					if (progressBar != null) {
 						progressBar.setVisibility(View.INVISIBLE);
+
+					}
+					if(menuItem !=null){
+						progressBar.setVisibility(View.VISIBLE);
+						menuItem.setActionView(null);
 					}
 				}
 			});
@@ -270,6 +282,10 @@ public class ServerSync {
 			if (progressBar != null) {
 				progressBar.setVisibility(View.INVISIBLE);
 			}
+			if(menuItem !=null){
+				progressBar.setVisibility(View.VISIBLE);
+				menuItem.setActionView(null);
+			}
 			Toast.makeText( context, "getFacilityIndent failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
 		}		
     	if (listFragment != null) {
@@ -278,7 +294,7 @@ public class ServerSync {
     	}
 	}	
 
-	public void fetchPayments(ProgressBar progressBar, final PaymentListFragment listFragment) {
+	public void fetchPayments(final MenuItem menuItem,ProgressBar progressBar, final PaymentListFragment listFragment) {
 		Map paramMap = new HashMap();
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		String storeId = prefs.getString("storeId", "");			
@@ -323,6 +339,10 @@ public class ServerSync {
 					if (progressBar != null) {
 						progressBar.setVisibility(View.INVISIBLE);
 					}
+					if(menuItem !=null){
+						progressBar.setVisibility(View.VISIBLE);
+						menuItem.setActionView(null);
+					}
 					Toast.makeText( context, "Updated payments!", Toast.LENGTH_SHORT ).show();	    		    			
 				}
 			});
@@ -331,6 +351,10 @@ public class ServerSync {
 			Log.e(module, "Exception: ", e);
 			if (progressBar != null) {
 				progressBar.setVisibility(View.INVISIBLE);
+			}
+			if(menuItem !=null){
+				progressBar.setVisibility(View.VISIBLE);
+				menuItem.setActionView(null);
 			}
 			Toast.makeText( context, "getFacilityPayments failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
 		}		
@@ -376,7 +400,7 @@ public class ServerSync {
 		}		
 	}	
 	
-	public void fetchOrders(ProgressBar progressBar, final OrderListFragment listFragment) {
+	public void fetchOrders(final MenuItem menuItem,ProgressBar progressBar, final OrderListFragment listFragment) {
 		Map paramMap = new HashMap();
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		String storeId = prefs.getString("storeId", "");			
@@ -407,6 +431,10 @@ public class ServerSync {
 					if (progressBar != null) {
 						progressBar.setVisibility(View.INVISIBLE);
 					}
+					if(menuItem !=null){
+						progressBar.setVisibility(View.VISIBLE);
+						menuItem.setActionView(null);
+					}
 					Toast.makeText( context, "Updated orders!", Toast.LENGTH_SHORT ).show();	    		    			
 				}
 			});
@@ -416,6 +444,10 @@ public class ServerSync {
 			if (progressBar != null) {
 				progressBar.setVisibility(View.INVISIBLE);
 			}
+			if(menuItem !=null){
+						progressBar.setVisibility(View.VISIBLE);
+						menuItem.setActionView(null);
+					}
 			Toast.makeText( context, "fetchOrders failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
 		}		
     	if (listFragment != null) {
@@ -424,7 +456,7 @@ public class ServerSync {
     	}
 	}		
 	
-	public void updateFacilities(ProgressBar progressBar, final FacilityListFragment listFragment) {
+	public void updateFacilities(final MenuItem menuItem, ProgressBar progressBar, final FacilityListFragment listFragment) {
 		final FacilityDataSource datasource = new FacilityDataSource(context);
 		datasource.open();  
 		Map paramMap = new HashMap();
@@ -470,6 +502,10 @@ public class ServerSync {
 					if (progressBar != null) {
 						progressBar.setVisibility(View.INVISIBLE);
 					}
+					if(menuItem !=null){
+						progressBar.setVisibility(View.VISIBLE);
+						menuItem.setActionView(null);
+					}
 					Toast.makeText( context, "Updated outlets!", Toast.LENGTH_SHORT ).show();
 				}
 			});
@@ -479,6 +515,10 @@ public class ServerSync {
 			if (progressBar != null) {
 				progressBar.setVisibility(View.INVISIBLE);
 			}
+			if(menuItem !=null){
+						progressBar.setVisibility(View.VISIBLE);
+						menuItem.setActionView(null);
+					}
 			Toast.makeText( context, "Update outlets failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
 		}	
     	if (listFragment != null) {
@@ -487,7 +527,7 @@ public class ServerSync {
     	}
 	}		
 
-	public void updateEmployees(ProgressBar progressBar, final EmployeeListFragment listFragment) {
+	public void updateEmployees(final MenuItem menuItem, ProgressBar progressBar, final EmployeeListFragment listFragment) {
 		Map paramMap = new HashMap();
 		try {   
 			XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(context);
@@ -557,6 +597,10 @@ public class ServerSync {
 					if (progressBar != null) {
 						progressBar.setVisibility(View.INVISIBLE);
 					}
+					if(menuItem !=null){
+						progressBar.setVisibility(View.VISIBLE);
+						menuItem.setActionView(null);
+					}
 					Toast.makeText( context, "Updated employees!", Toast.LENGTH_SHORT ).show();
 				}
 			});
@@ -565,6 +609,10 @@ public class ServerSync {
 			Log.e(module, "Exception: ", e);
 			if (progressBar != null) {
 				progressBar.setVisibility(View.INVISIBLE);
+			}
+			if(menuItem !=null){
+				progressBar.setVisibility(View.VISIBLE);
+				menuItem.setActionView(null);
 			}
 			Toast.makeText( context, "Update employees failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
 		}	
@@ -662,7 +710,7 @@ public class ServerSync {
 		}		
 	}		
 	
-	public void fetchEmployeeRecentLeaves(ProgressBar progressBar, final LeaveActivity leaveActivity) {
+	public void fetchEmployeeRecentLeaves(final MenuItem menuItem, ProgressBar progressBar, final LeaveActivity leaveActivity) {
 		Map paramMap = new HashMap();		
 		final EmployeeDataSource emplDatasource = new EmployeeDataSource(context);
 		try {   
@@ -725,6 +773,10 @@ public class ServerSync {
 					if (progressBar != null) {
 						progressBar.setVisibility(View.INVISIBLE);
 					}
+					if(menuItem !=null){
+						progressBar.setVisibility(View.VISIBLE);
+						menuItem.setActionView(null);
+					}
 					//Toast.makeText( context, "got facility dues!", Toast.LENGTH_SHORT ).show();	    		    			
 				}
 			});
@@ -734,12 +786,16 @@ public class ServerSync {
 			if (progressBar != null) {
 				progressBar.setVisibility(View.INVISIBLE);
 			}
+			if(menuItem !=null){
+				progressBar.setVisibility(View.VISIBLE);
+				menuItem.setActionView(null);
+			}
 			Toast.makeText( context, "fetchEmployeeRecentLeaves failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
 		}		
 	}	
 
 	
-	public void fetchEmployeeAttendance(ProgressBar progressBar, final AttendanceListFragment listFragment) {
+	public void fetchEmployeeAttendance(final MenuItem menuItem,ProgressBar progressBar, final AttendanceListFragment listFragment) {
 		Map paramMap = new HashMap();		
 		try {   
 			XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(context);
@@ -766,6 +822,10 @@ public class ServerSync {
 					if (progressBar != null) {
 						progressBar.setVisibility(View.INVISIBLE);
 					}
+					if(menuItem !=null){
+						progressBar.setVisibility(View.VISIBLE);
+						menuItem.setActionView(null);
+					}
 				}
 			});
 		}
@@ -773,6 +833,10 @@ public class ServerSync {
 			Log.e(module, "Exception: ", e);
 			if (progressBar != null) {
 				progressBar.setVisibility(View.INVISIBLE);
+			}
+			if(menuItem !=null){
+				progressBar.setVisibility(View.VISIBLE);
+				menuItem.setActionView(null);
 			}
 			Toast.makeText( context, "fetchEmployeeAttendance failed: " + e, Toast.LENGTH_SHORT ).show();	    		    			
 		}		
