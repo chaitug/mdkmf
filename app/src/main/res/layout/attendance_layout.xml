@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="?attr/actionBarSize"
+    android:orientation="vertical" >
+    
+    
+    <LinearLayout
+        android:id="@+id/attendanceListHeader"        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/listheader_border"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/column_attendance_intime_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="3dp"
+            android:text="@string/column_attendance_intime_header"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/column_attendance_outtime_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="3dp"
+            android:text="@string/column_attendance_outtime_header"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/column_attendance_duration_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.1"
+            android:padding="2dp"
+            android:text="@string/column_attendance_duration_header"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <fragment
+        android:id="@+id/attendance_list_fragment"
+        android:name="in.vasista.hr.attendance.AttendanceListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/attendanceListHeader"
+        android:layout_weight="1" />
+</LinearLayout>

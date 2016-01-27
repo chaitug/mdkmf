@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"  
+  android:id="@+id/newIndentItem" 
+  >
+<!--   <AutoCompleteTextView
+    android:id="@+id/orderitemSpinnerProductIdNew"
+    android:layout_toLeftOf="@+id/orderitemSpinnerProductId"        
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"             
+    android:completionThreshold="1"
+    android:dropDownHeight="200dp"
+    android:gravity="center"        
+    android:inputType="textAutoComplete"
+    android:hint="@string/add_product_hint"
+    android:dropDownWidth="wrap_content" />  --> 
+  <Spinner
+    android:id="@+id/indentitemSpinnerProductId"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+	android:layout_margin="10dp"        
+    
+    android:textSize="15sp"
+    android:hint="@string/add_product_hint"
+    android:textColor="@color/notepad_text"/>
+  <EditText
+    android:id="@+id/indentitemEditTextProductQty"
+    android:layout_toLeftOf="@+id/newIndentItemButton"    
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+	android:layout_margin="10dp"        
+    android:hint="@string/add_product_qty_hint"
+    android:inputType="number"
+    android:digits="0123456789."
+    android:textColor="@color/notepad_text"/>  
+  <Button 
+    android:id="@+id/newIndentItemButton"
+    android:background="@drawable/blue_button"
+    style="@style/ButtonText"
+	android:layout_margin="10dp"        
+    
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"  
+    android:layout_alignParentRight="true"
+    android:text="Add Item" 
+    android:textSize="15dip"/>
+</RelativeLayout>
