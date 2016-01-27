@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true" >
+
+    <LinearLayout
+        android:id="@+id/db1_root"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout style="@style/TitleBar2" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <ImageButton
+                    android:id="@+id/about"
+                    style="@style/TitleBarAction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:contentDescription="@string/description_about"
+                    android:onClick="onClickAbout"
+                    android:src="@drawable/title_about" />
+
+                <ImageView
+                    style="@style/TitleBarLogo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="@string/description_logo"
+                    android:src="@drawable/title_logo" />
+<!--                 <ImageButton
+                    android:id="@+id/place"
+                    style="@style/TitleBarAction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                	android:layout_toLeftOf="@+id/homeSettings"
+                    android:onClick="onClickPlace"                    
+                    android:src="@drawable/title_place" />   -->
+                <ImageButton
+                    android:id="@+id/homeSettings"
+                    style="@style/TitleBarAction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:onClick="onClickSettings"                    
+                    android:src="@drawable/title_settings" />                
+            </RelativeLayout>
+        </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/home_btn_sales"
+                    style="@style/HomeButton"
+                    android:drawableTop="@drawable/sales_button"
+                    android:onClick="onClickFeature"
+                    android:text="@string/title_sales" />
+                <Button
+                    android:id="@+id/home_btn_hr"
+                    style="@style/HomeButton"
+                    android:drawableTop="@drawable/hr_button"
+                    android:onClick="onClickFeature"
+                    android:text="@string/title_hr" />  
+           </LinearLayout>
+                
+              <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+                <Button
+                    android:id="@+id/home_btn_inventory"
+                    style="@style/HomeButton"
+                    android:drawableTop="@drawable/inventory_button"
+                    android:onClick="onClickFeature"
+                    android:text="Inventory" />             
+            </LinearLayout>                  
+                                 
+    </LinearLayout>
+
+</ScrollView>

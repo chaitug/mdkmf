@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:id="@+id/orderTitle"
+        style="@style/TitleBar" >
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom" >
+            <ImageButton
+                android:id="@+id/homeButton"
+                style="@style/TitleBarAction"
+                android:contentDescription="@string/description_home"
+                android:onClick="onClickHome"
+                android:src="@drawable/title_home" />
+
+            <ImageView
+                style="@style/TitleBarSeparator"
+                android:layout_toRightOf="@+id/homeButton" />
+
+            <TextView
+                android:id="@+id/employeeIdHeader"
+                style="@style/TitleBarText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="My Leaves"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            
+            <ImageView style="@style/TitleBarSeparator" 
+                android:layout_toLeftOf="@+id/syncLeavesButton"/>
+            <ImageButton
+                android:id="@+id/syncLeavesButton"
+                style="@style/TitleBarAction"
+            	android:layout_alignParentRight="true"
+                android:src="@drawable/title_refresh" /> 
+
+            <ProgressBar
+                android:id="@+id/leavesRefreshProgress"
+                style="@android:style/Widget.ProgressBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@+id/syncLeavesButton"
+                android:indeterminate="true"
+                android:visibility="invisible" />            
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/myemployeedetail_border"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/employeeheader_border"
+            android:orientation="horizontal"
+            android:padding="5dp" >
+
+            <TextView
+                android:id="@+id/employeeLeaveBalanceHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="2dp"
+                android:text="Leave Balance"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp" >
+
+            <TextView
+                android:id="@+id/employeeEarnedLeaveLabel"
+                style="@style/TextLabel"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:text="Earned Leave Balance: " />
+
+            <TextView
+                android:id="@+id/employeeEarnedLeave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_toRightOf="@+id/employeeEarnedLeaveLabel"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp" >
+
+            <TextView
+                android:id="@+id/employeeCasualLeaveLabel"
+                style="@style/TextLabel"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:text="Casual Leave Balance: " />
+
+            <TextView
+                android:id="@+id/employeeCasualLeave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_toRightOf="@+id/employeeCasualLeaveLabel"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp" >
+
+            <TextView
+                android:id="@+id/employeeHalfPayLeaveLabel"
+                style="@style/TextLabel"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:text="Half Pay Leave Balance: " />
+
+            <TextView
+                android:id="@+id/employeeHalfPayLeave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_toRightOf="@+id/employeeHalfPayLeaveLabel"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/employeeheader_border"
+            android:orientation="horizontal"
+            android:padding="5dp" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="2dp"
+                android:text="Recent Leaves"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+       </RelativeLayout>
+    </LinearLayout>
+        
+    <LinearLayout
+        android:id="@+id/leaveListHeader"        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/listheader_border"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/column_leave_type_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="2dp"
+            android:text="@string/column_leave_type_header"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/column_leave_status_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="2dp"
+            android:text="@string/column_leave_status_header"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/column_leave_fromdate_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="2dp"
+            android:text="@string/column_leave_fromdate_header"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/column_leave_thrudate_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="2dp"
+            android:text="@string/column_leave_thrudate_header"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <fragment
+        android:id="@+id/leave_list_fragment"
+        android:name="in.vasista.hr.leave.LeaveListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/leaveListHeader"
+        android:layout_weight="1" />
+</LinearLayout>

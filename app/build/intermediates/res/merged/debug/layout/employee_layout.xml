@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/employeeTitle"
+        style="@style/TitleBar" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom" >
+        <ImageButton
+            android:id="@+id/homeButton"                        
+            style="@style/TitleBarAction"
+            android:contentDescription="@string/description_home"
+            android:onClick="onClickHome"
+            android:src="@drawable/title_home" />
+
+        <ImageView style="@style/TitleBarSeparator" 
+            android:layout_toRightOf="@+id/homeButton" />
+        
+            <TextView
+                style="@style/TitleBarText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Employees"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        	<ImageView android:id="@+id/employeesRefreshSeparator"
+            	style="@style/TitleBarSeparator" 
+                android:layout_toLeftOf="@+id/refreshEmployeesButton"/>
+            <ImageButton
+                android:id="@+id/refreshEmployeesButton"
+                style="@style/TitleBarAction"
+                android:layout_alignParentRight="true"                
+                android:src="@drawable/title_refresh" />             
+
+            <ProgressBar
+                android:id="@+id/employeesRefreshProgress"
+                style="@android:style/Widget.ProgressBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@+id/refreshEmployeesButton"
+                android:indeterminate="true"
+                android:visibility="invisible" />
+<!--         <ImageView style="@style/TitleBarSeparator" 
+                android:layout_toLeftOf="@+id/employeeSearch"
+            />
+            <ImageButton
+                android:id="@+id/employeeSearch"
+                style="@style/TitleBarAction"
+                android:layout_alignParentRight="true"                
+                android:src="@drawable/title_search2" />  -->
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <!-- Editext for Search -->
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="9dp"
+    android:padding="5dp">
+        <EditText
+            android:id="@+id/inputSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter search text"
+            android:inputType="textVisiblePassword" />
+<ImageButton
+        android:id="@+id/inputSearchClear"      
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="right|center_vertical"
+        android:background="@drawable/ic_delete" />
+
+</FrameLayout>        
+        
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/facility_list_fragment"
+        android:name="in.vasista.vsales.employee.EmployeeListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/employeeTitle"
+        android:layout_weight="1" />
+
+</LinearLayout>

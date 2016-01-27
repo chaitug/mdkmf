@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/res/merged/debug/xml/preference_headers.xml",
+        "source": "/home/vasista/StudioProjects/android-mdkmf/app/src/main/res/xml/preference_headers.xml"
+    },
+    {
+        "merged": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/res/merged/debug/xml/userpreferences.xml",
+        "source": "/home/vasista/StudioProjects/android-mdkmf/app/src/main/res/xml/userpreferences.xml"
+    }
+]

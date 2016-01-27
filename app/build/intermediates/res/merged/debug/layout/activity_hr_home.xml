@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true" >
+
+    <LinearLayout
+        android:id="@+id/db1_root"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout style="@style/TitleBar2" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <ImageButton
+                    android:id="@+id/about"
+                    style="@style/TitleBarAction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:contentDescription="@string/description_about"
+                    android:onClick="onClickAbout"
+                    android:src="@drawable/title_about" />
+
+                <ImageView
+                android:id="@+id/titleBarLogo"                    
+                    style="@style/TitleBarLogo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="@string/description_logo"
+                    android:src="@drawable/title_logo" />
+            <ProgressBar
+                android:id="@+id/myEmployeeRefreshProgress"
+                style="@android:style/Widget.ProgressBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@+id/titleBarLogo"
+                android:indeterminate="true"
+                android:visibility="invisible" />
+             <ImageButton
+                    android:id="@+id/homeSettings"
+                    style="@style/TitleBarAction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"                    
+                    android:layout_alignParentRight="true"
+                    android:onClick="onClickSettings"                    
+                    android:src="@drawable/title_settings" />  
+            </RelativeLayout>
+        </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/profileLeaveLayout"                
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/home_btn_employeeprofile"
+                    style="@style/HomeButton"
+                    android:drawableTop="@drawable/employeeprofile_button"
+                    android:onClick="onClickFeature"
+                    android:text="@string/title_employeeprofile" />
+
+                <Button
+                    android:id="@+id/home_btn_leave"
+                    style="@style/HomeButton"
+                    android:drawableTop="@drawable/leave_button"
+                    android:onClick="onClickFeature"
+                    android:text="@string/title_leave" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/payslipSearchLayout"                                
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/home_btn_payslip"
+                    style="@style/HomeButton"
+                    android:drawableTop="@drawable/payslip_button"
+                    android:onClick="onClickFeature"
+                    android:text="@string/title_payslip" />
+                <Button
+                    android:id="@+id/home_btn_attendance"
+                    style="@style/HomeButton"
+                    android:drawableTop="@drawable/attendance_button" 
+                    android:onClick="onClickFeature"
+                    android:text="@string/title_attendance" />   
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+                <Button
+                    android:id="@+id/home_btn_emplsearch"
+                    style="@style/HomeButton"
+                    android:drawableTop="@drawable/emplsearch_button"
+                    android:onClick="onClickFeature"
+                    android:text="@string/title_emplsearch" />
+           
+            </LinearLayout>               
+    </LinearLayout>
+
+</ScrollView>
