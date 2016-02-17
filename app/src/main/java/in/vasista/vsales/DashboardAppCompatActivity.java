@@ -38,7 +38,9 @@ public class DashboardAppCompatActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true);
+        }
 
     }
 
@@ -85,14 +87,17 @@ public class DashboardAppCompatActivity extends AppCompatActivity {
      */
     public void actionBarHomeEnabled(){
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
     public void setContentChildView(int layoutResID) {
         CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
 
         View hiddenInfo = getLayoutInflater().inflate(layoutResID, coordinatorLayout, false);
-        coordinatorLayout.addView(hiddenInfo);
+        // Added child view at second position of the childs  -   ** second position - 1 **
+        coordinatorLayout.addView(hiddenInfo,1);
     }
     public void setSalesDashboardTitle(int title){
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME

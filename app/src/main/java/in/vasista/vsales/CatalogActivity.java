@@ -42,7 +42,7 @@ public class CatalogActivity extends DashboardAppCompatActivity
  * Always followed by onStart().
  *
  */
-private MenuItem menuItem;
+
     ProgressBar progressBar;
 protected void onCreate(Bundle savedInstanceState) 
 {
@@ -62,12 +62,11 @@ protected void onCreate(Bundle savedInstanceState)
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                menuItem = item;
-                menuItem.setActionView(R.layout.progressbar);
-                progressBar=(ProgressBar)menuItem.getActionView().findViewById(R.id.menuitem_progress);
+                item.setActionView(R.layout.progressbar);
+                progressBar=(ProgressBar) item.getActionView().findViewById(R.id.menuitem_progress);
                 android.app.FragmentManager fm = getFragmentManager();
                 CatalogListFragment catalogListFragment = (CatalogListFragment) fm.findFragmentById(R.id.catalog_list_fragment);
-                catalogListFragment.syncCatalog(menuItem);
+                catalogListFragment.syncCatalog(item);
                 return true;
 
         }

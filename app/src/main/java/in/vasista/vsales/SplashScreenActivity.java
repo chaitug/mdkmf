@@ -97,7 +97,7 @@ public class SplashScreenActivity extends Activity
 					    		prefEditor.putString(MainActivity.SALESREP_DB_PERM, salesRepPerm);
 					    		prefEditor.putString(MainActivity.HR_DB_PERM, hrPerm);		
 					    		prefEditor.putString(MainActivity.INVENTORY_DB_PERM, inventoryPerm);					    		  		
-					    		prefEditor.commit();
+					    		prefEditor.apply();
 							}
 						}
 					}

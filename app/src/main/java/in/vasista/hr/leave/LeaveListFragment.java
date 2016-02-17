@@ -3,7 +3,6 @@ package in.vasista.hr.leave;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import java.util.List;
@@ -27,7 +26,7 @@ public class LeaveListFragment extends ListFragment {
     	    datasource.open();
     	    leaveItems = datasource.getAllLeaves();
 		}
-		final ListView listView = getListView();
+		//final ListView listView = getListView();
 
 
 		if (adapter == null) {			   	    

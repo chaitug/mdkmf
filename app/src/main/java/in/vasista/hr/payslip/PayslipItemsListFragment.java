@@ -28,8 +28,7 @@ public class PayslipItemsListFragment extends ListFragment{
 		
 		super.onActivityCreated(savedInstanceState);  
 		Intent payslipItemsIntent= getActivity().getIntent();
-		String payrollHeaderId = "";
-		payrollHeaderId = payslipItemsIntent.getStringExtra("payrollHeaderId");
+		String payrollHeaderId = payslipItemsIntent.getStringExtra("payrollHeaderId");
 		if (adapter == null) {		
 			datasource = new PayslipDataSource(getActivity()); 
 			datasource.open();
@@ -38,7 +37,7 @@ public class PayslipItemsListFragment extends ListFragment{
 		}  
 	
 		listView = getListView();
-		final PayslipItemsListFragment payslipItemsListFragment = this;
+		//final PayslipItemsListFragment payslipItemsListFragment = this;
 
 		if (listView.getHeaderViewsCount() == 0) {	
 			
@@ -67,7 +66,7 @@ public class PayslipItemsListFragment extends ListFragment{
 	void updatePayslipHeaderViewInternal(Payslip payslip) {
 		float netAmount = payslip.getNetAmount();
 		String netAmountStr = "Net: Rs " + netAmount;
-		String payrollPeriod = payslip.getPayrollPeriod();
+		//String payrollPeriod = payslip.getPayrollPeriod();
 
 		TextView netAmountView = (TextView)listView.getRootView().findViewById(R.id.payslipNetAmount);
 		if (netAmountView != null) {

@@ -52,5 +52,6 @@ protected void onCreate(Bundle savedInstanceState)
 
     view.loadUrl("file:///android_asset/about.html");         
 }
+
     
 } // end class  

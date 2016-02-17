@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import in.vasista.vsales.preference.FragmentPreferences;
 import in.vasista.vsales.sync.ServerSync;
 
 public class HRDashboardActivity extends DashboardAppCompatActivity  {   
@@ -22,6 +23,7 @@ public class HRDashboardActivity extends DashboardAppCompatActivity  {
     private static final int SHOW_PREFERENCES = 1;
 	private boolean hideMenu = false;
 	MenuItem menuItem;
+	boolean settings_menu = true;
 	
 	/**
 	 * onCreate - called when the activity is first created.
@@ -48,6 +50,7 @@ Log.d(module, "onlyHRDashboard equals " + onlyHRDashboard);
     	else { 
 //    	    setContentView(R.layout.activity_hr_home_alt);
 			setContentChildView(R.layout.activity_hr_home_alt);
+			settings_menu = false;
 			actionBarHomeEnabled();
     	}
 
@@ -173,7 +176,31 @@ Log.d(module, "onlyHRDashboard equals " + onlyHRDashboard);
         }
         return false;
     } */
-    
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		menu.removeItem(R.id.homeSearch);
+		menu.removeItem(R.id.action_refresh);
+		if (!settings_menu){
+			menu.removeItem(R.id.action_settings);
+			menu.removeItem(R.id.action_about);
+		}
+		return super.onCreateOptionsMenu(menu);
+	}
+	public boolean onOptionsItemSelected(MenuItem item){
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+			case R.id.action_settings:
+				Intent i = new Intent(this.getBaseContext(), FragmentPreferences.class);
+				startActivityForResult(i, SHOW_PREFERENCES);
+				return true;
+			case R.id.action_about:
+				onClickAbout();
+				return true;
+		}
+		return false;
+	}
 	// Click Methods
     
     

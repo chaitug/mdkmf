@@ -1,8 +1,10 @@
 package in.vasista.vsales.preference;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +12,10 @@ import android.widget.LinearLayout;
 
 import java.util.List;
 
+import in.vasista.global.GlobalApplication;
 import in.vasista.vsales.R;
 
-public class FragmentPreferences extends PreferenceActivity {
+public class FragmentPreferences extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
   @Override 
   public void onBuildHeaders(List<Header> target) {
@@ -45,5 +48,17 @@ public class FragmentPreferences extends PreferenceActivity {
           finish();
         }
       });
+
+    PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+  }
+
+  @Override
+  public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+    //Toast.makeText(getApplicationContext(), "Pref changed " + key, Toast.LENGTH_LONG).show();
+
+    if (key.equalsIgnoreCase("password")||key.equalsIgnoreCase("serverURL")||key.equalsIgnoreCase("userName")||key.equalsIgnoreCase("tenantId")){
+      ((GlobalApplication)getApplication()).setPrefChange(true);
+    }
+
   }
 }

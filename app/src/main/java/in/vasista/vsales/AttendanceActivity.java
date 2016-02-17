@@ -41,7 +41,6 @@ public class AttendanceActivity extends DashboardAppCompatActivity
  * 
  * Always followed by onStart().
  *
- * @param savedInstanceState Bundle
  */
 	MenuItem menuItem;
 	protected void onCreate(Bundle savedInstanceState) 

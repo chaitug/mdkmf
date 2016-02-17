@@ -26,8 +26,8 @@ public class PayslipListFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		
 		super.onActivityCreated(savedInstanceState);
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity()); 		
-    	prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		//SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+    	//prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 		if (adapter == null) {			
     	    datasource = new PayslipDataSource(getActivity());   
