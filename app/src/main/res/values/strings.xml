@@ -170,4 +170,7 @@
     <string name="title_edit">Edit</string>
     <string name="title_done">Done</string>
     <string name="title_upload">Upload</string>
+
+    <string name="dialog_indent_milk_message">Quantity in Pkts (Please enter in multiple of %1$s)</string>
+    <string name="title_inventory">Inventory</string>
 </resources>

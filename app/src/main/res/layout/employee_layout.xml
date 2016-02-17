@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="?attr/actionBarSize"
+    android:layout_marginTop="?attr/actionBarSize"
     android:orientation="vertical" >
 
     
@@ -40,7 +40,6 @@
         android:name="in.vasista.vsales.employee.EmployeeListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/employeeTitle"
         android:layout_weight="1" />
 
 </LinearLayout>

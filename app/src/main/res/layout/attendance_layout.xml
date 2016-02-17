@@ -48,6 +48,5 @@
         android:name="in.vasista.hr.attendance.AttendanceListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/attendanceListHeader"
         android:layout_weight="1" />
 </LinearLayout>

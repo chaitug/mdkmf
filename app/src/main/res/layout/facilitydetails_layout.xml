@@ -41,7 +41,6 @@
                 android:id="@+id/facilityIdLabel"
             	style="@style/TextLabel"                
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_margin="2dp"
                 android:text="Code: "/>
 
@@ -49,7 +48,6 @@
                 android:id="@+id/facilityId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-            	android:layout_toRightOf="@+id/facilityIdLabel"                                
                 android:layout_margin="2dp"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -64,7 +62,6 @@
                 android:id="@+id/facilityNameLabel"
             	style="@style/TextLabel"
                 android:layout_height="wrap_content"
-            	android:layout_toLeftOf="@+id/facilityName"                
                 android:layout_margin="2dp"
                 android:text="Name: "/>
 
@@ -72,7 +69,6 @@
                 android:id="@+id/facilityName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_margin="2dp"
                 android:textSize="12sp"
                 android:textStyle="bold" />

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-android:paddingTop="?attr/actionBarSize"
+    android:layout_marginTop="?attr/actionBarSize"
     android:orientation="vertical" >
 
     
@@ -24,7 +24,6 @@ android:paddingTop="?attr/actionBarSize"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_margin="5dp"
-                android:layout_weight="1"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 android:textStyle="bold" />

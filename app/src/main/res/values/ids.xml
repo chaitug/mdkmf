@@ -30,6 +30,6 @@
 
     <item type="id" name="blocks_ruler" />
     <item type="id" name="blocks_now" />
-    <item name="progress_sync" type="id"></item>
+    <item name="progress_sync" type="id" />
 
 </resources>

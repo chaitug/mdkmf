@@ -21,8 +21,6 @@
                 style="@android:style/Widget.ProgressBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_toRightOf="@+id/separator"
                 android:indeterminate="true"
                 android:visibility="invisible" />
             <TextView
@@ -30,8 +28,6 @@
                 style="@style/TextLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/inventoryDetailsHeader"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:textColor="@color/title_text"
                 android:textStyle="italic" />
