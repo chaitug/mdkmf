@@ -6,6 +6,11 @@
         android:icon="@drawable/title_upload"
         android:title="@string/title_upload"/>
     <item
+        android:id="@+id/action_indent_edit"
+        app:showAsAction="always"
+        android:icon="@drawable/title_edit"
+        android:title="@string/title_edit"/>
+    <item
         android:id="@+id/action_indent_done"
         app:showAsAction="always"
         android:icon="@drawable/title_accept"

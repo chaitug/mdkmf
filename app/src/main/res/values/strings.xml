@@ -39,6 +39,7 @@
     <string name="title_feature3">Payments</string>
     <string name="title_feature4">Catalog</string>
     <string name="title_feature5">Outlets</string>
+    <string name="title_feature6">Party Ledger</string>
     <string name="title_sales">Sales</string>
     <string name="title_hr">HR</string>
     <string name="title_employeeprofile">My Profile</string>
@@ -107,7 +108,12 @@
     <string name="column_payment_id_header">Id</string>
     <string name="column_payment_date_header">Payment Date</string>
     <string name="column_payment_method_header">Method</string>
-    <string name="column_payment_amount_header">Amount (Rs)</string>    
+    <string name="column_payment_amount_header">Amount (Rs)</string>
+
+    <string name="column_ledger_id_header">Id</string>
+    <string name="column_ledger_date_header">Date</string>
+    <string name="column_ledger_invoice_header">Invoice Amt</string>
+    <string name="column_ledger_amount_header">Amount (Rs)</string>
     
     <string name="column_facility_id_header">Code</string>
     <string name="column_facility_name_header">Name</string>
@@ -170,4 +176,36 @@
     <string name="title_edit">Edit</string>
     <string name="title_done">Done</string>
     <string name="title_upload">Upload</string>
+
+    <string name="dialog_indent_milk_message">Quantity in Pkts (Please enter in multiple of %1$s) and minimum %2$s</string>
+    <string name="title_inventory">Inventory</string>
+
+    <!--Location-->
+    <string name="action_location">Location</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="record_note">Record Note</string>
+    <string name="note_description">Note description</string>
+    <string name="note_title">Note title</string>
+    <string name="title_menu_synclocaltion">Sync locations</string>
+    <string name="exception_location">Please enable your location.</string>
+    <string name="saved_location">Note recorded. Please sync location with server.</string>
+    <string name="synced_location">Already Synced. Please record new Note.</string>
+    <string name="sync_success_location">Successfully synced with server.</string>
+    <string name="sync_failed_location">Sync failed. Please contact admin.</string>
+
+    <!-- Navigation Drawer -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+<string name="Rs">\u20B9</string>
+    <string name="arrows">&lt;-&gt;</string>
+    <string name="title_analytica_sales">Sales Analytics</string>
+
+    <string name="present_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="verify_new_password">Verify New Password</string>
+    <string name="change_password">Change Password</string>
 </resources>
