@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="in.vasista.vsales"
-    android:versionCode="1"
-    android:versionName="1.0" >
+xmlns:tools="http://schemas.android.com/tools"
+    package="in.vasista.vsales">
 
-    <application 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
       android:theme="@style/AppTheme.NoActionBar"
       android:icon="@drawable/ic_launcher_vpos"
-      android:label="@string/app_name">
+      android:label="@string/app_name"
+        android:allowBackup="true"
+        android:name="in.vasista.global.GlobalApplication" >
       <meta-data android:name="com.google.android.gms.version"
            android:value="@integer/google_play_services_version" />
 	  <meta-data android:name="com.google.android.maps.v2.API_KEY"
@@ -24,41 +34,83 @@
     	</activity>       
         <activity android:name="in.vasista.vsales.SalesDashboardActivity"
             android:parentActivityName="in.vasista.vsales.MainActivity"
-            android:label="Sales Dashboard">
+            android:label="Sales Dashboard"
+            tools:ignore="UnusedAttribute">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.vasista.vsales.MainActivity" />
     	</activity> 
         <activity android:name="in.vasista.vsales.HRDashboardActivity"
             android:parentActivityName="in.vasista.vsales.MainActivity"
-      			android:label="HR Dashboard">
+      			android:label="HR Dashboard"
+            tools:ignore="UnusedAttribute">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.vasista.vsales.MainActivity" />
     	</activity>     	
       <activity android:name="in.vasista.vsales.OrderActivity"
           android:parentActivityName="in.vasista.vsales.SalesDashboardActivity"
             android:label="@string/title_feature1"
-            />
+          tools:ignore="UnusedAttribute"
+            >
+          <meta-data
+              android:name="android.support.PARENT_ACTIVITY"
+              android:value="in.vasista.vsales.SalesDashboardActivity" />
+      </activity>
       <activity android:name="in.vasista.vsales.IndentActivity"
           android:parentActivityName="in.vasista.vsales.SalesDashboardActivity"
             android:label="@string/title_feature2"
-            />
+          tools:ignore="UnusedAttribute">
+          <meta-data
+              android:name="android.support.PARENT_ACTIVITY"
+              android:value="in.vasista.vsales.SalesDashboardActivity" />
+      </activity>
       <activity android:name="in.vasista.vsales.PaymentActivity"
           android:parentActivityName="in.vasista.vsales.SalesDashboardActivity"
             android:label="@string/title_feature3"
-            />
+          tools:ignore="UnusedAttribute"
+            >
+          <meta-data
+              android:name="android.support.PARENT_ACTIVITY"
+              android:value="in.vasista.vsales.SalesDashboardActivity" />
+      </activity>
       <activity android:name="in.vasista.vsales.CatalogActivity"
           android:parentActivityName="in.vasista.vsales.SalesDashboardActivity"
             android:label="@string/title_feature4"
-            />
+          tools:ignore="UnusedAttribute"
+            >
+          <meta-data
+              android:name="android.support.PARENT_ACTIVITY"
+              android:value="in.vasista.vsales.SalesDashboardActivity" />
+      </activity>
       <activity android:name="in.vasista.vsales.FacilityActivity"
           android:parentActivityName="in.vasista.vsales.SalesDashboardActivity"
             android:label="@string/title_feature5"
             android:windowSoftInputMode="stateHidden"
-            />
+          tools:ignore="UnusedAttribute"
+            >
+          <meta-data
+              android:name="android.support.PARENT_ACTIVITY"
+              android:value="in.vasista.vsales.SalesDashboardActivity" />
+      </activity>
       <activity android:name="in.vasista.vsales.EmployeeActivity"
           android:parentActivityName="in.vasista.vsales.HRDashboardActivity"
             android:label="@string/title_hr"
-            />
+          tools:ignore="UnusedAttribute"
+            >
+          <meta-data
+              android:name="android.support.PARENT_ACTIVITY"
+              android:value="in.vasista.vsales.HRDashboardActivity" />
+      </activity>
       <activity android:name="in.vasista.vsales.AboutActivity"
             android:parentActivityName="in.vasista.vsales.MainActivity"
             android:label="@string/title_about"
-            />
+          tools:ignore="UnusedAttribute"
+            >
+          <meta-data
+              android:name="android.support.PARENT_ACTIVITY"
+              android:value="in.vasista.vsales.MainActivity" />
+      </activity>
       <activity android:name="in.vasista.vsales.SearchActivity"
 
             android:label="@string/title_search"
@@ -66,58 +118,111 @@
 
         <activity android:name="in.vasista.vsales.IndentItemsListActivity"
             android:parentActivityName="in.vasista.vsales.IndentActivity"
+            tools:ignore="UnusedAttribute"
       			android:label="Indent Details">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.vasista.vsales.IndentActivity" />
     	</activity>  
         <activity android:name="in.vasista.vsales.OrderItemsListActivity"
             android:parentActivityName="in.vasista.vsales.OrderActivity"
+            tools:ignore="UnusedAttribute"
       			android:label="Order Details">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.vasista.vsales.OrderActivity" />
     	</activity> 
         <activity android:name="in.vasista.vsales.FacilityDetailsActivity"
             android:parentActivityName="in.vasista.vsales.FacilityActivity"
+            tools:ignore="UnusedAttribute"
       			android:label="Facility Details">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.vasista.vsales.FacilityActivity" />
     	</activity>   
         <activity android:name="in.vasista.vsales.EmployeeDetailsActivity"
             android:parentActivityName="in.vasista.vsales.EmployeeActivity"
+            tools:ignore="UnusedAttribute"
       			android:label="Employee Details">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.vasista.vsales.EmployeeActivity" />
     	</activity> 
         <activity android:name="in.vasista.vsales.MyEmployeeDetailsActivity"
             android:parentActivityName="in.vasista.vsales.HRDashboardActivity"
+            tools:ignore="UnusedAttribute"
       			android:label="My Employee Details">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.vasista.vsales.HRDashboardActivity" />
     	</activity> 
          <activity android:name="in.vasista.vsales.LeaveActivity"
              android:parentActivityName="in.vasista.vsales.HRDashboardActivity"
-      			android:label="Leaves"/>      	 
+             tools:ignore="UnusedAttribute"
+      			android:label="Leaves">
+             <meta-data
+                 android:name="android.support.PARENT_ACTIVITY"
+                 android:value="in.vasista.vsales.HRDashboardActivity" />
+         </activity>
         <activity android:name="in.vasista.vsales.PayslipActivity"
             android:parentActivityName="in.vasista.vsales.HRDashboardActivity"
-      			android:label="Payslip"/>     	
+            tools:ignore="UnusedAttribute"
+      			android:label="Payslip">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.vasista.vsales.HRDashboardActivity" />
+        </activity>
         <activity android:name="in.vasista.vsales.PayslipItemsListActivity"
             android:parentActivityName="in.vasista.vsales.PayslipActivity"
-      			android:label="Payslip Details"/>    	     	    	  	    	
+            tools:ignore="UnusedAttribute"
+      			android:label="Payslip Details">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.vasista.vsales.PayslipActivity" />
+        </activity>
     	<activity android:name="in.vasista.vsales.preference.FragmentPreferences"
             android:parentActivityName="in.vasista.vsales.MainActivity"
-            android:theme="@style/AppTheme" />
+            tools:ignore="UnusedAttribute"
+            android:theme="@style/AppTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.vasista.vsales.MainActivity" />
+        </activity>
         <activity android:name="in.vasista.vsales.AttendanceActivity"
             android:parentActivityName="in.vasista.vsales.HRDashboardActivity"
-      			android:label="Attendance"/>  
+            tools:ignore="UnusedAttribute"
+      			android:label="Attendance">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.vasista.vsales.HRDashboardActivity" />
+        </activity>
         <activity android:name="in.vasista.location.LocationActivity"
-      			android:label="Location"/>   
+            android:parentActivityName="in.vasista.vsales.SalesDashboardActivity"
+            tools:ignore="UnusedAttribute"
+            android:label="Location">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.vasista.vsales.SalesDashboardActivity" />
+        </activity>
         <activity android:name="in.vasista.inventory.InventoryActivity"
             android:parentActivityName="in.vasista.vsales.MainActivity"
-      			android:label="Inventory"/>        			  
+            tools:ignore="UnusedAttribute"
+      			android:label="Inventory">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.vasista.vsales.MainActivity" />
+        </activity>
         <activity android:name="in.vasista.inventory.InventoryDetailsActivity"
             android:parentActivityName="in.vasista.inventory.InventoryActivity"
-      			android:label="InventoryDetails"/>        			
-        <service android:enabled="true" android:name="in.vasista.location.LocationService"/>
+            tools:ignore="UnusedAttribute"
+      			android:label="InventoryDetails">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.vasista.inventory.InventoryActivity" />
+        </activity>
+        <!--<service android:enabled="true" android:name="in.vasista.location.LocationService"/>-->
         			     
       </application>
-      
-      <uses-permission android:name="android.permission.INTERNET"></uses-permission> 
-	  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/> 
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />	      
-      <uses-permission android:name="android.permission.CALL_PHONE" />
-      <uses-permission android:name="android.permission.READ_PHONE_STATE" />    
+
     
 </manifest>

@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import in.vasista.global.GlobalApplication;
 import in.vasista.vsales.adapter.FacilityAutoAdapter;
 import in.vasista.vsales.db.FacilityDataSource;
 import in.vasista.vsales.db.IndentsDataSource;
@@ -34,7 +35,7 @@ import in.vasista.vsales.facility.Facility;
 import in.vasista.vsales.preference.FragmentPreferences;
 import in.vasista.vsales.sync.ServerSync;
 
-public class SalesDashboardActivity extends DashboardAppCompatActivity  {   
+public class SalesDashboardActivity extends DrawerCompatActivity  {
 	public static final String module = SalesDashboardActivity.class.getName();
 
     static final private int MENU_PREFERENCES = Menu.FIRST+1;
@@ -114,9 +115,7 @@ public class SalesDashboardActivity extends DashboardAppCompatActivity  {
     	}
     	else if (salesRepPerm.equals("N")) {
     	    AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteRetailer); 	     
-    	    actv.setVisibility(View.GONE);     		         
-    		ImageButton searchButton = (ImageButton)findViewById(R.id.homeSearch);
-    		searchButton.setVisibility(View.GONE); 
+    	    actv.setVisibility(View.GONE);
     		Button outletsButton = (Button)findViewById(R.id.home_btn_outlets);
     		outletsButton.setVisibility(View.GONE);     
     	    TextView accSum = (TextView) findViewById(R.id.accntSummary); 	     
@@ -152,8 +151,14 @@ Log.d(module, "onlySalesDashboard equals " + onlySalesDashboard);
     	else {
 			setContentChildView(R.layout.activity_sales_home_alt);
 			actionBarHomeEnabled();
-			settings_menu = false;
-			invalidateOptionsMenu();
+
+			// back button functionality
+			toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					finish();
+				}
+			});
     	}
 
 
@@ -222,6 +227,14 @@ Log.d(module, "onlySalesDashboard equals " + onlySalesDashboard);
 	protected void onResume ()
 	{
 	   super.onResume();
+		setupDashboard();
+		if(((GlobalApplication)getApplication()).isPrefChange()){
+			((GlobalApplication)getApplication()).setPrefChange(false);
+			Intent i = new Intent(this.getBaseContext(), SplashScreenActivity.class);
+			startActivity(i);
+			finish();
+		}
+
 	}
 
 	/**
@@ -285,10 +298,6 @@ public boolean onCreateOptionsMenu(Menu menu) {
 	public boolean onOptionsItemSelected(MenuItem item){
 		super.onOptionsItemSelected(item);
 		switch (item.getItemId()) {
-			case R.id.action_settings:
-				Intent i = new Intent(this.getBaseContext(), FragmentPreferences.class);
-				startActivityForResult(i, SHOW_PREFERENCES);
-				return true;
 			case R.id.homeSearch:
 				if (actv.isShown()) {
 					actv.setVisibility(View.GONE);
@@ -297,7 +306,6 @@ public boolean onCreateOptionsMenu(Menu menu) {
 					actv.setVisibility(View.VISIBLE);
 				}
 				return true;
-
 		}
 		return false;
 	}
@@ -383,7 +391,7 @@ public boolean onCreateOptionsMenu(Menu menu) {
     	}
     	SharedPreferences.Editor prefEditor = prefs.edit();
     	prefEditor.putString("storeId", retailerId);  
-    	prefEditor.commit();          
+    	prefEditor.apply();
     	
 		TextView accountSummaryView = (TextView)findViewById(R.id.accntSummary);
 		Facility facility = (Facility)facilityMap.get(retailerId);

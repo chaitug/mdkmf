@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 
 import in.vasista.vsales.sync.ServerSync;
 
-public class HRDashboardActivity extends DashboardAppCompatActivity  {   
+public class HRDashboardActivity extends DrawerCompatActivity  {
 	public static final String module = HRDashboardActivity.class.getName();
 
     static final private int MENU_PREFERENCES = Menu.FIRST+1;
@@ -49,6 +49,14 @@ Log.d(module, "onlyHRDashboard equals " + onlyHRDashboard);
 //    	    setContentView(R.layout.activity_hr_home_alt);
 			setContentChildView(R.layout.activity_hr_home_alt);
 			actionBarHomeEnabled();
+
+			// back button functionality
+			toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					finish();
+				}
+			});
     	}
 
 		ProgressBar progressBar = new ProgressBar(this);
@@ -173,7 +181,20 @@ Log.d(module, "onlyHRDashboard equals " + onlyHRDashboard);
         }
         return false;
     } */
-    
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		menu.removeItem(R.id.homeSearch);
+		menu.removeItem(R.id.action_refresh);
+		return super.onCreateOptionsMenu(menu);
+	}
+	public boolean onOptionsItemSelected(MenuItem item){
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+		}
+		return false;
+	}
 	// Click Methods
     
     
