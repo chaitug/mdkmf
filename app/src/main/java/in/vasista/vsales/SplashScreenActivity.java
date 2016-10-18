@@ -59,7 +59,9 @@ public class SplashScreenActivity extends Activity
 				//Get the current thread's token  
 				synchronized (this)  
 				{
-					Map paramMap = new HashMap();		
+					Map paramMap = new HashMap();
+					SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+					SharedPreferences.Editor prefEditor = prefs.edit();
 					XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(getBaseContext());
 					Object result = adapter.callSync("getMobilePermissions", paramMap);	
 					if (result != null) { 
@@ -91,17 +93,25 @@ public class SplashScreenActivity extends Activity
 									}									
 								}
 								// refresh permissions prefs
-						    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());								
-								SharedPreferences.Editor prefEditor = prefs.edit();
+
 					    		prefEditor.putString(MainActivity.RETAILER_DB_PERM, retailerPerm);
 					    		prefEditor.putString(MainActivity.SALESREP_DB_PERM, salesRepPerm);
 					    		prefEditor.putString(MainActivity.HR_DB_PERM, hrPerm);		
 					    		prefEditor.putString(MainActivity.INVENTORY_DB_PERM, inventoryPerm);					    		  		
-					    		prefEditor.commit();
 							}
 						}
 					}
-					
+
+					String name = (String)((Map)result).get("name");
+
+					if(name != null)
+						prefEditor.putString(MainActivity.USER_FULLNAME, name);
+
+					String contactNumber = (String)((Map)result).get("contactNumber");
+					if (contactNumber != null)
+						prefEditor.putString(MainActivity.USER_MOBILE, contactNumber);
+
+					prefEditor.apply();
 					/*
 					//Initialize an integer (that will act as a counter) to zero  
 					int counter = 0;  
