@@ -9,6 +9,7 @@ public class Employee {
 	String position;		
 	String phoneNum;
 	Date joinDate;
+	Date unitJoinDate;
 	String weeklyOff;
 
 	Date leaveBalanceDate;
@@ -17,7 +18,7 @@ public class Employee {
 	float halfPayLeave;
 	
 	public Employee(String id, String name, String dept, String position, String phoneNum,
-			Date joinDate, String weeklyOff) {
+			Date joinDate, Date unitJoinDate, String weeklyOff) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -25,6 +26,7 @@ public class Employee {
 		this.position = position;
 		this.phoneNum = phoneNum;
 		this.joinDate = joinDate;
+		this.unitJoinDate = unitJoinDate;
 		this.weeklyOff = weeklyOff;
 	}
 
@@ -45,7 +47,10 @@ public class Employee {
 	}
 	public Date getJoinDate() {
 		return joinDate;
-	}	
+	}
+	public Date getUnitJoinDate() {
+		return unitJoinDate;
+	}
 	public String getWeeklyOff() {
 		return weeklyOff;
 	}	
