@@ -17,7 +17,7 @@
 <resources>
     <string name="hello">Choose one of the features below.</string>
 
-    <string name="app_name">Milkosoft</string>
+    <string name="app_name">Milkosoft MDKMF</string>
     <string name="description_logo">Milkosoft</string>
 
     <string name="description_about">About</string>

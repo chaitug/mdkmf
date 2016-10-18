@@ -32,6 +32,10 @@ public class MyEmployeeDetailsActivity extends DashboardAppCompatActivity  {
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");
 	    String dateStr = dateFormat.format(date);
 		joinDateView.setText(dateStr);
+		TextView unitJoinDateView = (TextView)findViewById(R.id.employeeUnitJoinDate);
+		Date unitJoinDate = employee.getUnitJoinDate();
+		String unitJoinDateStr = dateFormat.format(unitJoinDate);
+		unitJoinDateView.setText(unitJoinDateStr);
 		TextView employeeWeeklyOffView = (TextView)findViewById(R.id.employeeWeeklyOff);
 		employeeWeeklyOffView.setText(employee.getWeeklyOff());			
 		TextView phoneView = (TextView)findViewById(R.id.employeePhone); 

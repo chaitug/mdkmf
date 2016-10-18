@@ -28,7 +28,8 @@ public class EmployeeDataSource {
 	      MySQLiteHelper.COLUMN_EMPLOYEE_POSITION,	 
 	      MySQLiteHelper.COLUMN_EMPLOYEE_PHONE_NUM,	 
 	      MySQLiteHelper.COLUMN_EMPLOYEE_JOIN_DATE,
-	      MySQLiteHelper.COLUMN_EMPLOYEE_WEEKLY_OFF,
+			  MySQLiteHelper.COLUMN_EMPLOYEE_UNIT_JOIN_DATE,
+			  MySQLiteHelper.COLUMN_EMPLOYEE_WEEKLY_OFF,
 	      MySQLiteHelper.COLUMN_EMPLOYEE_LEAVE_BALANCE_DATE,
 	      MySQLiteHelper.COLUMN_EMPLOYEE_EARNED_LEAVE,
 	      MySQLiteHelper.COLUMN_EMPLOYEE_CASUAL_LEAVE,	  
@@ -54,8 +55,10 @@ public class EmployeeDataSource {
 		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_DEPT, employee.getDept());	
 		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_POSITION, employee.getPosition());	
 		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_PHONE_NUM, employee.getPhoneNum());		    		    		    
-		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_JOIN_DATE, employee.getJoinDate().getTime());	    		    
-		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_WEEKLY_OFF, employee.getWeeklyOff());		    		    		    		    
+		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_JOIN_DATE, employee.getJoinDate().getTime());
+		  	values.put(MySQLiteHelper.COLUMN_EMPLOYEE_UNIT_JOIN_DATE, employee.getUnitJoinDate().getTime());
+
+		  	values.put(MySQLiteHelper.COLUMN_EMPLOYEE_WEEKLY_OFF, employee.getWeeklyOff());
 		    database.insert(MySQLiteHelper.TABLE_EMPLOYEE, null, values);
 	  }
 
@@ -70,8 +73,10 @@ public class EmployeeDataSource {
 				    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_DEPT, employee.getDept());	
 				    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_POSITION, employee.getPosition());	
 				    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_PHONE_NUM, employee.getPhoneNum());		    		    		    
-				    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_JOIN_DATE, employee.getJoinDate().getTime());	    		    
-				    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_WEEKLY_OFF, employee.getWeeklyOff());		    		    		    		    
+				    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_JOIN_DATE, employee.getJoinDate().getTime());
+				  	values.put(MySQLiteHelper.COLUMN_EMPLOYEE_UNIT_JOIN_DATE, employee.getUnitJoinDate().getTime());
+
+				  	values.put(MySQLiteHelper.COLUMN_EMPLOYEE_WEEKLY_OFF, employee.getWeeklyOff());
 				    database.insert(MySQLiteHelper.TABLE_EMPLOYEE, null, values);
 			  }
 			  database.setTransactionSuccessful();
@@ -125,12 +130,14 @@ public class EmployeeDataSource {
 	    		cursor.getString(3),
 	    		cursor.getString(4),	    		
 	    		new Date(cursor.getLong(5)),
-	    		cursor.getString(6)); 
-		  if (!cursor.isNull(7)) {
-			  employee.setLeaveBalanceDate(new Date(cursor.getLong(7)));
-			  employee.setEarnedLeave(cursor.getFloat(8));
-			  employee.setCasualLeave(cursor.getFloat(9));
-			  employee.setHalfPayLeave(cursor.getFloat(10));			  
+				  new Date(cursor.getLong(6)),
+
+				  cursor.getString(7));
+		  if (!cursor.isNull(8)) {
+			  employee.setLeaveBalanceDate(new Date(cursor.getLong(8)));
+			  employee.setEarnedLeave(cursor.getFloat(9));
+			  employee.setCasualLeave(cursor.getFloat(10));
+			  employee.setHalfPayLeave(cursor.getFloat(11));
 		  }
 	    return employee;
 	  }
@@ -144,6 +151,9 @@ public class EmployeeDataSource {
 		    if (employee.getJoinDate() != null) {
 		    	values.put(MySQLiteHelper.COLUMN_EMPLOYEE_JOIN_DATE, employee.getJoinDate().getTime());
 		    }
+		  	if (employee.getUnitJoinDate() != null) {
+			  values.put(MySQLiteHelper.COLUMN_EMPLOYEE_UNIT_JOIN_DATE, employee.getUnitJoinDate().getTime());
+		  	}
 		    values.put(MySQLiteHelper.COLUMN_EMPLOYEE_WEEKLY_OFF, employee.getWeeklyOff());			    
 		    if (employee.getLeaveBalanceDate() != null) {		    
 		    	values.put(MySQLiteHelper.COLUMN_EMPLOYEE_LEAVE_BALANCE_DATE, employee.getLeaveBalanceDate().getTime());		    	    

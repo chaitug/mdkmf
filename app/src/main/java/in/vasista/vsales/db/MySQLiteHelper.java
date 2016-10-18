@@ -68,8 +68,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_EMPLOYEE_DEPT = "DEPT";	
 	  public static final String COLUMN_EMPLOYEE_POSITION = "POSITION";			  
 	  public static final String COLUMN_EMPLOYEE_PHONE_NUM = "PHONE_NUM";	
-	  public static final String COLUMN_EMPLOYEE_JOIN_DATE = "JOIN_DATE";		  
-	  public static final String COLUMN_EMPLOYEE_LEAVE_BALANCE_DATE = "LEAVE_BALANCE_DATE";		  
+	  public static final String COLUMN_EMPLOYEE_UNIT_JOIN_DATE = "JOIN_DATE";
+	public static final String COLUMN_EMPLOYEE_JOIN_DATE = "UNIT_JOIN_DATE";
+	public static final String COLUMN_EMPLOYEE_LEAVE_BALANCE_DATE = "LEAVE_BALANCE_DATE";
 	  public static final String COLUMN_EMPLOYEE_EARNED_LEAVE = "EARNED_LEAVE";		  
 	  public static final String COLUMN_EMPLOYEE_CASUAL_LEAVE = "CASUAL_LEAVE";		  
 	  public static final String COLUMN_EMPLOYEE_HALF_PAY_LEAVE = "HALF_PAY_LEAVE";		  
@@ -194,8 +195,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		      + " text, " + COLUMN_EMPLOYEE_DEPT	
 		      + " text, " + COLUMN_EMPLOYEE_POSITION
 		      + " text, " + COLUMN_EMPLOYEE_PHONE_NUM		      
-		      + " text, " + COLUMN_EMPLOYEE_JOIN_DATE	
-		      + " text, " + COLUMN_EMPLOYEE_LEAVE_BALANCE_DATE	
+		      + " text, " + COLUMN_EMPLOYEE_JOIN_DATE
+			  + " text, " + COLUMN_EMPLOYEE_UNIT_JOIN_DATE
+			  + " text, " + COLUMN_EMPLOYEE_LEAVE_BALANCE_DATE
 		      + " text, " + COLUMN_EMPLOYEE_EARNED_LEAVE
 		      + " real, " + COLUMN_EMPLOYEE_CASUAL_LEAVE	
 		      + " real, " + COLUMN_EMPLOYEE_HALF_PAY_LEAVE			      		      		      		      
@@ -258,7 +260,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  
 
 	  private static final String DATABASE_NAME = "vsalesagent.db";
-	  private static final int DATABASE_VERSION = 24; 
+	  private static final int DATABASE_VERSION = 25;
 	  
 	  public MySQLiteHelper(Context context) {
 	    super(context, DATABASE_NAME, null, DATABASE_VERSION); 
@@ -306,6 +308,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    
 	    onCreate(db);
 	    }
+
+		  if (newVersion == 25){
+			  try {
+				  db.execSQL("ALTER TABLE EMPLOYEE ADD COLUMN " + COLUMN_EMPLOYEE_UNIT_JOIN_DATE + " text");
+			  }catch (Exception e){
+				  e.printStackTrace();
+			  }
+			  db.setVersion(newVersion);
+
+		  }
 
 	    //if (oldVersion > 20) {
 	    //	db.execSQL("drop table LOCATION");		    	    	    	    

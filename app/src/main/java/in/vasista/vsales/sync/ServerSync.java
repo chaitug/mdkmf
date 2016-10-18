@@ -554,15 +554,20 @@ public class ServerSync {
 							    	String phoneNumber = (String)employeeMap.get("phoneNumber");
 									Date joinDate = new Date();
 									String joinDateStr = (String)employeeMap.get("joinDate");
+									Date unitJoinDate = new Date();
 									try {
 										joinDate = format.parse(joinDateStr);
+										if (employeeMap.get("unitJoinDate") != null) {
+											String unitJoinDateStr = (String)employeeMap.get("unitJoinDate");
+											unitJoinDate = format.parse(unitJoinDateStr);
+										}
 									} catch (ParseException e) {
 										// just go with default date for now
 									}	
 							    	String weeklyOff = (String)employeeMap.get("weeklyOff");
 									
 							    	Employee employee = new Employee(id, name, department, 
-							    			position, phoneNumber, joinDate, weeklyOff);
+							    			position, phoneNumber, joinDate, unitJoinDate, weeklyOff);
 					    			if (employeeMap.get("leaveBalanceDate") != null) {
 					    				Date leaveBalanceDate = (Date)employeeMap.get("leaveBalanceDate");
 					    				//Log.d(module, "leaveBalanceDate=" + leaveBalanceDate);	
@@ -646,14 +651,19 @@ public class ServerSync {
 				    		String phoneNumber = (String)employeeMap.get("phoneNumber");
 				    		Date joinDate = new Date();
 				    		String joinDateStr = (String)employeeMap.get("joinDate");
+							Date unitJoinDate = new Date();
 				    		try {
 				    			joinDate = format.parse(joinDateStr);
-				    		} catch (ParseException e) {
+								if (employeeMap.get("unitJoinDate") != null) {
+									String unitJoinDateStr = (String)employeeMap.get("unitJoinDate");
+									unitJoinDate = format.parse(unitJoinDateStr);
+								}
+							} catch (ParseException e) {
 				    			// just go with default date for now
 				    		}
 					    	String weeklyOff = (String)employeeMap.get("weeklyOff");				    		
 				    		Employee employee = new Employee(id, name, department, 
-				    				position, phoneNumber, joinDate, weeklyOff);
+				    				position, phoneNumber, joinDate, unitJoinDate, weeklyOff);
 				    		if (employeeMap.get("leaveBalanceDate") != null) {
 				    			Date leaveBalanceDate = (Date)employeeMap.get("leaveBalanceDate");
 				    			//Log.d(module, "leaveBalanceDate=" + leaveBalanceDate);	
