@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.catalog.Product;
 import android.content.Context;
 import android.view.LayoutInflater;

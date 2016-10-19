@@ -1,7 +1,7 @@
 package in.vasista.vsales.adapter;
 
 
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.indent.IndentItem;
 import in.vasista.vsales.order.OrderItem;
 

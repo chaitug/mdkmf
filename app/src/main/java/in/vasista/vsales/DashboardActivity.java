@@ -19,7 +19,7 @@ package in.vasista.vsales;
 import in.vasista.inventory.InventoryActivity;
 import in.vasista.location.LocationActivity;
 import in.vasista.tm.TicketDashboardActivity;
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.preference.FragmentPreferences;
 import android.app.Activity;
 import android.content.Context;

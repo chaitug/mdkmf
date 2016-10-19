@@ -1,7 +1,7 @@
 package in.vasista.vsales.ui;
 
 
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;

@@ -3,7 +3,7 @@ package in.vasista.tm;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.db.TicketsDataSource;
 import in.vasista.vsales.sync.ServerSync;
 import android.app.ListFragment;

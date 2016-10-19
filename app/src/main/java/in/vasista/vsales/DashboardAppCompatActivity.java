@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import in.vasista.milkosoft.mdkmf.R;
 
 import in.vasista.inventory.InventoryActivity;
 

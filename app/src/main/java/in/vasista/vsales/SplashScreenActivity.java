@@ -3,7 +3,7 @@ package in.vasista.vsales;
 import java.util.HashMap;
 import java.util.Map;
 
-import in.vasista.vsales.R; 
+import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.sync.ServerSync;
 import in.vasista.vsales.sync.xmlrpc.XMLRPCApacheAdapter;
 import in.vasista.vsales.sync.xmlrpc.XMLRPCMethodCallback;

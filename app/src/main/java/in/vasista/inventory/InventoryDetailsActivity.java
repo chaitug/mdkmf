@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 import in.vasista.rest.ServerRestSync;
 import in.vasista.vsales.DashboardAppCompatActivity;
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.catalog.Product;
 
 public class InventoryDetailsActivity extends DashboardAppCompatActivity {

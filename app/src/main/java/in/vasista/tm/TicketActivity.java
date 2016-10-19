@@ -17,7 +17,7 @@
 package in.vasista.tm;
 
 import in.vasista.vsales.DashboardActivity;
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.catalog.CatalogListFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

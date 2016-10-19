@@ -3,7 +3,7 @@ package in.vasista.vsales.order;
 import in.vasista.vsales.IndentItemsListActivity;
 import in.vasista.vsales.SalesDashboardActivity;
 import in.vasista.vsales.OrderItemsListActivity;
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.adapter.IndentAdapter;
 import in.vasista.vsales.adapter.OrderAdapter;
 import in.vasista.vsales.catalog.CatalogListFragment;

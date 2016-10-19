@@ -1,15 +1,17 @@
 package in.vasista.vsales.adapter;
 
 
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.indent.IndentItem;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,6 +46,7 @@ public class IndentItemAdapter extends ArrayAdapter<IndentItem>{
 			this.isEditable = isEditable;
 		}
 		
+	  @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	  @Override
 	  public View getView(int position, View convertView, ViewGroup parent) {
 	    LinearLayout indentItemView;

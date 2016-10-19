@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 
 import java.util.List;
 
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 
 public class FragmentPreferences extends PreferenceActivity {
 

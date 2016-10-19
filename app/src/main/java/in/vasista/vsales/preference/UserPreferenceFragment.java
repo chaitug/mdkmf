@@ -1,6 +1,6 @@
 package in.vasista.vsales.preference;
 
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 

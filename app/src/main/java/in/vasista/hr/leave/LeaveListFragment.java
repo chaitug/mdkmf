@@ -9,7 +9,7 @@ import android.widget.ProgressBar;
 import java.util.List;
 
 import in.vasista.vsales.LeaveActivity;
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.adapter.LeaveAdapter;
 import in.vasista.vsales.db.LeavesDataSource;
 import in.vasista.vsales.sync.ServerSync;

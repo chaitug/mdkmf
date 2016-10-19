@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.Gravity;
 import android.widget.ProgressBar;
+import in.vasista.milkosoft.mdkmf.R;
 
 /**
  * This is the activity for feature 1 in the dashboard application.

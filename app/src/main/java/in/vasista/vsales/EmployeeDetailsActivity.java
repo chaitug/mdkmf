@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import in.vasista.milkosoft.mdkmf.R;
 
 import in.vasista.vsales.db.EmployeeDataSource;
 import in.vasista.vsales.employee.Employee;
@@ -37,7 +38,7 @@ public class EmployeeDetailsActivity extends DashboardAppCompatActivity  {
 		datasource.open();
 		employee = datasource.getEmployeeDetails(employeeId);		
 		datasource.close();
-		if (employee == null) {        
+		if (employee == null) {
 			return;
 		} 
 		setTitle(employee.getName());	
