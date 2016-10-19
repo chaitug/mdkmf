@@ -18,6 +18,7 @@ package in.vasista.vsales;
 
 import android.os.Bundle;
 import android.webkit.WebView;
+import in.vasista.milkosoft.mdkmf.R;
 
 /**
  * This is the About activity in the dashboard application.

@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import java.util.List;
 
 import in.vasista.vsales.PayslipItemsListActivity;
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.adapter.PayslipAdapter;
 import in.vasista.vsales.db.PayslipDataSource;
 

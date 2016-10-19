@@ -1,6 +1,6 @@
 package in.vasista.vsales.indent;
 
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.catalog.Product;
 import in.vasista.vsales.db.ProductsDataSource;
 

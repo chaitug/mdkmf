@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import in.vasista.milkosoft.mdkmf.R;
 
 import in.vasista.changePassword.ChangePassword;
 import in.vasista.inventory.InventoryActivity;

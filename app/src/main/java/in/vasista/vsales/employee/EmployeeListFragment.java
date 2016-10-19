@@ -18,7 +18,7 @@ import android.widget.ProgressBar;
 import java.util.List;
 
 import in.vasista.vsales.EmployeeDetailsActivity;
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.adapter.EmployeeAdapter;
 import in.vasista.vsales.db.EmployeeDataSource;
 import in.vasista.vsales.sync.ServerSync;

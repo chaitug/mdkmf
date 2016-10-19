@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.adapter.PayslipItemAdapter;
 import in.vasista.vsales.db.PayslipDataSource;
 

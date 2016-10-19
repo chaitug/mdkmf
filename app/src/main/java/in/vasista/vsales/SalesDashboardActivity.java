@@ -23,6 +23,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import in.vasista.milkosoft.mdkmf.R;
 
 import in.vasista.global.GlobalApplication;
 import in.vasista.vsales.adapter.FacilityAutoAdapter;
@@ -147,8 +148,7 @@ Log.d(module, "onlySalesDashboard equals " + onlySalesDashboard);
     	if (onlySalesDashboard.equals("Y")) {
     	    setContentChildView(R.layout.activity_sales_home);
 			getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-    	} 
-    	else {
+		} else {
 			setContentChildView(R.layout.activity_sales_home_alt);
 			actionBarHomeEnabled();
 
@@ -226,7 +226,7 @@ Log.d(module, "onlySalesDashboard equals " + onlySalesDashboard);
 
 	protected void onResume ()
 	{
-	   super.onResume();
+		super.onResume();
 		setupDashboard();
 		if(((GlobalApplication)getApplication()).isPrefChange()){
 			((GlobalApplication)getApplication()).setPrefChange(false);

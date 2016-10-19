@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
+import in.vasista.milkosoft.mdkmf.R;
 
 import in.vasista.vsales.catalog.CatalogListFragment;
 

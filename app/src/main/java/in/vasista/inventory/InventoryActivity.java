@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import in.vasista.vsales.DashboardAppCompatActivity;
-import in.vasista.vsales.R;
+import in.vasista.milkosoft.mdkmf.R;
 
 public class InventoryActivity extends DashboardAppCompatActivity
 {
