@@ -5,9 +5,12 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -21,6 +24,10 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.db.LocationsDataSource;
 import in.vasista.vsales.sync.ServerSync;
@@ -32,6 +39,7 @@ public class LocationActivity extends Activity implements GoogleApiClient.Connec
 	private GoogleApiClient mGoogleApiClient;
 	private LocationRequest mLocationRequest;
 	private PendingIntent mPendingIntent;
+	private String Currentaddress;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +88,7 @@ public class LocationActivity extends Activity implements GoogleApiClient.Connec
 		}
 		final LocationActivity thisActivity = this;
 
-		final Button recordNoteBtn;		  
+		final Button recordNoteBtn;
 		recordNoteBtn = (Button) findViewById(R.id.recordNote);
 
 		recordNoteBtn.setOnClickListener(new View.OnClickListener() {
@@ -104,8 +112,8 @@ public class LocationActivity extends Activity implements GoogleApiClient.Connec
 //				}
 			}
 		});
-		
-		Button getLocationBtn;		  
+
+		Button getLocationBtn;
 		getLocationBtn = (Button) findViewById(R.id.getLocation);
 
 		getLocationBtn.setOnClickListener(new View.OnClickListener() {
@@ -137,13 +145,13 @@ public class LocationActivity extends Activity implements GoogleApiClient.Connec
 		});
 
 		final Button button = (Button) findViewById(R.id.syncLocationsButton);
-		button.setOnClickListener(new OnClickListener() { 
+		button.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				//Toast.makeText( getActivity(), "Updating product catalog...", Toast.LENGTH_SHORT ).show();	    		    
 				ProgressBar progressBar = (ProgressBar) thisActivity.findViewById(R.id.locationsSyncProgress);
 				progressBar.setVisibility(View.VISIBLE);
 				ServerSync serverSync = new ServerSync(thisActivity);
-				serverSync.syncLocations(progressBar);					
+				serverSync.syncLocations(null,progressBar,null);
 			}
 		});
 	}
@@ -191,7 +199,27 @@ public class LocationActivity extends Activity implements GoogleApiClient.Connec
 				Double.toString(location.getLongitude());
 		LocationsDataSource datasource = new LocationsDataSource(this);
 		datasource.open();
-		long locationId = datasource.insertLocation(location.getLatitude(), location.getLongitude(), location.getTime());
+
+		Geocoder geocoder;
+        Double lat=location.getLatitude();
+		Double lng=location.getLongitude();
+		geocoder = new Geocoder(this, Locale.getDefault());
+		try {
+			List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
+			String address = addresses.get(0).getAddressLine(0) + "," +addresses.get(0).getAddressLine(1); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+			String city = addresses.get(0).getLocality();
+			String state = addresses.get(0).getAdminArea();
+			String country = addresses.get(0).getCountryName();
+			String postalCode = addresses.get(0).getPostalCode();
+			String knownName = addresses.get(0).getAddressLine(2);
+			String Currentaddress= address+" , "+ knownName+" , "+city+" , "+state+" , "+country+" , "+postalCode;
+			Log.v("current address",Currentaddress);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		long locationId = datasource.insertLocation(location.getLatitude(), location.getLongitude(),Currentaddress,location.getTime());
 		datasource.close();
 		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 	}

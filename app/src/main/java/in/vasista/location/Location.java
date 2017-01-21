@@ -9,16 +9,18 @@ public class Location {
 	double longitude;	
 	String noteName;
 	String noteInfo;
+	String address;
 	boolean isSynced;
 	
 	public Location (int id, Date createdDate, double latitude, double longitude, String noteName,
-			String noteInfo, boolean isSynced) {
+			String noteInfo,String address, boolean isSynced) {
 		this.id = id;
 		this.createdDate = createdDate;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.noteName = noteName;
 		this.noteInfo = noteInfo;
+		this.address = address;
 		this.isSynced = isSynced;
 	}
 	
@@ -39,7 +41,10 @@ public class Location {
 	}
 	public String getNoteInfo() {
 		return noteInfo;
-	}	
+	}
+	public String getAddress() {
+		return address;
+	}
 	public boolean isSynced() {
 		return isSynced;
 	}
