@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,6 +23,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import in.vasista.hr.attendance.AttendanceListFragment;
+import in.vasista.location.MapsActivity;
+import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.EmployeeDetailsActivity;
 import in.vasista.vsales.HRDashboardActivity;
 import in.vasista.vsales.LeaveActivity;
@@ -881,7 +884,7 @@ public class ServerSync {
 		}		
 	}		
 
-	public void syncLocations(ProgressBar progressBar) {
+	public void syncLocations(final MenuItem menuItem, ProgressBar progressBar, final MapsActivity locationActivity) {
 		final LocationsDataSource datasource = new LocationsDataSource(context);
 		datasource.open();  
 		final Map [] locations = datasource.getXMLRPCSerializedUnsyncedLocations();
@@ -891,7 +894,8 @@ public class ServerSync {
 		}
 		Map paramMap = new HashMap();
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-	    paramMap.put("locations",locations);	 
+	    paramMap.put("locations",locations);
+
 
 		try {   
 			XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(context);
@@ -908,6 +912,18 @@ public class ServerSync {
 					if (progressBar != null) {
 						progressBar.setVisibility(View.INVISIBLE);
 					}
+					if(menuItem !=null){
+						if (progressBar != null) {
+							progressBar.setVisibility(View.VISIBLE);
+						}
+						menuItem.setActionView(null);
+
+					}
+
+					Date today = Calendar.getInstance().getTime();
+					locationActivity.showSnackBar(locationActivity.getString(R.string.sync_success_location));
+					locationActivity.markLocations(null);
+					locationActivity.recyclerViewFragment.markLocations(null);
 				}
 			});
 		}
@@ -924,5 +940,89 @@ public class ServerSync {
 	public static boolean isNetworkAvailable(Context context) 
 	{
 	    return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
-	}	
+	}
+
+
+	public void fetchPrevLocations(final MenuItem menuItem, ProgressBar progressBar, final MapsActivity mapsActivity){
+		Map paramMap = new HashMap();
+
+
+
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		String storeId = prefs.getString("partyId", "");
+		paramMap.put("partyId", storeId);
+		final Date thruDate = new Date();
+		final Date fromDate = DateUtil.addDays(thruDate, -31);
+		paramMap.put("fromDate", fromDate.getTime());
+		paramMap.put("thruDate", thruDate.getTime());
+
+		try {
+			XMLRPCApacheAdapter adapter = new XMLRPCApacheAdapter(context);
+			adapter.call("fetchPartyVisitedLocations", paramMap, progressBar, new XMLRPCMethodCallback() {
+				public void callFinished(Object result, ProgressBar progressBar) {
+					if (result != null) {
+						final LocationsDataSource datasource = new LocationsDataSource(context);
+						datasource.open();
+						Map paymentsResult = (Map)((Map)result).get("locationsMap");
+						Log.d("Upendra", "locations.size() = " + paymentsResult);
+
+
+						datasource.updatePrevLocations();
+						if (paymentsResult.size() > 0) {
+
+							Map dayWise = (Map)paymentsResult.get("dayWise");
+							if (!dayWise.isEmpty()){
+								for ( Object key : dayWise.keySet() ) {
+									Log.v("Key",""+key.toString());
+									Object[] locations = (Object[])dayWise.get(key);
+
+									for (int i=0;i<locations.length;i++){
+										Map locationMap = (Map)locations[i];
+
+										datasource.insertPrevLocation(((BigDecimal)locationMap.get("latitude")).doubleValue(),
+												((BigDecimal)locationMap.get("longitude")).doubleValue(),
+												((Date) locationMap.get("createdDate")).getTime(),(String)locationMap.get("noteName"),
+												(String)locationMap.get("noteInfo"));
+
+
+									}
+								}
+							}
+						}
+						datasource.close();
+
+					}
+					if (progressBar != null) {
+						progressBar.setVisibility(View.INVISIBLE);
+					}
+					if(menuItem !=null){
+						if (progressBar != null) {
+							progressBar.setVisibility(View.VISIBLE);
+						}
+						menuItem.setActionView(null);
+					}
+
+					Date today = Calendar.getInstance().getTime();
+					mapsActivity.showSnackBar(mapsActivity.getString(R.string.sync_map_locations));
+					mapsActivity.markLocations(null);
+					mapsActivity.recyclerViewFragment.markLocations(null);
+				}
+			});
+		}
+		catch (Exception e) {
+			Log.e(module, "Exception: ", e);
+			if (progressBar != null) {
+				progressBar.setVisibility(View.INVISIBLE);
+			}
+			if(menuItem !=null){
+				if (progressBar != null) {
+					progressBar.setVisibility(View.VISIBLE);
+				}
+				menuItem.setActionView(null);
+			}
+			//mapsActivity.showSnackBar(mapsActivity.getString(R.string.sync_failed_location));
+		}
+
+	}
+
 }
