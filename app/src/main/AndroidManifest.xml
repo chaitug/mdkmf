@@ -20,8 +20,8 @@ xmlns:tools="http://schemas.android.com/tools"
         android:name="in.vasista.global.GlobalApplication" >
       <meta-data android:name="com.google.android.gms.version"
            android:value="@integer/google_play_services_version" />
-	  <meta-data android:name="com.google.android.maps.v2.API_KEY"
-    	   android:value="AIzaSyCHjdWVXMva749AH6yw9Ul6bt87Hm1J-kY"/>      
+	  <!--<meta-data android:name="com.google.android.maps.v2.API_KEY"
+    	   android:value="AIzaSyCHjdWVXMva749AH6yw9Ul6bt87Hm1J-kY"/>      -->
       <activity android:name="in.vasista.vsales.SplashScreenActivity"
                   android:label="@string/app_name">
          <intent-filter>
@@ -219,6 +219,19 @@ xmlns:tools="http://schemas.android.com/tools"
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.vasista.inventory.InventoryActivity" />
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <activity
+            android:name="in.vasista.location.MapsActivity"
+            android:parentActivityName="in.vasista.vsales.SalesDashboardActivity"
+            tools:ignore="UnusedAttribute"
+            android:label="@string/title_activity_maps">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.vasista.vsales.SalesDashboardActivity" />
         </activity>
         <!--<service android:enabled="true" android:name="in.vasista.location.LocationService"/>-->
         			     
