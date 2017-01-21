@@ -6,11 +6,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+
 import in.vasista.milkosoft.mdkmf.R;
 
 import in.vasista.inventory.InventoryActivity;
@@ -211,6 +214,23 @@ public class DashboardAppCompatActivity extends AppCompatActivity {
         }
         intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(intent);
+    }
+
+    public void hideKeyboard(){
+        // Hide the Keyboard
+        try {
+            InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    }
+
+    public void showSnackBar(String message){
+        CoordinatorLayout coordinatorLayout= (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+        Snackbar snackbar = Snackbar
+                .make(coordinatorLayout, message, Snackbar.LENGTH_LONG);
+        snackbar.show();
     }
 
 }

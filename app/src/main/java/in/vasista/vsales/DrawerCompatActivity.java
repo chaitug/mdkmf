@@ -21,6 +21,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+
+import in.vasista.location.MapsActivity;
 import in.vasista.milkosoft.mdkmf.R;
 
 import in.vasista.changePassword.ChangePassword;
@@ -218,7 +220,7 @@ public class DrawerCompatActivity extends AppCompatActivity implements Navigatio
 
     public void onClickPlace ()
     {
-        startActivity (new Intent(getApplicationContext(), LocationActivity.class));
+        startActivity (new Intent(getApplicationContext(), MapsActivity.class));
     }
     /**
      * Handle the click of a Feature button.
@@ -301,7 +303,7 @@ public class DrawerCompatActivity extends AppCompatActivity implements Navigatio
 
                  onClickSettings();
                 break;
-            case R.id.action_location:onClickPlace();break;
+          //  case R.id.action_location:onClickPlace();break;
             case R.id.action_change_password:
                 ChangePassword changePassword = new ChangePassword();
                 //changePassword.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
