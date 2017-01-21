@@ -108,8 +108,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_LOCATION_LAT = "LOCATION_LAT";	  
 	  public static final String COLUMN_LOCATION_LONG = "LOCATION_LONG";	
 	  public static final String COLUMN_LOCATION_NOTE_NAME = "LOCATION_NOTE_NAME";	  
-	  public static final String COLUMN_LOCATION_NOTE_INFO = "LOCATION_NOTE_INFO";	  	  
-	  public static final String COLUMN_LOCATION_IS_SYNCED = "LOCATION_IS_SYNCED";	
+	  public static final String COLUMN_LOCATION_NOTE_INFO = "LOCATION_NOTE_INFO";
+	public static final String COLUMN_LOCATION_ADDRESS = "LOCATION_ADDRESS";
+	public static final String COLUMN_LOCATION_IS_SYNCED = "LOCATION_IS_SYNCED";
 	  
 	  public static final String TABLE_TICKET = "TICKET";
 	  public static final String COLUMN_TICKET_ID_INTERNAL = "_ID";	  	  
@@ -242,8 +243,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		      + " integer not null, " + COLUMN_LOCATION_LAT	      
 		      + " real not null, " + COLUMN_LOCATION_LONG
 		      + " real not null, " + COLUMN_LOCATION_NOTE_NAME
-		      + " text, " + COLUMN_LOCATION_NOTE_INFO	
-		      + " text, " + COLUMN_LOCATION_IS_SYNCED	      
+		      + " text, " + COLUMN_LOCATION_NOTE_INFO
+			  + " text, " + COLUMN_LOCATION_ADDRESS
+			  + " text, " + COLUMN_LOCATION_IS_SYNCED
 		      + " integer not null);";	
 	  
 	  private static final String DATABASE_CREATE_TICKET = "create table "
