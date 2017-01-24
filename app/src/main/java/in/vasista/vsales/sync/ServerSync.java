@@ -889,7 +889,9 @@ public class ServerSync {
 		datasource.open();  
 		final Map [] locations = datasource.getXMLRPCSerializedUnsyncedLocations();
 		if (locations ==null || locations.length == 0) {
-			progressBar.setVisibility(View.INVISIBLE);
+			if (progressBar != null) {
+				progressBar.setVisibility(View.INVISIBLE);
+			}
 			return;
 		}
 		Map paramMap = new HashMap();
@@ -1004,8 +1006,8 @@ public class ServerSync {
 
 					Date today = Calendar.getInstance().getTime();
 					mapsActivity.showSnackBar(mapsActivity.getString(R.string.sync_map_locations));
-					mapsActivity.markLocations(null);
-					mapsActivity.recyclerViewFragment.markLocations(null);
+					mapsActivity.markLocations(today);
+					mapsActivity.recyclerViewFragment.markLocations(today);
 				}
 			});
 		}
