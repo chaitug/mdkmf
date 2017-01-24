@@ -362,7 +362,8 @@ public class MapsActivity extends DashboardAppCompatActivity
                 break;
             case R.id.fab:
                 fab.hide();
-
+                noteName.setText("");
+                noteInfo.setText("");
                 overLay.setVisibility(View.VISIBLE);
                 scrollView.setVisibility(View.VISIBLE);
                 scrollView.setVisibility(View.VISIBLE);
