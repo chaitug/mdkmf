@@ -96,7 +96,7 @@ public class DashboardAppCompatActivity extends AppCompatActivity {
         CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
 
         View hiddenInfo = getLayoutInflater().inflate(layoutResID, coordinatorLayout, false);
-        coordinatorLayout.addView(hiddenInfo);
+        coordinatorLayout.addView(hiddenInfo,1);
     }
     public void setSalesDashboardTitle(int title){
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME
