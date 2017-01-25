@@ -262,7 +262,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	  
 
 	  private static final String DATABASE_NAME = "vsalesagent.db";
-	  private static final int DATABASE_VERSION = 25;
+	  private static final int DATABASE_VERSION = 26;
 	  
 	  public MySQLiteHelper(Context context) {
 	    super(context, DATABASE_NAME, null, DATABASE_VERSION); 
@@ -291,7 +291,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    Log.w(MySQLiteHelper.class.getName(),
 	        "Upgrading database from version " + oldVersion + " to "
 	            + newVersion);
-	    if (oldVersion < 24 ) { 
+	    if (oldVersion < 26 ) {
 
 	    db.execSQL("drop table PRODUCT");	
 	    db.execSQL("drop table INDENT_ITEM");		    	    	    
@@ -311,9 +311,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    onCreate(db);
 	    }
 
-		  if (newVersion == 25){
+		  if (newVersion == 26){
 			  try {
-				  db.execSQL("ALTER TABLE EMPLOYEE ADD COLUMN " + COLUMN_EMPLOYEE_UNIT_JOIN_DATE + " text");
+				  db.execSQL("ALTER TABLE LOCATION ADD COLUMN " + COLUMN_LOCATION_ADDRESS + " text");
 			  }catch (Exception e){
 				  e.printStackTrace();
 			  }
