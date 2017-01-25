@@ -291,7 +291,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    Log.w(MySQLiteHelper.class.getName(),
 	        "Upgrading database from version " + oldVersion + " to "
 	            + newVersion);
-	    if (oldVersion < 26 ) {
+	    if (oldVersion < 24 ) {
 
 	    db.execSQL("drop table PRODUCT");	
 	    db.execSQL("drop table INDENT_ITEM");		    	    	    
@@ -310,6 +310,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	    
 	    onCreate(db);
 	    }
+
+		  if (newVersion == 25){
+			  try {
+				  db.execSQL("ALTER TABLE EMPLOYEE ADD COLUMN " + COLUMN_EMPLOYEE_UNIT_JOIN_DATE + " text");
+			  }catch (Exception e){
+				  e.printStackTrace();
+			  }
+			  db.setVersion(newVersion);
+
+		  }
 
 		  if (newVersion == 26){
 			  try {
