@@ -28,6 +28,7 @@ public class MainActivity extends DrawerCompatActivity  {
     public static final String SALESREP_DB_PERM = "MOB_SREP_DB_VIEW";
     public static final String HR_DB_PERM = "MOB_HR_DB_VIEW";
     public static final String INVENTORY_DB_PERM = "MOB_INVENTORY_DB_VIEW";
+	public static final String LOCATION_DB_PERM = "MOB_LOCATION_VIEW";
 
 	public static final String USER_FULLNAME = "USER_FULLNAME";
 	public static final String USER_MOBILE = "USER_MOBILE";

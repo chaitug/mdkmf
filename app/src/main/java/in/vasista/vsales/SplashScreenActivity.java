@@ -75,6 +75,7 @@ public class SplashScreenActivity extends Activity
 						    	String salesRepPerm = "N";
 						    	String hrPerm = "N";
 						    	String inventoryPerm = "N";
+								String locationPerm = "N";
 						    	
 								for (int i = 0; i < permissionList.length; ++i) {
 									String dashboardPermission = (String)permissionList[i];
@@ -90,14 +91,18 @@ public class SplashScreenActivity extends Activity
 									}
 									else if (MainActivity.INVENTORY_DB_PERM.equals(dashboardPermission)) {
 										inventoryPerm = "Y";
-									}									
+									}
+									else if (MainActivity.LOCATION_DB_PERM.equals(dashboardPermission)) {
+										locationPerm = "Y";
+									}
 								}
 								// refresh permissions prefs
 
 					    		prefEditor.putString(MainActivity.RETAILER_DB_PERM, retailerPerm);
 					    		prefEditor.putString(MainActivity.SALESREP_DB_PERM, salesRepPerm);
 					    		prefEditor.putString(MainActivity.HR_DB_PERM, hrPerm);		
-					    		prefEditor.putString(MainActivity.INVENTORY_DB_PERM, inventoryPerm);					    		  		
+					    		prefEditor.putString(MainActivity.INVENTORY_DB_PERM, inventoryPerm);
+								prefEditor.putString(MainActivity.LOCATION_DB_PERM, locationPerm);
 							}
 						}
 					}

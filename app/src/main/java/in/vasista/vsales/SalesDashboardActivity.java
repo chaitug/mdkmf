@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -96,6 +97,15 @@ public class SalesDashboardActivity extends DrawerCompatActivity  {
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);    	
     	String retailerPerm = prefs.getString(RETAILER_DB_PERM, "N");
     	String salesRepPerm = prefs.getString(SALESREP_DB_PERM, "N");
+
+		String locationPerm = prefs.getString(MainActivity.LOCATION_DB_PERM, "N");
+		if (locationPerm.equals("Y")) {
+			LinearLayout locationLayout = (LinearLayout) findViewById(R.id.locationLayout);
+			locationLayout.setVisibility(View.VISIBLE);
+		}else{
+			LinearLayout locationLayout = (LinearLayout) findViewById(R.id.locationLayout);
+			locationLayout.setVisibility(View.GONE);
+		}
 
     	if (salesRepPerm.equals("N") && retailerPerm.equals("N")) {
     		
