@@ -97,14 +97,13 @@ public class SalesDashboardActivity extends DrawerCompatActivity  {
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);    	
     	String retailerPerm = prefs.getString(RETAILER_DB_PERM, "N");
     	String salesRepPerm = prefs.getString(SALESREP_DB_PERM, "N");
-
 		String locationPerm = prefs.getString(MainActivity.LOCATION_DB_PERM, "N");
-		if (locationPerm.equals("Y")) {
+
+
+		if (locationPerm.equals("N")) {
 			LinearLayout locationLayout = (LinearLayout) findViewById(R.id.locationLayout);
-			locationLayout.setVisibility(View.VISIBLE);
-		}else{
-			LinearLayout locationLayout = (LinearLayout) findViewById(R.id.locationLayout);
-			locationLayout.setVisibility(View.GONE);
+			((LinearLayout)locationLayout.getParent()).removeView(locationLayout);
+
 		}
 
     	if (salesRepPerm.equals("N") && retailerPerm.equals("N")) {
