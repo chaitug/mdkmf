@@ -85,8 +85,8 @@
     <string name="column_product_id_header">Product Code</string>
     <string name="column_product_name_header">Name</string>
     <string name="column_product_description_header">Description</string>
-    <string name="column_product_price_header">Price (Rs)</string>
-    <string name="column_product_mrp_price_header">MRP (Rs)</string>
+    <string name="column_product_price_header">Selling Price(Rs) Incl.Tax</string>
+    <string name="column_product_mrp_price_header">MRP Price(Rs) Incl.Tax</string>
     
     
     <string name="column_order_id_header">Order Id</string>
