@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -23,6 +24,8 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import in.vasista.location.MapsActivity;
 import in.vasista.milkosoft.mdkmf.R;
 
 import in.vasista.global.GlobalApplication;
@@ -94,6 +97,15 @@ public class SalesDashboardActivity extends DrawerCompatActivity  {
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);    	
     	String retailerPerm = prefs.getString(RETAILER_DB_PERM, "N");
     	String salesRepPerm = prefs.getString(SALESREP_DB_PERM, "N");
+		String locationPerm = prefs.getString(MainActivity.LOCATION_DB_PERM, "N");
+
+
+		if (locationPerm.equals("N")) {
+			LinearLayout locationLayout = (LinearLayout) findViewById(R.id.locationLayout);
+			//((LinearLayout)locationLayout.getParent()).removeView(locationLayout);
+			locationLayout.setVisibility(View.GONE);
+
+		}
 
     	if (salesRepPerm.equals("N") && retailerPerm.equals("N")) {
     		
@@ -340,6 +352,9 @@ public boolean onCreateOptionsMenu(Menu menu) {
           case R.id.home_btn_outlets :
                startActivity (new Intent(getApplicationContext(), FacilityActivity.class));
                break;
+			case R.id.home_btn_location :
+				startActivity (new Intent(getApplicationContext(), MapsActivity.class));
+				break;
           default:    
         	   break;    
         }
@@ -432,6 +447,11 @@ public boolean onCreateOptionsMenu(Menu menu) {
     		double fdrAmount = (Double)boothTotalDues.get("fdrAmount");
     		TextView amountView = (TextView)findViewById(R.id.fdrAmount);
     		amountView.setText(String.format("Rs %.2f", fdrAmount));  
-    	}	    	
-    }
+    	}
+		if (boothTotalDues != null && boothTotalDues.get("sdAmount") != null) {
+			double fdrAmount = (Double)boothTotalDues.get("sdAmount");
+			TextView sdAmountView = (TextView)findViewById(R.id.sdamount);
+			sdAmountView.setText(String.format("Rs %.2f", fdrAmount));
+		}
+	}
 }

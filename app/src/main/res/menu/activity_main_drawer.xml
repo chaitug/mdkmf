@@ -18,6 +18,18 @@
         </item>
     </group>
 
+   <!-- <group android:id="@+id/group_location">
+        <item android:title="@string/action_location" >
+            <menu>
+                <item
+                    android:id="@+id/action_location"
+                    android:icon="@drawable/ic_location_24dp"
+                    android:title="@string/action_location"/>
+
+            </menu>
+        </item>
+    </group>-->
+
     <item android:title="Settings">
         <menu>
             <item

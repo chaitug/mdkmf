@@ -40,6 +40,7 @@
     <string name="title_feature4">Catalog</string>
     <string name="title_feature5">Outlets</string>
     <string name="title_feature6">Party Ledger</string>
+    <string name="title_feature7">Field Notes</string>
     <string name="title_sales">Sales</string>
     <string name="title_hr">HR</string>
     <string name="title_employeeprofile">My Profile</string>
@@ -84,8 +85,8 @@
     <string name="column_product_id_header">Product Code</string>
     <string name="column_product_name_header">Name</string>
     <string name="column_product_description_header">Description</string>
-    <string name="column_product_price_header">Price (Rs)</string>
-    <string name="column_product_mrp_price_header">MRP (Rs)</string>
+    <string name="column_product_price_header">Selling Price(Rs) Incl.Tax</string>
+    <string name="column_product_mrp_price_header">MRP Price(Rs) Incl.Tax</string>
     
     
     <string name="column_order_id_header">Order Id</string>
@@ -184,14 +185,22 @@
     <string name="action_location">Location</string>
     <string name="error_field_required">This field is required</string>
     <string name="record_note">Record Note</string>
-    <string name="note_description">Note description</string>
-    <string name="note_title">Note title</string>
+    <string name="note_description">Remark</string>
+    <string name="note_title">Subject(Eg:Retailer ID): </string>
     <string name="title_menu_synclocaltion">Sync locations</string>
     <string name="exception_location">Please enable your location.</string>
     <string name="saved_location">Note recorded. Please sync location with server.</string>
     <string name="synced_location">Already Synced. Please record new Note.</string>
     <string name="sync_success_location">Successfully synced with server.</string>
     <string name="sync_failed_location">Sync failed. Please contact admin.</string>
+    <string name="save_map_sync"><![CDATA[Save & Sync]]></string>
+    <string name="date_format">dd-MMM-yyyy  hh:mm a</string>
+    <string name="action_filter">Filter</string>
+    <string name="text_map_infowindow">%1$d. %2$s</string>
+    <string name="sync_map_locations">Locations updated</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="text_map_switch">Map</string>
+    <string name="text_map_filter_clear">Clear filter</string>
 
     <!-- Navigation Drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>

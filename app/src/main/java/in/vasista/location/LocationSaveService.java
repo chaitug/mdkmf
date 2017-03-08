@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.IBinder;
 import android.os.SystemClock;
@@ -15,13 +17,16 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import in.vasista.vsales.db.LocationsDataSource;
 
 public class LocationSaveService extends IntentService {
 	public static String TAG = "LOCATION_SAVE_SERVICE";
+	private String Currentaddress;
 
 	public LocationSaveService() {
 		super("LocationSaveService");
@@ -78,7 +83,27 @@ public class LocationSaveService extends IntentService {
 	    	  Log.d(TAG, "Alarm!!! " + latestLocation.getLatitude() + " " + latestLocation.getLongitude() + " " + timeStr);
 	    	  LocationsDataSource datasource = new LocationsDataSource(context);
 	    	  datasource.open();
-	    	  long locationId = datasource.insertLocation(latestLocation.getLatitude(), latestLocation.getLongitude(), latestLocation.getTime());
+
+			  Geocoder geocoder;
+			  Double lat=latestLocation.getLatitude();
+			  Double lng=latestLocation.getLongitude();
+			  geocoder = new Geocoder(this, Locale.getDefault());
+			  try {
+				  List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
+				  String address = addresses.get(0).getAddressLine(0) + "," +addresses.get(0).getAddressLine(1); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+				  String city = addresses.get(0).getLocality();
+				  String state = addresses.get(0).getAdminArea();
+				  String country = addresses.get(0).getCountryName();
+				  String postalCode = addresses.get(0).getPostalCode();
+				  String knownName = addresses.get(0).getAddressLine(2);
+				  String Currentaddress= address+" , "+ knownName+" , "+city+" , "+state+" , "+country+" , "+postalCode;
+				  Log.v("current address",Currentaddress);
+			  }
+			  catch (IOException e) {
+				  e.printStackTrace();
+			  }
+
+	    	  long locationId = datasource.insertLocation(latestLocation.getLatitude(), latestLocation.getLongitude(), Currentaddress, latestLocation.getTime());
 	    	  datasource.close();
 	      }
 	  }

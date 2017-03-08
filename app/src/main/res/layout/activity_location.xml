@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_margin="2dp"
-            android:text="Note Title: " />
+            android:text="Subject(Eg:Retailer ID): " />
 
         <EditText
             android:id="@+id/noteName"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_margin="2dp"
-            android:text="Note Detail: " />
+            android:text="Remark: " />
 
         <EditText
             android:id="@+id/noteInfo"
