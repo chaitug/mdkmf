@@ -18,3 +18,4 @@
 -dontwarn org.apache.**
 -dontwarn retrofit.**
 -dontwarn okio.**
+-keep class android.support.v7.widget.** {*;}
