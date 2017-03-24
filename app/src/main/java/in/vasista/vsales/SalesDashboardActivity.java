@@ -101,7 +101,7 @@ public class SalesDashboardActivity extends DrawerCompatActivity  {
 
 
 		if (locationPerm.equals("N")) {
-			LinearLayout locationLayout = (LinearLayout) findViewById(R.id.locationLayout);
+			Button locationLayout = (Button) findViewById(R.id.home_btn_location);
 			//((LinearLayout)locationLayout.getParent()).removeView(locationLayout);
 			locationLayout.setVisibility(View.GONE);
 

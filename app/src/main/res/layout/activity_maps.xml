@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/noteName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -64,6 +64,7 @@
                     android:imeActionLabel="Next"
                     android:imeOptions="actionNext"
                     android:inputType="text"
+                    android:completionThreshold="1"
                     android:maxLines="1"
                     android:singleLine="true" />
 

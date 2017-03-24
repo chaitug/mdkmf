@@ -222,11 +222,7 @@
                     android:drawableTop="@drawable/outlet_button"
                     android:onClick="onClickFeature"
                     android:text="@string/title_feature5" />
-                <LinearLayout
-                    android:id="@+id/locationLayout"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+
 
                     <Button
                         android:id="@+id/home_btn_location"
@@ -234,7 +230,7 @@
                         android:drawableTop="@drawable/location_button"
                         android:onClick="onClickFeature"
                         android:text="@string/title_feature7" />
-                </LinearLayout>
+
 
             </LinearLayout>
           
