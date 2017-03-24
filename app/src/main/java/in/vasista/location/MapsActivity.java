@@ -1,6 +1,7 @@
 package in.vasista.location;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -20,6 +21,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -59,7 +63,10 @@ import java.util.Locale;
 import in.vasista.helper.DatePickerFragment;
 import in.vasista.milkosoft.mdkmf.R;
 import in.vasista.vsales.DashboardAppCompatActivity;
+import in.vasista.vsales.adapter.FacilityAutoAdapter;
+import in.vasista.vsales.db.FacilityDataSource;
 import in.vasista.vsales.db.LocationsDataSource;
+import in.vasista.vsales.facility.Facility;
 import in.vasista.vsales.sync.ServerSync;
 
 
@@ -87,7 +94,8 @@ public class MapsActivity extends DashboardAppCompatActivity
 
     ScrollView scrollView;
     View overLay;
-    EditText noteName,noteInfo;
+    AutoCompleteTextView noteName;
+    EditText noteInfo;
 
     FloatingActionButton fab;
 
@@ -126,7 +134,7 @@ public class MapsActivity extends DashboardAppCompatActivity
         // New note view initialization.
         scrollView = (ScrollView) findViewById(R.id.noteEntryView);
         overLay = findViewById(R.id.overlay);
-        noteName = (EditText) findViewById(R.id.noteName);
+        noteName = (AutoCompleteTextView) findViewById(R.id.noteName);
         noteInfo = (EditText) findViewById(R.id.noteInfo);
 
 
@@ -190,6 +198,29 @@ public class MapsActivity extends DashboardAppCompatActivity
             }
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        FacilityDataSource facilityDS = new FacilityDataSource(this);
+        facilityDS.open();
+        List<Facility> facilityList = facilityDS.getAllFacilities();
+        facilityDS.close();
+        final FacilityAutoAdapter adapter = new FacilityAutoAdapter(this, R.layout.autocomplete_item, facilityList);
+        noteName.setAdapter(adapter);
+        noteName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                in.hideSoftInputFromWindow(noteName.getWindowToken(), 0);
+                noteName.clearFocus();
+                Facility retailer =  (Facility)parent.getItemAtPosition(position);
+                noteName.setText(retailer.getId());
+
+            }
+
+        });
+        super.onResume();
     }
 
     @Override
