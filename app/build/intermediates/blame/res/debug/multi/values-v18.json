@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/res/merged/debug/values-v18/values-v18.xml",
+        "outputFile": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v18\\values-v18.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 99
                 },
                 "from": {
-                    "file": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-v18/values-v18.xml",
+                    "file": "C:\\Users\\usern\\.android\\build-cache\\1488a77ff360c41cca8e850c11ef1f8b6afa4c60\\output\\res\\values-v18\\values-v18.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

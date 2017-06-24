@@ -1,42 +1,26 @@
 [
     {
-        "merged": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/red_button.xml",
-        "source": "/home/vasista/StudioProjects/android-mdkmf/app/src/main/res/drawable-nodpi/red_button.xml"
+        "merged": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\build\\intermediates\\res\\merged\\debug\\drawable-nodpi-v4\\gradient_header.xml",
+        "source": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\src\\main\\res\\drawable-nodpi\\gradient_header.xml"
     },
     {
-        "merged": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/custom_button.xml",
-        "source": "/home/vasista/StudioProjects/android-mdkmf/app/src/main/res/drawable-nodpi/custom_button.xml"
+        "merged": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\build\\intermediates\\res\\merged\\debug\\drawable-nodpi-v4\\red_button.xml",
+        "source": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\src\\main\\res\\drawable-nodpi\\red_button.xml"
     },
     {
-        "merged": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/qty_textbox.xml",
-        "source": "/home/vasista/StudioProjects/android-mdkmf/app/src/main/res/drawable-nodpi/qty_textbox.xml"
+        "merged": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\build\\intermediates\\res\\merged\\debug\\drawable-nodpi-v4\\spin_animation.xml",
+        "source": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\src\\main\\res\\drawable-nodpi\\spin_animation.xml"
     },
     {
-        "merged": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/spinner_20_outer_holo.png",
-        "source": "/home/vasista/StudioProjects/android-mdkmf/app/src/main/res/drawable-nodpi/spinner_20_outer_holo.png"
+        "merged": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\build\\intermediates\\res\\merged\\debug\\drawable-nodpi-v4\\custom_button.xml",
+        "source": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\src\\main\\res\\drawable-nodpi\\custom_button.xml"
     },
     {
-        "merged": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/geren_button.xml",
-        "source": "/home/vasista/StudioProjects/android-mdkmf/app/src/main/res/drawable-nodpi/geren_button.xml"
+        "merged": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\build\\intermediates\\res\\merged\\debug\\drawable-nodpi-v4\\geren_button.xml",
+        "source": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\src\\main\\res\\drawable-nodpi\\geren_button.xml"
     },
     {
-        "merged": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/arrow_double_up.png",
-        "source": "/home/vasista/StudioProjects/android-mdkmf/app/src/main/res/drawable-nodpi/arrow_double_up.png"
-    },
-    {
-        "merged": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/spin_animation.xml",
-        "source": "/home/vasista/StudioProjects/android-mdkmf/app/src/main/res/drawable-nodpi/spin_animation.xml"
-    },
-    {
-        "merged": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/spinner_20_inner_holo.png",
-        "source": "/home/vasista/StudioProjects/android-mdkmf/app/src/main/res/drawable-nodpi/spinner_20_inner_holo.png"
-    },
-    {
-        "merged": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/gradient_header.xml",
-        "source": "/home/vasista/StudioProjects/android-mdkmf/app/src/main/res/drawable-nodpi/gradient_header.xml"
-    },
-    {
-        "merged": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/arrow.png",
-        "source": "/home/vasista/StudioProjects/android-mdkmf/app/src/main/res/drawable-nodpi/arrow.png"
+        "merged": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\build\\intermediates\\res\\merged\\debug\\drawable-nodpi-v4\\qty_textbox.xml",
+        "source": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\src\\main\\res\\drawable-nodpi\\qty_textbox.xml"
     }
 ]

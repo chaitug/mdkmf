@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/vasista/StudioProjects/android-mdkmf/app/src/main/jniLibs"/></dataSet><dataSet config="debug"><source path="/home/vasista/StudioProjects/android-mdkmf/app/src/debug/jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="D:\Android\VasistaProjects\ExtractedSourceCodes\android-mdkmf\app\src\main\jniLibs"/></dataSet><dataSet config="debug"><source path="D:\Android\VasistaProjects\ExtractedSourceCodes\android-mdkmf\app\src\debug\jniLibs"/></dataSet></merger>

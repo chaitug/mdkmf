@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="in.vasista.vsales.test">
+    package="in.vasista.milkosoft.mdkmf.test">
 
     <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="23" />
 
@@ -9,8 +9,8 @@
     </application>
 
     <instrumentation android:name="android.test.InstrumentationTestRunner"
-                     android:targetPackage="in.vasista.vsales"
+                     android:targetPackage="in.vasista.milkosoft.mdkmf"
                      android:handleProfiling="false"
                      android:functionalTest="false"
-                     android:label="Tests for in.vasista.vsales"/>
+                     android:label="Tests for in.vasista.milkosoft.mdkmf"/>
 </manifest>

@@ -1,6 +1,8 @@
 package in.vasista.vsales;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -11,6 +13,7 @@ import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +33,8 @@ public class FacilityDetailsActivity extends DashboardAppCompatActivity {
 
 	MapView mapView;
 	GoogleMap map;
+    TextView tv_toast;
+    LinearLayout ll_alpha;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,36 +68,44 @@ public class FacilityDetailsActivity extends DashboardAppCompatActivity {
 		TextView pmRouteView = (TextView) findViewById(R.id.facilityPmRoute);
 		pmRouteView.setText(facility.getPmRouteId());
 		TextView phoneView = (TextView) findViewById(R.id.facilityPhone);
+		TextView tv_toast = (TextView) findViewById(R.id.tv_toast);
+		LinearLayout ll_alpha = (LinearLayout) findViewById(R.id.ll_alpha);
 		phoneView.setText(facility.getOwnerPhone());
 
 		map = ((com.google.android.gms.maps.MapFragment) getFragmentManager().findFragmentById(R.id.map_view)).getMap();
 		if (map != null) {
 			String latStr = facility.getLatitude();
 			String longStr = facility.getLongitude();
-			double latitude = 12.914133; // default MD coordinates
-			double longitude = 74.855949;
+			//double latitude = 12.914133; // default MD coordinates
+			double latitude; // default MD coordinates
+			//double longitude = 74.855949;
+			double longitude;
 			if (latStr != null && !latStr.isEmpty() && longStr != null && !longStr.isEmpty()) {
 				latitude = Double.valueOf(latStr);
 				longitude = Double.valueOf(longStr);
-
+				if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+					// TODO: Consider calling
+					//    ActivityCompat#requestPermissions
+					// here to request the missing permissions, and then overriding
+					//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+					//                                          int[] grantResults)
+					// to handle the case where the user grants the permission. See the documentation
+					// for ActivityCompat#requestPermissions for more details.
+					return;
+				}
+				map.setMyLocationEnabled(true);
+				MapsInitializer.initialize(this);
+				CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 12);
+				map.animateCamera(cameraUpdate);
+				map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude))
+						.title(facilityId)).showInfoWindow();
+			}
+			else {
+				ll_alpha.setVisibility(View.VISIBLE);
+                tv_toast.setVisibility(View.VISIBLE);
 			}
 			//map.getUiSettings().setMyLocationButtonEnabled(false);
-			if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
-				// TODO: Consider calling
-				//    ActivityCompat#requestPermissions
-				// here to request the missing permissions, and then overriding
-				//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-				//                                          int[] grantResults)
-				// to handle the case where the user grants the permission. See the documentation
-				// for ActivityCompat#requestPermissions for more details.
-				return;
-			}
-			map.setMyLocationEnabled(true);
-			MapsInitializer.initialize(this);
-			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 12);
-			map.animateCamera(cameraUpdate);
-			map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude))
-					.title(facilityId)).showInfoWindow();
+
 		}
 		
 		Button callBtn = (Button) findViewById(R.id.callButton);

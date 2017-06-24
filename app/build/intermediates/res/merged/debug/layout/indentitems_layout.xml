@@ -2,72 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="?attr/actionBarSize"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/orderTitle"
-        style="@style/TitleBar" >
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:gravity="bottom" >
-        <ImageButton
-            android:id="@+id/homeButton"            
-            style="@style/TitleBarAction"
-            android:contentDescription="@string/description_home"
-            android:onClick="onClickHome"
-            android:src="@drawable/title_home" />
-
-        <ImageView             
-            android:id="@+id/homeSeparator"
-            style="@style/TitleBarSeparator" 
-            android:layout_toRightOf="@+id/homeButton"/>
-        <TextView
-            android:id="@+id/indentDetailsTitle"                            
-            style="@style/TitleBarText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-			android:layout_toRightOf="@+id/homeSeparator" 
-			android:gravity="center_vertical"           
-			android:text="Indent Details"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <ProgressBar
-            android:id="@+id/indentUploadProgress"
-            style="@android:style/Widget.ProgressBar.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:indeterminate="true"
-            android:visibility="invisible" />
-            <ImageView style="@style/TitleBarSeparator" 
-                android:layout_toLeftOf="@+id/indentUploadButton"/>
-            <ImageButton
-                android:id="@+id/indentUploadButton"
-                style="@style/TitleBarAction"
-            android:layout_toLeftOf="@+id/indentEditButton"
-                android:src="@drawable/title_upload" /> 
-
-            <ImageView style="@style/TitleBarSeparator" 
-                android:layout_toLeftOf="@+id/indentEditButton"/>
-            <ImageButton
-                android:id="@+id/indentEditButton"
-                style="@style/TitleBarAction"
-            	android:layout_alignParentRight="true"
-                android:src="@drawable/title_edit" />         
-
-            <ImageView style="@style/TitleBarSeparator" 
-                android:layout_toLeftOf="@+id/newIndentDoneButton"/>
-            <ImageButton
-                android:id="@+id/newIndentDoneButton"
-                style="@style/TitleBarAction"
-            	android:layout_alignParentRight="true"
-                android:src="@drawable/title_accept" />   
-       </RelativeLayout>          
-
-    </LinearLayout>
+    
 
     <LinearLayout
         android:id="@+id/indentHeaderRow"

@@ -1,6 +1,6 @@
 [
     {
-        "merged": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/res/merged/debug/layout-v21/place_autocomplete_fragment.xml",
-        "source": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.4.0/res/layout-v21/place_autocomplete_fragment.xml"
+        "merged": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\place_autocomplete_fragment.xml",
+        "source": "C:\\Users\\usern\\.android\\build-cache\\01c0a66ee40c467f0acf8eeef828e2cdac79376e\\output\\res\\layout-v21\\place_autocomplete_fragment.xml"
     }
 ]

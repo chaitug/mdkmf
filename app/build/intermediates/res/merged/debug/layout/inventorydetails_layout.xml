@@ -2,82 +2,40 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
     android:layout_height="match_parent"
     android:fillViewport="true" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
-
-        <LinearLayout
-            android:id="@+id/inventoryDetailsTitle"
-            style="@style/TitleBar"
-            android:layout_height="60dip" >
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom" >
-
-                <ImageButton
-                    android:id="@+id/homeButton"
-                    style="@style/TitleBarAction"
-                    android:contentDescription="@string/description_home"
-                    android:onClick="onClickHome"
-                    android:src="@drawable/title_home" />
-
-                <ImageView
-                    android:id="@+id/separator"
-                    style="@style/TitleBarSeparator"
-                    android:layout_toRightOf="@+id/homeButton" />
-
-                <ProgressBar
-                    android:id="@+id/inventoryDetailsProgress"
-                    style="@android:style/Widget.ProgressBar.Small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_toRightOf="@+id/separator"
-                    android:indeterminate="true"
-                    android:visibility="invisible" />
-
-                <RelativeLayout
-                    android:id="@+id/titleRelativeId"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
-
-                    <TextView
-                        android:id="@+id/inventoryDetailsHeader"
-                        style="@style/TitleBarText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="Inventory Details"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/inventoryDetailsLastFetchTime"
-                        style="@style/TextLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/inventoryDetailsHeader"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        android:textColor="@color/title_text"
-                        android:textStyle="italic" />
-                </RelativeLayout>
-            </RelativeLayout>
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:background="@drawable/retailerdetail_border"
             android:orientation="vertical" >
-
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+            <ProgressBar
+                android:id="@+id/inventoryDetailsProgress"
+                style="@android:style/Widget.ProgressBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@+id/separator"
+                android:indeterminate="true"
+                android:visibility="invisible" />
+            <TextView
+                android:id="@+id/inventoryDetailsLastFetchTime"
+                style="@style/TextLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/inventoryDetailsHeader"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/title_text"
+                android:textStyle="italic" />
+                </LinearLayout>
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -326,6 +284,5 @@
                     android:textStyle="bold" />
             </RelativeLayout>
         </LinearLayout>
-    </LinearLayout>
 
 </ScrollView>

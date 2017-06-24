@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/res/merged/debug/values-port/values-port.xml",
+        "outputFile": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 106
                 },
                 "from": {
-                    "file": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-port/values-port.xml",
+                    "file": "C:\\Users\\usern\\.android\\build-cache\\1488a77ff360c41cca8e850c11ef1f8b6afa4c60\\output\\res\\values-port\\values-port.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

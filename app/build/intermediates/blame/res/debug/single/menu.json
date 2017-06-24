@@ -1,6 +1,18 @@
 [
     {
-        "merged": "/home/vasista/StudioProjects/android-mdkmf/app/build/intermediates/res/merged/debug/menu/main.xml",
-        "source": "/home/vasista/StudioProjects/android-mdkmf/app/src/main/res/menu/main.xml"
+        "merged": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
+        "source": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\src\\main\\res\\menu\\main.xml"
+    },
+    {
+        "merged": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\build\\intermediates\\res\\merged\\debug\\menu\\refresh.xml",
+        "source": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\src\\main\\res\\menu\\refresh.xml"
+    },
+    {
+        "merged": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\build\\intermediates\\res\\merged\\debug\\menu\\activity_main_drawer.xml",
+        "source": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\src\\main\\res\\menu\\activity_main_drawer.xml"
+    },
+    {
+        "merged": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\build\\intermediates\\res\\merged\\debug\\menu\\indent_menu.xml",
+        "source": "D:\\Android\\VasistaProjects\\ExtractedSourceCodes\\android-mdkmf\\app\\src\\main\\res\\menu\\indent_menu.xml"
     }
 ]
